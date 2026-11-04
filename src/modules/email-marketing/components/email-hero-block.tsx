@@ -111,7 +111,18 @@ export function EmailHeroBlock({
                   ? "[Aquí va el titular principal de apertura]"
                   : "Su oficina TIC tiene proyectos que liderar."}
               </span>
-              <span className="inline-block mt-1 bg-gradient-to-r from-[#C084FC] via-[#A855F7] to-[#38BDF8] bg-clip-text text-transparent">
+              <span
+                data-gradient-text="true"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  color: "transparent",
+                }}
+                className="inline-block mt-1 bg-gradient-to-r from-[#C084FC] via-[#A855F7] to-[#38BDF8] bg-clip-text text-transparent"
+              >
                 {isTemplate ? (
                   <>
                     [Aquí va la segunda línea
@@ -128,7 +139,13 @@ export function EmailHeroBlock({
               </span>
             </h1>
 
-            <div className="h-0.5 w-12 rounded-full bg-gradient-to-r from-[#A855F7] to-[#38BDF8]" />
+            <div
+              style={{
+                backgroundImage:
+                  "linear-gradient(90deg, #A855F7 0%, #38BDF8 100%)",
+              }}
+              className="h-0.5 w-12 rounded-full bg-gradient-to-r from-[#A855F7] to-[#38BDF8]"
+            />
           </div>
 
           <p className="font-sans text-[14px] sm:text-[14.5px] leading-[1.6] font-normal text-[#E9D5FF] drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">

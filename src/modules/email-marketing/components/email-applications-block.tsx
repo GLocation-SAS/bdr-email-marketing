@@ -123,7 +123,17 @@ export function EmailApplicationsBlock({
               ? "[Aquí va el título del caso práctico]"
               : "Imagine esta posibilidad"}{" "}
             <span
-              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+              data-gradient-text="true"
+              style={{
+                backgroundImage: isDark
+                  ? "linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%)"
+                  : "linear-gradient(90deg, #7C3AED 0%, #6D28D9 48%, #0284C7 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                color: "transparent",
+              }}
+              className={`inline-block bg-gradient-to-r bg-clip-text text-transparent ${
                 isDark
                   ? "from-[#C084FC] via-[#A855F7] to-[#38BDF8]"
                   : "from-[#7C3AED] via-[#6D28D9] to-[#0284C7]"

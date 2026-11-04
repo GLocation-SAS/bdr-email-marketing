@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { toCanvas } from "html-to-image";
+import { toCanvas, toSvg } from "html-to-image";
 import {
   Laptop,
   Smartphone,
@@ -106,7 +106,7 @@ const EMAIL_PARTS: EmailPartMeta[] = [
 
 /**
  * Convierte todas las imágenes dentro de un contenedor a Data URLs base64
- * antes de exportar para evitar fallos con espacios, tildes, paréntesis o SVGs.
+ * antes de exportar y espera su decodificación completa.
  */
 async function inlineImagesInElement(root: HTMLElement): Promise<() => void> {
   const imgs = Array.from(root.querySelectorAll("img"));
@@ -115,10 +115,18 @@ async function inlineImagesInElement(root: HTMLElement): Promise<() => void> {
   await Promise.all(
     imgs.map(async (img) => {
       const originalSrc = img.getAttribute("src") || "";
-      if (!originalSrc || originalSrc.startsWith("data:")) return;
+      if (!originalSrc || originalSrc.startsWith("data:")) {
+        if (img.decode) {
+          await img.decode().catch(() => {});
+        }
+        return;
+      }
 
       try {
-        const resolvedUrl = new URL(originalSrc, window.location.origin).href;
+        const resolvedUrl =
+          img.currentSrc ||
+          img.src ||
+          new URL(originalSrc, window.location.href).href;
         const response = await fetch(resolvedUrl);
         if (!response.ok) return;
         const blob = await response.blob();
@@ -133,6 +141,9 @@ async function inlineImagesInElement(root: HTMLElement): Promise<() => void> {
         });
 
         img.setAttribute("src", dataUrl);
+        if (img.decode) {
+          await img.decode().catch(() => {});
+        }
         restorers.push(() => {
           img.setAttribute("src", originalSrc);
         });
@@ -148,8 +159,78 @@ async function inlineImagesInElement(root: HTMLElement): Promise<() => void> {
 }
 
 /**
+ * Corrige el bug de html-to-image donde `embedProp('background')` sobrescribe
+ * `-webkit-background-clip: text` con `padding-box border-box` en textos con degradado.
+ */
+function fixSvgGradientText(svgDataUrl: string): string {
+  const commaIdx = svgDataUrl.indexOf(",");
+  if (commaIdx === -1) return svgDataUrl;
+  const prefix = svgDataUrl.slice(0, commaIdx + 1);
+  let rawSvg = decodeURIComponent(svgDataUrl.slice(commaIdx + 1));
+
+  // Re-forzar background-clip: text y reemplazar border-box en todos los textos con degradado
+  rawSvg = rawSvg.replace(
+    /style="([^"]*)"/gi,
+    (fullMatch, styleContent: string) => {
+      if (
+        styleContent.includes("-webkit-text-fill-color: transparent") ||
+        styleContent.includes("background-clip: text") ||
+        (styleContent.includes("linear-gradient") &&
+          styleContent.includes("color: rgba(0, 0, 0, 0)"))
+      ) {
+        const cleaned = styleContent.replace(
+          /padding-box\s+border-box/gi,
+          "padding-box text"
+        );
+        return `style="${cleaned}; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: transparent !important;"`;
+      }
+      return fullMatch;
+    }
+  );
+
+  return `${prefix}${encodeURIComponent(rawSvg)}`;
+}
+
+async function svgDataUrlToCanvas(
+  svgDataUrl: string,
+  width: number,
+  height: number,
+  backgroundColor: string,
+  pixelRatio: number
+): Promise<HTMLCanvasElement> {
+  const patchedUrl = fixSvgGradientText(svgDataUrl);
+  const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.onload = () => {
+      if (image.decode) {
+        image
+          .decode()
+          .catch(() => {})
+          .finally(() => resolve(image));
+      } else {
+        resolve(image);
+      }
+    };
+    image.onerror = reject;
+    image.src = patchedUrl;
+  });
+
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(width * pixelRatio));
+  canvas.height = Math.max(1, Math.round(height * pixelRatio));
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    ctx.fillStyle = backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  }
+  return canvas;
+}
+
+/**
  * Renderiza un elemento DOM a un HTMLCanvasElement de alta resolución,
- * ignorando controles flotantes y con fallback seguro de fuentes.
+ * preservando textos en degradado, imágenes base64 y sin desfase de márgenes.
  */
 async function renderElementToCanvas(
   element: HTMLElement,
@@ -157,6 +238,14 @@ async function renderElementToCanvas(
   pixelRatio = 2
 ): Promise<HTMLCanvasElement> {
   const restoreImages = await inlineImagesInElement(element);
+  const prevMargin = element.style.margin;
+  element.style.margin = "0px";
+
+  const width = Math.max(1, element.offsetWidth || element.clientWidth || 740);
+  const height = Math.max(
+    1,
+    element.offsetHeight || element.clientHeight || 300
+  );
 
   const filterNode = (node: HTMLElement | Node) => {
     if (
@@ -170,32 +259,77 @@ async function renderElementToCanvas(
 
   try {
     try {
-      return await toCanvas(element, {
+      const svgUrl = await toSvg(element, {
+        width,
+        height,
         pixelRatio,
         backgroundColor,
         filter: filterNode,
       });
+      return await svgDataUrlToCanvas(
+        svgUrl,
+        width,
+        height,
+        backgroundColor,
+        pixelRatio
+      );
     } catch {
-      return await toCanvas(element, {
-        pixelRatio,
-        backgroundColor,
-        skipFonts: true,
-        filter: filterNode,
-      });
+      try {
+        const svgUrlFallback = await toSvg(element, {
+          width,
+          height,
+          pixelRatio,
+          backgroundColor,
+          skipFonts: true,
+          filter: filterNode,
+        });
+        return await svgDataUrlToCanvas(
+          svgUrlFallback,
+          width,
+          height,
+          backgroundColor,
+          pixelRatio
+        );
+      } catch {
+        return await toCanvas(element, {
+          width,
+          height,
+          pixelRatio,
+          backgroundColor,
+          skipFonts: true,
+          filter: filterNode,
+        });
+      }
     }
   } finally {
+    element.style.margin = prevMargin;
     restoreImages();
   }
 }
 
 /**
- * Construye un archivo PDF 1.4 válido de una sola página continua
- * con las proporciones exactas del canvas renderizado.
+ * Construye un archivo PDF 1.4 estándar con tabla xref exacta en bytes
+ * y fondo opaco garantizado.
  */
-function buildPdfBlobFromCanvas(canvas: HTMLCanvasElement): Blob {
-  const imgWidth = canvas.width;
-  const imgHeight = canvas.height;
-  const jpegDataUrl = canvas.toDataURL("image/jpeg", 0.96);
+function buildPdfBlobFromCanvas(
+  canvas: HTMLCanvasElement,
+  backgroundColor = "#FFFFFF"
+): Blob {
+  const imgWidth = Math.max(1, Math.round(canvas.width));
+  const imgHeight = Math.max(1, Math.round(canvas.height));
+
+  // Garantizar lienzo RGB opaco antes de exportar a JPEG para PDF
+  const opaqueCanvas = document.createElement("canvas");
+  opaqueCanvas.width = imgWidth;
+  opaqueCanvas.height = imgHeight;
+  const opaqueCtx = opaqueCanvas.getContext("2d");
+  if (opaqueCtx) {
+    opaqueCtx.fillStyle = backgroundColor;
+    opaqueCtx.fillRect(0, 0, imgWidth, imgHeight);
+    opaqueCtx.drawImage(canvas, 0, 0);
+  }
+
+  const jpegDataUrl = opaqueCanvas.toDataURL("image/jpeg", 0.97);
   const base64Data = jpegDataUrl.split(",")[1];
   const binaryStr = window.atob(base64Data);
   const jpegBytes = new Uint8Array(binaryStr.length);
@@ -205,7 +339,7 @@ function buildPdfBlobFromCanvas(canvas: HTMLCanvasElement): Blob {
 
   const pageWidth = 595;
   const pageHeight = Math.max(
-    200,
+    180,
     Math.round((imgHeight / imgWidth) * pageWidth)
   );
 
@@ -229,7 +363,13 @@ function buildPdfBlobFromCanvas(canvas: HTMLCanvasElement): Blob {
     offsets.push(currentOffset);
   };
 
-  pushStr("%PDF-1.4\n%\xFF\xFF\xFF\xFF\n");
+  // Cabecera binaria estándar PDF 1.4 (%PDF-1.4\n%\xE2\xE3\xCF\xD3\n)
+  pushBytes(
+    new Uint8Array([
+      0x25, 0x50, 0x44, 0x46, 0x2d, 0x31, 0x2e, 0x34, 0x0a, 0x25, 0xe2, 0xe3,
+      0xcf, 0xd3, 0x0a,
+    ])
+  );
 
   startObj();
   pushStr("1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n");
@@ -261,7 +401,7 @@ function buildPdfBlobFromCanvas(canvas: HTMLCanvasElement): Blob {
     pushStr(`${String(offsets[i]).padStart(10, "0")} 00000 n \n`);
   }
   pushStr(
-    `trailer\n<< /Size ${offsets.length} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF`
+    `trailer\n<< /Size ${offsets.length} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF\n`
   );
 
   return new Blob(chunks as BlobPart[], { type: "application/pdf" });
@@ -382,7 +522,7 @@ export function EmailPreviewer({
     try {
       setDownloadingId(loadingKey);
       const canvas = await renderElementToCanvas(element, bgColor, 2.2);
-      const pdfBlob = buildPdfBlobFromCanvas(canvas);
+      const pdfBlob = buildPdfBlobFromCanvas(canvas, bgColor);
       triggerBlobDownload(pdfBlob, themedFilename);
 
       toast.success("PDF descargado correctamente", {
@@ -395,35 +535,99 @@ export function EmailPreviewer({
     }
   };
 
-  const handleDownloadFullPng = async () => {
-    if (!fullEmailRef.current) {
-      toast.error("No se encontró el email completo para exportar");
-      return;
+  /**
+   * Renderiza los 5 bloques individualmente y los une en un único lienzo maestro
+   * sin desfases por `mx-auto` ni recortes por altura máxima de `<foreignObject>`.
+   */
+  const renderStitchedEmailCanvas = async (
+    pixelRatio = 2
+  ): Promise<HTMLCanvasElement> => {
+    const partCanvases: HTMLCanvasElement[] = [];
+
+    for (const part of EMAIL_PARTS) {
+      const el = partRefs.current[part.id];
+      if (el) {
+        const partCanvas = await renderElementToCanvas(el, bgColor, pixelRatio);
+        partCanvases.push(partCanvas);
+      }
     }
-    await downloadElementAsPng(
-      fullEmailRef.current,
-      "glocation-email-completo.png",
-      "full-email"
-    );
+
+    if (partCanvases.length === 0) {
+      if (!fullEmailRef.current) {
+        throw new Error("No se encontraron bloques para exportar");
+      }
+      return await renderElementToCanvas(
+        fullEmailRef.current,
+        bgColor,
+        pixelRatio
+      );
+    }
+
+    const masterWidth = Math.max(...partCanvases.map((c) => c.width));
+    const totalHeight = partCanvases.reduce((acc, c) => acc + c.height, 0);
+
+    const masterCanvas = document.createElement("canvas");
+    masterCanvas.width = masterWidth;
+    masterCanvas.height = totalHeight;
+    const ctx = masterCanvas.getContext("2d");
+
+    if (ctx) {
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, masterWidth, totalHeight);
+      let currentY = 0;
+      for (const c of partCanvases) {
+        const offsetX = Math.round((masterWidth - c.width) / 2);
+        ctx.drawImage(c, offsetX, currentY);
+        currentY += c.height;
+      }
+    }
+
+    return masterCanvas;
+  };
+
+  const handleDownloadFullPng = async () => {
+    const themedFilename = `glocation-email-completo-${themeSuffix}.png`;
+    try {
+      setDownloadingId("full-email");
+      const masterCanvas = await renderStitchedEmailCanvas(2);
+      const blob = await new Promise<Blob | null>((resolve) =>
+        masterCanvas.toBlob(resolve, "image/png")
+      );
+      if (!blob) throw new Error("No se pudo crear el archivo PNG");
+
+      triggerBlobDownload(blob, themedFilename);
+      toast.success("Email completo descargado en PNG (2x HD)", {
+        description: themedFilename,
+      });
+    } catch {
+      toast.error("Error al generar el PNG completo");
+    } finally {
+      setDownloadingId(null);
+    }
   };
 
   const handleDownloadPdf = async () => {
-    if (!fullEmailRef.current) {
-      toast.error("No se encontró el email completo para exportar a PDF");
-      return;
+    const themedFilename = `glocation-email-completo-${themeSuffix}.pdf`;
+    try {
+      setDownloadingId("full-pdf");
+      const masterCanvas = await renderStitchedEmailCanvas(2.2);
+      const pdfBlob = buildPdfBlobFromCanvas(masterCanvas, bgColor);
+      triggerBlobDownload(pdfBlob, themedFilename);
+      toast.success("PDF completo descargado correctamente", {
+        description: themedFilename,
+      });
+    } catch {
+      toast.error("Error al generar el PDF completo");
+    } finally {
+      setDownloadingId(null);
     }
-    await downloadElementAsPdf(
-      fullEmailRef.current,
-      "glocation-email-completo.png",
-      "full-pdf"
-    );
   };
 
   const handleDownloadAllPartsPng = async () => {
     try {
       setDownloadingId("all-parts");
       toast.info(
-        `Generando los 4 bloques en PNG (${emailTheme === "dark" ? "Versión Oscura" : "Versión Clara"})...`,
+        `Generando los ${EMAIL_PARTS.length} bloques en PNG (${emailTheme === "dark" ? "Versión Oscura" : "Versión Clara"})...`,
         {
           description: "Cada bloque se descargará automáticamente.",
         }
@@ -446,7 +650,9 @@ export function EmailPreviewer({
         }
       }
 
-      toast.success("¡Los 4 bloques fueron descargados en PNG!");
+      toast.success(
+        `¡Los ${EMAIL_PARTS.length} bloques fueron descargados en PNG!`
+      );
     } catch {
       toast.error("Error al descargar los bloques en PNG");
     } finally {
