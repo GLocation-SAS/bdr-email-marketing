@@ -26,6 +26,7 @@ import {
   Mail,
   Send,
   FileEdit,
+  FileImage,
   UserX,
   Palette,
   Sun,
@@ -80,6 +81,14 @@ export const EMAIL_MARKETING_NAV_ITEMS: EmailNavItem[] = [
     href: "/email-marketing/plantilla-colores",
     group: "campanas",
     badge: "EM-04",
+  },
+  {
+    id: "encabezado-form",
+    label: "Encabezado Form (1600×400)",
+    icon: FileImage,
+    href: "/email-marketing/encabezado-form",
+    group: "campanas",
+    badge: "EM-05",
   },
   {
     id: "bajas",

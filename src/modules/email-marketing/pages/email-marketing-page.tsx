@@ -12,6 +12,8 @@ import {
   LayoutGrid,
   Table2,
   Plus,
+  ImageDown,
+  FileImage,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -68,6 +70,8 @@ export interface EmailCampaignItem {
   status: "ACTIVA" | "BORRADOR" | "EN REVISIÓN";
   updatedAt: string;
   href: string;
+  downloadPngAsset?: string;
+  downloadPngFilename?: string;
 }
 
 const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
@@ -77,7 +81,7 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     description:
       "Email B2B para Jefes de Oficinas TIC del sector público colombiano, enfocado en seguimiento de proyectos con Trabajadores Cognitivos.",
     segment: "Jefes TIC · Sector Público",
-    format: "4 Bloques · 740px",
+    format: "5 Bloques · 740px",
     ownerName: "Paula Rozo",
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "ACTIVA",
@@ -90,7 +94,7 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     description:
       "Plantilla clásica con placeholders [Aquí va...] lista para editar textos, subir imágenes y descargar en PDF o PNG.",
     segment: "Plantilla Clásica B2B",
-    format: "4 Bloques · Editable",
+    format: "5 Bloques · Editable",
     ownerName: "Paula Rozo",
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "BORRADOR",
@@ -103,7 +107,7 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     description:
       "Hero con foto a la izquierda + Bloque 2 con foto izquierda/texto derecha + Bloque 3 invertido (texto izquierda/foto derecha) y selector de color.",
     segment: "2 Fotos Invertidas · Zig-Zag",
-    format: "4 Bloques · Multicolor",
+    format: "5 Bloques · Multicolor",
     ownerName: "Paula Rozo",
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "BORRADOR",
@@ -116,12 +120,27 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     description:
       "Comparativa de dos fotos lado a lado con tarjetas en colores invertidos (Cian, Esmeralda, Violeta o Coral) y 3 pilares de impacto.",
     segment: "Contraste Bicolor · 2 Fotos",
-    format: "4 Bloques · 4 Paletas",
+    format: "5 Bloques · 4 Paletas",
     ownerName: "Paula Rozo",
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "BORRADOR",
     updatedAt: "04/11/2026",
     href: "/email-marketing/plantilla-colores",
+  },
+  {
+    id: "EM-05",
+    title: "Encabezado Form · Google Forms Jefes TIC",
+    description:
+      "Encabezado gráfico oficial 1600 × 400 px (4:1) alineado con el Hero 1: Trabajadores Cognitivos — Capacidad para su oficina TIC.",
+    segment: "Google Forms · Jefes TIC",
+    format: "1600 × 400 px · PNG 4:1",
+    ownerName: "Paula Rozo",
+    ownerPhoto: "/paula_natalia_rozo (4).png",
+    status: "ACTIVA",
+    updatedAt: "04/11/2026",
+    href: "/email-marketing/encabezado-form",
+    downloadPngAsset: "/glocation-google-forms-header.png",
+    downloadPngFilename: "glocation-google-forms-header.png",
   },
 ];
 
@@ -184,6 +203,30 @@ export function EmailMarketingPage() {
     }
     setCampaigns((prev) => prev.filter((item) => item.id !== id));
     toast.success("Campaña eliminada del listado");
+  };
+
+  const handleDownloadAssetPng = async (
+    assetPath: string,
+    filename: string
+  ) => {
+    try {
+      const response = await fetch(assetUrl(assetPath), { cache: "no-store" });
+      if (!response.ok) throw new Error("Error al obtener el archivo PNG");
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+      toast.success("Encabezado PNG descargado correctamente", {
+        description: `${filename} · 1600 × 400 px (Proporción 4:1)`,
+      });
+    } catch {
+      toast.error("No se pudo descargar el archivo PNG");
+    }
   };
 
   return (
@@ -354,6 +397,30 @@ export function EmailMarketingPage() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-end gap-1">
+                          {campaign.downloadPngAsset &&
+                            campaign.downloadPngFilename && (
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() =>
+                                      handleDownloadAssetPng(
+                                        campaign.downloadPngAsset!,
+                                        campaign.downloadPngFilename!
+                                      )
+                                    }
+                                    className="size-8 text-primary hover:text-primary hover:bg-primary/15"
+                                  >
+                                    <ImageDown className="size-4" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  Descargar encabezado PNG (1600×400)
+                                </TooltipContent>
+                              </Tooltip>
+                            )}
+
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Link href={campaign.href}>
@@ -521,6 +588,75 @@ export function EmailMarketingPage() {
               ))}
             </div>
           )}
+
+          {/* Vista previa directa del Encabezado Google Forms 1600 × 400 px */}
+          <Card className="p-5 bg-surface border border-border shadow-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2.5 flex-wrap">
+                <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <FileImage className="size-4" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h2 className="text-sm font-heading font-bold text-foreground">
+                      Encabezado Gráfico Google Forms — Campaña Jefes TIC
+                    </h2>
+                    <Badge
+                      variant="secondary"
+                      className="bg-primary/10 text-primary border-transparent text-[11px]"
+                    >
+                      1600 × 400 px · 4:1 PNG
+                    </Badge>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Archivo oficial{" "}
+                    <code>glocation-google-forms-header.png</code> alineado con
+                    el Hero 1 de la campaña.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 flex-wrap">
+                <Link href="/email-marketing/encabezado-form">
+                  <Button
+                    variant="neutral"
+                    size="sm"
+                    leftIcon={<Eye className="w-3.5 h-3.5" />}
+                    className="w-auto text-xs font-semibold"
+                  >
+                    Ver vista completa
+                  </Button>
+                </Link>
+                <Button
+                  variant="primary"
+                  size="sm"
+                  onClick={() =>
+                    handleDownloadAssetPng(
+                      "/glocation-google-forms-header.png",
+                      "glocation-google-forms-header.png"
+                    )
+                  }
+                  leftIcon={<ImageDown className="w-3.5 h-3.5" />}
+                  className="w-auto text-xs font-semibold"
+                >
+                  Descargar encabezado PNG
+                </Button>
+              </div>
+            </div>
+
+            <Link
+              href="/email-marketing/encabezado-form"
+              className="block overflow-hidden rounded-xl border border-[#2D1E52] bg-[#0B063B] shadow-md hover:opacity-95 transition-opacity"
+            >
+              <img
+                src={assetUrl("/glocation-google-forms-header.png")}
+                alt="Encabezado Google Forms GLocation (1600×400)"
+                width={1600}
+                height={400}
+                className="w-full h-auto block"
+              />
+            </Link>
+          </Card>
         </div>
       </SidebarInset>
     </SidebarProvider>

@@ -6,3 +6,4 @@ export * from "./email-cta-block";
 export * from "./email-footer-block";
 export * from "./email-marketing-sidebar";
 export * from "./email-template-variants";
+export * from "./google-forms-header-previewer";

@@ -6,6 +6,7 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { EmailPreviewer } from "../components/email-previewer";
+import { GoogleFormsHeaderPreviewer } from "../components/google-forms-header-previewer";
 import { EmailMarketingSidebar } from "../components/email-marketing-sidebar";
 import "../styles/email-marketing.css";
 
@@ -73,6 +74,19 @@ export function CampaignDualColorTemplatePage() {
             campaignTitle="Plantilla Dos Fotos + Bloques de Color Invertidos"
             campaignSegment="Contraste Bicolor · 4 Paletas Disponibles"
           />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function GoogleFormsHeaderPage() {
+  return (
+    <SidebarProvider>
+      <EmailMarketingSidebar />
+      <SidebarInset className="min-w-0">
+        <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
+          <GoogleFormsHeaderPreviewer />
         </div>
       </SidebarInset>
     </SidebarProvider>
