@@ -1,16 +1,7 @@
 "use client";
 
 import * as React from "react";
-import {
-  User,
-  Wrench,
-  Sparkles,
-  MessageSquare,
-  Workflow,
-  ArrowRight,
-  ArrowDown,
-  ImagePlus,
-} from "lucide-react";
+import { Workflow, ArrowRight, ImagePlus } from "lucide-react";
 import { assetUrl } from "@/lib/utils";
 
 interface EmailTransformationBlockProps {
@@ -18,6 +9,89 @@ interface EmailTransformationBlockProps {
   imageProcessUrl?: string;
   imageTeamUrl?: string;
   isTemplate?: boolean;
+}
+
+function ChatGptLogo() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="size-5"
+      fill="none"
+      aria-label="ChatGPT"
+    >
+      <rect width="24" height="24" rx="6" fill="#10A37F" />
+      <path
+        d="M19.2 10.3a4.1 4.1 0 0 0-.35-3.38 4.18 4.18 0 0 0-4.5-2 4.12 4.12 0 0 0-3.1-1.42 4.18 4.18 0 0 0-3.98 2.9 4.12 4.12 0 0 0-2.76 2 4.18 4.18 0 0 0 .52 4.9 4.1 4.1 0 0 0 .35 3.38 4.18 4.18 0 0 0 4.5 2 4.12 4.12 0 0 0 3.1 1.42 4.18 4.18 0 0 0 3.98-2.9 4.12 4.12 0 0 0 2.76-2 4.18 4.18 0 0 0-.52-4.9Z"
+        stroke="#FFFFFF"
+        strokeWidth="1.45"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="12" cy="12" r="2.1" stroke="#FFFFFF" strokeWidth="1.35" />
+    </svg>
+  );
+}
+
+function GeminiLogo() {
+  return (
+    <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-label="Gemini">
+      <defs>
+        <linearGradient
+          id="geminiGrad"
+          x1="2"
+          y1="2"
+          x2="22"
+          y2="22"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0%" stopColor="#1D4ED8" />
+          <stop offset="52%" stopColor="#7C3AED" />
+          <stop offset="100%" stopColor="#DB2777" />
+        </linearGradient>
+      </defs>
+      <rect width="24" height="24" rx="6" fill="url(#geminiGrad)" />
+      <path
+        d="M12 4.3C12.35 8.45 15.55 11.65 19.7 12C15.55 12.35 12.35 15.55 12 19.7C11.65 15.55 8.45 12.35 4.3 12C8.45 11.65 11.65 8.45 12 4.3Z"
+        fill="#FFFFFF"
+      />
+    </svg>
+  );
+}
+
+function ExcelLogo() {
+  return (
+    <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-label="Excel">
+      <rect width="24" height="24" rx="6" fill="#107C41" />
+      <rect
+        x="10.5"
+        y="4.5"
+        width="9"
+        height="15"
+        rx="1.5"
+        fill="#21A366"
+      />
+      <path
+        d="M10.5 8.2H19.5M10.5 12H19.5M10.5 15.8H19.5M14.8 4.5V19.5"
+        stroke="#107C41"
+        strokeWidth="0.9"
+        strokeOpacity="0.65"
+      />
+      <rect
+        x="4"
+        y="6.5"
+        width="9"
+        height="11"
+        rx="1.6"
+        fill="#0B532B"
+      />
+      <path
+        d="M6.5 9.2L10.5 14.8M10.5 9.2L6.5 14.8"
+        stroke="#FFFFFF"
+        strokeWidth="1.65"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
 }
 
 export function EmailTransformationBlock({
@@ -99,13 +173,13 @@ export function EmailTransformationBlock({
           </p>
         </div>
 
-        {/* Diagrama comparativo simplificado */}
+        {/* Diagrama comparativo: Uso aislado vs Transformación Cognitiva */}
         <div className="flex flex-col sm:flex-row items-stretch gap-3">
-          {/* Lado Izquierdo: Situación actual / Herramientas individuales */}
+          {/* COLUMNA IZQUIERDA: USO AISLADO (ChatGPT, Gemini, Excel) */}
           <div
-            className={`sm:w-[38%] rounded-2xl p-4 flex flex-col gap-3 border ${
+            className={`sm:w-[41%] rounded-2xl p-4 flex flex-col gap-3 border ${
               isDark
-                ? "bg-[#170E2B]/70 border-[#2A1B47]"
+                ? "bg-[#170E2B]/75 border-[#2A1B47]"
                 : "bg-[#F7F6FA] border-[#E4E1EC]"
             }`}
           >
@@ -115,7 +189,7 @@ export function EmailTransformationBlock({
                   isDark ? "text-slate-400" : "text-slate-500"
                 }`}
               >
-                {isTemplate ? "[Etiqueta antes]" : "Uso aislado"}
+                {isTemplate ? "[Etiqueta antes]" : "USO AISLADO"}
               </span>
               <h3
                 className={`font-heading text-[14px] font-bold mt-0.5 leading-snug ${
@@ -129,45 +203,49 @@ export function EmailTransformationBlock({
             </div>
 
             <div
-              className={`flex-1 flex flex-col justify-between rounded-xl border border-dashed px-3 py-3.5 ${
+              className={`flex-1 flex flex-col justify-between rounded-xl border border-dashed px-3 py-3.5 gap-3 ${
                 isDark
                   ? "bg-[#120B22] border-slate-700"
                   : "bg-white border-slate-300"
               }`}
             >
-              <div className="flex items-center justify-around my-auto">
-                {[Wrench, MessageSquare, Sparkles].map((Icon, idx) => (
-                  <div key={idx} className="flex flex-col items-center gap-1">
+              {/* Logos de ChatGPT, Gemini y Excel en tarjetas separadas */}
+              <div className="grid grid-cols-3 gap-2 my-auto">
+                {[
+                  { name: "ChatGPT", logo: <ChatGptLogo /> },
+                  { name: "Gemini", logo: <GeminiLogo /> },
+                  { name: "Excel", logo: <ExcelLogo /> },
+                ].map((tool) => (
+                  <div
+                    key={tool.name}
+                    className={`flex flex-col items-center justify-center gap-1.5 rounded-lg border py-2.5 px-1.5 ${
+                      isDark
+                        ? "bg-[#1A1130] border-slate-700/80"
+                        : "bg-slate-50/90 border-slate-200/90"
+                    }`}
+                  >
+                    <div className="flex size-8 items-center justify-center rounded-lg bg-white dark:bg-slate-900 shadow-2xs border border-black/5 dark:border-white/10">
+                      {tool.logo}
+                    </div>
                     <span
-                      className={`flex size-7 items-center justify-center rounded-md border ${
-                        isDark
-                          ? "bg-slate-800/80 border-slate-700 text-slate-400"
-                          : "bg-slate-100 border-slate-200 text-slate-500"
+                      className={`font-heading text-[10px] font-bold leading-none ${
+                        isDark ? "text-slate-200" : "text-slate-700"
                       }`}
                     >
-                      <Icon className="size-3.5" />
-                    </span>
-                    <ArrowDown className="size-3 text-slate-400" />
-                    <span
-                      className={`flex size-7 items-center justify-center rounded-full ${
-                        isDark
-                          ? "bg-slate-800 text-slate-300"
-                          : "bg-slate-100 text-slate-600"
-                      }`}
-                    >
-                      <User className="size-3.5" />
+                      {tool.name}
                     </span>
                   </div>
                 ))}
               </div>
+
               <p
-                className={`text-[11px] text-center mt-2.5 leading-tight ${
-                  isDark ? "text-slate-400" : "text-slate-500"
+                className={`font-sans text-[11px] text-center leading-[1.38] ${
+                  isDark ? "text-slate-300" : "text-slate-600"
                 }`}
               >
                 {isTemplate
                   ? "[Aquí va la limitación actual]"
-                  : "Esfuerzos dispersos por persona"}
+                  : "Consultas, documentos y seguimientos gestionados por separado."}
               </p>
             </div>
           </div>
@@ -179,7 +257,7 @@ export function EmailTransformationBlock({
             </div>
           </div>
 
-          {/* Lado Derecho DESTACADO: Propuesta / IA integrada a un proceso */}
+          {/* COLUMNA DERECHA: TRANSFORMACIÓN COGNITIVA */}
           <div
             className={`relative overflow-hidden sm:flex-1 rounded-2xl border-2 p-4 flex flex-col gap-3 ${
               isDark
@@ -197,7 +275,7 @@ export function EmailTransformationBlock({
                   <span className="size-1.5 rounded-full bg-[#7C3AED]" />
                   {isTemplate
                     ? "[Etiqueta propuesta]"
-                    : "Transformación Cognitiva"}
+                    : "TRANSFORMACIÓN COGNITIVA"}
                 </span>
                 <h3
                   className={`font-heading text-[14px] font-extrabold mt-0.5 leading-snug ${
@@ -214,9 +292,9 @@ export function EmailTransformationBlock({
               </span>
             </div>
 
-            {/* Flujo limpio de 3 nodos */}
+            {/* Flujo limpio de 3 nodos + texto de apoyo + frase final */}
             <div
-              className={`flex-1 flex flex-col justify-between rounded-xl border px-3 py-3.5 ${
+              className={`flex-1 flex flex-col justify-between rounded-xl border px-3.5 py-3.5 gap-2.5 ${
                 isDark
                   ? "bg-[#150A2B]/95 border-[#581C87]"
                   : "bg-white border-[#C4B5FD]"
@@ -348,15 +426,31 @@ export function EmailTransformationBlock({
                 </div>
               </div>
 
-              <p
-                className={`text-[11px] font-medium text-center mt-2.5 leading-tight ${
-                  isDark ? "text-[#C4B5FD]" : "text-[#6D28D9]"
+              <div
+                className={`pt-2 border-t text-center space-y-1 ${
+                  isDark ? "border-[#3B1D6E]" : "border-[#EDE9FE]"
                 }`}
               >
-                {isTemplate
-                  ? "[Aquí va el resultado esperado en la operación]"
-                  : "Capacidad articulada en su operación"}
-              </p>
+                <p
+                  className={`font-sans text-[11px] leading-[1.38] ${
+                    isDark ? "text-[#E9D5FF]/90" : "text-[#4B5563]"
+                  }`}
+                >
+                  {isTemplate
+                    ? "[Aquí va el texto de apoyo del flujo integrado.]"
+                    : "Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana."}
+                </p>
+
+                <p
+                  className={`font-heading text-[11px] font-extrabold tracking-tight leading-tight ${
+                    isDark ? "text-[#C4B5FD]" : "text-[#6D28D9]"
+                  }`}
+                >
+                  {isTemplate
+                    ? "[Aquí va el resultado esperado en la operación]"
+                    : "Capacidad articulada en su operación"}
+                </p>
+              </div>
             </div>
           </div>
         </div>

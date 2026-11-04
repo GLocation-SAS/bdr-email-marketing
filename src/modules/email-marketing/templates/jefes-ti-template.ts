@@ -187,20 +187,30 @@ export function generateJefesTiEmailHtml(
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <!-- Lado Izquierdo: Herramientas individuales -->
-                  <td class="stack-column mobile-mb" width="38%" valign="top">
+                  <td class="stack-column mobile-mb" width="40%" valign="top">
                     <div style="background-color: ${isDark ? "#170E2B" : "#F7F6FA"}; border: 1px solid ${isDark ? "#2A1B47" : "#E4E1EC"}; border-radius: 12px; padding: 14px;">
                       <div class="font-heading" style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #94A3B8; margin-bottom: 2px;">
-                        Uso aislado
+                        USO AISLADO
                       </div>
                       <div class="font-heading" style="font-size: 13.5px; font-weight: 700; color: ${isDark ? "#E2E8F0" : "#334155"}; margin-bottom: 12px;">
                         Herramientas individuales
                       </div>
                       <div style="background-color: ${isDark ? "#120B22" : "#FFFFFF"}; border: 1px dashed ${isDark ? "#334155" : "#CBD5E1"}; border-radius: 8px; padding: 12px; text-align: center;">
-                        <div style="font-size: 13px; color: #94A3B8; margin-bottom: 6px;">
-                          &#128295; &darr; &#128100; &nbsp;&nbsp; &#128172; &darr; &#128100; &nbsp;&nbsp; &#10024; &darr; &#128100;
-                        </div>
-                        <div style="font-size: 11px; color: #94A3B8; line-height: 1.35;">
-                          Esfuerzos dispersos por persona
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 8px;">
+                          <tr>
+                            <td align="center" width="33%" style="padding: 4px;">
+                              <div style="background-color: #10A37F; color: #FFFFFF; font-family: 'Montserrat', Arial, sans-serif; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 6px 4px;">ChatGPT</div>
+                            </td>
+                            <td align="center" width="33%" style="padding: 4px;">
+                              <div style="background-color: #4F46E5; color: #FFFFFF; font-family: 'Montserrat', Arial, sans-serif; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 6px 4px;">Gemini</div>
+                            </td>
+                            <td align="center" width="33%" style="padding: 4px;">
+                              <div style="background-color: #107C41; color: #FFFFFF; font-family: 'Montserrat', Arial, sans-serif; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 6px 4px;">Excel</div>
+                            </td>
+                          </tr>
+                        </table>
+                        <div style="font-size: 11px; color: ${isDark ? "#CBD5E1" : "#475569"}; line-height: 1.38;">
+                          Consultas, documentos y seguimientos gestionados por separado.
                         </div>
                       </div>
                     </div>
@@ -214,13 +224,13 @@ export function generateJefesTiEmailHtml(
                   </td>
 
                   <!-- Lado Derecho: IA integrada a un proceso -->
-                  <td class="stack-column" width="56%" valign="top">
+                  <td class="stack-column" width="54%" valign="top">
                     <div style="background-color: ${isDark ? "#24124D" : "#F6F0FF"}; border: 2px solid ${isDark ? "#7C3AED" : "#C4B5FD"}; border-radius: 16px; padding: 14px;">
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 10px;">
                         <tr>
                           <td>
                             <div class="font-heading" style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: ${isDark ? "#D8B4FE" : "#6D28D9"};">
-                              &#9679; Transformación Cognitiva
+                              &#9679; TRANSFORMACIÓN COGNITIVA
                             </div>
                             <div class="font-heading" style="font-size: 14.5px; font-weight: 800; color: ${textMain};">
                               IA integrada a un proceso
@@ -253,7 +263,10 @@ export function generateJefesTiEmailHtml(
                             </td>
                           </tr>
                         </table>
-                        <div style="font-size: 11px; font-weight: 600; color: ${isDark ? "#C4B5FD" : "#6D28D9"}; margin-top: 8px; line-height: 1.35;">
+                        <div style="font-size: 11px; color: ${isDark ? "#E9D5FF" : "#4B5563"}; margin-top: 8px; padding-top: 8px; border-top: 1px solid ${isDark ? "#3B1D6E" : "#EDE9FE"}; line-height: 1.38;">
+                          Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana.
+                        </div>
+                        <div class="font-heading" style="font-size: 11px; font-weight: 800; color: ${isDark ? "#C4B5FD" : "#6D28D9"}; margin-top: 4px; line-height: 1.35;">
                           Capacidad articulada en su operación
                         </div>
                       </div>
