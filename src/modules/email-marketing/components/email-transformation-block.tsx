@@ -352,7 +352,7 @@ export function EmailTransformationBlock({
               </div>
 
               <div
-                className={`pt-2 border-t text-center space-y-1 ${
+                className={`pt-2 border-t text-center ${
                   isDark ? "border-[#3B1D6E]" : "border-[#EDE9FE]"
                 }`}
               >
@@ -364,16 +364,6 @@ export function EmailTransformationBlock({
                   {isTemplate
                     ? "[Aquí va el texto de apoyo del flujo integrado.]"
                     : "Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana."}
-                </p>
-
-                <p
-                  className={`font-heading text-[11px] font-extrabold tracking-tight leading-tight ${
-                    isDark ? "text-[#C4B5FD]" : "text-[#6D28D9]"
-                  }`}
-                >
-                  {isTemplate
-                    ? "[Aquí va el resultado esperado en la operación]"
-                    : "Capacidad articulada en su operación"}
                 </p>
               </div>
             </div>

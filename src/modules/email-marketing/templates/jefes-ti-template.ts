@@ -269,9 +269,6 @@ export function generateJefesTiEmailHtml(
                         <div style="font-size: 11px; color: ${isDark ? "#E9D5FF" : "#4B5563"}; margin-top: 8px; padding-top: 8px; border-top: 1px solid ${isDark ? "#3B1D6E" : "#EDE9FE"}; line-height: 1.38;">
                           Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana.
                         </div>
-                        <div class="font-heading" style="font-size: 11px; font-weight: 800; color: ${isDark ? "#C4B5FD" : "#6D28D9"}; margin-top: 4px; line-height: 1.35;">
-                          Capacidad articulada en su operación
-                        </div>
                       </div>
                     </div>
                   </td>
