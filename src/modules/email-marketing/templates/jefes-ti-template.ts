@@ -198,21 +198,21 @@ export function generateJefesTiEmailHtml(
                       <div style="background-color: ${isDark ? "#120B22" : "#FFFFFF"}; border: 1px dashed ${isDark ? "#334155" : "#CBD5E1"}; border-radius: 8px; padding: 12px; text-align: center;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 8px;">
                           <tr>
-                            <td align="center" width="33%" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">
-                              <img src="/chatgpt_gris_circular.png" alt="ChatGPT" width="38" height="38" style="display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 0 auto 4px auto;" />
-                              ChatGPT
+                            <td align="center" width="33%" style="font-size: 11px; color: #94A3B8;">
+                              <img src="/chatgpt_gris_circular.png" alt="ChatGPT" width="32" height="32" style="display: block; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin: 0 auto 2px auto;" />
+                              &darr;<br />&#128100;
                             </td>
-                            <td align="center" width="33%" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">
-                              <img src="/gemini_gris_circular.png" alt="Gemini" width="38" height="38" style="display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 0 auto 4px auto;" />
-                              Gemini
+                            <td align="center" width="33%" style="font-size: 11px; color: #94A3B8;">
+                              <img src="/gemini_gris_circular.png" alt="Gemini" width="32" height="32" style="display: block; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin: 0 auto 2px auto;" />
+                              &darr;<br />&#128100;
                             </td>
-                            <td align="center" width="33%" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">
-                              <img src="/excel_gris_circular.png" alt="Excel" width="38" height="38" style="display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 0 auto 4px auto;" />
-                              Excel
+                            <td align="center" width="33%" style="font-size: 11px; color: #94A3B8;">
+                              <img src="/excel_gris_circular.png" alt="Excel" width="32" height="32" style="display: block; width: 32px; height: 32px; border-radius: 50%; object-fit: cover; margin: 0 auto 2px auto;" />
+                              &darr;<br />&#128100;
                             </td>
                           </tr>
                         </table>
-                        <div style="font-size: 11px; color: ${isDark ? "#CBD5E1" : "#475569"}; line-height: 1.38;">
+                        <div style="font-size: 11px; color: ${isDark ? "#CBD5E1" : "#475569"}; line-height: 1.35;">
                           Consultas, documentos y seguimientos gestionados por separado.
                         </div>
                       </div>
@@ -266,7 +266,7 @@ export function generateJefesTiEmailHtml(
                             </td>
                           </tr>
                         </table>
-                        <div style="font-size: 11px; color: ${isDark ? "#E9D5FF" : "#4B5563"}; margin-top: 8px; padding-top: 8px; border-top: 1px solid ${isDark ? "#3B1D6E" : "#EDE9FE"}; line-height: 1.38;">
+                        <div style="font-size: 11px; color: ${isDark ? "#E9D5FF" : "#4B5563"}; margin-top: 10px; line-height: 1.35;">
                           Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana.
                         </div>
                       </div>

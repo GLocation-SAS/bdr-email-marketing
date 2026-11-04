@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Workflow, ArrowRight, ImagePlus } from "lucide-react";
+import { User, Workflow, ArrowRight, ArrowDown, ImagePlus } from "lucide-react";
 import { assetUrl } from "@/lib/utils";
 
 interface EmailTransformationBlockProps {
@@ -98,9 +98,9 @@ export function EmailTransformationBlock({
 
         {/* Diagrama comparativo: Uso aislado vs Transformación Cognitiva */}
         <div className="flex flex-col sm:flex-row items-stretch gap-3">
-          {/* COLUMNA IZQUIERDA: USO AISLADO (ChatGPT, Gemini, Excel desde public/) */}
+          {/* COLUMNA IZQUIERDA: USO AISLADO (ChatGPT, Gemini, Excel + flecha + humano) */}
           <div
-            className={`sm:w-[41%] rounded-2xl p-4 flex flex-col gap-3 border ${
+            className={`sm:w-[40%] rounded-2xl p-4 flex flex-col gap-3 border ${
               isDark
                 ? "bg-[#170E2B]/75 border-[#2A1B47]"
                 : "bg-[#F7F6FA] border-[#E4E1EC]"
@@ -126,52 +126,49 @@ export function EmailTransformationBlock({
             </div>
 
             <div
-              className={`flex-1 flex flex-col justify-between rounded-xl border border-dashed px-3 py-3.5 gap-3 ${
+              className={`flex-1 flex flex-col items-center justify-center rounded-xl border border-dashed px-3 py-3.5 gap-2.5 ${
                 isDark
                   ? "bg-[#120B22] border-slate-700"
                   : "bg-white border-slate-300"
               }`}
             >
-              {/* Logos circulares de ChatGPT, Gemini y Excel desde public/ */}
-              <div className="flex items-center justify-around gap-2 my-auto">
+              {/* Logos circulares + flecha + humano */}
+              <div className="flex items-center justify-around w-full my-auto">
                 {ISOLATED_TOOLS.map((tool) => (
                   <div
                     key={tool.name}
-                    className="flex flex-col items-center text-center shrink-0"
+                    className="flex flex-col items-center gap-1"
                   >
-                    <span className="relative flex size-10 items-center justify-center rounded-full overflow-hidden border border-slate-400/60 bg-[#D6D6D6] shadow-2xs">
+                    <span className="relative flex size-8 items-center justify-center rounded-full overflow-hidden">
                       <img
                         src={assetUrl(tool.src)}
                         alt={tool.name}
                         className="size-full object-cover scale-[1.12]"
                       />
                     </span>
+                    <ArrowDown className="size-3 text-slate-400" />
                     <span
-                      className={`font-heading text-[10.5px] font-bold mt-1.5 leading-tight whitespace-nowrap ${
-                        isDark ? "text-slate-300" : "text-slate-700"
+                      className={`flex size-7 items-center justify-center rounded-full ${
+                        isDark
+                          ? "bg-slate-800 text-slate-300"
+                          : "bg-slate-100 text-slate-600"
                       }`}
                     >
-                      {tool.name}
+                      <User className="size-3.5" />
                     </span>
                   </div>
                 ))}
               </div>
 
-              <div
-                className={`pt-2 border-t text-center ${
-                  isDark ? "border-slate-800" : "border-slate-200"
+              <p
+                className={`font-sans text-[11px] text-center leading-[1.35] ${
+                  isDark ? "text-slate-300" : "text-slate-600"
                 }`}
               >
-                <p
-                  className={`font-sans text-[11px] leading-[1.38] ${
-                    isDark ? "text-slate-300" : "text-slate-600"
-                  }`}
-                >
-                  {isTemplate
-                    ? "[Aquí va la limitación actual]"
-                    : "Consultas, documentos y seguimientos gestionados por separado."}
-                </p>
-              </div>
+                {isTemplate
+                  ? "[Aquí va la limitación actual]"
+                  : "Consultas, documentos y seguimientos gestionados por separado."}
+              </p>
             </div>
           </div>
 
@@ -217,15 +214,15 @@ export function EmailTransformationBlock({
               </span>
             </div>
 
-            {/* Flujo limpio de 3 nodos + texto de apoyo + frase final */}
+            {/* Flujo limpio de 3 nodos centrado sin bordes intermedios */}
             <div
-              className={`flex-1 flex flex-col justify-between rounded-xl border px-3.5 py-3.5 gap-2.5 ${
+              className={`flex-1 flex flex-col items-center justify-center rounded-xl border px-3.5 py-3.5 gap-3 ${
                 isDark
                   ? "bg-[#150A2B]/95 border-[#581C87]"
                   : "bg-white border-[#C4B5FD]"
               }`}
             >
-              <div className="flex items-center justify-around gap-1 my-auto">
+              <div className="flex items-center justify-around w-full gap-1 my-auto">
                 {/* Nodo 1 */}
                 <div className="flex flex-col items-center text-center shrink-0">
                   <span
@@ -351,21 +348,15 @@ export function EmailTransformationBlock({
                 </div>
               </div>
 
-              <div
-                className={`pt-2 border-t text-center ${
-                  isDark ? "border-[#3B1D6E]" : "border-[#EDE9FE]"
+              <p
+                className={`font-sans text-[11px] text-center leading-[1.35] ${
+                  isDark ? "text-[#E9D5FF]/90" : "text-[#4B5563]"
                 }`}
               >
-                <p
-                  className={`font-sans text-[11px] leading-[1.38] ${
-                    isDark ? "text-[#E9D5FF]/90" : "text-[#4B5563]"
-                  }`}
-                >
-                  {isTemplate
-                    ? "[Aquí va el texto de apoyo del flujo integrado.]"
-                    : "Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana."}
-                </p>
-              </div>
+                {isTemplate
+                  ? "[Aquí va el texto de apoyo del flujo integrado.]"
+                  : "Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana."}
+              </p>
             </div>
           </div>
         </div>
