@@ -51,7 +51,7 @@ import {
   PaletteCtaBlock,
 } from "./email-template-variants";
 
-type BlockKey = "hero" | "concept" | "application" | "cta";
+type BlockKey = "hero" | "concept" | "application" | "cta" | "footer";
 
 interface EmailPartMeta {
   id: BlockKey;
@@ -89,10 +89,18 @@ const EMAIL_PARTS: EmailPartMeta[] = [
   {
     id: "cta",
     step: "Bloque 4",
-    title: "CTA — Reunión 20 min y Firma Comercial",
+    title: "CTA — Reunión virtual de 20 minutos",
     description:
-      "Invitación a explorar una oportunidad en su oficina TIC y firma de Paula Rozo.",
+      "Invitación a explorar una oportunidad en su oficina TIC.",
     filename: "04-glocation-bloque-cta.png",
+  },
+  {
+    id: "footer",
+    step: "Bloque 5",
+    title: "Firma Comercial — Paula Rozo · Glocation",
+    description:
+      "Firma institucional de Paula Rozo y canales oficiales de Glocation.",
+    filename: "05-glocation-bloque-firma.png",
   },
 ];
 
@@ -300,6 +308,7 @@ export function EmailPreviewer({
     concept: null,
     application: null,
     cta: null,
+    footer: null,
   });
 
   const config: JefesTiEmailConfig = {
@@ -456,26 +465,27 @@ export function EmailPreviewer({
           return <InvertedZigZagBlock2 theme={emailTheme} palette={palette} />;
         case "cta":
           return (
-            <>
-              <PaletteCtaBlock
-                mailtoLink={mailtoTestUrl}
-                theme={emailTheme}
-                palette={palette}
-              />
-              <EmailFooterBlock
-                theme={emailTheme}
-                isTemplate
-                senderPhotoUrl={config.senderPhotoUrl}
-                senderEyebrow={config.senderEyebrow}
-                senderName={config.senderName}
-                senderRole={config.senderRole}
-                senderMessage={config.senderMessage}
-                companyTagline={config.companyTagline}
-                websiteUrl={config.websiteUrl}
-                linkedinUrl={config.linkedinUrl}
-                unsubscribeUrl={config.unsubscribeUrl}
-              />
-            </>
+            <PaletteCtaBlock
+              mailtoLink={mailtoTestUrl}
+              theme={emailTheme}
+              palette={palette}
+            />
+          );
+        case "footer":
+          return (
+            <EmailFooterBlock
+              theme={emailTheme}
+              isTemplate
+              senderPhotoUrl={config.senderPhotoUrl}
+              senderEyebrow={config.senderEyebrow}
+              senderName={config.senderName}
+              senderRole={config.senderRole}
+              senderMessage={config.senderMessage}
+              companyTagline={config.companyTagline}
+              websiteUrl={config.websiteUrl}
+              linkedinUrl={config.linkedinUrl}
+              unsubscribeUrl={config.unsubscribeUrl}
+            />
           );
       }
     }
@@ -492,26 +502,27 @@ export function EmailPreviewer({
           return <DualColorMetricsBlock theme={emailTheme} palette={palette} />;
         case "cta":
           return (
-            <>
-              <PaletteCtaBlock
-                mailtoLink={mailtoTestUrl}
-                theme={emailTheme}
-                palette={palette}
-              />
-              <EmailFooterBlock
-                theme={emailTheme}
-                isTemplate
-                senderPhotoUrl={config.senderPhotoUrl}
-                senderEyebrow={config.senderEyebrow}
-                senderName={config.senderName}
-                senderRole={config.senderRole}
-                senderMessage={config.senderMessage}
-                companyTagline={config.companyTagline}
-                websiteUrl={config.websiteUrl}
-                linkedinUrl={config.linkedinUrl}
-                unsubscribeUrl={config.unsubscribeUrl}
-              />
-            </>
+            <PaletteCtaBlock
+              mailtoLink={mailtoTestUrl}
+              theme={emailTheme}
+              palette={palette}
+            />
+          );
+        case "footer":
+          return (
+            <EmailFooterBlock
+              theme={emailTheme}
+              isTemplate
+              senderPhotoUrl={config.senderPhotoUrl}
+              senderEyebrow={config.senderEyebrow}
+              senderName={config.senderName}
+              senderRole={config.senderRole}
+              senderMessage={config.senderMessage}
+              companyTagline={config.companyTagline}
+              websiteUrl={config.websiteUrl}
+              linkedinUrl={config.linkedinUrl}
+              unsubscribeUrl={config.unsubscribeUrl}
+            />
           );
       }
     }
@@ -532,26 +543,27 @@ export function EmailPreviewer({
         );
       case "cta":
         return (
-          <>
-            <EmailCtaBlock
-              mailtoLink={mailtoTestUrl}
-              theme={emailTheme}
-              isTemplate={isTemplate}
-            />
-            <EmailFooterBlock
-              theme={emailTheme}
-              isTemplate={isTemplate}
-              senderPhotoUrl={config.senderPhotoUrl}
-              senderEyebrow={config.senderEyebrow}
-              senderName={config.senderName}
-              senderRole={config.senderRole}
-              senderMessage={config.senderMessage}
-              companyTagline={config.companyTagline}
-              websiteUrl={config.websiteUrl}
-              linkedinUrl={config.linkedinUrl}
-              unsubscribeUrl={config.unsubscribeUrl}
-            />
-          </>
+          <EmailCtaBlock
+            mailtoLink={mailtoTestUrl}
+            theme={emailTheme}
+            isTemplate={isTemplate}
+          />
+        );
+      case "footer":
+        return (
+          <EmailFooterBlock
+            theme={emailTheme}
+            isTemplate={isTemplate}
+            senderPhotoUrl={config.senderPhotoUrl}
+            senderEyebrow={config.senderEyebrow}
+            senderName={config.senderName}
+            senderRole={config.senderRole}
+            senderMessage={config.senderMessage}
+            companyTagline={config.companyTagline}
+            websiteUrl={config.websiteUrl}
+            linkedinUrl={config.linkedinUrl}
+            unsubscribeUrl={config.unsubscribeUrl}
+          />
         );
     }
   };
@@ -734,7 +746,7 @@ export function EmailPreviewer({
                 }
                 className="w-auto text-xs font-medium"
               >
-                Descargar 4 Bloques (.png)
+                Descargar 5 Bloques (.png)
               </Button>
 
               {isTemplate && (

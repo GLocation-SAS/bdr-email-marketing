@@ -73,10 +73,10 @@ export function EmailFooterBlock({
 
   return (
     <footer
-      className={`relative overflow-hidden border-t px-6 py-5 sm:px-8 sm:py-6 transition-colors duration-300 ${
+      className={`relative overflow-hidden px-6 py-5 sm:px-8 sm:py-6 transition-colors duration-300 ${
         isDark
-          ? "bg-gradient-to-r from-[#090514] via-[#120A28] to-[#1A0E3A] border-[#2A1B4E]/80 text-white"
-          : "bg-white border-[#EAE6F3] text-[#140E24]"
+          ? "bg-gradient-to-r from-[#090514] via-[#120A28] to-[#1A0E3A] text-white"
+          : "bg-white text-[#140E24]"
       }`}
     >
       {/* Destello sutil violeta solo en modo oscuro */}
