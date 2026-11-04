@@ -59,11 +59,27 @@ export const EMAIL_MARKETING_NAV_ITEMS: EmailNavItem[] = [
   },
   {
     id: "plantilla-base",
-    label: "Plantilla Base Editable",
+    label: "Plantilla Base Clásica",
     icon: FileEdit,
     href: "/email-marketing/plantilla-base",
     group: "campanas",
     badge: "EM-02",
+  },
+  {
+    id: "plantilla-invertida",
+    label: "Plantilla 2 Fotos Invertidas",
+    icon: FileEdit,
+    href: "/email-marketing/plantilla-fotos-invertidas",
+    group: "campanas",
+    badge: "EM-03",
+  },
+  {
+    id: "plantilla-colores",
+    label: "Plantilla Colores Invertidos",
+    icon: Palette,
+    href: "/email-marketing/plantilla-colores",
+    group: "campanas",
+    badge: "EM-04",
   },
   {
     id: "bajas",

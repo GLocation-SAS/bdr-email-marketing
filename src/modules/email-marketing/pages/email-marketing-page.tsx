@@ -88,14 +88,40 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     id: "EM-02",
     title: "Plantilla Base Editable · 4 Bloques B2B",
     description:
-      "Plantilla reutilizable con placeholders [Aquí va...] lista para editar textos, subir imágenes y descargar en PDF o PNG.",
-    segment: "Plantilla Base Editable",
+      "Plantilla clásica con placeholders [Aquí va...] lista para editar textos, subir imágenes y descargar en PDF o PNG.",
+    segment: "Plantilla Clásica B2B",
     format: "4 Bloques · Editable",
     ownerName: "Paula Rozo",
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "BORRADOR",
     updatedAt: "04/11/2026",
     href: "/email-marketing/plantilla-base",
+  },
+  {
+    id: "EM-03",
+    title: "Plantilla Dos Fotos Invertidas · Zig-Zag",
+    description:
+      "Hero con foto a la izquierda + Bloque 2 con foto izquierda/texto derecha + Bloque 3 invertido (texto izquierda/foto derecha) y selector de color.",
+    segment: "2 Fotos Invertidas · Zig-Zag",
+    format: "4 Bloques · Multicolor",
+    ownerName: "Paula Rozo",
+    ownerPhoto: "/paula_natalia_rozo (4).png",
+    status: "BORRADOR",
+    updatedAt: "04/11/2026",
+    href: "/email-marketing/plantilla-fotos-invertidas",
+  },
+  {
+    id: "EM-04",
+    title: "Plantilla Dos Fotos + Colores Invertidos",
+    description:
+      "Comparativa de dos fotos lado a lado con tarjetas en colores invertidos (Cian, Esmeralda, Violeta o Coral) y 3 pilares de impacto.",
+    segment: "Contraste Bicolor · 2 Fotos",
+    format: "4 Bloques · 4 Paletas",
+    ownerName: "Paula Rozo",
+    ownerPhoto: "/paula_natalia_rozo (4).png",
+    status: "BORRADOR",
+    updatedAt: "04/11/2026",
+    href: "/email-marketing/plantilla-colores",
   },
 ];
 

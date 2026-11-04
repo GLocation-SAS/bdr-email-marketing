@@ -15,6 +15,8 @@ import {
   Moon,
   PenLine,
   RotateCcw,
+  Palette,
+  LayoutTemplate,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -36,6 +38,18 @@ import { EmailTransformationBlock } from "./email-transformation-block";
 import { EmailApplicationsBlock } from "./email-applications-block";
 import { EmailCtaBlock } from "./email-cta-block";
 import { EmailFooterBlock } from "./email-footer-block";
+import {
+  EMAIL_PALETTES,
+  EmailColorPalette,
+  EmailTemplateVariant,
+  InvertedHeroBlock,
+  InvertedZigZagBlock1,
+  InvertedZigZagBlock2,
+  DualColorHeroBlock,
+  DualPhotosContrastBlock,
+  DualColorMetricsBlock,
+  PaletteCtaBlock,
+} from "./email-template-variants";
 
 type BlockKey = "hero" | "concept" | "application" | "cta";
 
@@ -258,17 +272,25 @@ function triggerBlobDownload(blob: Blob, filename: string) {
 
 export interface EmailPreviewerProps {
   isTemplate?: boolean;
+  templateVariant?: EmailTemplateVariant;
+  defaultPalette?: EmailColorPalette;
   campaignTitle?: string;
   campaignSegment?: string;
 }
 
 export function EmailPreviewer({
   isTemplate = false,
+  templateVariant = "base",
+  defaultPalette = "violet",
   campaignTitle,
   campaignSegment,
 }: EmailPreviewerProps = {}) {
   const [device, setDevice] = React.useState<"desktop" | "mobile">("desktop");
   const [emailTheme, setEmailTheme] = React.useState<"light" | "dark">("light");
+  const [activeVariant, setActiveVariant] =
+    React.useState<EmailTemplateVariant>(templateVariant);
+  const [palette, setPalette] =
+    React.useState<EmailColorPalette>(defaultPalette);
   const [downloadingId, setDownloadingId] = React.useState<string | null>(null);
   const [resetKey, setResetKey] = React.useState(0);
 
@@ -424,6 +446,76 @@ export function EmailPreviewer({
   };
 
   const renderPartComponent = (id: BlockKey) => {
+    if (isTemplate && activeVariant === "inverted-photos") {
+      switch (id) {
+        case "hero":
+          return <InvertedHeroBlock palette={palette} />;
+        case "concept":
+          return <InvertedZigZagBlock1 theme={emailTheme} palette={palette} />;
+        case "application":
+          return <InvertedZigZagBlock2 theme={emailTheme} palette={palette} />;
+        case "cta":
+          return (
+            <>
+              <PaletteCtaBlock
+                mailtoLink={mailtoTestUrl}
+                theme={emailTheme}
+                palette={palette}
+              />
+              <EmailFooterBlock
+                theme={emailTheme}
+                isTemplate
+                senderPhotoUrl={config.senderPhotoUrl}
+                senderEyebrow={config.senderEyebrow}
+                senderName={config.senderName}
+                senderRole={config.senderRole}
+                senderMessage={config.senderMessage}
+                companyTagline={config.companyTagline}
+                websiteUrl={config.websiteUrl}
+                linkedinUrl={config.linkedinUrl}
+                unsubscribeUrl={config.unsubscribeUrl}
+              />
+            </>
+          );
+      }
+    }
+
+    if (isTemplate && activeVariant === "dual-color") {
+      switch (id) {
+        case "hero":
+          return <DualColorHeroBlock palette={palette} />;
+        case "concept":
+          return (
+            <DualPhotosContrastBlock theme={emailTheme} palette={palette} />
+          );
+        case "application":
+          return <DualColorMetricsBlock theme={emailTheme} palette={palette} />;
+        case "cta":
+          return (
+            <>
+              <PaletteCtaBlock
+                mailtoLink={mailtoTestUrl}
+                theme={emailTheme}
+                palette={palette}
+              />
+              <EmailFooterBlock
+                theme={emailTheme}
+                isTemplate
+                senderPhotoUrl={config.senderPhotoUrl}
+                senderEyebrow={config.senderEyebrow}
+                senderName={config.senderName}
+                senderRole={config.senderRole}
+                senderMessage={config.senderMessage}
+                companyTagline={config.companyTagline}
+                websiteUrl={config.websiteUrl}
+                linkedinUrl={config.linkedinUrl}
+                unsubscribeUrl={config.unsubscribeUrl}
+              />
+            </>
+          );
+      }
+    }
+
     switch (id) {
       case "hero":
         return <EmailHeroBlock theme={emailTheme} isTemplate={isTemplate} />;
@@ -662,6 +754,93 @@ export function EmailPreviewer({
             </div>
           </div>
         </CardContent>
+
+        {/* Barra de Diseño y Paleta de Color en modo Plantilla */}
+        {isTemplate && (
+          <div className="w-full mt-4 pt-4 border-t border-border/60 flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+            {/* Selector de estructura de plantilla */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-muted-foreground mr-1">
+                <LayoutTemplate className="size-3.5 text-primary" />
+                Diseño:
+              </span>
+              <ToggleGroup
+                type="single"
+                variant="outline"
+                size="sm"
+                value={activeVariant}
+                onValueChange={(val) => {
+                  if (
+                    val === "base" ||
+                    val === "inverted-photos" ||
+                    val === "dual-color"
+                  ) {
+                    setActiveVariant(val);
+                  }
+                }}
+                className="bg-surface flex-wrap"
+              >
+                <ToggleGroupItem
+                  value="base"
+                  className="text-xs px-3 font-semibold"
+                >
+                  Clásica B2B
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="inverted-photos"
+                  className="text-xs px-3 font-semibold"
+                >
+                  2 Fotos Invertidas (Zig-Zag)
+                </ToggleGroupItem>
+                <ToggleGroupItem
+                  value="dual-color"
+                  className="text-xs px-3 font-semibold"
+                >
+                  2 Fotos + Bloques de Color
+                </ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+
+            {/* Selector de paleta de color */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-muted-foreground mr-1">
+                <Palette className="size-3.5 text-primary" />
+                Color:
+              </span>
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {(Object.keys(EMAIL_PALETTES) as EmailColorPalette[]).map(
+                  (key) => {
+                    const p = EMAIL_PALETTES[key];
+                    const isSelected = palette === key;
+                    return (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => {
+                          setPalette(key);
+                          if (activeVariant === "base" && key !== "violet") {
+                            setActiveVariant("inverted-photos");
+                          }
+                        }}
+                        className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-semibold border transition-all cursor-pointer ${
+                          isSelected
+                            ? "border-primary bg-primary/15 text-foreground shadow-xs"
+                            : "border-border bg-surface text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        <span
+                          className="size-2.5 rounded-full shrink-0"
+                          style={{ backgroundColor: p.dotColor }}
+                        />
+                        <span>{p.label}</span>
+                      </button>
+                    );
+                  }
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </Card>
 
       {/* VISTA ÚNICA POR BLOQUES (con contenedor completo para exportar todo a PDF o PNG) */}
