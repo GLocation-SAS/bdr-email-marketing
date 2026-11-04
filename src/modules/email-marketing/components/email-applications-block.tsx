@@ -306,7 +306,7 @@ export function EmailApplicationsBlock({
           >
             <div className="space-y-3">
               <div
-                className={`flex items-center gap-2.5 pb-2.5 border-b ${
+                className={`flex items-center gap-2 pb-2.5 border-b ${
                   isDark ? "border-[#233252]" : "border-[#E2E8F0]"
                 }`}
               >
@@ -319,7 +319,7 @@ export function EmailApplicationsBlock({
                     }
                   }}
                   title={isTemplate ? "Haz clic para subir imagen" : undefined}
-                  className={`relative flex size-11 items-center justify-center rounded-full bg-white border-2 border-[#0284C7] ring-2 ring-[#0EA5E9]/15 overflow-hidden shrink-0 ${
+                  className={`relative flex size-10 items-center justify-center rounded-full bg-white border-2 border-[#0284C7] ring-2 ring-[#0EA5E9]/15 overflow-hidden shrink-0 ${
                     isTemplate ? "cursor-pointer hover:opacity-85" : ""
                   }`}
                 >
@@ -344,16 +344,16 @@ export function EmailApplicationsBlock({
                     />
                   )}
                 </span>
-                <div className="min-w-0">
+                <div className="min-w-0 pr-1">
                   <span
-                    className={`block font-heading text-[9.5px] font-bold uppercase tracking-wider ${
+                    className={`block font-heading text-[9px] font-bold uppercase tracking-wider ${
                       isDark ? "text-[#38BDF8]" : "text-[#0284C7]"
                     }`}
                   >
                     {isTemplate ? "[Etiqueta derecha]" : "Valor para su gestión"}
                   </span>
                   <p
-                    className={`font-heading text-[13px] font-extrabold leading-tight whitespace-nowrap ${
+                    className={`font-heading text-[11.5px] sm:text-[12px] font-extrabold tracking-tight leading-tight whitespace-nowrap ${
                       isDark ? "text-white" : "text-[#0F172A]"
                     }`}
                   >
