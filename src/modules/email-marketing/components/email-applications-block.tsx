@@ -353,7 +353,7 @@ export function EmailApplicationsBlock({
                     {isTemplate ? "[Etiqueta derecha]" : "Valor para su gestión"}
                   </span>
                   <p
-                    className={`font-heading text-[13.5px] font-extrabold leading-tight ${
+                    className={`font-heading text-[13px] font-extrabold leading-tight whitespace-nowrap ${
                       isDark ? "text-white" : "text-[#0F172A]"
                     }`}
                   >

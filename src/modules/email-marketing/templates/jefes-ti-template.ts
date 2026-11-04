@@ -363,7 +363,7 @@ export function generateJefesTiEmailHtml(
                             <div class="font-heading" style="font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: ${isDark ? "#38BDF8" : "#0284C7"};">
                               Valor para su gestión
                             </div>
-                            <div class="font-heading" style="font-size: 13px; font-weight: 800; line-height: 1.25; color: ${textMain};">
+                            <div class="font-heading" style="font-size: 12.5px; font-weight: 800; line-height: 1.25; color: ${textMain}; white-space: nowrap;">
                               ¿Qué gana el equipo TIC?
                             </div>
                           </td>
