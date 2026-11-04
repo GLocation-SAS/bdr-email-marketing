@@ -374,17 +374,17 @@ export function generateJefesTiEmailHtml(
                         Una <strong class="font-heading" style="color: ${textMain};">base de información organizada</strong> para preparar el seguimiento, revisar pendientes y concentrar esfuerzos en las decisiones que requieren criterio humano.
                       </p>
 
-                      <div style="background-color: ${isDark ? "#0F172A" : "#F8FAFC"}; border: 1px solid ${isDark ? "#22324C" : "#E2E8F0"}; border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; font-size: 11.5px; line-height: 1.35; color: ${isDark ? "#CBD5E1" : "#334155"};">
+                      <div style="background-color: ${isDark ? "#0F172A" : "#F8FAFC"}; border: 1px solid ${isDark ? "#22324C" : "#E2E8F0"}; border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; font-size: 11px; line-height: 1.35; color: ${isDark ? "#CBD5E1" : "#334155"}; white-space: nowrap;">
                         <strong class="font-heading" style="display: block; color: ${textMain};">Información autorizada:</strong>
                         fuentes oficiales de su entidad.
                       </div>
 
-                      <div style="background-color: ${isDark ? "#0F172A" : "#F8FAFC"}; border: 1px solid ${isDark ? "#22324C" : "#E2E8F0"}; border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; font-size: 11.5px; line-height: 1.35; color: ${isDark ? "#CBD5E1" : "#334155"};">
+                      <div style="background-color: ${isDark ? "#0F172A" : "#F8FAFC"}; border: 1px solid ${isDark ? "#22324C" : "#E2E8F0"}; border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; font-size: 11px; line-height: 1.35; color: ${isDark ? "#CBD5E1" : "#334155"}; white-space: nowrap;">
                         <strong class="font-heading" style="display: block; color: ${textMain};">Revisión humana:</strong>
                         insumos listos para validar.
                       </div>
 
-                      <div class="font-heading" style="background-color: ${isDark ? "#0C4A6E" : "#E0F2FE"}; border: 1px solid ${isDark ? "#0284C7" : "#7DD3FC"}; border-radius: 10px; padding: 8px 10px; font-family: 'Montserrat', Arial, sans-serif; font-size: 11.5px; font-weight: 700; line-height: 1.35; color: ${isDark ? "#FFFFFF" : "#0F172A"};">
+                      <div class="font-heading" style="background-color: ${isDark ? "#0C4A6E" : "#E0F2FE"}; border: 1px solid ${isDark ? "#0284C7" : "#7DD3FC"}; border-radius: 10px; padding: 8px 10px; font-family: 'Montserrat', Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.35; color: ${isDark ? "#FFFFFF" : "#0F172A"}; white-space: nowrap;">
                         &#10003;&nbsp; Su equipo conserva el<br />criterio y las decisiones.
                       </div>
                     </div>

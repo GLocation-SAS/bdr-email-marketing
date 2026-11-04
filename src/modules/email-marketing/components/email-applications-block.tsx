@@ -411,18 +411,18 @@ export function EmailApplicationsBlock({
                       <Icon className="size-3.5" />
                     </span>
                     <span
-                      className={`font-sans text-[11.5px] leading-[1.35] ${
+                      className={`font-sans text-[11px] leading-[1.35] min-w-0 ${
                         isDark ? "text-[#CBD5E1]" : "text-[#334155]"
                       }`}
                     >
                       <strong
-                        className={`block font-heading font-extrabold ${
+                        className={`block font-heading font-extrabold whitespace-nowrap ${
                           isDark ? "text-white" : "text-[#0F172A]"
                         }`}
                       >
                         {item.verb}
                       </strong>
-                      <span className="block">{item.rest}</span>
+                      <span className="block whitespace-nowrap">{item.rest}</span>
                     </span>
                   </div>
                 );
@@ -446,16 +446,16 @@ export function EmailApplicationsBlock({
                   <ShieldCheck className="size-3.5" />
                 </span>
                 <span
-                  className={`font-heading text-[11.5px] font-extrabold leading-[1.35] ${
+                  className={`font-heading text-[11px] font-extrabold leading-[1.35] min-w-0 ${
                     isDark ? "text-white" : "text-[#0F172A]"
                   }`}
                 >
-                  <span className="block">
+                  <span className="block whitespace-nowrap">
                     {isTemplate
                       ? "[Garantía o cierre clave línea 1]"
                       : "Su equipo conserva el"}
                   </span>
-                  <span className="block">
+                  <span className="block whitespace-nowrap">
                     {isTemplate
                       ? "[línea 2 destacada va aquí.]"
                       : "criterio y las decisiones."}
