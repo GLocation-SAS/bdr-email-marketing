@@ -406,7 +406,7 @@ export function generateJefesTiEmailHtml(
                       ¿Y si exploramos dónde podría<br />aportar valor en su entidad?
                     </h2>
 
-                    <p style="margin: 0 0 24px 0; font-size: 14px; line-height: 1.6; color: #EDE9FE; max-width: 590px;">
+                    <p style="margin: 0 0 24px 0; font-size: 13.5px; line-height: 1.6; color: #EDE9FE; white-space: nowrap;">
                       Le proponemos una reunión virtual de 20 minutos para conocer sus necesidades<br />e identificar algún proceso en el que tenga sentido evaluar un Trabajador Cognitivo.
                     </p>
 
@@ -423,7 +423,7 @@ export function generateJefesTiEmailHtml(
 
                     <!-- Texto secundario -->
                     <p style="margin: 0; font-size: 12.5px; line-height: 1.5; color: #DDD6FE;">
-                      Responda a este correo o deje su información en el formulario y le compartiré dos opciones de horario.
+                      Responda a este correo o deje su información en el formulario<br />y le compartiré dos opciones de horario.
                     </p>
                   </td>
                 </tr>

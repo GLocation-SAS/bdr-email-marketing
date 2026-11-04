@@ -49,19 +49,26 @@ export function EmailCtaBlock({
               )}
             </h2>
 
-            <p className="font-sans text-[13.5px] sm:text-[14px] leading-[1.6] text-[#EDE9FE]/95">
+            <p className="font-sans text-[13.5px] leading-[1.6] text-[#EDE9FE]/95">
               {isTemplate ? (
                 <>
-                  [Aquí va la propuesta de reunión breve (ej. 20 minutos)
-                  <br className="hidden sm:block" /> indicando qué revisarán
-                  juntos en esa sesión.]
+                  <span className="sm:block sm:whitespace-nowrap">
+                    [Aquí va la propuesta de reunión breve (ej. 20 minutos)
+                  </span>
+                  <span className="sm:block sm:whitespace-nowrap">
+                    indicando qué revisarán juntos en esa sesión.]
+                  </span>
                 </>
               ) : (
                 <>
-                  Le proponemos una reunión virtual de 20 minutos para conocer
-                  sus necesidades
-                  <br className="hidden sm:block" /> e identificar algún proceso
-                  en el que tenga sentido evaluar un Trabajador Cognitivo.
+                  <span className="sm:block sm:whitespace-nowrap">
+                    Le proponemos una reunión virtual de 20 minutos para conocer
+                    sus necesidades
+                  </span>
+                  <span className="sm:block sm:whitespace-nowrap">
+                    e identificar algún proceso en el que tenga sentido evaluar
+                    un Trabajador Cognitivo.
+                  </span>
                 </>
               )}
             </p>
@@ -86,11 +93,28 @@ export function EmailCtaBlock({
               </a>
             </div>
 
-            {/* Texto secundario */}
-            <p className="font-sans text-[12.5px] text-[#DDD6FE]/90 pt-0.5">
-              {isTemplate
-                ? "[Aquí va la instrucción secundaria de respuesta o enlace a formulario.]"
-                : "Responda a este correo o deje su información en el formulario y le compartiré dos opciones de horario."}
+            {/* Texto secundario en 2 líneas */}
+            <p className="font-sans text-[12.5px] leading-[1.5] text-[#DDD6FE]/90 pt-0.5">
+              {isTemplate ? (
+                <>
+                  <span className="sm:block sm:whitespace-nowrap">
+                    [Aquí va la instrucción secundaria de respuesta
+                  </span>
+                  <span className="sm:block sm:whitespace-nowrap">
+                    o enlace al formulario en segunda línea.]
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="sm:block sm:whitespace-nowrap">
+                    Responda a este correo o deje su información en el
+                    formulario
+                  </span>
+                  <span className="sm:block sm:whitespace-nowrap">
+                    y le compartiré dos opciones de horario.
+                  </span>
+                </>
+              )}
             </p>
           </div>
         </div>
