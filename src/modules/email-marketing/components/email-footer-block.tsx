@@ -103,7 +103,7 @@ export function EmailFooterBlock({
                   }
                 }}
                 title={isTemplate ? "Haz clic para subir tu foto" : undefined}
-                className={`size-14 sm:size-[58px] rounded-full overflow-hidden border-2 border-[#A855F7] ring-2 ring-[#7C3AED]/15 flex items-center justify-center shadow-[0_4px_14px_rgba(124,58,237,0.18)] ${
+                className={`size-[72px] sm:size-[78px] rounded-full overflow-hidden border-2 border-[#A855F7] ring-2 ring-[#7C3AED]/15 flex items-center justify-center shadow-[0_4px_14px_rgba(124,58,237,0.18)] ${
                   isDark ? "bg-[#150B2E]" : "bg-[#F5F0FF]"
                 } ${isTemplate ? "cursor-pointer hover:opacity-85" : ""}`}
               >

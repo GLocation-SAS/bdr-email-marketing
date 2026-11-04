@@ -442,9 +442,9 @@ export function generateJefesTiEmailHtml(
                   <td class="sig-col" width="66%" valign="middle" style="padding-right: 16px;">
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                       <tr>
-                        <td class="sig-photo-cell" width="62" valign="middle" style="padding-right: 14px;">
-                          <div class="sig-photo-wrap" style="width: 56px; height: 56px; border-radius: 50%; border: 2px solid #A855F7; overflow: hidden; background-color: ${isDark ? "#150B2E" : "#F5F0FF"}; text-align: center; line-height: 56px;">
-                            <img src="${config.senderPhotoUrl}" alt="${config.senderName}" width="56" height="56" style="display: block; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: top; color: ${isDark ? "#E9D5FF" : "#6D28D9"}; font-family: 'Montserrat', Arial, sans-serif; font-size: 13px; font-weight: 800;" />
+                        <td class="sig-photo-cell" width="80" valign="middle" style="padding-right: 16px;">
+                          <div class="sig-photo-wrap" style="width: 74px; height: 74px; border-radius: 50%; border: 2px solid #A855F7; overflow: hidden; background-color: ${isDark ? "#150B2E" : "#F5F0FF"}; text-align: center; line-height: 74px;">
+                            <img src="${config.senderPhotoUrl}" alt="${config.senderName}" width="74" height="74" style="display: block; width: 74px; height: 74px; border-radius: 50%; object-fit: cover; object-position: top; color: ${isDark ? "#E9D5FF" : "#6D28D9"}; font-family: 'Montserrat', Arial, sans-serif; font-size: 13px; font-weight: 800;" />
                           </div>
                         </td>
                         <td class="sig-col" valign="middle" style="text-align: left;">

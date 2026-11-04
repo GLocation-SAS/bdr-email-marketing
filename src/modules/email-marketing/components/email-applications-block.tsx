@@ -313,7 +313,7 @@ export function EmailApplicationsBlock({
                     }
                   }}
                   title={isTemplate ? "Haz clic para subir imagen" : undefined}
-                  className={`relative flex size-9 items-center justify-center rounded-full bg-white border-2 border-[#0284C7] ring-2 ring-[#0EA5E9]/15 overflow-hidden shrink-0 ${
+                  className={`relative flex size-11 items-center justify-center rounded-full bg-white border-2 border-[#0284C7] ring-2 ring-[#0EA5E9]/15 overflow-hidden shrink-0 ${
                     isTemplate ? "cursor-pointer hover:opacity-85" : ""
                   }`}
                 >
