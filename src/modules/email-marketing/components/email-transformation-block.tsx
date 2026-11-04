@@ -11,6 +11,7 @@ import {
   ArrowDown,
   ImagePlus,
 } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 
 interface EmailTransformationBlockProps {
   theme?: "light" | "dark";
@@ -274,11 +275,11 @@ export function EmailTransformationBlock({
                       <ImagePlus className="size-4 text-[#7C3AED]" />
                     ) : (
                       <img
-                        src={
+                        src={assetUrl(
                           isTemplate
                             ? customNode1Img || imageProcessUrl
                             : imageProcessUrl
-                        }
+                        )}
                         alt="Nodo 2"
                         className="size-full object-cover object-top"
                       />
@@ -327,11 +328,11 @@ export function EmailTransformationBlock({
                       <ImagePlus className="size-4 text-[#7C3AED]" />
                     ) : (
                       <img
-                        src={
+                        src={assetUrl(
                           isTemplate
                             ? customNode2Img || imageTeamUrl
                             : imageTeamUrl
-                        }
+                        )}
                         alt="Nodo 3"
                         className="size-full object-cover object-top"
                       />

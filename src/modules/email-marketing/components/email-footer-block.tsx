@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ImagePlus } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 
 export interface EmailFooterBlockProps {
   logoUrl?: string;
@@ -130,10 +131,10 @@ export function EmailFooterBlock({
                   </div>
                 ) : !imgError && (isTemplate ? customPhoto : senderPhotoUrl) ? (
                   <img
-                    src={
+                    src={assetUrl(
                       (isTemplate ? customPhoto : senderPhotoUrl) ||
-                      senderPhotoUrl
-                    }
+                        senderPhotoUrl
+                    )}
                     alt={displaySenderName}
                     onError={() => setImgError(true)}
                     className="w-full h-full object-cover object-top"
@@ -204,7 +205,7 @@ export function EmailFooterBlock({
             }`}
           >
             <img
-              src={resolvedLogo}
+              src={assetUrl(resolvedLogo)}
               alt="Glocation"
               className="h-11 sm:h-12 w-auto object-contain"
             />

@@ -4,26 +4,20 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
+const isGithubPages = process.env.GITHUB_ACTIONS === "true";
+const repoBasePath = process.env.NEXT_PUBLIC_BASE_PATH || (isGithubPages ? "/bdr-email-marketing" : "");
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: isGithubPages ? "export" : undefined,
+  trailingSlash: true,
+  basePath: repoBasePath || undefined,
+  assetPrefix: repoBasePath || undefined,
   turbopack: {
     root: path.resolve(__dirname),
   },
-  async redirects() {
-    return [
-      {
-        source: "/:locale(es|en|pt)/email-marketing",
-        destination: "/email-marketing",
-        permanent: false,
-      },
-      {
-        source: "/:locale(es|en|pt)/campanas/:path*",
-        destination: "/campanas/:path*",
-        permanent: false,
-      },
-    ];
-  },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

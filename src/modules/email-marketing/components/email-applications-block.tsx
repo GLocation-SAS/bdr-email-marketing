@@ -10,6 +10,7 @@ import {
   UserCheck,
   ImagePlus,
 } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 
 interface EmailApplicationsBlockProps {
   theme?: "light" | "dark";
@@ -348,11 +349,11 @@ export function EmailApplicationsBlock({
                     <ImagePlus className="size-4 text-[#0284C7]" />
                   ) : (
                     <img
-                      src={
+                      src={assetUrl(
                         isTemplate
                           ? customAvatar || imageAgentUrl
                           : imageAgentUrl
-                      }
+                      )}
                       alt="Trabajador Cognitivo"
                       className="size-full object-cover object-top"
                     />

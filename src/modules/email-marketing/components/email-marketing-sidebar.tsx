@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { applyTheme, getStoredTheme, type Theme } from "@/lib/theme";
+import { assetUrl } from "@/lib/utils";
 import {
   Mail,
   Send,
@@ -60,7 +61,7 @@ export const EMAIL_MARKETING_NAV_ITEMS: EmailNavItem[] = [
     id: "plantilla-base",
     label: "Plantilla Base Editable",
     icon: FileEdit,
-    href: "/campanas/plantilla-base",
+    href: "/email-marketing/plantilla-base",
     group: "campanas",
     badge: "EM-02",
   },
@@ -128,28 +129,28 @@ export function EmailMarketingSidebar() {
             onClick={() => setOpenMobile(false)}
           >
             <Image
-              src="/Logotipo.svg"
+              src={assetUrl("/Logotipo.svg")}
               alt="GLocation Logo"
               width={145}
               height={34}
               className="h-[32px] w-auto dark:hidden group-data-[state=collapsed]:hidden animate-in fade-in duration-300"
             />
             <Image
-              src="/LogotipoVersionNegativo.svg"
+              src={assetUrl("/LogotipoVersionNegativo.svg")}
               alt="GLocation Logo"
               width={145}
               height={34}
               className="h-[32px] w-auto hidden dark:group-data-[state=expanded]:block group-data-[state=collapsed]:hidden animate-in fade-in duration-300"
             />
             <Image
-              src="/icon.svg"
+              src={assetUrl("/icon.svg")}
               alt="GLocation Icon"
               width={26}
               height={26}
               className="h-[26px] w-auto dark:hidden group-data-[state=expanded]:hidden animate-in zoom-in-75 duration-300"
             />
             <Image
-              src="/iconBlanco.svg"
+              src={assetUrl("/iconBlanco.svg")}
               alt="GLocation Icon"
               width={26}
               height={26}
@@ -264,7 +265,7 @@ export function EmailMarketingSidebar() {
         <div className="flex items-center gap-3 px-1 group-data-[collapsible=icon]:justify-center">
           <div className="relative shrink-0">
             <img
-              src="/paula_natalia_rozo (4).png"
+              src={assetUrl("/paula_natalia_rozo (4).png")}
               alt="Paula Rozo"
               className="size-9 rounded-full object-cover object-top border border-primary/40 group-data-[collapsible=icon]:size-8"
             />

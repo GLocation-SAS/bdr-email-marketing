@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ImagePlus } from "lucide-react";
+import { assetUrl } from "@/lib/utils";
 
 interface EmailHeroBlockProps {
   theme?: "light" | "dark";
@@ -37,7 +38,7 @@ export function EmailHeroBlock({
       {/* Imagen de fondo (en campaña usa 01.png; en plantilla muestra placeholder o la imagen subida) */}
       {activeBgImage ? (
         <img
-          src={activeBgImage}
+          src={assetUrl(activeBgImage)}
           alt="Imagen principal Hero"
           className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover object-right"
         />
@@ -67,8 +68,8 @@ export function EmailHeroBlock({
             fileInputRef.current?.click();
           }}
           className={`absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 z-20 cursor-pointer transition-all ${customBgUrl
-              ? "opacity-0 hover:opacity-100 bg-[#120A24]/90 border border-[#A855F7] rounded-xl px-3 py-2 text-xs"
-              : "w-[210px] sm:w-[235px] h-[220px] rounded-2xl border-2 border-dashed border-[#A855F7]/70 bg-[#1A0E36]/75 hover:bg-[#24134A]/85 flex flex-col items-center justify-center text-center p-4 gap-2"
+            ? "opacity-0 hover:opacity-100 bg-[#120A24]/90 border border-[#A855F7] rounded-xl px-3 py-2 text-xs"
+            : "w-[210px] sm:w-[235px] h-[220px] rounded-2xl border-2 border-dashed border-[#A855F7]/70 bg-[#1A0E36]/75 hover:bg-[#24134A]/85 flex flex-col items-center justify-center text-center p-4 gap-2"
             }`}
         >
           <input
@@ -97,7 +98,7 @@ export function EmailHeroBlock({
         <div className="max-w-[340px] sm:max-w-[355px] space-y-5">
           <div>
             <img
-              src={logoUrl}
+              src={assetUrl(logoUrl)}
               alt="Glocation"
               className="h-14 sm:h-16 w-auto object-contain -ml-2.5 -my-2"
             />

@@ -54,6 +54,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { EmailMarketingSidebar } from "../components/email-marketing-sidebar";
+import { assetUrl } from "@/lib/utils";
 import "../styles/email-marketing.css";
 
 export interface EmailCampaignItem {
@@ -94,7 +95,7 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "BORRADOR",
     updatedAt: "04/11/2026",
-    href: "/campanas/plantilla-base",
+    href: "/email-marketing/plantilla-base",
   },
 ];
 
@@ -312,7 +313,7 @@ export function EmailMarketingPage() {
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <img
-                            src={campaign.ownerPhoto}
+                            src={assetUrl(campaign.ownerPhoto)}
                             alt={campaign.ownerName}
                             className="size-7 rounded-full object-cover object-top border border-primary/40 shrink-0"
                           />
@@ -433,7 +434,7 @@ export function EmailMarketingPage() {
                   <div className="w-full pt-4 border-t border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-2.5">
                       <img
-                        src={campaign.ownerPhoto}
+                        src={assetUrl(campaign.ownerPhoto)}
                         alt={campaign.ownerName}
                         className="size-8 rounded-full object-cover object-top border border-primary/40 shrink-0"
                       />
