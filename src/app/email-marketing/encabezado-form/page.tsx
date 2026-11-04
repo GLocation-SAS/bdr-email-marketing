@@ -1,4 +1,4 @@
-import { GoogleFormsHeaderPage } from "@/modules/email-marketing";
+import { GoogleFormsHeaderPage } from "@/modules/email-marketing/pages/campaign-jefes-ti-page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
