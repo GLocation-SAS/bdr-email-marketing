@@ -198,14 +198,17 @@ export function generateJefesTiEmailHtml(
                       <div style="background-color: ${isDark ? "#120B22" : "#FFFFFF"}; border: 1px dashed ${isDark ? "#334155" : "#CBD5E1"}; border-radius: 8px; padding: 12px; text-align: center;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 8px;">
                           <tr>
-                            <td align="center" width="33%" style="padding: 4px;">
-                              <div style="background-color: #10A37F; color: #FFFFFF; font-family: 'Montserrat', Arial, sans-serif; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 6px 4px;">ChatGPT</div>
+                            <td align="center" width="33%" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">
+                              <img src="/chatgpt_gris_circular.png" alt="ChatGPT" width="38" height="38" style="display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 0 auto 4px auto;" />
+                              ChatGPT
                             </td>
-                            <td align="center" width="33%" style="padding: 4px;">
-                              <div style="background-color: #4F46E5; color: #FFFFFF; font-family: 'Montserrat', Arial, sans-serif; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 6px 4px;">Gemini</div>
+                            <td align="center" width="33%" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">
+                              <img src="/gemini_gris_circular.png" alt="Gemini" width="38" height="38" style="display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 0 auto 4px auto;" />
+                              Gemini
                             </td>
-                            <td align="center" width="33%" style="padding: 4px;">
-                              <div style="background-color: #107C41; color: #FFFFFF; font-family: 'Montserrat', Arial, sans-serif; font-size: 10px; font-weight: 700; border-radius: 6px; padding: 6px 4px;">Excel</div>
+                            <td align="center" width="33%" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">
+                              <img src="/excel_gris_circular.png" alt="Excel" width="38" height="38" style="display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; margin: 0 auto 4px auto;" />
+                              Excel
                             </td>
                           </tr>
                         </table>

@@ -24,8 +24,8 @@ export function EmailCtaBlock({
       <div className="max-w-[650px] mx-auto">
         <div
           className={`relative overflow-hidden rounded-2xl text-white px-7 py-9 sm:px-10 sm:py-10 text-center ${isDark
-              ? "bg-gradient-to-br from-[#231048] via-[#3B197A] to-[#5B21B6] border border-[#6D28D9]/60"
-              : "bg-gradient-to-br from-[#1A0D36] via-[#2D145E] to-[#4C1D95]"
+            ? "bg-gradient-to-br from-[#231048] via-[#3B197A] to-[#5B21B6] border border-[#6D28D9]/60"
+            : "bg-gradient-to-br from-[#1A0D36] via-[#2D145E] to-[#4C1D95]"
             }`}
         >
           {/* Acento luminoso sutil */}

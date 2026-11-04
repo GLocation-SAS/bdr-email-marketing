@@ -11,88 +11,11 @@ interface EmailTransformationBlockProps {
   isTemplate?: boolean;
 }
 
-function ChatGptLogo() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className="size-5"
-      fill="none"
-      aria-label="ChatGPT"
-    >
-      <rect width="24" height="24" rx="6" fill="#10A37F" />
-      <path
-        d="M19.2 10.3a4.1 4.1 0 0 0-.35-3.38 4.18 4.18 0 0 0-4.5-2 4.12 4.12 0 0 0-3.1-1.42 4.18 4.18 0 0 0-3.98 2.9 4.12 4.12 0 0 0-2.76 2 4.18 4.18 0 0 0 .52 4.9 4.1 4.1 0 0 0 .35 3.38 4.18 4.18 0 0 0 4.5 2 4.12 4.12 0 0 0 3.1 1.42 4.18 4.18 0 0 0 3.98-2.9 4.12 4.12 0 0 0 2.76-2 4.18 4.18 0 0 0-.52-4.9Z"
-        stroke="#FFFFFF"
-        strokeWidth="1.45"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="12" r="2.1" stroke="#FFFFFF" strokeWidth="1.35" />
-    </svg>
-  );
-}
-
-function GeminiLogo() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-label="Gemini">
-      <defs>
-        <linearGradient
-          id="geminiGrad"
-          x1="2"
-          y1="2"
-          x2="22"
-          y2="22"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor="#1D4ED8" />
-          <stop offset="52%" stopColor="#7C3AED" />
-          <stop offset="100%" stopColor="#DB2777" />
-        </linearGradient>
-      </defs>
-      <rect width="24" height="24" rx="6" fill="url(#geminiGrad)" />
-      <path
-        d="M12 4.3C12.35 8.45 15.55 11.65 19.7 12C15.55 12.35 12.35 15.55 12 19.7C11.65 15.55 8.45 12.35 4.3 12C8.45 11.65 11.65 8.45 12 4.3Z"
-        fill="#FFFFFF"
-      />
-    </svg>
-  );
-}
-
-function ExcelLogo() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-label="Excel">
-      <rect width="24" height="24" rx="6" fill="#107C41" />
-      <rect
-        x="10.5"
-        y="4.5"
-        width="9"
-        height="15"
-        rx="1.5"
-        fill="#21A366"
-      />
-      <path
-        d="M10.5 8.2H19.5M10.5 12H19.5M10.5 15.8H19.5M14.8 4.5V19.5"
-        stroke="#107C41"
-        strokeWidth="0.9"
-        strokeOpacity="0.65"
-      />
-      <rect
-        x="4"
-        y="6.5"
-        width="9"
-        height="11"
-        rx="1.6"
-        fill="#0B532B"
-      />
-      <path
-        d="M6.5 9.2L10.5 14.8M10.5 9.2L6.5 14.8"
-        stroke="#FFFFFF"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
+const ISOLATED_TOOLS = [
+  { name: "ChatGPT", src: "/chatgpt_gris_circular.png" },
+  { name: "Gemini", src: "/gemini_gris_circular.png" },
+  { name: "Excel", src: "/excel_gris_circular.png" },
+];
 
 export function EmailTransformationBlock({
   theme = "light",
@@ -175,7 +98,7 @@ export function EmailTransformationBlock({
 
         {/* Diagrama comparativo: Uso aislado vs Transformación Cognitiva */}
         <div className="flex flex-col sm:flex-row items-stretch gap-3">
-          {/* COLUMNA IZQUIERDA: USO AISLADO (ChatGPT, Gemini, Excel) */}
+          {/* COLUMNA IZQUIERDA: USO AISLADO (ChatGPT, Gemini, Excel desde public/) */}
           <div
             className={`sm:w-[41%] rounded-2xl p-4 flex flex-col gap-3 border ${
               isDark
@@ -209,27 +132,23 @@ export function EmailTransformationBlock({
                   : "bg-white border-slate-300"
               }`}
             >
-              {/* Logos de ChatGPT, Gemini y Excel en tarjetas separadas */}
-              <div className="grid grid-cols-3 gap-2 my-auto">
-                {[
-                  { name: "ChatGPT", logo: <ChatGptLogo /> },
-                  { name: "Gemini", logo: <GeminiLogo /> },
-                  { name: "Excel", logo: <ExcelLogo /> },
-                ].map((tool) => (
+              {/* Logos circulares de ChatGPT, Gemini y Excel desde public/ */}
+              <div className="flex items-center justify-around gap-2 my-auto">
+                {ISOLATED_TOOLS.map((tool) => (
                   <div
                     key={tool.name}
-                    className={`flex flex-col items-center justify-center gap-1.5 rounded-lg border py-2.5 px-1.5 ${
-                      isDark
-                        ? "bg-[#1A1130] border-slate-700/80"
-                        : "bg-slate-50/90 border-slate-200/90"
-                    }`}
+                    className="flex flex-col items-center text-center shrink-0"
                   >
-                    <div className="flex size-8 items-center justify-center rounded-lg bg-white dark:bg-slate-900 shadow-2xs border border-black/5 dark:border-white/10">
-                      {tool.logo}
-                    </div>
+                    <span className="relative flex size-10 items-center justify-center rounded-full overflow-hidden border border-slate-400/60 bg-[#D6D6D6] shadow-2xs">
+                      <img
+                        src={assetUrl(tool.src)}
+                        alt={tool.name}
+                        className="size-full object-cover scale-[1.12]"
+                      />
+                    </span>
                     <span
-                      className={`font-heading text-[10px] font-bold leading-none ${
-                        isDark ? "text-slate-200" : "text-slate-700"
+                      className={`font-heading text-[10.5px] font-bold mt-1.5 leading-tight whitespace-nowrap ${
+                        isDark ? "text-slate-300" : "text-slate-700"
                       }`}
                     >
                       {tool.name}
@@ -238,15 +157,21 @@ export function EmailTransformationBlock({
                 ))}
               </div>
 
-              <p
-                className={`font-sans text-[11px] text-center leading-[1.38] ${
-                  isDark ? "text-slate-300" : "text-slate-600"
+              <div
+                className={`pt-2 border-t text-center ${
+                  isDark ? "border-slate-800" : "border-slate-200"
                 }`}
               >
-                {isTemplate
-                  ? "[Aquí va la limitación actual]"
-                  : "Consultas, documentos y seguimientos gestionados por separado."}
-              </p>
+                <p
+                  className={`font-sans text-[11px] leading-[1.38] ${
+                    isDark ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
+                  {isTemplate
+                    ? "[Aquí va la limitación actual]"
+                    : "Consultas, documentos y seguimientos gestionados por separado."}
+                </p>
+              </div>
             </div>
           </div>
 
