@@ -303,9 +303,6 @@ export function generateJefesTiEmailHtml(
                         <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #0EA5E9; margin-right: 4px;"></span>
                         <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: #94A3B8; margin-right: 6px;"></span>
                         <span class="font-heading" style="font-size: 10.5px; font-weight: 700; color: ${isDark ? "#CBD5E1" : "#334155"};">&#10024; Ejemplo Oficina TIC</span>
-                        <span class="font-heading" style="float: right; display: inline-block; background-color: ${isDark ? "#0C4A6E" : "#E0F2FE"}; border: 1px solid ${isDark ? "#0284C7" : "#7DD3FC"}; border-radius: 999px; padding: 1px 9px; font-size: 10px; font-weight: 700; color: ${isDark ? "#E0F2FE" : "#0369A1"};">
-                          Para revisión
-                        </span>
                       </div>
 
                       <div style="padding: 16px;">

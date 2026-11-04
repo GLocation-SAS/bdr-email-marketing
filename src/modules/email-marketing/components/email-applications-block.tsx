@@ -171,16 +171,6 @@ export function EmailApplicationsBlock({
                   {isTemplate ? "[Etiqueta ventana]" : "Ejemplo Oficina TIC"}
                 </span>
               </div>
-
-              <span
-                className={`inline-block rounded-full px-2.5 py-0.5 text-[10px] font-heading font-bold border whitespace-nowrap shrink-0 ${
-                  isDark
-                    ? "bg-[#0C4A6E] border-[#0284C7] text-[#E0F2FE]"
-                    : "bg-[#E0F2FE] border-[#7DD3FC] text-[#0369A1]"
-                }`}
-              >
-                {isTemplate ? "[Etiqueta estado]" : "Para revisión"}
-              </span>
             </div>
 
             {/* Cuerpo del caso concreto */}
