@@ -181,11 +181,10 @@ export function InvertedHeroBlock({
           inputRef.current?.click();
         }}
         style={{ borderColor: p.lightAccentHex }}
-        className={`absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 z-20 cursor-pointer transition-all ${
-          image
+        className={`absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 z-20 cursor-pointer transition-all ${image
             ? "opacity-0 hover:opacity-100 bg-black/80 border rounded-xl px-3 py-2 text-xs"
             : "w-[210px] sm:w-[235px] h-[220px] rounded-2xl border-2 border-dashed bg-black/45 hover:bg-black/60 flex flex-col items-center justify-center text-center p-4 gap-2"
-        }`}
+          }`}
       >
         <input
           ref={inputRef}
@@ -363,9 +362,8 @@ export function InvertedZigZagBlock1({
               [Aquí va el título del primer bloque con foto a la izquierda]
             </h2>
             <p
-              className={`font-sans text-[12.5px] leading-[1.5] ${
-                isDark ? "text-white/80" : "text-slate-600"
-              }`}
+              className={`font-sans text-[12.5px] leading-[1.5] ${isDark ? "text-white/80" : "text-slate-600"
+                }`}
             >
               [Aquí va la explicación de 2 o 3 líneas que acompaña la primera
               fotografía. Ideal para presentar el contexto o problema actual.]
@@ -485,9 +483,8 @@ export function InvertedZigZagBlock2({
           </div>
 
           <p
-            className={`font-sans text-[12px] leading-[1.4] ${
-              isDark ? "text-white/75" : "text-slate-600"
-            }`}
+            className={`font-sans text-[12px] leading-[1.4] ${isDark ? "text-white/75" : "text-slate-600"
+              }`}
           >
             [Aquí va una frase de cierre o respaldo para el bloque invertido.]
           </p>
@@ -687,9 +684,8 @@ export function DualPhotosContrastBlock({
             [Dos Fotos con Colores Invertidos · Comparativa / Antes y Después]
           </span>
           <h2
-            className={`font-heading text-[19px] sm:text-[21px] font-extrabold leading-[1.2] ${
-              isDark ? "text-white" : "text-slate-900"
-            }`}
+            className={`font-heading text-[19px] sm:text-[21px] font-extrabold leading-[1.2] ${isDark ? "text-white" : "text-slate-900"
+              }`}
           >
             [Aquí va el título para comparar dos escenarios o dos soluciones]
           </h2>
@@ -822,9 +818,8 @@ export function DualPhotosContrastBlock({
                 [Título de la segunda tarjeta en contraste]
               </h3>
               <p
-                className={`font-sans text-[12px] leading-[1.45] ${
-                  isDark ? "text-white/90" : "text-slate-700"
-                }`}
+                className={`font-sans text-[12px] leading-[1.45] ${isDark ? "text-white/90" : "text-slate-700"
+                  }`}
               >
                 [Descripción de 2 líneas para explicar la segunda imagen o el
                 resultado alcanzado.]
@@ -865,9 +860,8 @@ export function DualColorMetricsBlock({
               [Bloques de Color Alternados · Impacto y Resultados]
             </span>
             <h3
-              className={`font-heading text-[18px] sm:text-[20px] font-extrabold leading-tight ${
-                isDark ? "text-white" : "text-slate-900"
-              }`}
+              className={`font-heading text-[18px] sm:text-[20px] font-extrabold leading-tight ${isDark ? "text-white" : "text-slate-900"
+                }`}
             >
               [Aquí va el titular de métricas o pilares clave]
             </h3>
@@ -927,9 +921,8 @@ export function DualColorMetricsBlock({
               [Pilar o Dato 3]
             </div>
             <p
-              className={`font-sans text-[11.5px] leading-[1.35] ${
-                isDark ? "text-white/80" : "text-slate-700"
-              }`}
+              className={`font-sans text-[11.5px] leading-[1.35] ${isDark ? "text-white/80" : "text-slate-700"
+                }`}
             >
               [Dos líneas de descripción con fondo claro y borde de color.]
             </p>
@@ -978,17 +971,15 @@ export function PaletteCtaBlock({
         </span>
 
         <h2
-          className={`font-heading text-[20px] sm:text-[23px] font-extrabold leading-tight max-w-[520px] mx-auto ${
-            isDark ? "text-white" : "text-slate-900"
-          }`}
+          className={`font-heading text-[20px] sm:text-[23px] font-extrabold leading-tight max-w-[520px] mx-auto ${isDark ? "text-white" : "text-slate-900"
+            }`}
         >
           [Aquí va tu pregunta o invitación de cierre para agendar reunión]
         </h2>
 
         <p
-          className={`font-sans text-[13px] sm:text-[14px] max-w-[500px] mx-auto leading-[1.5] ${
-            isDark ? "text-white/85" : "text-slate-600"
-          }`}
+          className={`font-sans text-[13px] sm:text-[14px] max-w-[500px] mx-auto leading-[1.5] ${isDark ? "text-white/85" : "text-slate-600"
+            }`}
         >
           [Aquí va el texto de apoyo explicando qué verán en la sesión y el
           beneficio directo para el destinatario.]
@@ -1006,9 +997,8 @@ export function PaletteCtaBlock({
         </div>
 
         <p
-          className={`font-sans text-[11.5px] ${
-            isDark ? "text-white/70" : "text-slate-500"
-          }`}
+          className={`font-sans text-[11.5px] ${isDark ? "text-white/70" : "text-slate-500"
+            }`}
         >
           [Texto secundario · Ej. Responda a este correo y le compartiré dos
           opciones de horario.]
@@ -1017,3 +1007,4 @@ export function PaletteCtaBlock({
     </section>
   );
 }
+
