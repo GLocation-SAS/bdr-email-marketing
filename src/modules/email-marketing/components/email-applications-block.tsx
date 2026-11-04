@@ -122,7 +122,13 @@ export function EmailApplicationsBlock({
             {isTemplate
               ? "[Aquí va el título del caso práctico]"
               : "Imagine esta posibilidad"}{" "}
-            <span className={isDark ? "text-[#38BDF8]" : "text-[#7C3AED]"}>
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark
+                  ? "from-[#C084FC] via-[#A855F7] to-[#38BDF8]"
+                  : "from-[#7C3AED] via-[#6D28D9] to-[#0284C7]"
+              }`}
+            >
               {isTemplate ? "[en su entidad]" : "en su oficina"}
             </span>
           </h2>

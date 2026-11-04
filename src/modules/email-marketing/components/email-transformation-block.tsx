@@ -65,7 +65,13 @@ export function EmailTransformationBlock({
             {isTemplate
               ? "[Aquí va el título del concepto],"
               : "Ampliar la capacidad,"}{" "}
-            <span className={isDark ? "text-[#C084FC]" : "text-[#7C3AED]"}>
+            <span
+              className={`bg-gradient-to-r bg-clip-text text-transparent ${
+                isDark
+                  ? "from-[#C084FC] via-[#A855F7] to-[#38BDF8]"
+                  : "from-[#7C3AED] via-[#6D28D9] to-[#0284C7]"
+              }`}
+            >
               {isTemplate
                 ? "[aquí el diferencial clave]"
                 : "no repartir herramientas."}

@@ -105,13 +105,13 @@ export function EmailHeroBlock({
           </div>
 
           <div className="space-y-3.5">
-            <h1 className="font-heading text-[23px] sm:text-[26px] font-extrabold tracking-tight leading-[1.2] drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
-              <span className="block text-white">
+            <h1 className="font-heading text-[23px] sm:text-[26px] font-extrabold tracking-tight leading-[1.2]">
+              <span className="block text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
                 {isTemplate
                   ? "[Aquí va el titular principal de apertura]"
                   : "Su oficina TIC tiene proyectos que liderar."}
               </span>
-              <span className="block mt-1 text-[#C084FC]">
+              <span className="inline-block mt-1 bg-gradient-to-r from-[#C084FC] via-[#A855F7] to-[#38BDF8] bg-clip-text text-transparent">
                 {isTemplate ? (
                   <>
                     [Aquí va la segunda línea
@@ -128,7 +128,7 @@ export function EmailHeroBlock({
               </span>
             </h1>
 
-            <div className="h-0.5 w-12 rounded-full bg-[#A855F7]" />
+            <div className="h-0.5 w-12 rounded-full bg-gradient-to-r from-[#A855F7] to-[#38BDF8]" />
           </div>
 
           <p className="font-sans text-[14px] sm:text-[14.5px] leading-[1.6] font-normal text-[#E9D5FF] drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
