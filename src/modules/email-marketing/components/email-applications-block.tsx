@@ -297,17 +297,6 @@ export function EmailApplicationsBlock({
                   );
                 })}
               </div>
-
-              {/* Nota aclaratoria sobria */}
-              <p
-                className={`font-sans text-[10.5px] italic leading-tight pt-0.5 ${
-                  isDark ? "text-[#94A3B8]" : "text-[#64748B]"
-                }`}
-              >
-                {isTemplate
-                  ? "[Aquí va una nota aclaratoria breve si aplica.]"
-                  : "Representación conceptual, no resultado de una implementación real."}
-              </p>
             </div>
           </div>
 

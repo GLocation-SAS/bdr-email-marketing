@@ -335,10 +335,6 @@ export function generateJefesTiEmailHtml(
                             </td>
                           </tr>
                         </table>
-
-                        <div style="font-size: 10.5px; font-style: italic; color: #64748B;">
-                          Representación conceptual, no resultado de una implementación real.
-                        </div>
                       </div>
                     </div>
                   </td>
