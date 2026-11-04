@@ -428,26 +428,26 @@ export function EmailApplicationsBlock({
                 );
               })}
 
-              {/* Destaque de cierre en 2 líneas */}
+              {/* Destaque de cierre en 2 líneas (Primary) */}
               <div
                 className={`flex items-center gap-2.5 rounded-xl border px-3 py-2 ${
                   isDark
-                    ? "bg-[#0C4A6E]/55 border-[#0284C7]"
-                    : "bg-gradient-to-r from-[#EFF6FF] to-[#E0F2FE] border-[#7DD3FC]"
+                    ? "bg-[#2E1660]/70 border-[#7C3AED]"
+                    : "bg-gradient-to-r from-[#F5F3FF] to-[#EDE9FE] border-[#C4B5FD]"
                 }`}
               >
                 <span
                   className={`flex size-7 items-center justify-center rounded-lg border shrink-0 ${
                     isDark
-                      ? "bg-[#0C4A6E] border-[#38BDF8] text-[#38BDF8]"
-                      : "bg-white border-[#7DD3FC] text-[#0284C7]"
+                      ? "bg-[#3B1D6E] border-[#A855F7] text-[#E9D5FF]"
+                      : "bg-white border-[#C4B5FD] text-[#7C3AED]"
                   }`}
                 >
                   <ShieldCheck className="size-3.5" />
                 </span>
                 <span
                   className={`font-heading text-[11px] font-extrabold leading-[1.35] min-w-0 ${
-                    isDark ? "text-white" : "text-[#0F172A]"
+                    isDark ? "text-white" : "text-[#4C1D95]"
                   }`}
                 >
                   <span className="block whitespace-nowrap">

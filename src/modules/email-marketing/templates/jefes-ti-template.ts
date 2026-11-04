@@ -387,7 +387,7 @@ export function generateJefesTiEmailHtml(
                         insumos listos para validar.
                       </div>
 
-                      <div class="font-heading" style="background-color: ${isDark ? "#0C4A6E" : "#E0F2FE"}; border: 1px solid ${isDark ? "#0284C7" : "#7DD3FC"}; border-radius: 10px; padding: 8px 10px; font-family: 'Montserrat', Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.35; color: ${isDark ? "#FFFFFF" : "#0F172A"}; white-space: nowrap;">
+                      <div class="font-heading" style="background-color: ${isDark ? "#2E1660" : "#EDE9FE"}; border: 1px solid ${isDark ? "#7C3AED" : "#C4B5FD"}; border-radius: 10px; padding: 8px 10px; font-family: 'Montserrat', Arial, sans-serif; font-size: 11px; font-weight: 700; line-height: 1.35; color: ${isDark ? "#FFFFFF" : "#4C1D95"}; white-space: nowrap;">
                         &#10003;&nbsp; Su equipo conserva el<br />criterio y las decisiones.
                       </div>
                     </div>
