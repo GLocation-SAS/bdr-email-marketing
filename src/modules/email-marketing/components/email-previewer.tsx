@@ -168,23 +168,21 @@ function fixSvgGradientText(svgDataUrl: string): string {
   const prefix = svgDataUrl.slice(0, commaIdx + 1);
   let rawSvg = decodeURIComponent(svgDataUrl.slice(commaIdx + 1));
 
-  // Re-forzar background-clip: text y reemplazar border-box en todos los textos con degradado
+  // Solo ajustar los <span data-gradient-text="true"> de titulares sin tocar ningún <div>
   rawSvg = rawSvg.replace(
-    /style="([^"]*)"/gi,
-    (fullMatch, styleContent: string) => {
-      if (
-        styleContent.includes("-webkit-text-fill-color: transparent") ||
-        styleContent.includes("background-clip: text") ||
-        (styleContent.includes("linear-gradient") &&
-          styleContent.includes("color: rgba(0, 0, 0, 0)"))
-      ) {
-        const cleaned = styleContent.replace(
-          /padding-box\s+border-box/gi,
-          "padding-box text"
-        );
-        return `style="${cleaned}; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: transparent !important;"`;
-      }
-      return fullMatch;
+    /<span\b([^>]*\bdata-gradient-text="true"[^>]*)>/gi,
+    (_fullTag, attrs: string) => {
+      const updatedAttrs = attrs.replace(
+        /style="([^"]*)"/i,
+        (_m, styleContent: string) => {
+          const cleaned = styleContent.replace(
+            /padding-box\s+border-box/gi,
+            "padding-box text"
+          );
+          return `style="${cleaned}; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; color: transparent !important;"`;
+        }
+      );
+      return `<span${updatedAttrs}>`;
     }
   );
 
