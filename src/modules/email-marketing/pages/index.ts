@@ -4,5 +4,6 @@ export {
   CampaignTemplatePage,
   CampaignInvertedTemplatePage,
   CampaignDualColorTemplatePage,
+  GoogleFormsHeaderPage,
 } from "./campaign-jefes-ti-page";
 export { UnsubscribePage } from "./unsubscribe-page";
