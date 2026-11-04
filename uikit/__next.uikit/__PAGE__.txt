@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[70644,["/bdr-email-marketing/_next/static/chunks/17gxp4sa-as01.js","/bdr-email-marketing/_next/static/chunks/05604ra3ay1~j.js","/bdr-email-marketing/_next/static/chunks/0eewamb49pw7k.js","/bdr-email-marketing/_next/static/chunks/0na1y9eou-z-d.js","/bdr-email-marketing/_next/static/chunks/0zld0jur2_fnx.js","/bdr-email-marketing/_next/static/chunks/0yw123km18u9j.js"],"UIKitView"]
+3:I[97367,["/bdr-email-marketing/_next/static/chunks/17gxp4sa-as01.js","/bdr-email-marketing/_next/static/chunks/05604ra3ay1~j.js","/bdr-email-marketing/_next/static/chunks/0eewamb49pw7k.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/bdr-email-marketing/_next/static/chunks/0na1y9eou-z-d.js","async":true}],["$","script","script-1",{"src":"/bdr-email-marketing/_next/static/chunks/0zld0jur2_fnx.js","async":true}],["$","script","script-2",{"src":"/bdr-email-marketing/_next/static/chunks/0yw123km18u9j.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"FuSRfqH-j8x6gIzglKxLk"}
+5:null
