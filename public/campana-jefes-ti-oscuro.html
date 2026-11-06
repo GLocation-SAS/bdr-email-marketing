@@ -23,105 +23,95 @@
       outline: none;
       text-decoration: none;
     }
-    @media only screen and (max-width: 760px) {
-      .gl-container {
-        width: 100% !important;
-        max-width: 740px !important;
+    @supports (-webkit-background-clip: text) or (background-clip: text) {
+      .gl-grad-hero {
+        background-image: linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        color: transparent !important;
       }
-      .gl-pad {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-      }
-      .gl-stack {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      .gl-stack-spacer {
-        display: block !important;
-        width: 100% !important;
-        height: 12px !important;
+      .gl-grad-title {
+        background-image: linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%) !important;
+        -webkit-background-clip: text !important;
+        background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        color: transparent !important;
       }
     }
   </style>
 </head>
 <body style="margin: 0; padding: 0; width: 100% !important; background-color: #0B0617; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #FFFFFF; -webkit-font-smoothing: antialiased;">
 
-  <!-- Preheader oculto -->
-  <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all;">
-    Su oficina TIC tiene proyectos que liderar. Y una operación que no se detiene. Descubra cómo los Trabajadores Cognitivos pueden ampliar las capacidades de su equipo.
-  </div>
-
   <!-- Contenedor maestro 100% -->
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0617" style="width: 100%; border-collapse: collapse; background-color: #0B0617; margin: 0; padding: 0;">
     <tr>
-      <td align="center" style="padding: 24px 12px;">
+      <td align="center" style="padding: 20px 10px;">
 
         <!-- Lienzo fijo 740px -->
-        <table role="presentation" class="gl-container" width="740" cellpadding="0" cellspacing="0" border="0" style="width: 740px; max-width: 740px; border-collapse: separate; border-spacing: 0; margin: 0 auto;">
+        <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" style="width: 740px; max-width: 740px; border-collapse: separate; border-spacing: 0; margin: 0 auto;">
 
           <!-- ======================================================== -->
-          <!-- BLOQUE 1 · HERO (740px)                                  -->
+          <!-- BLOQUE 1 · HERO (740px) — 2 CELDAS EN LA MISMA FILA      -->
           <!-- ======================================================== -->
           <tr>
             <td style="padding: 0 0 6px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0E0620" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #0E0620; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
+              <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" bgcolor="#0D061F" style="width: 740px; border-collapse: separate; border-spacing: 0; background-color: #0D061F; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
+                <!-- Línea superior morada de 4px -->
                 <tr>
-                  <td
-                    class="gl-pad"
-                    bgcolor="#0E0620"
-                    background="https://glocation-sas.github.io/bdr-email-marketing/email-icons/hero-bg-composited.png"
-                    valign="middle"
-                    style="background-color: #0E0620; background-image: url('https://glocation-sas.github.io/bdr-email-marketing/email-icons/hero-bg-composited.png'); background-size: cover; background-position: center center; background-repeat: no-repeat; padding: 52px 48px; height: 340px; vertical-align: middle;"
-                  >
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 650px; margin: 0 auto; border-collapse: collapse;">
+                  <td colspan="2" height="4" bgcolor="#7C3AED" style="height: 4px; line-height: 4px; font-size: 1px; background-color: #7C3AED; background-image: linear-gradient(90deg, #7C3AED 0%, #A855F7 50%, #7C3AED 100%);">&nbsp;</td>
+                </tr>
+                <!-- Fila principal: Izquierda Texto (390px) + Derecha Ilustración (350px) -->
+                <tr>
+                  <td width="390" valign="middle" align="left" bgcolor="#0D061F" style="width: 390px; background-color: #0D061F; padding: 34px 0 34px 44px; vertical-align: middle;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                      <!-- Logo GLocation -->
                       <tr>
-                        <td align="left" valign="middle" style="padding: 0;">
-                          <table role="presentation" width="355" cellpadding="0" cellspacing="0" border="0" style="width: 355px; max-width: 100%; border-collapse: collapse;">
-                            <!-- Logo GLocation -->
+                        <td align="left" style="padding: 0 0 16px 0;">
+                          <img
+                            src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/logo-glocation-negativo.png"
+                            alt="GLocation"
+                            width="147"
+                            height="64"
+                            style="display: block; width: 147px; height: 64px; border: 0; margin-left: -10px;"
+                          />
+                        </td>
+                      </tr>
+                      <!-- Titular Hero -->
+                      <tr>
+                        <td align="left" style="padding: 0 0 14px 0; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 25px; font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; color: #FFFFFF;">
+                          <span style="color: #FFFFFF;">Su oficina TIC tiene proyectos que liderar.</span><br />
+                          <span class="gl-grad-hero" style="color: #C084FC;">Y una operación </span><span class="gl-grad-hero" style="color: #38BDF8;">que<br />no se detiene.</span>
+                        </td>
+                      </tr>
+                      <!-- Línea de acento 48px -->
+                      <tr>
+                        <td align="left" style="padding: 0 0 16px 0;">
+                          <table role="presentation" width="48" cellpadding="0" cellspacing="0" border="0" style="width: 48px; border-collapse: collapse;">
                             <tr>
-                              <td align="left" style="padding: 0 0 18px 0;">
-                                <img
-                                  src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/logo-glocation-negativo.png"
-                                  alt="GLocation"
-                                  width="147"
-                                  height="64"
-                                  style="display: block; width: 147px; height: 64px; border: 0; margin-left: -10px;"
-                                />
-                              </td>
-                            </tr>
-                            <!-- Titular Hero -->
-                            <tr>
-                              <td align="left" style="padding: 0 0 14px 0; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 26px; font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; color: #FFFFFF;">
-                                <span style="display: block; color: #FFFFFF;">
-                                  Su oficina TIC tiene proyectos que liderar.
-                                </span>
-                                <span style="display: inline-block; margin-top: 4px; color: #C084FC; background-image: linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%); -webkit-background-clip: text; background-clip: text;">
-                                  Y una operación que<br />no se detiene.
-                                </span>
-                              </td>
-                            </tr>
-                            <!-- Línea de acento -->
-                            <tr>
-                              <td align="left" style="padding: 0 0 18px 0;">
-                                <table role="presentation" width="48" cellpadding="0" cellspacing="0" border="0" style="width: 48px; border-collapse: collapse;">
-                                  <tr>
-                                    <td height="3" bgcolor="#A855F7" style="height: 3px; line-height: 3px; font-size: 1px; background-color: #A855F7; background-image: linear-gradient(90deg, #A855F7 0%, #38BDF8 100%); border-radius: 99px;">&nbsp;</td>
-                                  </tr>
-                                </table>
-                              </td>
-                            </tr>
-                            <!-- Subtítulo Hero -->
-                            <tr>
-                              <td align="left" style="padding: 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14.5px; font-weight: 400; line-height: 1.6; color: #E9D5FF;">
-                                Descubra cómo los Trabajadores Cognitivos pueden ampliar las capacidades de su equipo y apoyar actividades institucionales bajo supervisión humana.
-                              </td>
+                              <td height="3" bgcolor="#A855F7" style="height: 3px; line-height: 3px; font-size: 1px; background-color: #A855F7; background-image: linear-gradient(90deg, #A855F7 0%, #38BDF8 100%); border-radius: 99px;">&nbsp;</td>
                             </tr>
                           </table>
                         </td>
                       </tr>
+                      <!-- Subtítulo Hero -->
+                      <tr>
+                        <td align="left" style="padding: 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 1.58; color: #E9D5FF;">
+                          Descubra cómo los Trabajadores Cognitivos pueden ampliar las capacidades de su equipo y apoyar actividades institucionales bajo supervisión humana.
+                        </td>
+                      </tr>
                     </table>
+                  </td>
+
+                  <!-- Celda derecha: Ilustración 01.png integrada al fondo oscuro -->
+                  <td width="350" valign="middle" align="right" bgcolor="#0D061F" style="width: 350px; background-color: #0D061F; padding: 0; vertical-align: middle;">
+                    <img
+                      src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/hero-right-illustration.png"
+                      alt="Trabajador Cognitivo GLocation"
+                      width="350"
+                      height="340"
+                      style="display: block; width: 350px; height: 340px; border: 0;"
+                    />
                   </td>
                 </tr>
               </table>
@@ -133,70 +123,76 @@
           <!-- ======================================================== -->
           <tr>
             <td style="padding: 0 0 6px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#120A24" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #120A24; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
+              <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" bgcolor="#120A24" style="width: 740px; border-collapse: separate; border-spacing: 0; background-color: #120A24; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
                 <tr>
-                  <td class="gl-pad" style="padding: 32px 44px;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 650px; margin: 0 auto; border-collapse: collapse;">
+                  <td style="padding: 32px 44px;">
+                    <table role="presentation" width="650" cellpadding="0" cellspacing="0" border="0" style="width: 650px; margin: 0 auto; border-collapse: collapse;">
                       <!-- Encabezado Bloque 2 -->
                       <tr>
                         <td align="center" style="padding: 0 0 8px 0; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 800; line-height: 1.24; letter-spacing: -0.025em; color: #FFFFFF;">
-                          Ampliar la capacidad, <span style="color: #C084FC; background-image: linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%); -webkit-background-clip: text; background-clip: text;">no repartir herramientas.</span>
+                          Ampliar la capacidad, <span class="gl-grad-title" style="color: #C084FC;">no repartir </span><span class="gl-grad-title" style="color: #38BDF8;">herramientas.</span>
                         </td>
                       </tr>
                       <tr>
-                        <td align="center" style="padding: 0 20px 22px 20px; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14.5px; line-height: 1.6; color: #D4C7EC;">
+                        <td align="center" style="padding: 0 16px 22px 16px; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14.5px; line-height: 1.6; color: #D4C7EC;">
                           En Glocation diseñamos <strong style="font-weight: 700; color: #FFFFFF;">Trabajadores Cognitivos</strong> para incorporarse a procesos organizacionales con funciones definidas, conocimiento institucional y supervisión humana.
                         </td>
                       </tr>
 
-                      <!-- Diagrama comparativo 3 columnas: Izquierda (254px) + Flecha (44px) + Derecha (352px) -->
+                      <!-- Diagrama comparativo 3 celdas fijas en la misma fila -->
                       <tr>
                         <td style="padding: 0;">
-                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                          <table role="presentation" width="650" cellpadding="0" cellspacing="0" border="0" style="width: 650px; border-collapse: collapse; table-layout: fixed;">
                             <tr>
-                              <!-- COLUMNA IZQUIERDA: USO AISLADO -->
-                              <td class="gl-stack" width="256" valign="top" style="width: 256px; vertical-align: top;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#170E2B" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #170E2B; border: 1px solid #2A1B47; border-radius: 16px; padding: 16px;">
+                              <!-- COLUMNA IZQUIERDA: USO AISLADO (254px) -->
+                              <td width="254" valign="top" style="width: 254px; vertical-align: top;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#170E2B" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #170E2B; border: 1px solid #2A1B47; border-radius: 16px;">
                                   <tr>
-                                    <td align="left" style="padding: 0 0 12px 0;">
-                                      <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">
-                                        USO AISLADO
-                                      </div>
-                                      <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; line-height: 1.35; color: #E2E8F0; margin-top: 2px;">
-                                        Herramientas individuales
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="padding: 0;">
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#120B22" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #120B22; border: 1px dashed #334155; border-radius: 12px; padding: 14px 10px;">
+                                    <td style="padding: 16px;">
+                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                                         <tr>
-                                          <td align="center" style="padding: 0 0 10px 0;">
-                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
-                                              <tr>
-                                                
-                                                <td align="center" width="33%" valign="top" style="padding: 0 4px;">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/tool-chatgpt.png" alt="ChatGPT" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto 4px auto; border: 0;" />
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-down-slate.png" alt="↓" width="12" height="12" style="display: block; width: 12px; height: 12px; margin: 0 auto 4px auto; border: 0;" />
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/user-badge-dark.png" alt="Usuario" width="28" height="28" style="display: block; width: 28px; height: 28px; margin: 0 auto; border: 0;" />
-                                                </td>
-                                                <td align="center" width="33%" valign="top" style="padding: 0 4px;">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/tool-gemini.png" alt="Gemini" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto 4px auto; border: 0;" />
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-down-slate.png" alt="↓" width="12" height="12" style="display: block; width: 12px; height: 12px; margin: 0 auto 4px auto; border: 0;" />
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/user-badge-dark.png" alt="Usuario" width="28" height="28" style="display: block; width: 28px; height: 28px; margin: 0 auto; border: 0;" />
-                                                </td>
-                                                <td align="center" width="33%" valign="top" style="padding: 0 4px;">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/tool-excel.png" alt="Excel" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto 4px auto; border: 0;" />
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-down-slate.png" alt="↓" width="12" height="12" style="display: block; width: 12px; height: 12px; margin: 0 auto 4px auto; border: 0;" />
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/user-badge-dark.png" alt="Usuario" width="28" height="28" style="display: block; width: 28px; height: 28px; margin: 0 auto; border: 0;" />
-                                                </td>
-                                              </tr>
-                                            </table>
+                                          <td align="left" style="padding: 0 0 12px 0;">
+                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">
+                                              USO AISLADO
+                                            </div>
+                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; line-height: 1.35; color: #E2E8F0; margin-top: 2px;">
+                                              Herramientas individuales
+                                            </div>
                                           </td>
                                         </tr>
                                         <tr>
-                                          <td align="center" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.38; color: #CBD5E1; padding: 2px 2px 0 2px;">
-                                            Consultas, documentos y seguimientos gestionados por separado.
+                                          <td style="padding: 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#120B22" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #120B22; border: 1px dashed #334155; border-radius: 12px;">
+                                              <tr>
+                                                <td style="padding: 14px 10px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      
+                                                      <td align="center" width="33%" valign="top" style="padding: 0 4px 10px 4px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/tool-chatgpt.png" alt="ChatGPT" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto 4px auto; border: 0;" />
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-down-slate.png" alt="↓" width="12" height="12" style="display: block; width: 12px; height: 12px; margin: 0 auto 4px auto; border: 0;" />
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/user-badge-dark.png" alt="Usuario" width="28" height="28" style="display: block; width: 28px; height: 28px; margin: 0 auto; border: 0;" />
+                                                      </td>
+                                                      <td align="center" width="33%" valign="top" style="padding: 0 4px 10px 4px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/tool-gemini.png" alt="Gemini" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto 4px auto; border: 0;" />
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-down-slate.png" alt="↓" width="12" height="12" style="display: block; width: 12px; height: 12px; margin: 0 auto 4px auto; border: 0;" />
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/user-badge-dark.png" alt="Usuario" width="28" height="28" style="display: block; width: 28px; height: 28px; margin: 0 auto; border: 0;" />
+                                                      </td>
+                                                      <td align="center" width="33%" valign="top" style="padding: 0 4px 10px 4px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/tool-excel.png" alt="Excel" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto 4px auto; border: 0;" />
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-down-slate.png" alt="↓" width="12" height="12" style="display: block; width: 12px; height: 12px; margin: 0 auto 4px auto; border: 0;" />
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/user-badge-dark.png" alt="Usuario" width="28" height="28" style="display: block; width: 28px; height: 28px; margin: 0 auto; border: 0;" />
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td colspan="3" align="center" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.38; color: #CBD5E1; padding: 2px 2px 0 2px;">
+                                                        Consultas, documentos y seguimientos gestionados por separado.
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
                                       </table>
@@ -205,78 +201,84 @@
                                 </table>
                               </td>
 
-                              <!-- FLECHA CENTRAL -->
-                              <td class="gl-stack-spacer" width="44" align="center" valign="middle" style="width: 44px; vertical-align: middle; text-align: center; padding: 0 6px;">
+                              <!-- FLECHA CENTRAL (44px) -->
+                              <td width="44" align="center" valign="middle" style="width: 44px; vertical-align: middle; text-align: center; padding: 0 6px;">
                                 <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/evolution-arrow-purple.png" alt="→" width="32" height="32" style="display: block; width: 32px; height: 32px; margin: 0 auto; border: 0;" />
                               </td>
 
-                              <!-- COLUMNA DERECHA: TRANSFORMACIÓN COGNITIVA -->
-                              <td class="gl-stack" width="350" valign="top" style="width: 350px; vertical-align: top;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#24124D" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #24124D; background-image: linear-gradient(135deg, #24124D 0%, #1D0E3D 50%, #2E1660 100%); border: 2px solid #7C3AED; border-radius: 16px; padding: 15px;">
+                              <!-- COLUMNA DERECHA: TRANSFORMACIÓN COGNITIVA (352px) -->
+                              <td width="352" valign="top" style="width: 352px; vertical-align: top;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#24124D" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #24124D; background-image: linear-gradient(135deg, #24124D 0%, #1D0E3D 50%, #2E1660 100%); border: 2px solid #7C3AED; border-radius: 16px;">
                                   <tr>
-                                    <td style="padding: 0 0 12px 0;">
+                                    <td style="padding: 15px;">
                                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                                         <tr>
-                                          <td align="left" valign="top">
-                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #D8B4FE;">
-                                              &#9679; TRANSFORMACIÓN COGNITIVA
-                                            </div>
-                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 800; line-height: 1.35; color: #FFFFFF; margin-top: 2px;">
-                                              IA integrada a un proceso
-                                            </div>
-                                          </td>
-                                          <td align="right" valign="top" style="width: 76px;">
-                                            <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 800; color: #FFFFFF; background-color: #7C3AED; border-radius: 99px; padding: 3px 10px;">
-                                              GLocation
-                                            </span>
-                                          </td>
-                                        </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td style="padding: 0;">
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#150A2B" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #150A2B; border: 1px solid #581C87; border-radius: 12px; padding: 14px 10px;">
-                                        <tr>
-                                          <td align="center" style="padding: 0 0 12px 0;">
+                                          <td style="padding: 0 0 12px 0;">
                                             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                                               <tr>
-                                                <!-- Nodo 1: Proceso TIC -->
-                                                <td align="center" valign="top" width="28%">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/workflow-badge-dark.png" alt="Proceso TIC" width="40" height="40" style="display: block; width: 40px; height: 40px; margin: 0 auto 6px auto; border: 0;" />
-                                                  <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 600; line-height: 1.2; color: #F3E8FF; white-space: nowrap;">
-                                                    Proceso TIC
+                                                <td align="left" valign="top">
+                                                  <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #D8B4FE;">
+                                                    &#9679; TRANSFORMACIÓN COGNITIVA
+                                                  </div>
+                                                  <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 800; line-height: 1.35; color: #FFFFFF; margin-top: 2px;">
+                                                    IA integrada a un proceso
                                                   </div>
                                                 </td>
-                                                <!-- Flecha 1 -->
-                                                <td align="center" valign="middle" width="8%" style="padding-bottom: 14px;">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-right-purple-dark.png" alt="→" width="16" height="16" style="display: block; width: 16px; height: 16px; margin: 0 auto; border: 0;" />
-                                                </td>
-                                                <!-- Nodo 2: Trabajador Cognitivo -->
-                                                <td align="center" valign="top" width="36%">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/avatar-bot-purple.png" alt="Trabajador Cognitivo" width="40" height="40" style="display: block; width: 40px; height: 40px; margin: 0 auto 6px auto; border: 0;" />
-                                                  <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 800; line-height: 1.2; color: #D8B4FE; white-space: nowrap;">
-                                                    Trabajador Cognitivo
-                                                  </div>
-                                                </td>
-                                                <!-- Flecha 2 -->
-                                                <td align="center" valign="middle" width="8%" style="padding-bottom: 14px;">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-right-purple-dark.png" alt="→" width="16" height="16" style="display: block; width: 16px; height: 16px; margin: 0 auto; border: 0;" />
-                                                </td>
-                                                <!-- Nodo 3: Equipo TIC -->
-                                                <td align="center" valign="top" width="20%">
-                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/avatar-team-dark.png" alt="Equipo TIC" width="40" height="40" style="display: block; width: 40px; height: 40px; margin: 0 auto 6px auto; border: 0;" />
-                                                  <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 800; line-height: 1.2; color: #FFFFFF; white-space: nowrap;">
-                                                    Equipo TIC
-                                                  </div>
+                                                <td align="right" valign="top" width="76" style="width: 76px;">
+                                                  <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 800; color: #FFFFFF; background-color: #7C3AED; border-radius: 99px; padding: 3px 10px;">
+                                                    GLocation
+                                                  </span>
                                                 </td>
                                               </tr>
                                             </table>
                                           </td>
                                         </tr>
                                         <tr>
-                                          <td align="center" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.38; color: #E9D5FF; padding: 2px 4px 0 4px;">
-                                            Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana.
+                                          <td style="padding: 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#150A2B" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #150A2B; border: 1px solid #581C87; border-radius: 12px;">
+                                              <tr>
+                                                <td style="padding: 14px 10px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <!-- Nodo 1: Proceso TIC -->
+                                                      <td align="center" valign="top" width="28%" style="padding-bottom: 10px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/workflow-badge-dark.png" alt="Proceso TIC" width="40" height="40" style="display: block; width: 40px; height: 40px; margin: 0 auto 6px auto; border: 0;" />
+                                                        <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 600; line-height: 1.2; color: #F3E8FF; white-space: nowrap;">
+                                                          Proceso TIC
+                                                        </div>
+                                                      </td>
+                                                      <!-- Flecha 1 -->
+                                                      <td align="center" valign="middle" width="8%" style="padding-bottom: 22px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-right-purple-dark.png" alt="→" width="16" height="16" style="display: block; width: 16px; height: 16px; margin: 0 auto; border: 0;" />
+                                                      </td>
+                                                      <!-- Nodo 2: Trabajador Cognitivo -->
+                                                      <td align="center" valign="top" width="36%" style="padding-bottom: 10px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/avatar-bot-purple.png" alt="Trabajador Cognitivo" width="40" height="40" style="display: block; width: 40px; height: 40px; margin: 0 auto 6px auto; border: 0;" />
+                                                        <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 800; line-height: 1.2; color: #D8B4FE; white-space: nowrap;">
+                                                          Trabajador Cognitivo
+                                                        </div>
+                                                      </td>
+                                                      <!-- Flecha 2 -->
+                                                      <td align="center" valign="middle" width="8%" style="padding-bottom: 22px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-right-purple-dark.png" alt="→" width="16" height="16" style="display: block; width: 16px; height: 16px; margin: 0 auto; border: 0;" />
+                                                      </td>
+                                                      <!-- Nodo 3: Equipo TIC -->
+                                                      <td align="center" valign="top" width="20%" style="padding-bottom: 10px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/avatar-team-dark.png" alt="Equipo TIC" width="40" height="40" style="display: block; width: 40px; height: 40px; margin: 0 auto 6px auto; border: 0;" />
+                                                        <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 800; line-height: 1.2; color: #FFFFFF; white-space: nowrap;">
+                                                          Equipo TIC
+                                                        </div>
+                                                      </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td colspan="5" align="center" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.38; color: #E9D5FF; padding: 2px 4px 0 4px;">
+                                                        Un Trabajador Cognitivo apoya actividades definidas con información autorizada y supervisión humana.
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
                                       </table>
@@ -300,14 +302,14 @@
           <!-- ======================================================== -->
           <tr>
             <td style="padding: 0 0 6px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#12102B" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #12102B; background-image: linear-gradient(180deg, #130C26 0%, #11152E 50%, #130A26 100%); border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
+              <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" bgcolor="#12102B" style="width: 740px; border-collapse: separate; border-spacing: 0; background-color: #12102B; background-image: linear-gradient(180deg, #130C26 0%, #11152E 50%, #130A26 100%); border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
                 <tr>
-                  <td class="gl-pad" style="padding: 32px 44px;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 650px; margin: 0 auto; border-collapse: collapse;">
+                  <td style="padding: 32px 44px;">
+                    <table role="presentation" width="650" cellpadding="0" cellspacing="0" border="0" style="width: 650px; margin: 0 auto; border-collapse: collapse;">
                       <!-- Encabezado Bloque 3 -->
                       <tr>
                         <td align="left" style="padding: 0 0 8px 0; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 26px; font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; color: #FFFFFF;">
-                          Imagine esta posibilidad <span style="color: #C084FC; background-image: linear-gradient(90deg, #C084FC 0%, #A855F7 48%, #38BDF8 100%); -webkit-background-clip: text; background-clip: text;">en su oficina</span>
+                          Imagine esta posibilidad <span class="gl-grad-title" style="color: #C084FC;">en su </span><span class="gl-grad-title" style="color: #38BDF8;">oficina</span>
                         </td>
                       </tr>
                       <tr>
@@ -316,13 +318,13 @@
                         </td>
                       </tr>
 
-                      <!-- Dos columnas: Izquierda (372px) + Espacio (16px) + Derecha (262px) -->
+                      <!-- Dos columnas fijas en la misma fila: Izquierda (372px) + Espacio (16px) + Derecha (262px) -->
                       <tr>
                         <td style="padding: 0;">
-                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                          <table role="presentation" width="650" cellpadding="0" cellspacing="0" border="0" style="width: 650px; border-collapse: collapse; table-layout: fixed;">
                             <tr>
-                              <!-- COLUMNA IZQUIERDA (7/12) -->
-                              <td class="gl-stack" width="372" valign="top" style="width: 372px; vertical-align: top;">
+                              <!-- COLUMNA IZQUIERDA (372px) -->
+                              <td width="372" valign="top" style="width: 372px; vertical-align: top;">
                                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0F172A" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #0F172A; border: 1px solid #1E3A5F; border-radius: 16px; overflow: hidden;">
                                   <!-- Barra superior tipo ventana -->
                                   <tr>
@@ -352,82 +354,128 @@
                                   <!-- Contenido ventana -->
                                   <tr>
                                     <td style="padding: 18px;">
-                                      <!-- Tarjeta Seguimiento de proyectos tecnológicos -->
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#152238" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #152238; border: 1px solid #23395B; border-radius: 12px; padding: 12px; margin-bottom: 14px;">
+                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                        <!-- Tarjeta Seguimiento de proyectos tecnológicos -->
                                         <tr>
-                                          <td width="36" valign="top" style="width: 36px; padding-right: 12px; vertical-align: top;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/filetext-badge-dark.png" alt="Documento" width="36" height="36" style="display: block; width: 36px; height: 36px; border: 0;" />
-                                          </td>
-                                          <td valign="top" style="vertical-align: top;">
-                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13.5px; font-weight: 800; line-height: 1.25; color: #FFFFFF; margin-bottom: 4px;">
-                                              Seguimiento de proyectos tecnológicos
-                                            </div>
-                                            <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; line-height: 1.42; color: #CBD5E1;">
-                                              Un Trabajador Cognitivo podría organizar la información registrada sobre compromisos, entregables y fechas de los proyectos institucionales.
-                                            </div>
+                                          <td style="padding: 0 0 14px 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#152238" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #152238; border: 1px solid #23395B; border-radius: 12px;">
+                                              <tr>
+                                                <td style="padding: 12px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="36" valign="top" style="width: 36px; padding-right: 12px; vertical-align: top;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/filetext-badge-dark.png" alt="Documento" width="36" height="36" style="display: block; width: 36px; height: 36px; border: 0;" />
+                                                      </td>
+                                                      <td valign="top" style="vertical-align: top;">
+                                                        <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13.5px; font-weight: 800; line-height: 1.25; color: #FFFFFF; margin-bottom: 4px;">
+                                                          Seguimiento de proyectos tecnológicos
+                                                        </div>
+                                                        <div style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; line-height: 1.42; color: #CBD5E1;">
+                                                          Un Trabajador Cognitivo podría organizar la información registrada sobre compromisos, entregables y fechas de los proyectos institucionales.
+                                                        </div>
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
-                                      </table>
 
-                                      <!-- Encabezado Resumen de seguimiento / Estado -->
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse; margin-bottom: 8px;">
+                                        <!-- Encabezado Resumen de seguimiento / Estado -->
                                         <tr>
-                                          <td align="left" style="padding: 0 4px; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #7DD3FC;">
-                                            Resumen de seguimiento
-                                          </td>
-                                          <td align="right" style="padding: 0 4px; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">
-                                            Estado
+                                          <td style="padding: 0 0 8px 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                              <tr>
+                                                <td align="left" style="padding: 0 4px; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #7DD3FC;">
+                                                  Resumen de seguimiento
+                                                </td>
+                                                <td align="right" style="padding: 0 4px; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94A3B8;">
+                                                  Estado
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
-                                      </table>
 
-                                      <!-- Fila 1: Compromisos pendientes -->
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#131D31" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #131D31; border: 1px solid #22324C; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px;">
+                                        <!-- Fila 1: Compromisos pendientes -->
                                         <tr>
-                                          <td width="22" valign="middle" style="width: 22px; padding-right: 8px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/check-blue.png" alt="✓" width="14" height="14" style="display: block; width: 14px; height: 14px; border: 0;" />
-                                          </td>
-                                          <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; color: #F1F5F9;">
-                                            Compromisos pendientes
-                                          </td>
-                                          <td align="right" valign="middle">
-                                            <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; border: 1px solid #0284C7; background-color: #0C4A6E; color: #E0F2FE; white-space: nowrap;">
-                                              Por revisar
-                                            </span>
+                                          <td style="padding: 0 0 8px 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#131D31" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #131D31; border: 1px solid #22324C; border-radius: 8px;">
+                                              <tr>
+                                                <td style="padding: 8px 12px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="22" valign="middle" style="width: 22px; padding-right: 8px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/check-blue.png" alt="✓" width="14" height="14" style="display: block; width: 14px; height: 14px; border: 0;" />
+                                                      </td>
+                                                      <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; color: #F1F5F9;">
+                                                        Compromisos pendientes
+                                                      </td>
+                                                      <td align="right" valign="middle">
+                                                        <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; border: 1px solid #0284C7; background-color: #0C4A6E; color: #E0F2FE; white-space: nowrap;">
+                                                          Por revisar
+                                                        </span>
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
-                                      </table>
 
-                                      <!-- Fila 2: Entregables próximos -->
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#131D31" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #131D31; border: 1px solid #22324C; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px;">
+                                        <!-- Fila 2: Entregables próximos -->
                                         <tr>
-                                          <td width="22" valign="middle" style="width: 22px; padding-right: 8px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/check-orange.png" alt="✓" width="14" height="14" style="display: block; width: 14px; height: 14px; border: 0;" />
-                                          </td>
-                                          <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; color: #F1F5F9;">
-                                            Entregables próximos
-                                          </td>
-                                          <td align="right" valign="middle">
-                                            <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; border: 1px solid #F97316; background-color: #431407; color: #FFEDD5; white-space: nowrap;">
-                                              Por verificar
-                                            </span>
+                                          <td style="padding: 0 0 8px 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#131D31" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #131D31; border: 1px solid #22324C; border-radius: 8px;">
+                                              <tr>
+                                                <td style="padding: 8px 12px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="22" valign="middle" style="width: 22px; padding-right: 8px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/check-orange.png" alt="✓" width="14" height="14" style="display: block; width: 14px; height: 14px; border: 0;" />
+                                                      </td>
+                                                      <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; color: #F1F5F9;">
+                                                        Entregables próximos
+                                                      </td>
+                                                      <td align="right" valign="middle">
+                                                        <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; border: 1px solid #F97316; background-color: #431407; color: #FFEDD5; white-space: nowrap;">
+                                                          Por verificar
+                                                        </span>
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
-                                      </table>
 
-                                      <!-- Fila 3: Responsables y fechas -->
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#131D31" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #131D31; border: 1px solid #22324C; border-radius: 8px; padding: 8px 12px;">
+                                        <!-- Fila 3: Responsables y fechas -->
                                         <tr>
-                                          <td width="22" valign="middle" style="width: 22px; padding-right: 8px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/check-green.png" alt="✓" width="14" height="14" style="display: block; width: 14px; height: 14px; border: 0;" />
-                                          </td>
-                                          <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; color: #F1F5F9;">
-                                            Responsables y fechas
-                                          </td>
-                                          <td align="right" valign="middle">
-                                            <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; border: 1px solid #10B981; background-color: #064E3B; color: #D1FAE5; white-space: nowrap;">
-                                              Identificados
-                                            </span>
+                                          <td style="padding: 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#131D31" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #131D31; border: 1px solid #22324C; border-radius: 8px;">
+                                              <tr>
+                                                <td style="padding: 8px 12px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="22" valign="middle" style="width: 22px; padding-right: 8px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/check-green.png" alt="✓" width="14" height="14" style="display: block; width: 14px; height: 14px; border: 0;" />
+                                                      </td>
+                                                      <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 600; color: #F1F5F9;">
+                                                        Responsables y fechas
+                                                      </td>
+                                                      <td align="right" valign="middle">
+                                                        <span style="display: inline-block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; font-weight: 700; padding: 2px 10px; border-radius: 99px; border: 1px solid #10B981; background-color: #064E3B; color: #D1FAE5; white-space: nowrap;">
+                                                          Identificados
+                                                        </span>
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
                                       </table>
@@ -436,84 +484,108 @@
                                 </table>
                               </td>
 
-                              <!-- ESPACIO ENTRE COLUMNAS -->
-                              <td class="gl-stack-spacer" width="16" style="width: 16px; font-size: 1px; line-height: 1px;">&nbsp;</td>
+                              <!-- ESPACIO ENTRE COLUMNAS (16px) -->
+                              <td width="16" style="width: 16px; font-size: 1px; line-height: 1px;">&nbsp;</td>
 
-                              <!-- COLUMNA DERECHA (5/12) -->
-                              <td class="gl-stack" width="262" valign="top" style="width: 262px; vertical-align: top;">
-                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#13182E" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #13182E; border: 1px solid #283558; border-radius: 16px; padding: 18px;">
-                                  <!-- Cabecera con avatar bot azul -->
+                              <!-- COLUMNA DERECHA (262px) -->
+                              <td width="262" valign="top" style="width: 262px; vertical-align: top;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#13182E" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #13182E; border: 1px solid #283558; border-radius: 16px;">
                                   <tr>
-                                    <td style="padding: 0 0 10px 0; border-bottom: 1px solid #233252;">
+                                    <td style="padding: 18px;">
                                       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                        <!-- Cabecera con avatar bot azul -->
                                         <tr>
-                                          <td width="40" valign="middle" style="width: 40px; padding-right: 8px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/avatar-bot-blue.png" alt="Trabajador Cognitivo" width="40" height="40" style="display: block; width: 40px; height: 40px; border: 0;" />
-                                          </td>
-                                          <td valign="middle">
-                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #38BDF8;">
-                                              VALOR PARA SU GESTIÓN
-                                            </div>
-                                            <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; color: #FFFFFF; white-space: nowrap;">
-                                              ¿Qué gana el equipo TIC?
-                                            </div>
+                                          <td style="padding: 0 0 10px 0; border-bottom: 1px solid #233252;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                              <tr>
+                                                <td width="40" valign="middle" style="width: 40px; padding-right: 8px;">
+                                                  <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/avatar-bot-blue.png" alt="Trabajador Cognitivo" width="40" height="40" style="display: block; width: 40px; height: 40px; border: 0;" />
+                                                </td>
+                                                <td valign="middle">
+                                                  <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #38BDF8;">
+                                                    VALOR PARA SU GESTIÓN
+                                                  </div>
+                                                  <div style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; color: #FFFFFF; white-space: nowrap;">
+                                                    ¿Qué gana el equipo TIC?
+                                                  </div>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
 
-                                  <!-- Párrafo descriptivo -->
-                                  <tr>
-                                    <td style="padding: 12px 0 14px 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #E2E8F0;">
-                                      Una <strong style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; color: #FFFFFF;">base de información organizada</strong> para preparar el seguimiento, revisar pendientes y concentrar esfuerzos en las decisiones que requieren criterio humano.
-                                    </td>
-                                  </tr>
-
-                                  <!-- Beneficio 1 -->
-                                  <tr>
-                                    <td style="padding: 0 0 8px 0;">
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0F172A" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #0F172A; border: 1px solid #22324C; border-radius: 12px; padding: 8px 10px;">
+                                        <!-- Párrafo descriptivo -->
                                         <tr>
-                                          <td width="28" valign="middle" style="width: 28px; padding-right: 10px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/folder-badge-dark.png" alt="" width="28" height="28" style="display: block; width: 28px; height: 28px; border: 0;" />
-                                          </td>
-                                          <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.35; color: #CBD5E1;">
-                                            <strong style="display: block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; color: #FFFFFF;">Información autorizada:</strong>
-                                            fuentes oficiales de su entidad.
+                                          <td style="padding: 12px 0 14px 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.5; color: #E2E8F0;">
+                                            Una <strong style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; color: #FFFFFF;">base de información organizada</strong> para preparar el seguimiento, revisar pendientes y concentrar esfuerzos en las decisiones que requieren criterio humano.
                                           </td>
                                         </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
 
-                                  <!-- Beneficio 2 -->
-                                  <tr>
-                                    <td style="padding: 0 0 8px 0;">
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0F172A" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #0F172A; border: 1px solid #22324C; border-radius: 12px; padding: 8px 10px;">
+                                        <!-- Beneficio 1 -->
                                         <tr>
-                                          <td width="28" valign="middle" style="width: 28px; padding-right: 10px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/usercheck-badge-dark.png" alt="" width="28" height="28" style="display: block; width: 28px; height: 28px; border: 0;" />
-                                          </td>
-                                          <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.35; color: #CBD5E1;">
-                                            <strong style="display: block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; color: #FFFFFF;">Revisión humana:</strong>
-                                            insumos listos para validar.
+                                          <td style="padding: 0 0 8px 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0F172A" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #0F172A; border: 1px solid #22324C; border-radius: 12px;">
+                                              <tr>
+                                                <td style="padding: 8px 10px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="28" valign="middle" style="width: 28px; padding-right: 10px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/folder-badge-dark.png" alt="" width="28" height="28" style="display: block; width: 28px; height: 28px; border: 0;" />
+                                                      </td>
+                                                      <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.35; color: #CBD5E1;">
+                                                        <strong style="display: block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; color: #FFFFFF;">Información autorizada:</strong>
+                                                        fuentes oficiales de su entidad.
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
-                                      </table>
-                                    </td>
-                                  </tr>
 
-                                  <!-- Beneficio 3 -->
-                                  <tr>
-                                    <td style="padding: 0;">
-                                      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2E1660" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #2E1660; border: 1px solid #7C3AED; border-radius: 12px; padding: 8px 10px;">
+                                        <!-- Beneficio 2 -->
                                         <tr>
-                                          <td width="28" valign="middle" style="width: 28px; padding-right: 10px;">
-                                            <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/shield-badge-dark.png" alt="" width="28" height="28" style="display: block; width: 28px; height: 28px; border: 0;" />
+                                          <td style="padding: 0 0 8px 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0F172A" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #0F172A; border: 1px solid #22324C; border-radius: 12px;">
+                                              <tr>
+                                                <td style="padding: 8px 10px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="28" valign="middle" style="width: 28px; padding-right: 10px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/usercheck-badge-dark.png" alt="" width="28" height="28" style="display: block; width: 28px; height: 28px; border: 0;" />
+                                                      </td>
+                                                      <td valign="middle" style="font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; line-height: 1.35; color: #CBD5E1;">
+                                                        <strong style="display: block; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 800; color: #FFFFFF;">Revisión humana:</strong>
+                                                        insumos listos para validar.
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
-                                          <td valign="middle" style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; line-height: 1.35; color: #FFFFFF;">
-                                            Su equipo conserva el<br />criterio y las decisiones.
+                                        </tr>
+
+                                        <!-- Beneficio 3 -->
+                                        <tr>
+                                          <td style="padding: 0;">
+                                            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2E1660" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #2E1660; border: 1px solid #7C3AED; border-radius: 12px;">
+                                              <tr>
+                                                <td style="padding: 8px 10px;">
+                                                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
+                                                    <tr>
+                                                      <td width="28" valign="middle" style="width: 28px; padding-right: 10px;">
+                                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/shield-badge-dark.png" alt="" width="28" height="28" style="display: block; width: 28px; height: 28px; border: 0;" />
+                                                      </td>
+                                                      <td valign="middle" style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 800; line-height: 1.35; color: #FFFFFF;">
+                                                        Su equipo conserva el<br />criterio y las decisiones.
+                                                      </td>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
                                           </td>
                                         </tr>
                                       </table>
@@ -537,59 +609,65 @@
           <!-- ======================================================== -->
           <tr>
             <td style="padding: 0 0 6px 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#120A24" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #120A24; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
+              <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" bgcolor="#120A24" style="width: 740px; border-collapse: separate; border-spacing: 0; background-color: #120A24; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
                 <tr>
-                  <td class="gl-pad" style="padding: 32px 44px 40px 44px;">
+                  <td style="padding: 32px 44px 40px 44px;">
                     <table
                       role="presentation"
-                      width="100%"
+                      width="650"
                       cellpadding="0"
                       cellspacing="0"
                       border="0"
                       bgcolor="#231048"
-                      style="width: 100%; max-width: 650px; margin: 0 auto; border-collapse: separate; border-spacing: 0; background-color: #231048; background-image: linear-gradient(135deg, #231048 0%, #3B197A 50%, #5B21B6 100%); border-radius: 16px; padding: 38px 32px; border: 1px solid #6D28D9;"
+                      style="width: 650px; margin: 0 auto; border-collapse: separate; border-spacing: 0; background-color: #231048; background-image: linear-gradient(135deg, #231048 0%, #3B197A 50%, #5B21B6 100%); border-radius: 16px; border: 1px solid #6D28D9;"
                     >
                       <tr>
-                        <td align="center" style="padding: 0 0 18px 0; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 800; line-height: 1.26; letter-spacing: -0.025em; color: #FFFFFF;">
-                          ¿Y si exploramos dónde podría<br />aportar valor en su entidad?
-                        </td>
-                      </tr>
-                      <tr>
-                        <td align="center" style="padding: 0 0 22px 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13.5px; line-height: 1.6; color: #EDE9FE;">
-                          Le proponemos una reunión virtual de 20 minutos para conocer sus necesidades<br />
-                          e identificar algún proceso en el que tenga sentido evaluar un Trabajador Cognitivo.
-                        </td>
-                      </tr>
-                      <!-- Botón CTA por tabla -->
-                      <tr>
-                        <td align="center" style="padding: 0 0 20px 0;">
-                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="border-collapse: separate; border-spacing: 0; background-color: #FFFFFF; border-radius: 999px; box-shadow: 0 8px 22px rgba(15,7,32,0.3);">
+                        <td align="center" style="padding: 38px 32px;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                             <tr>
-                              <td align="center" valign="middle" style="padding: 13px 26px;">
-                                <a href="mailto:contacto@glocation.com?subject=Explorar%20una%20oportunidad%20en%20mi%20oficina%20TIC%20-%20Reuni%C3%B3n%2020%20min%20Glocation&body=Hola%20Paula%2C%20me%20gustar%C3%ADa%20recibir%20dos%20opciones%20de%20horario%20para%20la%20reuni%C3%B3n%20virtual%20de%2020%20minutos%20sobre%20Trabajadores%20Cognitivos.%0A%0ASaludos%20cordiales%2C" style="text-decoration: none; display: inline-block;">
-                                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
-                                    <tr>
-                                      <td valign="middle" style="padding-right: 10px;">
-                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/mail-purple.png" alt="" width="16" height="16" style="display: block; width: 16px; height: 16px; border: 0;" />
-                                      </td>
-                                      <td valign="middle" style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14.5px; font-weight: 800; color: #4C1D95; text-decoration: none; white-space: nowrap;">
-                                        Explorar una oportunidad en mi oficina TIC
-                                      </td>
-                                      <td valign="middle" style="padding-left: 10px;">
-                                        <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-right-purple.png" alt="→" width="16" height="16" style="display: block; width: 16px; height: 16px; border: 0;" />
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </a>
+                              <td align="center" style="padding: 0 0 18px 0; font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 23px; font-weight: 800; line-height: 1.26; letter-spacing: -0.025em; color: #FFFFFF;">
+                                ¿Y si exploramos dónde podría<br />aportar valor en su entidad?
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center" style="padding: 0 0 22px 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13.5px; line-height: 1.6; color: #EDE9FE;">
+                                Le proponemos una reunión virtual de 20 minutos para conocer sus necesidades<br />
+                                e identificar algún proceso en el que tenga sentido evaluar un Trabajador Cognitivo.
+                              </td>
+                            </tr>
+                            <!-- Botón CTA por tabla -->
+                            <tr>
+                              <td align="center" style="padding: 0 0 20px 0;">
+                                <table role="presentation" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" style="border-collapse: separate; border-spacing: 0; background-color: #FFFFFF; border-radius: 999px; box-shadow: 0 8px 22px rgba(15,7,32,0.3);">
+                                  <tr>
+                                    <td align="center" valign="middle" style="padding: 13px 26px;">
+                                      <a href="mailto:contacto@glocation.com?subject=Explorar%20una%20oportunidad%20en%20mi%20oficina%20TIC%20-%20Reuni%C3%B3n%2020%20min%20Glocation&body=Hola%20Paula%2C%20me%20gustar%C3%ADa%20recibir%20dos%20opciones%20de%20horario%20para%20la%20reuni%C3%B3n%20virtual%20de%2020%20minutos%20sobre%20Trabajadores%20Cognitivos.%0A%0ASaludos%20cordiales%2C" style="text-decoration: none; display: inline-block;">
+                                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                                          <tr>
+                                            <td valign="middle" style="padding-right: 10px;">
+                                              <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/mail-purple.png" alt="" width="16" height="16" style="display: block; width: 16px; height: 16px; border: 0;" />
+                                            </td>
+                                            <td valign="middle" style="font-family: 'Montserrat', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14.5px; font-weight: 800; color: #4C1D95; text-decoration: none; white-space: nowrap;">
+                                              Explorar una oportunidad en mi oficina TIC
+                                            </td>
+                                            <td valign="middle" style="padding-left: 10px;">
+                                              <img src="https://glocation-sas.github.io/bdr-email-marketing/email-icons/arrow-right-purple.png" alt="→" width="16" height="16" style="display: block; width: 16px; height: 16px; border: 0;" />
+                                            </td>
+                                          </tr>
+                                        </table>
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td align="center" style="padding: 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12.5px; line-height: 1.5; color: #DDD6FE;">
+                                Responda a este correo o deje su información en el formulario<br />
+                                y le compartiré dos opciones de horario.
                               </td>
                             </tr>
                           </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td align="center" style="padding: 0; font-family: 'Nunito', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 12.5px; line-height: 1.5; color: #DDD6FE;">
-                          Responda a este correo o deje su información en el formulario<br />
-                          y le compartiré dos opciones de horario.
                         </td>
                       </tr>
                     </table>
@@ -604,14 +682,14 @@
           <!-- ======================================================== -->
           <tr>
             <td style="padding: 0;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#120A24" style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: #120A24; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
+              <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" bgcolor="#120A24" style="width: 740px; border-collapse: separate; border-spacing: 0; background-color: #120A24; border: 1px solid #2D1E52; border-radius: 6px; overflow: hidden;">
                 <tr>
-                  <td class="gl-pad" style="padding: 24px 36px;">
-                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px; margin: 0 auto; border-collapse: collapse;">
+                  <td style="padding: 24px 36px;">
+                    <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; margin: 0 auto; border-collapse: collapse; table-layout: fixed;">
                       <tr>
-                        <!-- Izquierda: Foto circular de Paula Rozo + Datos -->
-                        <td class="gl-stack" valign="middle" style="vertical-align: middle;">
-                          <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                        <!-- Izquierda: Foto circular de Paula Rozo + Datos (385px) -->
+                        <td width="385" valign="middle" style="width: 385px; vertical-align: middle;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-collapse: collapse;">
                             <tr>
                               <td width="78" valign="middle" style="width: 78px; padding-right: 14px;">
                                 <img
@@ -638,8 +716,8 @@
                           </table>
                         </td>
 
-                        <!-- Derecha: Logo GLocation + Tagline + Enlaces -->
-                        <td class="gl-stack" width="215" align="right" valign="middle" style="width: 215px; vertical-align: middle; text-align: right; padding-left: 24px; border-left: 1px solid #2E1C59;">
+                        <!-- Derecha: Logo GLocation + Tagline + Enlaces (215px) -->
+                        <td width="215" align="right" valign="middle" style="width: 215px; vertical-align: middle; text-align: right; padding-left: 24px; border-left: 1px solid #2E1C59;">
                           <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="right" style="border-collapse: collapse; margin-left: auto;">
                             <tr>
                               <td align="right" style="padding-bottom: 6px;">

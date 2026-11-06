@@ -669,7 +669,7 @@ export function EmailPreviewer({
    * e idéntico visualmente a la previsualización.
    */
   const buildExportHtml = (): string => {
-    if (!isTemplate) {
+    if (!isTemplate || activeVariant === "base") {
       return generateJefesTiEmailHtml({ ...config, theme: emailTheme });
     }
 
@@ -771,30 +771,13 @@ export function EmailPreviewer({
   const handleCopyHtml = async () => {
     try {
       const htmlString = buildExportHtml();
-      if (typeof ClipboardItem !== "undefined" && navigator.clipboard?.write) {
-        const htmlBlob = new Blob([htmlString], { type: "text/html" });
-        const textBlob = new Blob([htmlString], { type: "text/plain" });
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            "text/html": htmlBlob,
-            "text/plain": textBlob,
-          }),
-        ]);
-      } else {
-        await navigator.clipboard.writeText(htmlString);
-      }
-      toast.success("HTML copiado (compatible con código y correo visual)", {
+      await navigator.clipboard.writeText(htmlString);
+      toast.success("Código HTML copiado al portapapeles", {
         description:
           "Maquetación por tablas con estilos inline y URLs públicas de GitHub Pages.",
       });
     } catch {
-      try {
-        const htmlString = buildExportHtml();
-        await navigator.clipboard.writeText(htmlString);
-        toast.success("Código HTML copiado al portapapeles");
-      } catch {
-        toast.error("No se pudo copiar el HTML al portapapeles");
-      }
+      toast.error("No se pudo copiar el HTML al portapapeles");
     }
   };
 
