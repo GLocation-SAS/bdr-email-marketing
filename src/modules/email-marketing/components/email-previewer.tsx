@@ -36,6 +36,7 @@ import {
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   JefesTiEmailConfig,
+  OFFICIAL_JEFES_TI_FORM_URL,
   generateJefesTiEmailHtml,
 } from "../templates/jefes-ti-template";
 import { EmailHeroBlock } from "./email-hero-block";
@@ -460,6 +461,7 @@ export function EmailPreviewer({
       "Explorar una oportunidad en mi oficina TIC - Reunión 20 min Glocation",
     emailBody:
       "Hola Paula, me gustaría recibir dos opciones de horario para la reunión virtual de 20 minutos sobre Trabajadores Cognitivos.\n\nSaludos cordiales,",
+    formUrl: OFFICIAL_JEFES_TI_FORM_URL,
     senderPhotoUrl: "/paula_natalia_rozo (4).png",
     senderEyebrow: "HABLEMOS",
     senderName: "Paula Rozo",
@@ -475,6 +477,7 @@ export function EmailPreviewer({
   const mailtoTestUrl = `mailto:${config.recipientEmail}?subject=${encodeURIComponent(
     config.emailSubject || ""
   )}&body=${encodeURIComponent(config.emailBody || "")}`;
+  const ctaFormUrl = config.formUrl || OFFICIAL_JEFES_TI_FORM_URL;
 
   const bgColor = emailTheme === "dark" ? "#120A24" : "#FFFFFF";
   const themeSuffix = emailTheme === "dark" ? "oscuro" : "claro";
@@ -688,9 +691,29 @@ export function EmailPreviewer({
 
       let wrappedContent = imgTag;
       if (part.id === "cta") {
-        wrappedContent = `<a href="${mailtoTestUrl}" style="display: block; text-decoration: none; border: 0;">${imgTag}</a>`;
+        wrappedContent = `<a href="${ctaFormUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">${imgTag}</a>`;
       } else if (part.id === "footer") {
-        wrappedContent = `<a href="${config.websiteUrl || "https://glocation.co"}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">${imgTag}</a>`;
+        // Divide el lienzo del Bloque 5 en 3 columnas (Paula 466px, Web 124px, LinkedIn 150px)
+        const sliceDefs = [
+          { xRatio: 0, wRatio: 466 / 740, widthPx: 466, pct: "62.97%", href: mailtoTestUrl, external: false, alt: "Paula Rozo — Correo directo" },
+          { xRatio: 466 / 740, wRatio: 124 / 740, widthPx: 124, pct: "16.76%", href: config.websiteUrl || "https://glocation.co", external: true, alt: "glocation.co" },
+          { xRatio: 590 / 740, wRatio: 150 / 740, widthPx: 150, pct: "20.27%", href: config.linkedinUrl || "https://www.linkedin.com/company/glocation/", external: true, alt: "LinkedIn GLocation" },
+        ];
+        const tdCells = sliceDefs.map((s) => {
+          const sx = Math.round(canvas.width * s.xRatio);
+          const sw = Math.max(1, Math.round(canvas.width * s.wRatio));
+          const subCanvas = document.createElement("canvas");
+          subCanvas.width = sw;
+          subCanvas.height = canvas.height;
+          const subCtx = subCanvas.getContext("2d");
+          if (subCtx) {
+            subCtx.drawImage(canvas, sx, 0, sw, canvas.height, 0, 0, sw, canvas.height);
+          }
+          const subDataUrl = subCanvas.toDataURL("image/png");
+          const targetAttrs = s.external ? ` target="_blank" rel="noopener noreferrer"` : "";
+          return `<td width="${s.widthPx}" valign="top" style="width: ${s.pct}; padding: 0; margin: 0; font-size: 0; line-height: 0;"><a href="${s.href}"${targetAttrs} style="display: block; text-decoration: none; border: 0;"><img src="${subDataUrl}" alt="${s.alt}" width="${s.widthPx}" style="display: block; width: 100%; max-width: ${s.widthPx}px; height: auto; border: 0;" /></a></td>`;
+        });
+        wrappedContent = `<table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" style="width: 740px; max-width: 100%; border-collapse: collapse; margin: 0 auto;"><tr>${tdCells.join("")}</tr></table>`;
       }
 
       blockRows.push(`          <!-- ${part.step.toUpperCase()} · ${part.title.toUpperCase()} -->
@@ -794,7 +817,7 @@ ${blockRows.join("\n\n")}
         case "cta":
           return (
             <PaletteCtaBlock
-              mailtoLink={mailtoTestUrl}
+              mailtoLink={ctaFormUrl}
               theme={emailTheme}
               palette={palette}
             />
@@ -831,7 +854,7 @@ ${blockRows.join("\n\n")}
         case "cta":
           return (
             <PaletteCtaBlock
-              mailtoLink={mailtoTestUrl}
+              mailtoLink={ctaFormUrl}
               theme={emailTheme}
               palette={palette}
             />
@@ -872,7 +895,7 @@ ${blockRows.join("\n\n")}
       case "cta":
         return (
           <EmailCtaBlock
-            mailtoLink={mailtoTestUrl}
+            mailtoLink={ctaFormUrl}
             theme={emailTheme}
             isTemplate={isTemplate}
           />

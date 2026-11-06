@@ -988,6 +988,8 @@ export function PaletteCtaBlock({
         <div className="pt-1">
           <a
             href={mailtoLink}
+            target="_blank"
+            rel="noopener noreferrer"
             style={{ backgroundColor: p.primaryHex }}
             className="inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 font-heading text-xs sm:text-sm font-bold text-white shadow-md hover:opacity-95 transition-opacity"
           >

@@ -10,7 +10,7 @@ interface EmailCtaBlockProps {
 }
 
 export function EmailCtaBlock({
-  mailtoLink = "mailto:contacto@glocation.com?subject=S%C3%AD%2C%20me%20interesa%20-%20Reuni%C3%B3n%2020%20min%20Glocation&body=S%C3%AD%2C%20me%20interesa.",
+  mailtoLink = "https://docs.google.com/forms/u/3/d/e/1FAIpQLSf7Iq6ZSAy8jCE-Vo4OCMSDM1A8RjFhT5ZNoi-W0SuDiVdEWw/viewform?usp=send_form",
   theme = "light",
   isTemplate = false,
 }: EmailCtaBlockProps) {
@@ -83,6 +83,8 @@ export function EmailCtaBlock({
             <div className="pt-1">
               <a
                 href={mailtoLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ color: "#4C1D95", backgroundColor: "#FFFFFF" }}
                 className="inline-flex items-center justify-center gap-2.5 rounded-full bg-white hover:bg-[#F5F3FF] !text-[#4C1D95] font-heading font-extrabold text-[13.5px] sm:text-[14.5px] px-7 py-3.5 shadow-[0_8px_22px_rgba(15,7,32,0.3)] transition-all duration-200 hover:-translate-y-0.5 no-underline"
               >
