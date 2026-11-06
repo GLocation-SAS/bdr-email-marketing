@@ -17,6 +17,8 @@ import {
   RotateCcw,
   Palette,
   LayoutTemplate,
+  Code2,
+  Copy,
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -32,7 +34,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { JefesTiEmailConfig } from "../templates/jefes-ti-template";
+import {
+  JefesTiEmailConfig,
+  generateJefesTiEmailHtml,
+  toPublicAssetUrl,
+} from "../templates/jefes-ti-template";
 import { EmailHeroBlock } from "./email-hero-block";
 import { EmailTransformationBlock } from "./email-transformation-block";
 import { EmailApplicationsBlock } from "./email-applications-block";
@@ -658,6 +664,123 @@ export function EmailPreviewer({
     }
   };
 
+  /**
+   * Construye el documento HTML 100% autónomo con URLs públicas de GitHub Pages
+   * e idéntico visualmente a la previsualización.
+   */
+  const buildExportHtml = (): string => {
+    if (!isTemplate) {
+      return generateJefesTiEmailHtml({ ...config, theme: emailTheme });
+    }
+
+    // Si es plantilla editable con textos o variantes personalizadas,
+    // clona los bloques del DOM en vivo, convierte rutas locales a URLs públicas y embebe las hojas de estilo activas
+    const blockHtmls: string[] = [];
+    const blockBg = emailTheme === "dark" ? "#120A24" : "#FFFFFF";
+    const blockBorder = emailTheme === "dark" ? "#2D1E52" : "#E5E0F0";
+
+    for (const part of EMAIL_PARTS) {
+      const el = partRefs.current[part.id];
+      if (!el) continue;
+      const clone = el.cloneNode(true) as HTMLElement;
+      clone.removeAttribute("contenteditable");
+
+      clone.querySelectorAll("[data-export-ignore='true']").forEach((n) => n.remove());
+      clone.querySelectorAll("img").forEach((img) => {
+        const rawSrc = img.getAttribute("src") || "";
+        if (rawSrc) {
+          img.setAttribute("src", toPublicAssetUrl(rawSrc));
+        }
+      });
+
+      blockHtmls.push(
+        `<div style="background:${blockBg};border:1px solid ${blockBorder};border-radius:6px;overflow:hidden;">${clone.innerHTML}</div>`
+      );
+    }
+
+    let collectedCss = "";
+    try {
+      for (const sheet of Array.from(document.styleSheets)) {
+        try {
+          const rules = Array.from(sheet.cssRules || []);
+          collectedCss += rules.map((r) => r.cssText).join("\n") + "\n";
+        } catch {
+          // Ignorar hojas externas con CORS restringido
+        }
+      }
+    } catch {
+      // Fallback silencioso
+    }
+
+    const outerBg = emailTheme === "dark" ? "#0B0617" : "#F3F1F8";
+    return `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${campaignTitle || "Plantilla Email Marketing Glocation"}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    ${collectedCss}
+    body {
+      margin: 0;
+      padding: 24px 16px;
+      background-color: ${outerBg};
+      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .gl-export-stack {
+      width: 740px;
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="gl-export-stack">
+    ${blockHtmls.join("\n    ")}
+  </div>
+</body>
+</html>`;
+  };
+
+  const handleDownloadHtml = () => {
+    const filename = isTemplate
+      ? `glocation-plantilla-editable-${themeSuffix}.html`
+      : `glocation-campana-jefes-ti-${themeSuffix}.html`;
+
+    try {
+      setDownloadingId("full-html");
+      const htmlString = buildExportHtml();
+      const blob = new Blob([htmlString], { type: "text/html;charset=utf-8" });
+      triggerBlobDownload(blob, filename);
+      toast.success("HTML descargado con URLs públicas", {
+        description: filename,
+      });
+    } catch {
+      toast.error("Error al exportar el archivo HTML");
+    } finally {
+      setDownloadingId(null);
+    }
+  };
+
+  const handleCopyHtml = async () => {
+    try {
+      const htmlString = buildExportHtml();
+      await navigator.clipboard.writeText(htmlString);
+      toast.success("Código HTML copiado al portapapeles", {
+        description:
+          "Incluye todas las imágenes con URLs públicas de GitHub Pages.",
+      });
+    } catch {
+      toast.error("No se pudo copiar el HTML al portapapeles");
+    }
+  };
+
   const renderPartComponent = (id: BlockKey) => {
     if (isTemplate && activeVariant === "inverted-photos") {
       switch (id) {
@@ -904,6 +1027,34 @@ export function EmailPreviewer({
             <div className="flex items-center gap-2 flex-wrap">
               <Button
                 variant="primary"
+                size="sm"
+                onClick={handleDownloadHtml}
+                disabled={downloadingId !== null}
+                leftIcon={
+                  downloadingId === "full-html" ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <Code2 className="w-4 h-4" />
+                  )
+                }
+                className="w-auto text-xs font-semibold"
+              >
+                Descargar HTML
+              </Button>
+
+              <Button
+                variant="neutral"
+                size="sm"
+                onClick={handleCopyHtml}
+                disabled={downloadingId !== null}
+                leftIcon={<Copy className="w-4 h-4" />}
+                className="w-auto text-xs font-medium"
+              >
+                Copiar HTML
+              </Button>
+
+              <Button
+                variant="neutral"
                 size="sm"
                 onClick={handleDownloadPdf}
                 disabled={downloadingId !== null}
