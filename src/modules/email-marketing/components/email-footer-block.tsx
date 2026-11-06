@@ -149,6 +149,56 @@ export function EmailFooterBlock({
                   </span>
                 )}
               </div>
+
+              {/* Cursor manito con destellito de clic sobre la foto de Paula */}
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 36 36"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style={{
+                  filter: "drop-shadow(0px 2px 4px rgba(20, 14, 36, 0.38))",
+                }}
+                className="pointer-events-none absolute -bottom-1.5 -right-2 z-20 size-7 sm:size-[30px] -rotate-12"
+              >
+                {/* Destellitos de clic alrededor de la punta del dedo */}
+                <path
+                  d="M14 2.2V5.4M7.2 4.6L9.6 6.9M4.5 11.2L7.7 11.8M20.8 4.6L18.4 6.9"
+                  stroke="#FFFFFF"
+                  strokeWidth="3.2"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M14 2.2V5.4M7.2 4.6L9.6 6.9M4.5 11.2L7.7 11.8M20.8 4.6L18.4 6.9"
+                  stroke="#7C3AED"
+                  strokeWidth="1.9"
+                  strokeLinecap="round"
+                />
+                {/* Estrella de destello sutil */}
+                <path
+                  d="M23.8 8.2L24.5 10.1L26.4 10.8L24.5 11.5L23.8 13.4L23.1 11.5L21.2 10.8L23.1 10.1L23.8 8.2Z"
+                  fill="#A855F7"
+                  stroke="#FFFFFF"
+                  strokeWidth="0.9"
+                  strokeLinejoin="round"
+                />
+                {/* Manito cursor (Pointer Hand) */}
+                <path
+                  d="M14 7.5C12.78 7.5 11.8 8.48 11.8 9.7V19.2L9.45 17.35C8.42 16.54 6.92 16.68 6.06 17.67C5.29 18.56 5.36 19.9 6.22 20.71L12.65 26.85C13.88 28.02 15.52 28.68 17.22 28.68H21.4C24.6 28.68 27.2 26.08 27.2 22.88V16.6C27.2 15.44 26.26 14.5 25.1 14.5C24.68 14.5 24.29 14.62 23.96 14.84C23.75 13.84 22.87 13.1 21.8 13.1C21.34 13.1 20.91 13.24 20.56 13.49C20.25 12.56 19.38 11.9 18.35 11.9C17.63 11.9 16.99 12.23 16.58 12.75V9.7C16.58 8.48 15.42 7.5 14 7.5Z"
+                  fill="#FFFFFF"
+                  stroke="#4C1D95"
+                  strokeWidth="1.85"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                {/* Líneas internas de los dedos */}
+                <path
+                  d="M16.58 12.75V17.4M20.56 13.49V17.8M23.96 14.84V18.2"
+                  stroke="#4C1D95"
+                  strokeWidth="1.65"
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
 
             <div className="space-y-0.5 max-w-[350px]">

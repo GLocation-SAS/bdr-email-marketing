@@ -182,8 +182,8 @@ export function InvertedHeroBlock({
         }}
         style={{ borderColor: p.lightAccentHex }}
         className={`absolute left-6 sm:left-10 top-1/2 -translate-y-1/2 z-20 cursor-pointer transition-all ${image
-            ? "opacity-0 hover:opacity-100 bg-black/80 border rounded-xl px-3 py-2 text-xs"
-            : "w-[210px] sm:w-[235px] h-[220px] rounded-2xl border-2 border-dashed bg-black/45 hover:bg-black/60 flex flex-col items-center justify-center text-center p-4 gap-2"
+          ? "opacity-0 hover:opacity-100 bg-black/80 border rounded-xl px-3 py-2 text-xs"
+          : "w-[210px] sm:w-[235px] h-[220px] rounded-2xl border-2 border-dashed bg-black/45 hover:bg-black/60 flex flex-col items-center justify-center text-center p-4 gap-2"
           }`}
       >
         <input
