@@ -771,13 +771,30 @@ export function EmailPreviewer({
   const handleCopyHtml = async () => {
     try {
       const htmlString = buildExportHtml();
-      await navigator.clipboard.writeText(htmlString);
-      toast.success("Código HTML copiado al portapapeles", {
+      if (typeof ClipboardItem !== "undefined" && navigator.clipboard?.write) {
+        const htmlBlob = new Blob([htmlString], { type: "text/html" });
+        const textBlob = new Blob([htmlString], { type: "text/plain" });
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            "text/html": htmlBlob,
+            "text/plain": textBlob,
+          }),
+        ]);
+      } else {
+        await navigator.clipboard.writeText(htmlString);
+      }
+      toast.success("HTML copiado (compatible con código y correo visual)", {
         description:
-          "Incluye todas las imágenes con URLs públicas de GitHub Pages.",
+          "Maquetación por tablas con estilos inline y URLs públicas de GitHub Pages.",
       });
     } catch {
-      toast.error("No se pudo copiar el HTML al portapapeles");
+      try {
+        const htmlString = buildExportHtml();
+        await navigator.clipboard.writeText(htmlString);
+        toast.success("Código HTML copiado al portapapeles");
+      } catch {
+        toast.error("No se pudo copiar el HTML al portapapeles");
+      }
     }
   };
 
