@@ -14,6 +14,7 @@ import {
   Plus,
   ImageDown,
   FileImage,
+  Code2,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -72,6 +73,8 @@ export interface EmailCampaignItem {
   href: string;
   downloadPngAsset?: string;
   downloadPngFilename?: string;
+  downloadHtmlAsset?: string;
+  downloadHtmlFilename?: string;
 }
 
 const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
@@ -85,8 +88,10 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     ownerName: "Paula Rozo",
     ownerPhoto: "/paula_natalia_rozo (4).png",
     status: "ACTIVA",
-    updatedAt: "04/11/2026",
+    updatedAt: "06/11/2026",
     href: "/campanas/email-jefes-ti",
+    downloadHtmlAsset: "/campana-jefes-ti-claro.html",
+    downloadHtmlFilename: "glocation-campana-jefes-ti-claro.html",
   },
   {
     id: "EM-02",
@@ -226,6 +231,31 @@ export function EmailMarketingPage() {
       });
     } catch {
       toast.error("No se pudo descargar el archivo PNG");
+    }
+  };
+
+  const handleDownloadAssetHtml = async (
+    assetPath: string,
+    filename: string
+  ) => {
+    try {
+      const response = await fetch(assetUrl(assetPath), { cache: "no-store" });
+      if (!response.ok) throw new Error("Error al obtener el archivo HTML");
+      const htmlText = await response.text();
+      const blob = new Blob([htmlText], { type: "text/html;charset=utf-8" });
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 1500);
+      toast.success("HTML descargado (5 bloques PNG en estructura HTML)", {
+        description: filename,
+      });
+    } catch {
+      toast.error("No se pudo descargar el archivo HTML");
     }
   };
 
@@ -397,6 +427,30 @@ export function EmailMarketingPage() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-end gap-1">
+                          {campaign.downloadHtmlAsset &&
+                            campaign.downloadHtmlFilename && (
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() =>
+                                      handleDownloadAssetHtml(
+                                        campaign.downloadHtmlAsset!,
+                                        campaign.downloadHtmlFilename!
+                                      )
+                                    }
+                                    className="size-8 text-primary hover:text-primary hover:bg-primary/15"
+                                  >
+                                    <Code2 className="size-4" />
+                                  </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  Descargar HTML (5 bloques PNG públicos)
+                                </TooltipContent>
+                              </Tooltip>
+                            )}
+
                           {campaign.downloadPngAsset &&
                             campaign.downloadPngFilename && (
                               <Tooltip>
@@ -542,6 +596,29 @@ export function EmailMarketingPage() {
                     </div>
 
                     <CardFooter className="p-0 pt-0 flex items-center gap-2">
+                      {campaign.downloadHtmlAsset &&
+                        campaign.downloadHtmlFilename && (
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="neutral"
+                                size="icon"
+                                onClick={() =>
+                                  handleDownloadAssetHtml(
+                                    campaign.downloadHtmlAsset!,
+                                    campaign.downloadHtmlFilename!
+                                  )
+                                }
+                                className="size-8 shrink-0"
+                              >
+                                <Code2 className="size-3.5" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              Descargar HTML (5 bloques PNG públicos)
+                            </TooltipContent>
+                          </Tooltip>
+                        )}
                       <Link href={campaign.href}>
                         <Button
                           variant="primary"
