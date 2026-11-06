@@ -1,6 +1,6 @@
 :HL["/bdr-email-marketing/_next/static/chunks/0kytp1t.lu.65.css","style"]
-:HL["/bdr-email-marketing/_next/static/chunks/0kujz9y7ob7-l.css","style"]
+:HL["/bdr-email-marketing/_next/static/chunks/128hb90f6p7_0.css","style"]
 :HL["/bdr-email-marketing/_next/static/media/07454f8ad8aaac57-s.p.0tqkxa-w3pk~c.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/bdr-email-marketing/_next/static/media/e8f2fbee2754df70-s.p.0fzkl03jw-sdz.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/bdr-email-marketing/_next/static/chunks/02~osk9toabra.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"email-marketing","param":null,"prefetchHints":0,"slots":{"children":{"name":"plantilla-colores","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"5EkgjaFdsGhIrFsHTz6Nl"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"email-marketing","param":null,"prefetchHints":0,"slots":{"children":{"name":"plantilla-colores","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"wrEis1u5FslGT354XbNpY"}

@@ -1,3 +1,3 @@
 :HL["/bdr-email-marketing/_next/static/chunks/0kytp1t.lu.65.css","style"]
-:HL["/bdr-email-marketing/_next/static/chunks/0kujz9y7ob7-l.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"5EkgjaFdsGhIrFsHTz6Nl"}
+:HL["/bdr-email-marketing/_next/static/chunks/128hb90f6p7_0.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"wrEis1u5FslGT354XbNpY"}
