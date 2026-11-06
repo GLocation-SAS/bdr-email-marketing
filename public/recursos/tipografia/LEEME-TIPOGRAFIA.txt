@@ -1,0 +1,12 @@
+﻿TIPOGRAFÍA OFICIAL DE MARCA — GLOCATION
+=======================================
+
+1. Títulos y Encabezados (--font-heading):
+   - Familia: Montserrat (Google Fonts)
+   - Pesos utilizados: SemiBold (600), Bold (700), ExtraBold (800)
+   - URL Google Fonts: https://fonts.google.com/specimen/Montserrat
+
+2. Cuerpo de Texto y Párrafos (--font-sans):
+   - Familia: Nunito (Google Fonts)
+   - Pesos utilizados: Regular (400), Medium (500), SemiBold (600), Bold (700)
+   - URL Google Fonts: https://fonts.google.com/specimen/Nunito
