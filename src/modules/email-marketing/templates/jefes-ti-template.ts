@@ -105,7 +105,8 @@ export function generateJefesTiEmailHtml(
     ...customConfig,
   };
 
-  const blocksBase = `${baseUrl}/email-blocks`;
+  const blocksBase =
+    "https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks";
 
   const block1HeroUrl = `${blocksBase}/01-glocation-bloque-hero-${suffix}.png`;
   const block2ConceptUrl = `${blocksBase}/02-glocation-bloque-concepto-${suffix}.png`;
