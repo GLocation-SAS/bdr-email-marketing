@@ -37,7 +37,6 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import {
   JefesTiEmailConfig,
   generateJefesTiEmailHtml,
-  toPublicAssetUrl,
 } from "../templates/jefes-ti-template";
 import { EmailHeroBlock } from "./email-hero-block";
 import { EmailTransformationBlock } from "./email-transformation-block";
@@ -668,97 +667,96 @@ export function EmailPreviewer({
    * Construye el documento HTML 100% autónomo con URLs públicas de GitHub Pages
    * e idéntico visualmente a la previsualización.
    */
-  const buildExportHtml = (): string => {
-    if (!isTemplate || activeVariant === "base") {
+  const buildExportHtml = async (): Promise<string> => {
+    if (!isTemplate) {
       return generateJefesTiEmailHtml({ ...config, theme: emailTheme });
     }
 
-    // Si es plantilla editable con textos o variantes personalizadas,
-    // clona los bloques del DOM en vivo, convierte rutas locales a URLs públicas y embebe las hojas de estilo activas
-    const blockHtmls: string[] = [];
-    const blockBg = emailTheme === "dark" ? "#120A24" : "#FFFFFF";
-    const blockBorder = emailTheme === "dark" ? "#2D1E52" : "#E5E0F0";
+    // Para plantillas editables o variantes personalizadas, renderiza cada uno de los 5 bloques
+    // como imagen PNG 2x HD y los estructura en la misma tabla de 740px con enlaces activos
+    const blockRows: string[] = [];
+    const outerBg = emailTheme === "dark" ? "#0B0617" : "#F3F1F8";
 
     for (const part of EMAIL_PARTS) {
       const el = partRefs.current[part.id];
       if (!el) continue;
-      const clone = el.cloneNode(true) as HTMLElement;
-      clone.removeAttribute("contenteditable");
+      const canvas = await renderElementToCanvas(el, bgColor, 2);
+      const pngDataUrl = canvas.toDataURL("image/png");
+      const isLast = part.id === "footer";
+      const cellPadding = isLast ? "0" : "0 0 6px 0";
+      const imgTag = `<img src="${pngDataUrl}" alt="${part.step} — ${part.title}" width="740" style="display: block; width: 740px; max-width: 100%; height: auto; border: 0;" />`;
 
-      clone.querySelectorAll("[data-export-ignore='true']").forEach((n) => n.remove());
-      clone.querySelectorAll("img").forEach((img) => {
-        const rawSrc = img.getAttribute("src") || "";
-        if (rawSrc) {
-          img.setAttribute("src", toPublicAssetUrl(rawSrc));
-        }
-      });
-
-      blockHtmls.push(
-        `<div style="background:${blockBg};border:1px solid ${blockBorder};border-radius:6px;overflow:hidden;">${clone.innerHTML}</div>`
-      );
-    }
-
-    let collectedCss = "";
-    try {
-      for (const sheet of Array.from(document.styleSheets)) {
-        try {
-          const rules = Array.from(sheet.cssRules || []);
-          collectedCss += rules.map((r) => r.cssText).join("\n") + "\n";
-        } catch {
-          // Ignorar hojas externas con CORS restringido
-        }
+      let wrappedContent = imgTag;
+      if (part.id === "cta") {
+        wrappedContent = `<a href="${mailtoTestUrl}" style="display: block; text-decoration: none; border: 0;">${imgTag}</a>`;
+      } else if (part.id === "footer") {
+        wrappedContent = `<a href="${config.websiteUrl || "https://glocation.co"}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">${imgTag}</a>`;
       }
-    } catch {
-      // Fallback silencioso
+
+      blockRows.push(`          <!-- ${part.step.toUpperCase()} · ${part.title.toUpperCase()} -->
+          <tr>
+            <td align="center" style="padding: ${cellPadding};">
+              ${wrappedContent}
+            </td>
+          </tr>`);
     }
 
-    const outerBg = emailTheme === "dark" ? "#0B0617" : "#F3F1F8";
     return `<!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>${campaignTitle || "Plantilla Email Marketing Glocation"}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
-  <style>
-    ${collectedCss}
-    body {
-      margin: 0;
-      padding: 24px 16px;
-      background-color: ${outerBg};
-      font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  <style type="text/css">
+    body, table, td, a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
-    .gl-export-stack {
-      width: 740px;
-      max-width: 100%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+    table, td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      display: block;
+    }
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      background-color: ${outerBg};
     }
   </style>
 </head>
-<body>
-  <div class="gl-export-stack">
-    ${blockHtmls.join("\n    ")}
-  </div>
+<body style="margin: 0; padding: 0; width: 100% !important; background-color: ${outerBg};">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${outerBg}" style="width: 100%; border-collapse: collapse; background-color: ${outerBg}; margin: 0; padding: 0;">
+    <tr>
+      <td align="center" style="padding: 20px 10px;">
+        <table role="presentation" width="740" cellpadding="0" cellspacing="0" border="0" style="width: 740px; max-width: 100%; border-collapse: collapse; margin: 0 auto;">
+${blockRows.join("\n\n")}
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`;
   };
 
-  const handleDownloadHtml = () => {
+  const handleDownloadHtml = async () => {
     const filename = isTemplate
       ? `glocation-plantilla-editable-${themeSuffix}.html`
       : `glocation-campana-jefes-ti-${themeSuffix}.html`;
 
     try {
       setDownloadingId("full-html");
-      const htmlString = buildExportHtml();
+      const htmlString = await buildExportHtml();
       const blob = new Blob([htmlString], { type: "text/html;charset=utf-8" });
       triggerBlobDownload(blob, filename);
-      toast.success("HTML descargado con URLs públicas", {
+      toast.success("HTML descargado (5 bloques PNG en estructura HTML)", {
         description: filename,
       });
     } catch {
@@ -770,14 +768,17 @@ export function EmailPreviewer({
 
   const handleCopyHtml = async () => {
     try {
-      const htmlString = buildExportHtml();
+      setDownloadingId("copy-html");
+      const htmlString = await buildExportHtml();
       await navigator.clipboard.writeText(htmlString);
       toast.success("Código HTML copiado al portapapeles", {
         description:
-          "Maquetación por tablas con estilos inline y URLs públicas de GitHub Pages.",
+          "Estructura de 5 bloques en imagen PNG (740px) con enlaces activos.",
       });
     } catch {
       toast.error("No se pudo copiar el HTML al portapapeles");
+    } finally {
+      setDownloadingId(null);
     }
   };
 
