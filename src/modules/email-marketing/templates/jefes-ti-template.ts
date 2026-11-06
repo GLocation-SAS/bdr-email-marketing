@@ -117,9 +117,9 @@ export function generateJefesTiEmailHtml(
   const block2ConceptUrl = `${blocksBase}/02-glocation-bloque-concepto-${suffix}.png`;
   const block3ApplicationUrl = `${blocksBase}/03-glocation-bloque-aplicacion-${suffix}.png`;
   const block4CtaUrl = `${blocksBase}/04-glocation-bloque-cta-${suffix}.png`;
-  const block5aPaulaUrl = `${blocksBase}/05a-glocation-bloque-firma-paula-${suffix}.png?v=2`;
-  const block5bWebUrl = `${blocksBase}/05b-glocation-bloque-firma-web-${suffix}.png?v=2`;
-  const block5cLinkedinUrl = `${blocksBase}/05c-glocation-bloque-firma-linkedin-${suffix}.png?v=2`;
+  const block5aPaulaUrl = `${blocksBase}/05a-glocation-bloque-firma-paula-cursor-${suffix}.png`;
+  const block5bWebUrl = `${blocksBase}/05b-glocation-bloque-firma-web-${suffix}.png`;
+  const block5cLinkedinUrl = `${blocksBase}/05c-glocation-bloque-firma-linkedin-${suffix}.png`;
 
   const mailtoLink = `mailto:${config.recipientEmail}?subject=${encodeURIComponent(
     config.emailSubject
