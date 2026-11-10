@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sidebar";
 import { EmailPreviewer } from "../components/email-previewer";
 import { GoogleFormsHeaderPreviewer } from "../components/google-forms-header-previewer";
+import { SaaswEmailPreviewer } from "../components/saasw-email-previewer";
 import { EmailMarketingSidebar } from "../components/email-marketing-sidebar";
 import "../styles/email-marketing.css";
 
@@ -87,6 +88,19 @@ export function GoogleFormsHeaderPage() {
       <SidebarInset className="min-w-0">
         <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
           <GoogleFormsHeaderPreviewer />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function CampaignSaaswTemplatePage() {
+  return (
+    <SidebarProvider>
+      <EmailMarketingSidebar />
+      <SidebarInset className="min-w-0">
+        <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
+          <SaaswEmailPreviewer />
         </div>
       </SidebarInset>
     </SidebarProvider>

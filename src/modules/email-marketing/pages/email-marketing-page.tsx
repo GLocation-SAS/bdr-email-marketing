@@ -147,6 +147,21 @@ const INITIAL_CAMPAIGNS: EmailCampaignItem[] = [
     downloadPngAsset: "/glocation-google-forms-header.png",
     downloadPngFilename: "glocation-google-forms-header.png",
   },
+  {
+    id: "EM-06",
+    title: "Plantilla SaaSW · Fuerza Laboral Cognitiva TIC",
+    description:
+      "Plantilla HTML editorial (600px) con 3 casos de uso (TC-PMO, TC-Workspace, TC-Test), CTA de Diagnóstico Cognitivo 30 min, ecosistema en vivo y firma con foto oficial de Paula Rozo.",
+    segment: "Líderes TIC · SaaSW",
+    format: "HTML 600px · Editable",
+    ownerName: "Paula Rozo",
+    ownerPhoto: "/paula_natalia_rozo (4).png",
+    status: "ACTIVA",
+    updatedAt: "10/11/2026",
+    href: "/email-marketing/plantilla-saasw",
+    downloadHtmlAsset: "/plantilla-saasw-lideres-tic.html",
+    downloadHtmlFilename: "glocation-plantilla-saasw-lideres-tic.html",
+  },
 ];
 
 function getStatusBadge(status: EmailCampaignItem["status"]) {

@@ -91,6 +91,14 @@ export const EMAIL_MARKETING_NAV_ITEMS: EmailNavItem[] = [
     badge: "EM-05",
   },
   {
+    id: "plantilla-saasw",
+    label: "Plantilla SaaSW · Líderes TIC",
+    icon: FileEdit,
+    href: "/email-marketing/plantilla-saasw",
+    group: "campanas",
+    badge: "EM-06",
+  },
+  {
     id: "bajas",
     label: "Control de Bajas",
     icon: UserX,
@@ -244,8 +252,8 @@ export function EmailMarketingSidebar() {
                     variant="ghost"
                     onClick={() => handleTheme("light")}
                     className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-caption font-medium transition-all duration-200 h-auto ${theme === "light"
-                        ? "bg-sidebar text-sidebar-foreground shadow-sm"
-                        : "text-sidebar-foreground/50 hover:text-sidebar-foreground/80"
+                      ? "bg-sidebar text-sidebar-foreground shadow-sm"
+                      : "text-sidebar-foreground/50 hover:text-sidebar-foreground/80"
                       }`}
                   >
                     <Sun className="h-3 w-3" />
@@ -255,8 +263,8 @@ export function EmailMarketingSidebar() {
                     variant="ghost"
                     onClick={() => handleTheme("dark")}
                     className={`flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-caption font-medium transition-all duration-200 h-auto ${theme === "dark"
-                        ? "bg-sidebar text-sidebar-foreground shadow-sm"
-                        : "text-sidebar-foreground/50 hover:text-sidebar-foreground/80"
+                      ? "bg-sidebar text-sidebar-foreground shadow-sm"
+                      : "text-sidebar-foreground/50 hover:text-sidebar-foreground/80"
                       }`}
                   >
                     <Moon className="h-3 w-3" />

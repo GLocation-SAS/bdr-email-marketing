@@ -74,8 +74,8 @@ export function EmailFooterBlock({
   return (
     <footer
       className={`relative overflow-hidden px-6 py-5 sm:px-8 sm:py-6 transition-colors duration-300 ${isDark
-          ? "bg-gradient-to-r from-[#090514] via-[#120A28] to-[#1A0E3A] text-white"
-          : "bg-white text-[#140E24]"
+        ? "bg-gradient-to-r from-[#090514] via-[#120A28] to-[#1A0E3A] text-white"
+        : "bg-white text-[#140E24]"
         }`}
     >
       {/* Destello sutil violeta solo en modo oscuro */}
@@ -148,8 +148,6 @@ export function EmailFooterBlock({
               {/* Cursor manito con destellito de clic sobre la foto de Paula */}
               <svg
                 aria-hidden="true"
-                width="32"
-                height="32"
                 viewBox="0 0 36 36"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -161,10 +159,9 @@ export function EmailFooterBlock({
                   height: "32px",
                   zIndex: 30,
                   transform: "rotate(-12deg)",
-                  filter: "drop-shadow(0px 2px 4px rgba(20, 14, 36, 0.38))",
                   pointerEvents: "none",
+                  filter: "drop-shadow(0px 2px 4px rgba(20, 14, 36, 0.38))",
                 }}
-                className="pointer-events-none absolute z-30"
               >
                 {/* Destellitos de clic alrededor de la punta del dedo */}
                 <path
@@ -327,6 +324,6 @@ export function EmailFooterBlock({
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 }
