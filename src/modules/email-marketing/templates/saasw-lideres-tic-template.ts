@@ -80,7 +80,7 @@ export const defaultSaaswLideresTicConfig: Required<SaaswLideresTicEmailConfig> 
 /**
  * Genera el HTML nativo continuo (formato tarjeta limpia como el de Julian)
  * 100% compatible con Brevo, CKEditor, Gmail, Outlook y Apple Mail.
- * Usa ancho responsivo de hasta 580px para garantizar que NUNCA se desborde ni se corte.
+ * Ancho máximo 580px responsivo para garantizar cero desbordes y cero cortes.
  */
 export function generateSaaswLideresTicHtml(
   customConfig?: SaaswLideresTicEmailConfig
@@ -348,31 +348,78 @@ export function generateSaaswLideresTicHtml(
             </td>
           </tr>
 
-          <!-- ECOSISTEMA EN VIVO -->
+          <!-- ECOSISTEMA EN VIVO · 3 TARJETAS VISUALES CON SUS LINKS ACTIVOS -->
           <tr>
-            <td style="padding:16px 26px;border-top:1px solid ${dividerColor};background-color:${subtleBg};">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border:none;border-collapse:collapse;">
-                <tbody><tr>
-                  <td align="center" style="border:none;">
-                    <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor};">
-                      EXPLORE NUESTRO ECOSISTEMA EN VIVO:
-                    </span>
-                    <div style="margin-top:8px;font-size:12px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7;">
-                      <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(34,119,156);border:none;outline:none;">
-                        <span style="color:rgb(34,119,156);text-decoration:none;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">glocation.co</span>
-                      </a>
-                      <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163);"> (Plataforma Comercial SaaSW)</span> &nbsp;·&nbsp; 
-                      <a href="${c.manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(122,92,255);border:none;outline:none;">
-                        <span style="color:rgb(122,92,255);text-decoration:none;font-weight:700;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">homoagenticus.co</span>
-                      </a>
-                      <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163);"> (Manifiesto)</span> &nbsp;·&nbsp; 
-                      <a href="${c.preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:600;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${mutedColor};border:none;outline:none;">
-                        <span style="color:${mutedColor};text-decoration:none;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">preagentica.glocation.co</span>
-                      </a>
-                    </div>
+            <td style="padding:18px 26px 20px;border-top:1px solid ${dividerColor};background-color:${subtleBg};">
+              <div style="text-align:center;margin-bottom:12px;">
+                <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor};">
+                  EXPLORE NUESTRO ECOSISTEMA EN VIVO:
+                </span>
+              </div>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:separate;border-spacing:0 8px;">
+                <!-- 1. glocation.co -->
+                <tr>
+                  <td style="background-color:${cardBg};border:1px solid ${isDark ? "#1E405A" : "#D0E7F5"};border-radius:10px;padding:9px 14px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border:none;">
+                      <tr>
+                        <td width="26" valign="middle" style="font-size:15px;line-height:1;border:none;">🌐</td>
+                        <td valign="middle" style="padding-left:8px;border:none;">
+                          <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px;font-weight:700;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:none;">
+                            glocation.co <span style="font-weight:400;font-size:11px;color:${mutedColor};">· Plataforma Comercial SaaSW</span>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle" style="border:none;">
+                          <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:4px 10px;background-color:${isDark ? "#0F293A" : "#F0F7FB"};border:1px solid ${isDark ? "#1E7094" : "#B8DCF0"};border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:none;">
+                            Visitar →
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
-              </tbody></table>
+
+                <!-- 2. homoagenticus.co -->
+                <tr>
+                  <td style="background-color:${cardBg};border:1px solid ${isDark ? "#3B2D6B" : "#E4DAFF"};border-radius:10px;padding:9px 14px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border:none;">
+                      <tr>
+                        <td width="26" valign="middle" style="font-size:15px;line-height:1;border:none;">📖</td>
+                        <td valign="middle" style="padding-left:8px;border:none;">
+                          <a href="${c.manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px;font-weight:700;color:${isDark ? "#A78BFA" : "#7A5CFF"};text-decoration:none;">
+                            homoagenticus.co <span style="font-weight:400;font-size:11px;color:${mutedColor};">· El Manifiesto del Homo agenticus</span>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle" style="border:none;">
+                          <a href="${c.manifestoUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:4px 10px;background-color:${isDark ? "#231B3D" : "#F6F3FF"};border:1px solid ${isDark ? "#5B449A" : "#D8C7FF"};border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#A78BFA" : "#7A5CFF"};text-decoration:none;">
+                            Leer →
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- 3. preagentica.glocation.co -->
+                <tr>
+                  <td style="background-color:${cardBg};border:1px solid ${subtleBorder};border-radius:10px;padding:9px 14px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border:none;">
+                      <tr>
+                        <td width="26" valign="middle" style="font-size:15px;line-height:1;border:none;">🏛️</td>
+                        <td valign="middle" style="padding-left:8px;border:none;">
+                          <a href="${c.preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px;font-weight:700;color:${mutedColor};text-decoration:none;">
+                            preagentica.glocation.co <span style="font-weight:400;font-size:11px;color:rgb(123,140,163);">· Nuestra Herencia Pre-IA</span>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle" style="border:none;">
+                          <a href="${c.preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:4px 10px;background-color:${subtleBg};border:1px solid ${subtleBorder};border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${mutedColor};text-decoration:none;">
+                            Conocer →
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
@@ -391,46 +438,45 @@ export function generateSaaswLideresTicHtml(
             </td>
           </tr>
 
-          <!-- FIRMA COMERCIAL · PAULA ROZO CON FOTO OFICIAL Y ACCESOS RÁPIDOS -->
+          <!-- FIRMA COMERCIAL · PAULA ROZO CON SUS BOTONES DIRECTOS GLOCATION.CO Y HOMOAGENTICUS.CO -->
           <tr>
-            <td style="padding:20px 26px 22px;border-top:1px solid ${dividerColor};background-color:${cardBg};">
+            <td style="padding:22px 26px 24px;border-top:1px solid ${dividerColor};background-color:${cardBg};">
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border:none;border-collapse:collapse;">
                 <tbody><tr>
                   <td width="48" valign="top" style="width:48px;border:none;">
-                    <a href="mailto:${c.senderEmail}" style="text-decoration:none;border:none;outline:none;display:inline-block;">
-                      <img src="${paulaPhotoPublicUrl}" alt="${c.senderName}" width="44" height="44" border="0" style="display:block;width:44px;height:44px;border:none;border-radius:50%;outline:none;text-decoration:none;">
+                    <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="text-decoration:none;border:none;outline:none;display:inline-block;">
+                      <img src="${paulaPhotoPublicUrl}" alt="${c.senderName}" width="46" height="46" border="0" style="display:block;width:46px;height:46px;border:2px solid ${isDark ? "#1E7094" : "#D0E7F5"};border-radius:50%;outline:none;text-decoration:none;">
                     </a>
                   </td>
                   <td style="padding-left:14px;border:none;" valign="top">
                     <b style="font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${titleColor};">${c.senderName}</b><br>
                     <span style="font-size:12px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${mutedColor};">${c.senderRole}</span><br>
                     <span style="font-size:11px;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(34,119,156);">${c.senderCompany}</span><br>
-                    <div style="margin-top:6px;font-size:11px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163);line-height:1.6;">
-                      <a href="mailto:${c.senderEmail}" style="text-decoration:none;color:rgb(34,119,156);font-weight:600;border:none;outline:none;" target="_blank">
-                        <span style="color:rgb(34,119,156);text-decoration:none;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">${c.senderEmail}</span>
-                      </a>
-                      &nbsp;|&nbsp;
-                      <a href="${c.websiteUrl}" style="text-decoration:none;color:rgb(34,119,156);font-weight:600;border:none;outline:none;" target="_blank">
-                        <span style="color:rgb(34,119,156);text-decoration:none;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">glocation.co</span>
-                      </a>
-                      &nbsp;|&nbsp;
-                      <a href="${c.linkedinUrl}" style="text-decoration:none;color:rgb(34,119,156);font-weight:600;border:none;outline:none;" target="_blank">
-                        <span style="color:rgb(34,119,156);text-decoration:none;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">LinkedIn</span>
-                      </a>
-                      &nbsp;|&nbsp;
-                      <a href="${c.manifestoUrl}" style="text-decoration:none;color:rgb(122,92,255);font-weight:600;border:none;outline:none;" target="_blank">
-                        <span style="color:rgb(122,92,255);text-decoration:none;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">homoagenticus.co</span>
+                    
+                    <div style="margin-top:6px;">
+                      <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="text-decoration:none;color:${isDark ? "#38BDF8" : "rgb(34,119,156)"};font-size:11px;font-weight:600;border:none;outline:none;" target="_blank">
+                        ✉️ ${c.senderEmail}
                       </a>
                     </div>
-                    <!-- BOTONES ACCESO RÁPIDO GLOCATION Y LINKEDIN -->
-                    <div style="margin-top:10px;">
-                      <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:5px 12px;background-color:#F0F7FB;border:1px solid #D0E7F5;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:#0E768C;text-decoration:none;margin-right:6px;">
-                        🌐 glocation.co
-                      </a>
-                      <a href="${c.linkedinUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-block;padding:5px 12px;background-color:#F0F4F9;border:1px solid #D6E3F0;border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:#0E768C;text-decoration:none;">
-                        💼 LinkedIn GLocation
-                      </a>
-                    </div>
+
+                    <!-- LOS 2 BOTONES DE ACCIÓN (ESTILO REFERENCIA): GLOCATION.CO Y HOMOAGENTICUS.CO -->
+                    <table border="0" cellspacing="0" cellpadding="0" style="margin-top:12px;border-collapse:separate;border-spacing:8px 0;">
+                      <tr>
+                        <!-- BOTÓN GLOCATION.CO -->
+                        <td style="background-color:${isDark ? "#0F293A" : "#F0F7FB"};border:1px solid ${isDark ? "#1E7094" : "#B8DCF0"};border-radius:8px;padding:6px 14px;">
+                          <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:none;display:inline-block;">
+                            🌐 glocation.co →
+                          </a>
+                        </td>
+                        <!-- BOTÓN HOMOAGENTICUS.CO -->
+                        <td style="background-color:${isDark ? "#231B3D" : "#F6F3FF"};border:1px solid ${isDark ? "#5B449A" : "#D8C7FF"};border-radius:8px;padding:6px 14px;">
+                          <a href="${c.manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#A78BFA" : "#7A5CFF"};text-decoration:none;display:inline-block;">
+                            📖 homoagenticus.co →
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
                   </td>
                 </tr>
               </tbody></table>
@@ -478,7 +524,6 @@ export function generateSaaswLideresTicImageEmailHtml(
   const websiteUrl = (c.websiteUrl || "https://glocation.co").trim();
   const manifestoUrl = (c.manifestoUrl || "https://homoagenticus.co").trim();
   const preagenticaUrl = (c.preagenticaUrl || "https://preagentica.glocation.co").trim();
-  const linkedinUrl = (c.linkedinUrl || "https://www.linkedin.com/company/glocation/").trim();
 
   return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -541,49 +586,113 @@ export function generateSaaswLideresTicImageEmailHtml(
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · FIRMA COMERCIAL GRÁFICA EN 3 COLUMNAS -->
+          <!-- ECOSISTEMA EN VIVO · 3 TARJETAS VISUALES CON SUS LINKS ACTIVOS -->
           <tr>
-            <td align="center" style="padding: 0 0 10px 0; border: 0 !important;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 580px; border-collapse: collapse; margin: 0 auto; border: 0 !important;">
+            <td style="padding:16px 20px;background-color:${isDark ? "#1E293B" : "#F8FAFD"};border: 1px solid ${isDark ? "#334155" : "#E2EBF5"};border-radius:12px;margin: 8px 0;">
+              <div style="text-align:center;margin-bottom:10px;">
+                <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${isDark ? "#94A3B8" : "#51647D"};">
+                  EXPLORE NUESTRO ECOSISTEMA EN VIVO:
+                </span>
+              </div>
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:separate;border-spacing:0 6px;">
                 <tr>
-                  <!-- 5A · Paula Rozo -->
-                  <td width="63%" valign="top" style="width: 63%; padding: 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important;">
-                    <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="display: block; text-decoration: none; border: 0 !important; outline: none !important;">
-                      <img src="${blocksBaseUrl}/05a-glocation-bloque-firma-paula-cursor-${suffix}.png" alt="Paula Rozo — BDR | Business Development Representative" width="365" style="display: block; width: 100%; height: auto; border: 0 !important;" />
-                    </a>
+                  <td style="background-color:${isDark ? "#111827" : "#FFFFFF"};border:1px solid ${isDark ? "#1E405A" : "#D0E7F5"};border-radius:8px;padding:8px 12px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="24" valign="middle" style="font-size:14px;">🌐</td>
+                        <td valign="middle" style="padding-left:6px;">
+                          <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:700;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:none;">
+                            glocation.co <span style="font-weight:400;font-size:11px;color:${isDark ? "#94A3B8" : "#51647D"};">· Plataforma SaaSW</span>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle">
+                          <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="padding:3px 8px;background-color:${isDark ? "#0F293A" : "#F0F7FB"};border:1px solid ${isDark ? "#1E7094" : "#B8DCF0"};border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:none;">Visitar →</a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
-                  <!-- 5B · Botón Web glocation.co -->
-                  <td width="17%" valign="top" style="width: 17%; padding: 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important;">
-                    <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0 !important; outline: none !important;">
-                      <img src="${blocksBaseUrl}/05b-glocation-bloque-firma-web-${suffix}.png" alt="Sitio web oficial glocation.co" width="98" style="display: block; width: 100%; height: auto; border: 0 !important;" />
-                    </a>
+                </tr>
+                <tr>
+                  <td style="background-color:${isDark ? "#111827" : "#FFFFFF"};border:1px solid ${isDark ? "#3B2D6B" : "#E4DAFF"};border-radius:8px;padding:8px 12px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="24" valign="middle" style="font-size:14px;">📖</td>
+                        <td valign="middle" style="padding-left:6px;">
+                          <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:700;color:${isDark ? "#A78BFA" : "#7A5CFF"};text-decoration:none;">
+                            homoagenticus.co <span style="font-weight:400;font-size:11px;color:${isDark ? "#94A3B8" : "#51647D"};">· Manifiesto</span>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle">
+                          <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="padding:3px 8px;background-color:${isDark ? "#231B3D" : "#F6F3FF"};border:1px solid ${isDark ? "#5B449A" : "#D8C7FF"};border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#A78BFA" : "#7A5CFF"};text-decoration:none;">Leer →</a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
-                  <!-- 5C · Botón LinkedIn GLocation -->
-                  <td width="20%" valign="top" style="width: 20%; padding: 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important;">
-                    <a href="${linkedinUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0 !important; outline: none !important;">
-                      <img src="${blocksBaseUrl}/05c-glocation-bloque-firma-linkedin-${suffix}.png" alt="LinkedIn oficial de GLocation" width="117" style="display: block; width: 100%; height: auto; border: 0 !important;" />
-                    </a>
+                </tr>
+                <tr>
+                  <td style="background-color:${isDark ? "#111827" : "#FFFFFF"};border:1px solid ${isDark ? "#334155" : "#E2EBF5"};border-radius:8px;padding:8px 12px;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td width="24" valign="middle" style="font-size:14px;">🏛️</td>
+                        <td valign="middle" style="padding-left:6px;">
+                          <a href="${preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;font-weight:700;color:${isDark ? "#94A3B8" : "#51647D"};text-decoration:none;">
+                            preagentica.glocation.co <span style="font-weight:400;font-size:11px;color:rgb(123,140,163);">· Herencia Pre-IA</span>
+                          </a>
+                        </td>
+                        <td align="right" valign="middle">
+                          <a href="${preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="padding:3px 8px;background-color:${isDark ? "#1E293B" : "#F8FAFD"};border:1px solid ${isDark ? "#334155" : "#D6E3F0"};border-radius:6px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#94A3B8" : "#51647D"};text-decoration:none;">Conocer →</a>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- ENLACES DIRECTOS Y ACCESOS RÁPIDOS -->
+          <!-- FIRMA COMERCIAL · PAULA ROZO CON FOTO Y LOS 2 BOTONES GLOCATION.CO Y HOMOAGENTICUS.CO -->
           <tr>
-            <td align="center" style="padding: 10px 10px 16px 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; line-height: 1.8; color: ${isDark ? "#94A3B8" : "#51647D"}; text-align: center; border: 0 !important;">
-              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#0E768C"}; text-decoration: underline !important; font-weight: 700; margin: 0 6px;">📅 Agendar Diagnóstico (30 min)</a> &nbsp;·&nbsp; 
-              <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#0E768C"}; text-decoration: underline !important; font-weight: 600; margin: 0 6px;">🌐 glocation.co</a> &nbsp;·&nbsp; 
-              <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#0E768C"}; text-decoration: underline !important; font-weight: 600; margin: 0 6px;">📖 homoagenticus.co</a> &nbsp;·&nbsp; 
-              <a href="${preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#0E768C"}; text-decoration: underline !important; font-weight: 600; margin: 0 6px;">🏛️ preagentica.glocation.co</a> &nbsp;·&nbsp; 
-              <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="color: ${isDark ? "#38BDF8" : "#0E768C"}; text-decoration: underline !important; font-weight: 600; margin: 0 6px;">✉️ Escribir a Paula</a> &nbsp;·&nbsp; 
-              <a href="${linkedinUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#0E768C"}; text-decoration: underline !important; font-weight: 600; margin: 0 6px;">💼 LinkedIn</a>
+            <td style="padding: 16px 20px; background-color:${isDark ? "#111827" : "#FFFFFF"}; border: 1px solid ${isDark ? "#1E293B" : "#D6E3F0"}; border-radius: 12px;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td width="48" valign="top">
+                    <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="text-decoration:none;display:block;">
+                      <img src="${c.senderPhotoUrl}" alt="${c.senderName}" width="46" height="46" style="display:block;width:46px;height:46px;border-radius:50%;border:2px solid #D0E7F5;" />
+                    </a>
+                  </td>
+                  <td valign="top" style="padding-left: 12px;">
+                    <b style="font-size:14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${isDark ? "#F8FAFC" : "#040914"};">${c.senderName}</b><br />
+                    <span style="font-size:12px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${isDark ? "#94A3B8" : "#51647D"};">${c.senderRole}</span><br />
+                    <span style="font-size:11px;font-weight:600;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(34,119,156);">${c.senderCompany}</span><br />
+                    <div style="margin-top:4px;">
+                      <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="font-size:11px;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:underline;">
+                        ✉️ ${c.senderEmail}
+                      </a>
+                    </div>
+                    <!-- 2 BOTONES: GLOCATION.CO Y HOMOAGENTICUS.CO -->
+                    <table border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;border-collapse:separate;border-spacing:8px 0;">
+                      <tr>
+                        <td style="background-color:${isDark ? "#0F293A" : "#F0F7FB"};border:1px solid ${isDark ? "#1E7094" : "#B8DCF0"};border-radius:8px;padding:6px 14px;">
+                          <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#38BDF8" : "#0E768C"};text-decoration:none;">
+                            🌐 glocation.co →
+                          </a>
+                        </td>
+                        <td style="background-color:${isDark ? "#231B3D" : "#F6F3FF"};border:1px solid ${isDark ? "#5B449A" : "#D8C7FF"};border-radius:8px;padding:6px 14px;">
+                          <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;font-weight:700;color:${isDark ? "#A78BFA" : "#7A5CFF"};text-decoration:none;">
+                            📖 homoagenticus.co →
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
           <!-- PIE DE DERECHOS RESERVADOS -->
           <tr>
-            <td align="center" style="padding: 6px 10px 20px 10px; border: 0 !important;">
+            <td align="center" style="padding: 10px 10px 20px 10px; border: 0 !important;">
               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 580px; width: 100%; margin: 0 auto; border: 0 !important;" role="presentation">
                 <tr>
                   <td align="center" style="font-size: 11px; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: rgb(123,140,163); border: 0 !important;">
