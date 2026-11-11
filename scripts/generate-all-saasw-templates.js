@@ -2,17 +2,16 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-// Generador de plantillas SaaSW
-// Formato Jefes TIC: Cada sección es una tarjeta flotante con bordes redondeados y espacio
+// Generador de plantillas SaaSW con espaciado amplio y elegante entre tarjetas
+// Formato Jefes TIC: Cada sección es una tarjeta flotante con bordes redondeados y espacio amplio (20px)
 // Cada bloque interno tiene su hipervínculo nativo (<a href="..."><img></a>)
-// para funcionar 100% en Brevo, Gmail, Outlook y cualquier cliente.
 
 async function buildAllTemplates() {
   const blocksDir = path.join(__dirname, '../public/email-blocks');
   const publicDir = path.join(__dirname, '../public');
   const recursosDir = path.join(__dirname, '../recursos');
 
-  // Primero aseguramos que las tarjetas redondeadas y sus rodajas estén generadas
+  // Asegurar que las tarjetas y rodajas estén actualizadas
   require('./build-cards-and-templates.js');
 
   function renderTemplatesHtml(theme = 'claro', includeToolbar = true) {
@@ -120,16 +119,16 @@ async function buildAllTemplates() {
 </head>
 <body style="margin:0 !important;padding:0 !important;width:100% !important;background-color:${outerBg};">
 ${toolbarHtml}
-  <!-- CONTENEDOR RAÍZ CON TARJETAS REDONDEADAS Y ENLACES NATIVOS 100% COMPATIBLES -->
+  <!-- CONTENEDOR RAÍZ CON TARJETAS REDONDEADAS, ESPACIO AMPLIO Y ENLACES NATIVOS -->
   <div data-saasw-root="true" style="margin:0 !important;padding:0 !important;background-color:${outerBg};">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${outerBg}" style="width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;background-color:${outerBg};margin:0 !important;padding:0 !important;border:0 !important;">
       <tr>
-        <td align="center" style="padding:24px 10px !important;margin:0 !important;border:0 !important;">
+        <td align="center" style="padding:32px 14px !important;margin:0 !important;border:0 !important;">
           <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:660px !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
 
             <!-- BLOQUE 1 · HERO HEADER (TARJETA REDONDEADA) -->
             <tr>
-              <td align="center" style="padding:0 0 12px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
                   <img src="${b1Url}" width="660" height="${b1Height}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo." border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
                 </a>
@@ -138,7 +137,7 @@ ${toolbarHtml}
 
             <!-- BLOQUE 2 · TRABAJADORES COGNITIVOS (TARJETA REDONDEADA) -->
             <tr>
-              <td align="center" style="padding:0 0 12px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
                   <img src="${b2Url}" width="660" height="${b2Height}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
                 </a>
@@ -147,16 +146,16 @@ ${toolbarHtml}
 
             <!-- BLOQUE 3 · CTA DIAGNÓSTICO COGNITIVO (TARJETA REDONDEADA) -->
             <tr>
-              <td align="center" style="padding:0 0 12px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
                   <img src="${b3Url}" width="660" height="${b3Height}" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
                 </a>
               </td>
             </tr>
 
-            <!-- BLOQUE 4 · TARJETA ECOSISTEMA (TARJETA REDONDEADA CON SUS 3 OPCIONES CONTINUAS Y ENLACES) -->
+            <!-- BLOQUE 4 · TARJETA ECOSISTEMA (TARJETA REDONDEADA CON SUS 3 OPCIONES Y ENLACES) -->
             <tr>
-              <td align="center" style="padding:0 0 12px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
                   <!-- 4A: Header + glocation.co (borde superior redondeado) -->
                   <tr>
@@ -188,7 +187,7 @@ ${toolbarHtml}
 
             <!-- BLOQUE 5 · TARJETA FIRMA & BOTONES (TARJETA REDONDEADA CON CINTILLO + PAULA ROZO + 2 BOTONES) -->
             <tr>
-              <td align="center" style="padding:0 0 12px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
                   <!-- 5A: Cintillo Holding (borde superior redondeado) -->
                   <tr>
@@ -228,7 +227,7 @@ ${toolbarHtml}
 
             <!-- LEGAL FOOTER -->
             <tr>
-              <td align="center" style="padding:16px 10px 24px 10px !important;margin:0 !important;border:0 !important;">
+              <td align="center" style="padding:20px 10px 36px 10px !important;margin:0 !important;border:0 !important;">
                 <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px !important;width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border:0 !important;" role="presentation">
                   <tr>
                     <td align="center" style="font-size:11px !important;line-height:1.5 !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;color:${textMuted} !important;border:0 !important;">
@@ -260,7 +259,7 @@ ${toolbarHtml}
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-oscuro.html'), oscuroHtml, 'utf8');
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques.html'), defaultHtml, 'utf8');
 
-  console.log('✓ All templates successfully generated in rounded floating cards layout with active links!');
+  console.log('✓ All templates successfully updated with 20px generous card spacing!');
 }
 
 buildAllTemplates();
