@@ -150,8 +150,8 @@ export function generateSaaswLideresTicHtml(
 
               <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px" role="presentation">
                 <tbody><tr>
-                  <td style="border:1px solid rgb(184,220,240);border-radius:999px;padding:4px 14px;background-color:rgb(230,243,250)">
-                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;color:rgb(30,112,148)">
+                  <td style="border:1px solid ${isDark ? "#1E4E6B" : "rgb(184,220,240)"};border-radius:999px;padding:4px 14px;background-color:${isDark ? "#0F293A" : "rgb(230,243,250)"}">
+                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;color:${isDark ? "rgb(56,189,248)" : "rgb(30,112,148)"}">
                       ${c.eyebrowPill}
                     </span>
                   </td>
@@ -160,8 +160,8 @@ export function generateSaaswLideresTicHtml(
 
               <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px" role="presentation">
                 <tbody><tr>
-                  <td style="border:1px solid rgb(252,211,77);border-radius:8px;padding:6px 12px;background-color:rgb(254,243,199)">
-                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.05em;color:rgb(146,64,14)">
+                  <td style="border:1px solid ${isDark ? "#784E0B" : "rgb(252,211,77)"};border-radius:8px;padding:6px 12px;background-color:${isDark ? "#2E2008" : "rgb(254,243,199)"}">
+                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.05em;color:${isDark ? "rgb(251,191,36)" : "rgb(146,64,14)"}">
                       ${c.warningBanner}
                     </span>
                   </td>
@@ -259,10 +259,10 @@ export function generateSaaswLideresTicHtml(
           <!-- BLOQUE CTA · DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
             <td style="padding:0px 36px 36px;background-color:${cardBg}">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1.5px solid rgb(34,119,156);border-radius:14px;padding:24px;background-color:${ctaBoxBg}" role="presentation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="${ctaBoxBg}" style="border:1.5px solid rgb(34,119,156);border-radius:14px;background-color:${ctaBoxBg}" role="presentation">
                 <tbody><tr>
-                  <td align="center">
-                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgb(34,119,156)">
+                  <td align="center" style="padding:24px">
+                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${isDark ? "rgb(56,189,248)" : "rgb(34,119,156)"}">
                       ${c.ctaEyebrow}
                     </span>
                     <h3 style="margin:8px 0px 12px;font-size:17px;font-weight:700;color:${titleColor}">
@@ -368,6 +368,116 @@ export function generateSaaswLideresTicHtml(
   </tbody></table>
 
 </div>
+</body>
+</html>`;
+}
+
+/**
+ * Genera el documento HTML para clientes de correo basado en 5 bloques de imagen PNG
+ * idéntico a la campaña de Jefes TIC (public/campana-jefes-ti-claro.html),
+ * garantizando que al descargarse o enviarse conserve el 100% de la estructura visual
+ * con el bloque CTA interactivo enlazado a https://citas.glocation.co/?theme=light
+ */
+export function generateSaaswLideresTicImageEmailHtml(
+  customConfig?: SaaswLideresTicEmailConfig,
+  blocksBaseUrl = "https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks"
+): string {
+  const c: Required<SaaswLideresTicEmailConfig> = {
+    ...defaultSaaswLideresTicConfig,
+    ...customConfig,
+  };
+  const isDark = c.theme === "dark";
+  const suffix = isDark ? "oscuro" : "claro";
+  const outerBg = isDark ? "#0B0F19" : "#F0F4F9";
+
+  const block1HeroUrl = `${blocksBaseUrl}/saasw-01-hero-${suffix}.png`;
+  const block2WorkersUrl = `${blocksBaseUrl}/saasw-02-trabajadores-${suffix}.png`;
+  const block3CtaUrl = `${blocksBaseUrl}/saasw-03-cta-${suffix}.png`;
+  const block4EcosystemUrl = `${blocksBaseUrl}/saasw-04-ecosistema-${suffix}.png`;
+  const block5FooterUrl = `${blocksBaseUrl}/saasw-05-firma-${suffix}.png`;
+
+  return `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Su oficina TIC no necesita más software. Necesita fuerza laboral que entregue proyectos terminados.</title>
+  <style type="text/css">
+    body, table, td, a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    table, td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      display: block;
+    }
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      background-color: ${outerBg};
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; width: 100% !important; background-color: ${outerBg};">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${outerBg}" style="width: 100%; border-collapse: collapse; background-color: ${outerBg}; margin: 0; padding: 0;">
+    <tr>
+      <td align="center" style="padding: 20px 10px;">
+        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 100%; border-collapse: collapse; margin: 0 auto;">
+
+          <!-- BLOQUE 1 · CABECERA Y HERO — SAASW LÍDERES TIC -->
+          <tr>
+            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+              <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
+                <img src="${block1HeroUrl}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador." width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
+              </a>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 2 · TRES TRABAJADORES COGNITIVOS TIC -->
+          <tr>
+            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+              <img src="${block2WorkersUrl}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
+            </td>
+          </tr>
+
+          <!-- BLOQUE 3 · CTA — DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
+          <tr>
+            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+              <a href="${c.ctaButtonUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
+                <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
+              </a>
+            </td>
+          </tr>
+
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES -->
+          <tr>
+            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+              <img src="${block4EcosystemUrl}" alt="Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
+            </td>
+          </tr>
+
+          <!-- BLOQUE 5 · FIRMA COMERCIAL PAULA ROZO Y DERECHOS RESERVADOS -->
+          <tr>
+            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+              <a href="mailto:${c.senderEmail}" style="display: block; text-decoration: none; border: 0;">
+                <img src="${block5FooterUrl}" alt="Paula Rozo — BDR GLocation" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
+              </a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>`;
 }
