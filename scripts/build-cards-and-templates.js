@@ -111,28 +111,64 @@ async function buildAllCards() {
     }
 
     // ==========================================
-    // 3. CARD 3 (CTA): Ensure rounded top and bottom corners
+    // 3. CARD 3 (CTA): Clean, uniform card with 24px rounded corners
     // ==========================================
     const ctaPath = path.join(blocksDir, `saasw-03-cta-${t.id}.png`);
-    if (fs.existsSync(ctaPath)) {
-      const ctaMeta = await sharp(ctaPath).metadata();
-      const ctaH = ctaMeta.height;
-      const ctaOverlay = Buffer.from(`
-        <svg width="1320" height="${ctaH}" xmlns="http://www.w3.org/2000/svg">
-          <!-- Top corners -->
-          <path d="M 60,0 L 60,24 A 24 24 0 0 1 84,0 Z" fill="${t.outerBg}" />
-          <path d="M 1260,0 L 1260,24 A 24 24 0 0 0 1236,0 Z" fill="${t.outerBg}" />
-          <!-- Bottom corners -->
-          <path d="M 60,${ctaH - 24} L 60,${ctaH} L 84,${ctaH} A 24 24 0 0 1 60,${ctaH - 24} Z" fill="${t.outerBg}" />
-          <path d="M 1260,${ctaH - 24} L 1260,${ctaH} L 1236,${ctaH} A 24 24 0 0 0 1260,${ctaH - 24} Z" fill="${t.outerBg}" />
-        </svg>
-      `);
-      const rounded = await sharp(ctaPath)
-        .composite([{ input: ctaOverlay, blend: 'over' }])
-        .png()
-        .toBuffer();
-      fs.writeFileSync(ctaPath, rounded);
-    }
+    const ctaH = 630;
+    const ctaCardBg = t.id === 'claro' ? '#FFFFFF' : '#0F172A';
+    const ctaCardBorder = t.id === 'claro' ? '#E2E8F0' : '#1E293B';
+    const ctaEyebrowColor = t.id === 'claro' ? '#0284C7' : '#38BDF8';
+    const ctaTitleColor = t.id === 'claro' ? '#0F172A' : '#F8FAFC';
+    const ctaDescColor = t.id === 'claro' ? '#475569' : '#94A3B8';
+    const ctaSubtextColor = t.id === 'claro' ? '#64748B' : '#64748B';
+
+    const ctaSvg = `
+      <svg width="1320" height="${ctaH}" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ctaBtnGrad_${t.id}" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1F6E91" />
+            <stop offset="60%" stop-color="#4A64A0" />
+            <stop offset="100%" stop-color="#6E5C98" />
+          </linearGradient>
+        </defs>
+        <rect width="1320" height="${ctaH}" fill="${t.outerBg}" />
+        <rect x="60" y="0" width="1200" height="${ctaH}" rx="24" ry="24" fill="${ctaCardBg}" stroke="${ctaCardBorder}" stroke-width="1.5" />
+        
+        <!-- Eyebrow -->
+        <text x="660" y="90" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2" fill="${ctaEyebrowColor}">
+          DIAGNÓSTICO COGNITIVO · 30 MINUTOS
+        </text>
+
+        <!-- Título -->
+        <text x="660" y="160" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+          ¿Exploramos qué proceso de su oficina TIC podemos liberar
+        </text>
+        <text x="660" y="210" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+          este mes?
+        </text>
+
+        <!-- Descripción -->
+        <text x="660" y="280" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+          Agende una sesión técnica de 30 minutos. Evaluaremos uno de sus cuellos de
+        </text>
+        <text x="660" y="320" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+          botella operativos y le entregaremos una estimación contable de ahorro y tiempos.
+        </text>
+
+        <!-- Botón CTA -->
+        <rect x="340" y="380" width="640" height="96" rx="16" ry="16" fill="url(#ctaBtnGrad_${t.id})" />
+        <text x="660" y="440" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">
+          Agendar Diagnóstico Cognitivo (30 min) →
+        </text>
+
+        <!-- Subtexto -->
+        <text x="660" y="540" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="400" fill="${ctaSubtextColor}">
+          Sin formularios eternos: seleccione día y hora directamente en nuestra plataforma.
+        </text>
+      </svg>
+    `;
+    const ctaBuffer = await sharp(Buffer.from(ctaSvg)).png().toBuffer();
+    fs.writeFileSync(ctaPath, ctaBuffer);
 
     // ==========================================
     // 4. MASTER CARD 4: ECOSISTEMA (Rounded card with top and bottom rx=24)

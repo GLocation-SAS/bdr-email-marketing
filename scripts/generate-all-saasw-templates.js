@@ -33,7 +33,7 @@ async function buildAllTemplates() {
 
     const b1Height = isDark ? 560 : 554;
     const b2Height = 465;
-    const b3Height = isDark ? 400 : 315;
+    const b3Height = 315;
 
     const toolbarHtml = includeToolbar ? `
   <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
