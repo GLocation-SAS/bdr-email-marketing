@@ -36,8 +36,8 @@
       cursor: pointer;
     }
     .saasw-link-overlay:hover {
-      box-shadow: 0 0 0 2px #0284C7 inset;
-      background-color: rgba(2, 132, 199, 0.12) !important;
+      background-color: rgba(2, 132, 199, 0.08) !important;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -46,7 +46,7 @@
   <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR Y VERIFICAR ZONAS INTERACTIVAS -->
   <div id="saasw-floating-toolbar" style="position:sticky;top:0;z-index:999999;background:#0F172A;border-bottom:2px solid #0284C7;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;flex-wrap:wrap;">
     <button id="btnToggleZonas" onclick="toggleZonasClic()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
-      👁️ <span id="txtBtnZonas">VER ZONAS DE CLIC (LINKS & CTA)</span>
+      👁️ <span id="txtBtnZonas">VER FORMA DE ZONAS (SIN TEXTO EXTRA)</span>
     </button>
     <button id="btnCopiarVisual" onclick="copiarCorreoVisual()" style="background:linear-gradient(90deg,#0284C7 0%,#2563EB 100%);color:#FFFFFF;border:none;padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.5);display:inline-flex;align-items:center;gap:8px;">
       📋 COPIAR DISEÑO COMPLETO (Ctrl+V en Brevo / Gmail / Outlook)
@@ -66,37 +66,31 @@
     function toggleZonasClic() {
       zonasVisibles = !zonasVisibles;
       var overlays = document.querySelectorAll('.saasw-link-overlay');
-      var badges = document.querySelectorAll('.saasw-zone-badge');
       var txtBtn = document.getElementById('txtBtnZonas');
       var btn = document.getElementById('btnToggleZonas');
 
       overlays.forEach(function(ov) {
         if (zonasVisibles) {
-          ov.style.border = '2px dashed #0284C7';
-          ov.style.backgroundColor = 'rgba(2, 132, 199, 0.18)';
+          ov.style.outline = '2px dashed #0284C7';
+          ov.style.backgroundColor = 'rgba(2, 132, 199, 0.14)';
         } else {
-          ov.style.border = 'none';
+          ov.style.outline = 'none';
           ov.style.backgroundColor = 'transparent';
         }
       });
 
-      badges.forEach(function(b) {
-        b.style.display = zonasVisibles ? 'inline-block' : 'none';
-      });
-
       if (zonasVisibles) {
-        txtBtn.innerText = 'OCULTAR ZONAS DE CLIC';
+        txtBtn.innerText = 'OCULTAR RESALTADO DE ZONAS';
         btn.style.background = '#0284C7';
         btn.style.color = '#FFFFFF';
       } else {
-        txtBtn.innerText = 'VER ZONAS DE CLIC (LINKS & CTA)';
+        txtBtn.innerText = 'VER FORMA DE ZONAS (SIN TEXTO EXTRA)';
         btn.style.background = '#1E293B';
         btn.style.color = '#38BDF8';
       }
     }
 
     function copiarCorreoVisual() {
-      // Ocultar temporalmente overlays para copiar únicamente el diseño limpio
       var eraVisible = zonasVisibles;
       if (eraVisible) toggleZonasClic();
 
@@ -120,7 +114,6 @@
     function copiarCodigoHtml() {
       var root = document.querySelector('[data-saasw-root="true"]');
       if (!root) return;
-      // Clonar nodo y limpiar elementos interactivos de inspección para exportar HTML 100% puro para Brevo/Gmail
       var clone = root.cloneNode(true);
       var overlays = clone.querySelectorAll('.saasw-link-overlay');
       overlays.forEach(function(el) { el.remove(); });
@@ -139,7 +132,7 @@
     }
   </script>
 
-  <!-- CONTENEDOR RAÍZ CONTINUO EN 1 SOLA PIEZA (CERO CORTES, CERO ESPACIOS, CERO BORDES) -->
+  <!-- CONTENEDOR RAÍZ CONTINUO EN 1 SOLA PIEZA (TODO DENTRO DE LO MISMO, CERO TEXTOS APARTE) -->
   <div data-saasw-root="true" style="margin: 0; padding: 0; background-color: #0B0F19;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0F19" style="width: 100%; border-collapse: collapse; border-spacing: 0; background-color: #0B0F19; margin: 0; padding: 0; border: 0;">
       <tr>
@@ -148,10 +141,10 @@
             <tr>
               <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0; border: 0; position: relative;">
                 
-                <!-- CONTENEDOR RELATIVO PARA ENLACES DIRECTOS Y COMPATIBILIDAD CON MAPA -->
+                <!-- CONTENEDOR RELATIVO PARA ENLACES DIRECTOS DENTRO DEL MISMO LIENZO -->
                 <div style="position: relative; width: 660px; max-width: 100%; margin: 0 auto; line-height: 0; font-size: 0;">
                   
-                  <!-- IMAGEN ÚNICA CONTINUA HD EN 1 SOLA PIEZA -->
+                  <!-- IMAGEN ÚNICA CONTINUA HD EN 1 SOLA PIEZA (TODO EL DISEÑO Y TEXTOS DENTRO DE LA IMAGEN) -->
                   <img 
                     src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-email-completo-oscuro.png" 
                     alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo que hace el trabajo." 
@@ -162,60 +155,36 @@
                     style="display: block; width: 660px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none; margin: 0; padding: 0;" 
                   />
 
-                  <!-- CAPA INTERACTIVA DE ENLACES PARA NAVEGADOR Y PREVISUALIZACIÓN -->
+                  <!-- CAPA INTERACTIVA DE ENLACES TOTALMENTE TRANSPARENTE (SIN TEXTO EXTRA, DENTRO DE LO MISMO) -->
 
-        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="hero-header" style="position:absolute;left:48px;top:0px;width:564px;height:100px;border-radius:16px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#0284C7;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">🌐 GLocation · Cabecera</span>
-        </a>
+        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" title="GLocation · Cabecera Oficial" class="saasw-link-overlay" data-region="hero-header" style="position:absolute;left:48px;top:0px;width:564px;height:100px;border-radius:16px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="cta-diagnostico" style="position:absolute;left:67px;top:1040px;width:526px;height:340px;border-radius:18px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#2563EB;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">📅 Agendar Diagnóstico Cognitivo (30 min)</span>
-        </a>
+        <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" title="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" class="saasw-link-overlay" data-region="cta-diagnostico" style="position:absolute;left:67px;top:1040px;width:526px;height:340px;border-radius:18px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="eco-glocation" style="position:absolute;left:48px;top:1456px;width:564px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#0284C7;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">🌐 glocation.co · Plataforma SaaSW</span>
-        </a>
+        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" title="glocation.co · Plataforma Comercial SaaSW" class="saasw-link-overlay" data-region="eco-glocation" style="position:absolute;left:48px;top:1456px;width:564px;height:46px;border-radius:8px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="eco-homoagenticus" style="position:absolute;left:48px;top:1508px;width:564px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#7C3AED;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">📖 homoagenticus.co · Manifiesto</span>
-        </a>
+        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" title="homoagenticus.co · El Manifiesto del Homo agenticus" class="saasw-link-overlay" data-region="eco-homoagenticus" style="position:absolute;left:48px;top:1508px;width:564px;height:46px;border-radius:8px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="eco-preagentica" style="position:absolute;left:48px;top:1560px;width:564px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#475569;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">🏛️ preagentica.glocation.co · Herencia Pre-IA</span>
-        </a>
+        <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" title="preagentica.glocation.co · Nuestra Herencia Pre-IA" class="saasw-link-overlay" data-region="eco-preagentica" style="position:absolute;left:48px;top:1560px;width:564px;height:46px;border-radius:8px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="firma-paula" style="position:absolute;left:48px;top:1646px;width:312px;height:116px;border-radius:14px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#0E768C;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">✉️ Paula Rozo · Correo Directo</span>
-        </a>
+        <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" title="Paula Rozo · Correo Directo (paula.rozo@glocation.com.co)" class="saasw-link-overlay" data-region="firma-paula" style="position:absolute;left:48px;top:1646px;width:312px;height:116px;border-radius:14px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="firma-btn-gloc" style="position:absolute;left:370px;top:1667px;width:115px;height:68px;border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#0284C7;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">🌐 glocation.co</span>
-        </a>
+        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" title="Sitio Web glocation.co" class="saasw-link-overlay" data-region="firma-btn-gloc" style="position:absolute;left:370px;top:1667px;width:115px;height:68px;border-radius:10px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
-        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" class="saasw-link-overlay" data-region="firma-btn-homo" style="position:absolute;left:497px;top:1667px;width:115px;height:68px;border-radius:10px;display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box;transition:all 0.2s ease;z-index:10;">
-          <span class="saasw-zone-badge" style="display:none;background:#7C3AED;color:#ffffff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.3);pointer-events:none;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,sans-serif;">📖 homoagenticus.co</span>
-        </a>
+        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" title="Manifiesto homoagenticus.co" class="saasw-link-overlay" data-region="firma-btn-homo" style="position:absolute;left:497px;top:1667px;width:115px;height:68px;border-radius:10px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
 
                 </div>
 
-                <!-- MAPA DE ENLACES ESTÁNDAR PARA CLIENTES DE CORREO QUE SOPORTAN MAP -->
+                <!-- MAPA DE ENLACES ESTÁNDAR PARA CLIENTES DE CORREO -->
                 <map name="saasw-map-oscuro">
-              <!-- 🌐 GLocation · Cabecera -->
-              <area shape="rect" coords="48,0,612,100" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="🌐 GLocation · Cabecera">
-              <!-- 📅 Agendar Diagnóstico Cognitivo (30 min) -->
-              <area shape="rect" coords="67,1040,593,1380" href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" alt="📅 Agendar Diagnóstico Cognitivo (30 min)">
-              <!-- 🌐 glocation.co · Plataforma SaaSW -->
-              <area shape="rect" coords="48,1456,612,1502" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="🌐 glocation.co · Plataforma SaaSW">
-              <!-- 📖 homoagenticus.co · Manifiesto -->
-              <area shape="rect" coords="48,1508,612,1554" href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" alt="📖 homoagenticus.co · Manifiesto">
-              <!-- 🏛️ preagentica.glocation.co · Herencia Pre-IA -->
-              <area shape="rect" coords="48,1560,612,1606" href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" alt="🏛️ preagentica.glocation.co · Herencia Pre-IA">
-              <!-- ✉️ Paula Rozo · Correo Directo -->
-              <area shape="rect" coords="48,1646,360,1762" href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" alt="✉️ Paula Rozo · Correo Directo">
-              <!-- 🌐 glocation.co -->
-              <area shape="rect" coords="370,1667,485,1735" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="🌐 glocation.co">
-              <!-- 📖 homoagenticus.co -->
-              <area shape="rect" coords="497,1667,612,1735" href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" alt="📖 homoagenticus.co">
+              <area shape="rect" coords="48,0,612,100" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="GLocation · Cabecera Oficial">
+              <area shape="rect" coords="67,1040,593,1380" href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co">
+              <area shape="rect" coords="48,1456,612,1502" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="glocation.co · Plataforma Comercial SaaSW">
+              <area shape="rect" coords="48,1508,612,1554" href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" alt="homoagenticus.co · El Manifiesto del Homo agenticus">
+              <area shape="rect" coords="48,1560,612,1606" href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA">
+              <area shape="rect" coords="48,1646,360,1762" href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" alt="Paula Rozo · Correo Directo (paula.rozo@glocation.com.co)">
+              <area shape="rect" coords="370,1667,485,1735" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="Sitio Web glocation.co">
+              <area shape="rect" coords="497,1667,612,1735" href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" alt="Manifiesto homoagenticus.co">
                 </map>
 
               </td>
