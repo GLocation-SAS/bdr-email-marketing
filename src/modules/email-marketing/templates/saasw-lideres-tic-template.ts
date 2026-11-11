@@ -509,6 +509,24 @@ export function generateSaaswLideresTicImageEmailHtml(
             </td>
           </tr>
 
+          <!-- ENLACES DIRECTOS Y ACCESOS RÁPIDOS (100% FUNCIONALES SIN BORDES) -->
+          <tr>
+            <td align="center" style="padding: 6px 16px 18px; border: 0 !important; border-style: none !important;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 580px; width: 100%; border-collapse: collapse; border: 0 !important; border: none !important;" role="presentation">
+                <tr>
+                  <td align="center" style="padding: 10px 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; line-height: 1.8; color: ${mutedColor}; border: 0 !important; border: none !important;">
+                    <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#1E7094"}; text-decoration: underline; font-weight: 700; margin: 0 6px;">📅 Agendar Diagnóstico (30 min)</a> &nbsp;·&nbsp; 
+                    <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#1E7094"}; text-decoration: underline; font-weight: 600; margin: 0 6px;">🌐 glocation.co</a> &nbsp;·&nbsp; 
+                    <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#1E7094"}; text-decoration: underline; font-weight: 600; margin: 0 6px;">📖 homoagenticus.co</a> &nbsp;·&nbsp; 
+                    <a href="${preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#1E7094"}; text-decoration: underline; font-weight: 600; margin: 0 6px;">🏛 preagentica.glocation.co</a> &nbsp;·&nbsp; 
+                    <a href="${mailtoLink}" style="color: ${isDark ? "#38BDF8" : "#1E7094"}; text-decoration: underline; font-weight: 600; margin: 0 6px;">✉️ Escribir a Paula</a> &nbsp;·&nbsp; 
+                    <a href="${linkedinUrl}" target="_blank" rel="noopener noreferrer" style="color: ${isDark ? "#38BDF8" : "#1E7094"}; text-decoration: underline; font-weight: 600; margin: 0 6px;">💼 LinkedIn</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
           <!-- PIE DE DERECHOS RESERVADOS -->
           <tr>
             <td align="center" style="padding: 6px 10px 24px 10px;">
