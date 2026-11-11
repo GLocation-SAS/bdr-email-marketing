@@ -152,20 +152,24 @@ export function generateSaaswLideresTicHtml(
 
               <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px" role="presentation">
                 <tbody><tr>
-                  <td style="border:1px solid ${isDark ? "#1E4E6B" : "rgb(184,220,240)"};border-radius:999px;padding:4px 14px;background-color:${isDark ? "#0F293A" : "rgb(230,243,250)"}">
-                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;color:${isDark ? "rgb(56,189,248)" : "rgb(30,112,148)"}">
-                      ${c.eyebrowPill}
-                    </span>
+                  <td style="border:none;background-color:transparent;padding:0">
+                    <div style="display:inline-block;border:1px solid ${isDark ? "#1E4E6B" : "rgb(184,220,240)"};border-radius:999px;padding:4px 14px;background-color:${isDark ? "#0F293A" : "rgb(230,243,250)"}">
+                      <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;color:${isDark ? "rgb(56,189,248)" : "rgb(30,112,148)"}">
+                        ${c.eyebrowPill}
+                      </span>
+                    </div>
                   </td>
                 </tr>
               </tbody></table>
 
               <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px" role="presentation">
                 <tbody><tr>
-                  <td style="border:1px solid ${isDark ? "#784E0B" : "rgb(252,211,77)"};border-radius:8px;padding:6px 12px;background-color:${isDark ? "#2E2008" : "rgb(254,243,199)"}">
-                    <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.05em;color:${isDark ? "rgb(251,191,36)" : "rgb(146,64,14)"}">
-                      ${c.warningBanner}
-                    </span>
+                  <td style="border:none;background-color:transparent;padding:0">
+                    <div style="display:inline-block;border:1px solid ${isDark ? "#784E0B" : "rgb(252,211,77)"};border-radius:8px;padding:6px 12px;background-color:${isDark ? "#2E2008" : "rgb(254,243,199)"}">
+                      <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.05em;color:${isDark ? "rgb(251,191,36)" : "rgb(146,64,14)"}">
+                        ${c.warningBanner}
+                      </span>
+                    </div>
                   </td>
                 </tr>
               </tbody></table>

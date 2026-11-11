@@ -881,30 +881,39 @@ export function SaaswEmailPreviewer() {
                                 <tr>
                                   <td
                                     style={{
-                                      border: isDark
-                                        ? "1px solid #1E4E6B"
-                                        : "1px solid rgb(184,220,240)",
-                                      borderRadius: "999px",
-                                      padding: "4px 14px",
-                                      backgroundColor: isDark
-                                        ? "#0F293A"
-                                        : "rgb(230,243,250)",
+                                      border: "none",
+                                      backgroundColor: "transparent",
+                                      padding: 0,
                                     }}
                                   >
-                                    <span
+                                    <div
                                       style={{
-                                        fontFamily:
-                                          '"SF Mono",Consolas,Monaco,monospace',
-                                        fontSize: "11px",
-                                        fontWeight: 700,
-                                        letterSpacing: "0.08em",
-                                        color: isDark
-                                          ? "rgb(56,189,248)"
-                                          : "rgb(30,112,148)",
+                                        display: "inline-block",
+                                        border: isDark
+                                          ? "1px solid #1E4E6B"
+                                          : "1px solid rgb(184,220,240)",
+                                        borderRadius: "999px",
+                                        padding: "4px 14px",
+                                        backgroundColor: isDark
+                                          ? "#0F293A"
+                                          : "rgb(230,243,250)",
                                       }}
                                     >
-                                      {c.eyebrowPill}
-                                    </span>
+                                      <span
+                                        style={{
+                                          fontFamily:
+                                            '"SF Mono",Consolas,Monaco,monospace',
+                                          fontSize: "11px",
+                                          fontWeight: 700,
+                                          letterSpacing: "0.08em",
+                                          color: isDark
+                                            ? "rgb(56,189,248)"
+                                            : "rgb(30,112,148)",
+                                        }}
+                                      >
+                                        {c.eyebrowPill}
+                                      </span>
+                                    </div>
                                   </td>
                                 </tr>
                               </tbody>
@@ -921,30 +930,39 @@ export function SaaswEmailPreviewer() {
                                 <tr>
                                   <td
                                     style={{
-                                      border: isDark
-                                        ? "1px solid #784E0B"
-                                        : "1px solid rgb(252,211,77)",
-                                      borderRadius: "8px",
-                                      padding: "6px 12px",
-                                      backgroundColor: isDark
-                                        ? "#2E2008"
-                                        : "rgb(254,243,199)",
+                                      border: "none",
+                                      backgroundColor: "transparent",
+                                      padding: 0,
                                     }}
                                   >
-                                    <span
+                                    <div
                                       style={{
-                                        fontFamily:
-                                          '"SF Mono",Consolas,Monaco,monospace',
-                                        fontSize: "11px",
-                                        fontWeight: 700,
-                                        letterSpacing: "0.05em",
-                                        color: isDark
-                                          ? "rgb(251,191,36)"
-                                          : "rgb(146,64,14)",
+                                        display: "inline-block",
+                                        border: isDark
+                                          ? "1px solid #784E0B"
+                                          : "1px solid rgb(252,211,77)",
+                                        borderRadius: "8px",
+                                        padding: "6px 12px",
+                                        backgroundColor: isDark
+                                          ? "#2E2008"
+                                          : "rgb(254,243,199)",
                                       }}
                                     >
-                                      {c.warningBanner}
-                                    </span>
+                                      <span
+                                        style={{
+                                          fontFamily:
+                                            '"SF Mono",Consolas,Monaco,monospace',
+                                          fontSize: "11px",
+                                          fontWeight: 700,
+                                          letterSpacing: "0.05em",
+                                          color: isDark
+                                            ? "rgb(251,191,36)"
+                                            : "rgb(146,64,14)",
+                                        }}
+                                      >
+                                        {c.warningBanner}
+                                      </span>
+                                    </div>
                                   </td>
                                 </tr>
                               </tbody>
