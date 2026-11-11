@@ -4,9 +4,16 @@ function getImageHtml(theme) {
   const isDark = theme === 'dark';
   const suffix = isDark ? 'oscuro' : 'claro';
   const outerBg = isDark ? '#0B0F19' : '#F0F4F9';
+  const cardBg = isDark ? '#111827' : '#FFFFFF';
+  const cardBorder = isDark ? '#1E293B' : 'rgb(214,227,240)';
+  const subtleBg = isDark ? '#1E293B' : '#F8FAFD';
+  const dividerColor = isDark ? '#1E293B' : 'rgb(237,243,250)';
+  const titleColor = isDark ? '#F8FAFC' : '#040914';
   const mutedColor = isDark ? '#94A3B8' : '#51647D';
   const accentColor = isDark ? '#38BDF8' : '#0E768C';
+  const manifestoColor = isDark ? '#A78BFA' : '#7A5CFF';
   const blocksBaseUrl = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
+  const paulaImgUrl = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/paula_natalia_rozo%20(4).png';
 
   return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -76,19 +83,64 @@ function getImageHtml(theme) {
 
           <!-- BLOQUE 3 · CTA — DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
+            <td align="center" style="padding: 0 0 10px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
               <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display: block; border: 0 !important; border-style: none !important; outline: none !important; text-decoration: none !important;">
                 <img src="${blocksBaseUrl}/saasw-03-cta-${suffix}.png" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="660" border="0" style="display: block; width: 660px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; outline: none !important; text-decoration: none !important;" />
               </a>
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y FIRMA COMERCIAL PAULA ROZO -->
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO + HOLDING + FIRMA PAULA ROZO CON ENLACES REALES -->
           <tr>
-            <td align="center" style="padding: 0 0 10px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
-              <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation&body=Hola%20Paula%2C%20me%20gustar%C3%ADa%20coordinar%20una%20sesi%C3%B3n%20de%2030%20minutos%20sobre%20Trabajadores%20Cognitivos." style="display: block; border: 0 !important; border-style: none !important; outline: none !important; text-decoration: none !important;">
-                <img src="${blocksBaseUrl}/saasw-04-ecosistema-firma-${suffix}.png" alt="Ecosistema GLocation y Firma Comercial Paula Rozo — BDR" width="660" border="0" style="display: block; width: 660px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; outline: none !important; text-decoration: none !important;" />
-              </a>
+            <td align="center" style="padding: 0 0 10px 0; border: 0 !important; border-style: none !important;">
+              <div style="background-color: ${cardBg}; border-radius: 14px; border: 1px solid ${cardBorder}; overflow: hidden; width: 100%; max-width: 660px; text-align: center; box-sizing: border-box;">
+                
+                <!-- 4A · ECOSISTEMA EN VIVO -->
+                <div style="padding: 24px 20px 18px 20px; text-align: center;">
+                  <div style="font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: ${mutedColor}; margin-bottom: 10px;">
+                    EXPLORE NUESTRO ECOSISTEMA EN VIVO:
+                  </div>
+                  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.8;">
+                    <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="color: ${accentColor}; font-weight: 700; text-decoration: underline !important;">glocation.co</a>
+                    <span style="color: #7B8CA3;"> (Plataforma Comercial SaaSW)</span><br />
+                    <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="color: ${manifestoColor}; font-weight: 700; text-decoration: underline !important;">homoagenticus.co</a>
+                    <span style="color: #7B8CA3;"> (El Manifiesto del Homo agenticus)</span><br />
+                    <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="color: ${mutedColor}; font-weight: 600; text-decoration: underline !important;">preagentica.glocation.co</a>
+                    <span style="color: #7B8CA3;"> (Nuestra Herencia Pre-IA)</span>
+                  </div>
+                </div>
+
+                <!-- 4B · CINTILLO HOLDING -->
+                <div style="background-color: ${subtleBg}; border-top: 1px solid ${dividerColor}; border-bottom: 1px solid ${dividerColor}; padding: 12px 16px; font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: ${mutedColor}; text-align: center;">
+                  HOLDING SERVINFORMACIÓN (27 AÑOS) &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER &nbsp;•&nbsp; NORMA ISO 27001
+                </div>
+
+                <!-- 4C · FIRMA PAULA ROZO -->
+                <div style="padding: 22px 26px; text-align: left;">
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border: 0 !important; width: 100%;">
+                    <tr>
+                      <td width="52" valign="top" style="width: 52px; padding: 0 14px 0 0; margin: 0; border: 0 !important;">
+                        <a href="mailto:paula.rozo@glocation.com.co" style="text-decoration: none; border: 0 !important; outline: none !important; display: block;">
+                          <img src="${paulaImgUrl}" alt="Paula Rozo" width="48" height="48" border="0" style="display: block; width: 48px; height: 48px; border-radius: 50%; border: 0 !important; outline: none !important;" />
+                        </a>
+                      </td>
+                      <td valign="top" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border: 0 !important; padding: 0; margin: 0;">
+                        <div style="font-size: 15px; font-weight: 700; color: ${titleColor}; line-height: 1.2;">Paula Rozo</div>
+                        <div style="font-size: 12px; color: ${mutedColor}; margin-top: 2px;">BDR · Business Development Representative</div>
+                        <div style="font-size: 12px; font-weight: 600; color: ${accentColor}; margin-top: 2px;">GLocation SAS · Transformación Cognitiva</div>
+                        <div style="font-size: 12px; margin-top: 6px; color: #7B8CA3; line-height: 1.5;">
+                          <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="color: ${accentColor}; font-weight: 600; text-decoration: underline !important;">paula.rozo@glocation.com.co</a>
+                          &nbsp;|&nbsp;
+                          <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="color: ${accentColor}; font-weight: 600; text-decoration: underline !important;">glocation.co</a>
+                          &nbsp;|&nbsp;
+                          <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="color: ${manifestoColor}; font-weight: 600; text-decoration: underline !important;">homoagenticus.co</a>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+              </div>
             </td>
           </tr>
 
@@ -129,4 +181,9 @@ function getImageHtml(theme) {
 fs.writeFileSync('public/plantilla-saasw-lideres-tic-bloques-claro.html', getImageHtml('light'), 'utf8');
 fs.writeFileSync('public/plantilla-saasw-lideres-tic-bloques.html', getImageHtml('light'), 'utf8');
 fs.writeFileSync('public/plantilla-saasw-lideres-tic-bloques-oscuro.html', getImageHtml('dark'), 'utf8');
-console.log('Saved 3 block HTML files!');
+fs.writeFileSync('public/plantilla-saasw-lideres-tic.html', getImageHtml('light'), 'utf8');
+fs.writeFileSync('public/plantilla-saasw-lideres-tic-claro.html', getImageHtml('light'), 'utf8');
+fs.writeFileSync('public/plantilla-saasw-lideres-tic-oscuro.html', getImageHtml('dark'), 'utf8');
+console.log('Saved all 6 HTML files with active ecosystem and signature links!');
+
+
