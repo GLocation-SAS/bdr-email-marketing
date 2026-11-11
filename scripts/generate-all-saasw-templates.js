@@ -14,7 +14,7 @@ async function buildAllTemplates() {
   // Asegurar que las tarjetas y rodajas estén actualizadas
   require('./build-cards-and-templates.js');
 
-  function renderTemplatesHtml(theme = 'claro', includeToolbar = true, isSliced = false) {
+  function renderTemplatesHtml(theme = 'claro', includeToolbar = true) {
     const isDark = theme === 'oscuro';
     const outerBg = isDark ? '#0B0F19' : '#F0F4F9';
     const textMuted = isDark ? '#94A3B8' : '#64748B';
@@ -63,6 +63,13 @@ async function buildAllTemplates() {
       range.selectNode(root);
       sel.addRange(range);
       try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          var htmlBlob = new Blob([root.outerHTML], { type: 'text/html' });
+          var textBlob = new Blob([root.innerText], { type: 'text/plain' });
+          navigator.clipboard.write([
+            new ClipboardItem({ 'text/html': htmlBlob, 'text/plain': textBlob })
+          ]).catch(function(){});
+        }
         document.execCommand('copy');
         sel.removeAllRanges();
         mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en tu correo');
@@ -158,93 +165,19 @@ ${toolbarHtml}
               </td>
             </tr>
 
-            ${isSliced ? `<!-- BLOQUE 4 · TARJETA ECOSISTEMA (RODAJAS SEPARADAS) -->
+            <!-- BLOQUE 4 · TARJETA ECOSISTEMA (3 ENLACES INDEPENDIENTES UNIDOS SIN ESPACIOS) -->
             <tr>
               <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
-                  <!-- 4A: Header + glocation.co (borde superior redondeado) -->
-                  <tr>
-                    <td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                      <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                        <img src="${b4aUrl}" width="660" height="80" alt="glocation.co · Plataforma Comercial SaaSW" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                      </a>
-                    </td>
-                  </tr>
-                  <!-- 4B: homoagenticus.co -->
-                  <tr>
-                    <td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                      <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                        <img src="${b4bUrl}" width="660" height="53" alt="homoagenticus.co · El Manifiesto del Homo agenticus" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                      </a>
-                    </td>
-                  </tr>
-                  <!-- 4C: preagentica.glocation.co (borde inferior redondeado) -->
-                  <tr>
-                    <td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                      <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                        <img src="${b4cUrl}" width="660" height="62" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                      </a>
-                    </td>
-                  </tr>
-                </table>
+                <div style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4aUrl}" width="660" height="80" alt="glocation.co · Plataforma Comercial SaaSW" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4bUrl}" width="660" height="53" alt="homoagenticus.co · El Manifiesto del Homo agenticus" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4cUrl}" width="660" height="62" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></div>
               </td>
             </tr>
 
-            <!-- BLOQUE 5 · TARJETA FIRMA & BOTONES (RODAJAS SEPARADAS) -->
-            <tr>
-              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
-                  <!-- 5A: Cintillo Holding (borde superior redondeado) -->
-                  <tr>
-                    <td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                      <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                        <img src="${b5aUrl}" width="660" height="33" alt="HOLDING SERVINFORMACIÓN (27 AÑOS) • GOOGLE CLOUD PREMIER PARTNER • NORMA ISO 27001" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                      </a>
-                    </td>
-                  </tr>
-                  <!-- 5 ROW: Paula Rozo + 2 Botones (borde inferior redondeado) -->
-                  <tr>
-                    <td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                      <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
-                        <tr>
-                          <td width="365" valign="top" style="width:365px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                            <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                              <img src="${b5bUrl}" width="365" height="127" alt="Paula Rozo — BDR · Business Development Representative" border="0" style="display:block !important;width:365px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                            </a>
-                          </td>
-                          <td width="125" valign="top" style="width:125px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                            <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                              <img src="${b5cUrl}" width="125" height="127" alt="glocation.co" border="0" style="display:block !important;width:125px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                            </a>
-                          </td>
-                          <td width="170" valign="top" style="width:170px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                            <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                              <img src="${b5dUrl}" width="170" height="127" alt="homoagenticus.co" border="0" style="display:block !important;width:170px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>` : `<!-- BLOQUE 4 · TARJETA ECOSISTEMA (TARJETA SÓLIDA CONTINUA SIN CORTES NI ESPACIOS) -->
-            <tr>
-              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                  <img src="${b4Url}" width="660" height="${b4Height}" alt="Explore nuestro ecosistema en vivo: glocation.co, homoagenticus.co, preagentica.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                </a>
-              </td>
-            </tr>
-
-            <!-- BLOQUE 5 · TARJETA FIRMA & CONTACTO (TARJETA SÓLIDA CONTINUA SIN CORTES NI ESPACIOS) -->
+            <!-- BLOQUE 5 · TARJETA FIRMA & BOTONES (ENLACES INDEPENDIENTES UNIDOS SIN ESPACIOS) -->
             <tr>
               <td align="center" style="padding:0 0 14px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
-                <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
-                  <img src="${b5Url}" width="660" height="${b5Height}" alt="Paula Rozo — BDR · Business Development Representative · GLocation SAS" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-                </a>
+                <div style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b5aUrl}" width="660" height="33" alt="HOLDING SERVINFORMACIÓN (27 AÑOS) • GOOGLE CLOUD PREMIER PARTNER • NORMA ISO 27001" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 !important;padding:0 !important;border:0 !important;table-layout:fixed !important;"><tr><td width="365" valign="top" style="width:365px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5bUrl}" width="365" height="127" alt="Paula Rozo — BDR · Business Development Representative" border="0" style="display:block !important;width:365px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td><td width="125" valign="top" style="width:125px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5cUrl}" width="125" height="127" alt="glocation.co" border="0" style="display:block !important;width:125px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td><td width="170" valign="top" style="width:170px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5dUrl}" width="170" height="127" alt="homoagenticus.co" border="0" style="display:block !important;width:170px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr></table></div>
               </td>
-            </tr>`}
+            </tr>
 
             <!-- LEGAL FOOTER (IMAGEN CON FONDO PERMANENTE INTEGRADO) -->
             <tr>
@@ -262,19 +195,17 @@ ${toolbarHtml}
 </html>`;
   }
 
-  const claroHtml = renderTemplatesHtml('claro', true, false);
-  const oscuroHtml = renderTemplatesHtml('oscuro', true, false);
-  const claroBloquesHtml = renderTemplatesHtml('claro', true, true);
-  const oscuroBloquesHtml = renderTemplatesHtml('oscuro', true, true);
+  const claroHtml = renderTemplatesHtml('claro', true);
+  const oscuroHtml = renderTemplatesHtml('oscuro', true);
   const defaultHtml = claroHtml;
 
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-claro.html'), claroHtml, 'utf8');
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-oscuro.html'), oscuroHtml, 'utf8');
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic.html'), defaultHtml, 'utf8');
   fs.writeFileSync(path.join(recursosDir, 'plantilla-saasw-lideres-tic.html'), defaultHtml, 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-claro.html'), claroBloquesHtml, 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-oscuro.html'), oscuroBloquesHtml, 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques.html'), claroBloquesHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-claro.html'), claroHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-oscuro.html'), oscuroHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques.html'), defaultHtml, 'utf8');
 
   console.log('✓ All templates successfully updated with 20px generous card spacing!');
 }
