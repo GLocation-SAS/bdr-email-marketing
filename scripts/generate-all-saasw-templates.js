@@ -12,31 +12,33 @@ async function buildAllTemplates() {
   const recursosDir = path.join(__dirname, '../recursos');
 
   // Asegurar que las tarjetas y rodajas estén actualizadas
-  require('./build-cards-and-templates.js');
+  const { buildAllCards } = require('./build-cards-and-templates.js');
+  await buildAllCards();
 
   function renderTemplatesHtml(theme = 'claro', includeToolbar = true) {
     const isDark = theme === 'oscuro';
     const outerBg = isDark ? '#0B0F19' : '#F0F4F9';
     const textMuted = isDark ? '#94A3B8' : '#64748B';
     const blocksBase = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
+    const v = '?v=20261111c';
 
-    const b1Url = `${blocksBase}/saasw-01-hero-${theme}.png`;
-    const b2Url = `${blocksBase}/saasw-02-trabajadores-${theme}.png`;
-    const b3Url = `${blocksBase}/saasw-03-cta-${theme}.png`;
-    const b4Url = `${blocksBase}/saasw-04-ecosistema-${theme}.png`;
-    const b4aUrl = `${blocksBase}/saasw-04a-eco-glocation-${theme}.png`;
-    const b4bUrl = `${blocksBase}/saasw-04b-eco-homoagenticus-${theme}.png`;
-    const b4cUrl = `${blocksBase}/saasw-04c-eco-preagentica-${theme}.png`;
-    const b5Url = `${blocksBase}/saasw-05-firma-${theme}.png`;
-    const b5aUrl = `${blocksBase}/saasw-05a-cintillo-${theme}.png`;
-    const b5bUrl = `${blocksBase}/saasw-05b-firma-paula-${theme}.png`;
-    const b5cUrl = `${blocksBase}/saasw-05c-boton-glocation-${theme}.png`;
-    const b5dUrl = `${blocksBase}/saasw-05d-boton-homoagenticus-${theme}.png`;
-    const b6Url = `${blocksBase}/saasw-06-legal-${theme}.png`;
+    const b1Url = `${blocksBase}/saasw-01-hero-${theme}.png${v}`;
+    const b2Url = `${blocksBase}/saasw-02-trabajadores-${theme}.png${v}`;
+    const b3Url = `${blocksBase}/saasw-03-cta-${theme}.png${v}`;
+    const b4Url = `${blocksBase}/saasw-04-ecosistema-${theme}.png${v}`;
+    const b4aUrl = `${blocksBase}/saasw-04a-eco-glocation-${theme}.png${v}`;
+    const b4bUrl = `${blocksBase}/saasw-04b-eco-homoagenticus-${theme}.png${v}`;
+    const b4cUrl = `${blocksBase}/saasw-04c-eco-preagentica-${theme}.png${v}`;
+    const b5Url = `${blocksBase}/saasw-05-firma-${theme}.png${v}`;
+    const b5aUrl = `${blocksBase}/saasw-05a-cintillo-${theme}.png${v}`;
+    const b5bUrl = `${blocksBase}/saasw-05b-firma-paula-${theme}.png${v}`;
+    const b5cUrl = `${blocksBase}/saasw-05c-boton-glocation-${theme}.png${v}`;
+    const b5dUrl = `${blocksBase}/saasw-05d-boton-homoagenticus-${theme}.png${v}`;
+    const b6Url = `${blocksBase}/saasw-06-legal-${theme}.png${v}`;
 
     const b1Height = isDark ? 560 : 554;
     const b2Height = 465;
-    const b3Height = 340;
+    const b3Height = 275;
     const b4Height = 195;
     const b5Height = 160;
 
@@ -140,14 +142,14 @@ ${toolbarHtml}
 
             <!-- BLOQUE 1 · HERO & TRABAJADORES (1 SOLA TARJETA UNIDA CON ENLACES INDEPENDIENTES) -->
             <tr>
-              <td align="center" style="padding:0 0 10px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 4px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <div style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b1Url}" width="660" height="${b1Height}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo." border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="https://citas.glocation.co/?theme=${theme === 'oscuro' ? 'dark' : 'light'}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b2Url}" width="660" height="${b2Height}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></div>
               </td>
             </tr>
 
             <!-- BLOQUE 2 · CTA DIAGNÓSTICO COGNITIVO (TARJETA INDEPENDIENTE FLOTANTE) -->
             <tr>
-              <td align="center" style="padding:0 0 10px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 4px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <a href="https://citas.glocation.co/?theme=${theme === 'oscuro' ? 'dark' : 'light'}" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
                   <img src="${b3Url}" width="660" height="${b3Height}" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
                 </a>
@@ -156,7 +158,7 @@ ${toolbarHtml}
 
             <!-- BLOQUE 3 · TARJETA ECOSISTEMA (1 TARJETA UNIDA DIVIDIDA EN 3 ENLACES INDEPENDIENTES) -->
             <tr>
-              <td align="center" style="padding:0 0 10px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 4px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <div style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4aUrl}" width="660" height="80" alt="glocation.co · Plataforma Comercial SaaSW" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4bUrl}" width="660" height="53" alt="homoagenticus.co · El Manifiesto del Homo agenticus" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4cUrl}" width="660" height="62" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></div>
               </td>
             </tr>
