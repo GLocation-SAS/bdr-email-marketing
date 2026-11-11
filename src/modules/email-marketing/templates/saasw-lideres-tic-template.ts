@@ -435,7 +435,7 @@ export function generateSaaswLideresTicImageEmailHtml(
 
           <!-- BLOQUE 1 · CABECERA Y HERO — SAASW LÍDERES TIC -->
           <tr>
-            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
               <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
                 <img src="${block1HeroUrl}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador." width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
               </a>
@@ -444,14 +444,14 @@ export function generateSaaswLideresTicImageEmailHtml(
 
           <!-- BLOQUE 2 · TRES TRABAJADORES COGNITIVOS TIC -->
           <tr>
-            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
               <img src="${block2WorkersUrl}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
             </td>
           </tr>
 
           <!-- BLOQUE 3 · CTA — DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
-            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
               <a href="${c.ctaButtonUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
                 <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
               </a>
@@ -460,7 +460,7 @@ export function generateSaaswLideresTicImageEmailHtml(
 
           <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES -->
           <tr>
-            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
               <img src="${block4EcosystemUrl}" alt="Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
             </td>
           </tr>
@@ -468,7 +468,7 @@ export function generateSaaswLideresTicImageEmailHtml(
           <!-- BLOQUE 5 · FIRMA COMERCIAL PAULA ROZO Y DERECHOS RESERVADOS -->
           <tr>
             <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="mailto:${c.senderEmail}" style="display: block; text-decoration: none; border: 0;">
+              <a href="mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation&body=Hola%20Paula%2C%20me%20gustar%C3%ADa%20coordinar%20una%20sesi%C3%B3n%20de%2030%20minutos%20sobre%20Trabajadores%20Cognitivos%20para%20nuestra%20oficina%20TIC." style="display: block; text-decoration: none; border: 0;">
                 <img src="${block5FooterUrl}" alt="Paula Rozo — BDR GLocation" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
               </a>
             </td>

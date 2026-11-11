@@ -36,6 +36,7 @@ import { assetUrl } from "@/lib/utils";
 import {
   defaultSaaswLideresTicConfig,
   generateSaaswLideresTicHtml,
+  generateSaaswLideresTicImageEmailHtml,
 } from "../templates/saasw-lideres-tic-template";
 
 export function SaaswEmailPreviewer() {
@@ -222,71 +223,33 @@ export function SaaswEmailPreviewer() {
     return { slices, fullCanvas: canvas };
   }, [c.ctaButtonUrl, c.senderEmail, c.websiteUrl, isDark]);
 
-  // Construye la estructura HTML idéntica a la otra campaña:
-  // 5 bloques en imágenes PNG 2x incrustadas dentro de una tabla de 600px compatible con Gmail/Outlook
+  // Construye la estructura HTML idéntica a la campaña de Jefes TI:
+  // 5 bloques en imágenes PNG públicas alojadas en GitHub dentro de una tabla de 600px
+  // compatible con cualquier cliente de correo (Gmail, Outlook, Mailchimp, Brevo, HubSpot)
   // con el Bloque CTA enlazado a https://citas.glocation.co/?theme=light
   const buildExportHtml = React.useCallback(async (): Promise<string> => {
-    const result = await sliceEmailBlocks();
-    if (!result) return "";
+    // 1. Guardar automáticamente los bloques PNG en public/email-blocks/
+    try {
+      const result = await sliceEmailBlocks();
+      if (result && result.slices.length > 0) {
+        const suffix = theme === "light" ? "claro" : "oscuro";
+        await fetch("/api/save-blocks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ slices: result.slices, suffix }),
+        }).catch(() => { });
+      }
+    } catch (err) {
+      console.warn("Auto-save blocks warning:", err);
+    }
 
-    const blockRows = result.slices.map((slice) => {
-      const imgTag = `<img src="${slice.dataUrl}" alt="${slice.step} — ${slice.title}" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />`;
-      const wrapped = slice.href
-        ? `<a href="${slice.href}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">${imgTag}</a>`
-        : imgTag;
-
-      return `          <!-- ${slice.step.toUpperCase()} · ${slice.title.toUpperCase()} -->
-          <tr>
-            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
-              ${wrapped}
-            </td>
-          </tr>`;
+    // 2. Retorna estructura idéntica a campana-jefes-ti con URLs públicas de GitHub y CTA activo
+    return generateSaaswLideresTicImageEmailHtml({
+      ...c,
+      theme,
+      ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
     });
-
-    return `<!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Su oficina TIC no necesita más software. Necesita fuerza laboral que entregue proyectos terminados.</title>
-  <style type="text/css">
-    body, table, td, a {
-      -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
-    }
-    table, td {
-      mso-table-lspace: 0pt;
-      mso-table-rspace: 0pt;
-    }
-    img {
-      -ms-interpolation-mode: bicubic;
-      border: 0;
-      outline: none;
-      text-decoration: none;
-      display: block;
-    }
-    body {
-      margin: 0 !important;
-      padding: 0 !important;
-      width: 100% !important;
-      background-color: ${outerBg};
-    }
-  </style>
-</head>
-<body style="margin: 0; padding: 0; width: 100% !important; background-color: ${outerBg};">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${outerBg}" style="width: 100%; border-collapse: collapse; background-color: ${outerBg}; margin: 0; padding: 0;">
-    <tr>
-      <td align="center" style="padding: 20px 10px;">
-        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 100%; border-collapse: collapse; margin: 0 auto;">
-${blockRows.join("\n\n")}
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>`;
-  }, [outerBg, sliceEmailBlocks]);
+  }, [c, theme, sliceEmailBlocks]);
 
   const handleCopyHtml = async () => {
     if (downloadingFormat) return;
@@ -364,7 +327,14 @@ ${blockRows.join("\n\n")}
         await new Promise((resolve) => setTimeout(resolve, 250));
       }
 
-      toast.success("Los 5 bloques PNG se descargaron correctamente");
+      // Guarda automáticamente copias directas en public/email-blocks/
+      await fetch("/api/save-blocks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slices: result.slices, suffix }),
+      }).catch(() => { });
+
+      toast.success("Los 5 bloques PNG se descargaron y sincronizaron correctamente");
     } catch (err) {
       console.error("Error al descargar los 5 bloques:", err);
       toast.error("Error al descargar los bloques PNG");
@@ -879,809 +849,820 @@ ${blockRows.join("\n\n")}
                                     style={{
                                       border: isDark
                                         ? "1px solid #1E4E6B"
+                                        : "1px solid rgb(184,220,240)",
                                       borderRadius: "999px",
                                       padding: "4px 14px",
                                       backgroundColor: isDark
                                         ? "#0F293A"
-                                        < span
-                                      style={{
-                                        fontFamily:
-                                  '"SF Mono",Consolas,Monaco,monospace',
-                                  fontSize: "11px",
-                                  fontWeight: 700,
-                                  letterSpacing: "0.08em",
-                                  color: isDark
-                                  ? "rgb(56,189,248)"
-                                  : "rgb(30,112,148)",
-                                      }}
-                                    >
-                                  {c.eyebrowPill}
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-
-                        <table
-                          border={0}
-                          cellSpacing={0}
-                          cellPadding={0}
-                          style={{ marginBottom: "16px" }}
-                          role="presentation"
-                        >
-                          <tbody>
-                            <tr>
-                              <td
-                                style={{
-                                  border: isDark
-                                    ? "1px solid #784E0B"
-                                    : "1px solid rgb(252,211,77)",
-                                  borderRadius: "8px",
-                                  backgroundColor: isDark
-                                    ? "#2E2008"
-                                    : "rgb(254,243,199)",
-                                }}
-                                fontFamily:
-                                          '"SF Mono",Consolas,Monaco,monospace',
-                              fontSize: "11px",
-                              fontWeight: 700,
-                              letterSpacing: "0.05em",
-                              color: isDark
-                              ? "rgb(251,191,36)"
-                              : "rgb(146,64,14)",
-                                      }}
-                                    >
-                              {c.warningBanner}
-                            </span>
-                          </tr>
-                      </tbody>
-                    </table>
-
-                    <h1
-                      style={{
-                        margin: "0px 0px 18px",
-                        fontFamily:
-                          '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',
-                        fontSize: "24px",
-                        fontWeight: 800,
-                        lineHeight: 1.25,
-                        letterSpacing: "-0.02em",
-                        color: titleColor,
-                      }}
-                    >
-                      {c.headlinePart1}{" "}
-                      <span
-                        style={{
-                          fontFamily:
-                            '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',
-                          color: "rgb(34,119,156)",
-                        }}
-                      >
-                        {c.headlineHighlight}
-                      </span>{" "}
-                      {c.headlinePart2}
-                    </h1>
-
-                    <p
-                      style={{
-                        margin: "0px 0px 20px",
-                        fontSize: "14px",
-                        lineHeight: 1.6,
-                        color: bodyColor,
-                      }}
-                    >
-                      {c.greeting}
-                    </p>
-                    <p
-                      style={{
-                        margin: "0px 0px 24px",
-                        fontSize: "14px",
-                        lineHeight: 1.6,
-                        color: bodyColor,
-                      }}
-                      dangerouslySetInnerHTML={{
-                        __html: c.introParagraphHtml,
-                      }}
-                    />
-                  </td>
-                </tr>
-
-                {/* 3 TARJETAS DE TRABAJADORES COGNITIVOS */}
-                <tr data-saasw-block="workers">
-                  <td
-                    style={{
-                      padding: "0px 36px 28px",
-                      backgroundColor: cardBg,
-                    }}
-                  >
-                    <table
-                      width="100%"
-                      border={0}
-                      cellSpacing={0}
-                      cellPadding={0}
-                      role="presentation"
-                    >
-                      <tbody>
-                        <tr>
-                          <td
-                            style={{
-                              padding: "16px",
-                              border: `1px solid ${subtleBorder}`,
-                              borderRadius: "12px",
-                              marginBottom: "12px",
-                              backgroundColor: subtleBg,
-                            }}
-                          >
-                            <table
-                              width="100%"
-                              border={0}
-                              cellSpacing={0}
-                              cellPadding={0}
-                              role="presentation"
-                            >
-                              <tbody>
-                                <tr>
-                                  <td width={36} valign="top">
-                                    <div
-                                      style={{
-                                        width: "30px",
-                                        height: "30px",
-                                        borderRadius: "8px",
-                                        textAlign: "center",
-                                        lineHeight: "30px",
-                                        fontSize: "15px",
-                                        backgroundColor:
-                                          "rgb(224,242,254)",
-                                      }}
-                                    >
-                                      📋
-                                    </div>
-                                  </td>
-                                  <td style={{ paddingLeft: "12px" }}>
-                                    <b
-                                      style={{
-                                        fontFamily:
-                                          "-apple-system,BlinkMacSystemFont,sans-serif",
-                                        fontSize: "13px",
-                                        color: titleColor,
-                                      }}
-                                    >
-                                      {c.card1Title}
-                                    </b>
-                                    <p
-                                      style={{
-                                        margin: "4px 0px 6px",
-                                        fontSize: "12px",
-                                        lineHeight: 1.45,
-                                        color: mutedColor,
-                                      }}
-                                      dangerouslySetInnerHTML={{
-                                        __html: c.card1DescriptionHtml,
-                                      }}
-                                    />
-                                    <span
-                                      style={{
-                                        fontFamily:
-                                          '"SF Mono",Consolas,Monaco,monospace',
-                                        fontSize: "10px",
-                                        fontWeight: 600,
-                                        color: "rgb(2,132,199)",
-                                      }}
-                                    >
-                                      {c.card1Metric}
-                                    </span>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height={12}></td>
-                        </tr>
-
-                        <tr>
-                          <td
-                            style={{
-                              padding: "16px",
-                              border: `1px solid ${subtleBorder}`,
-                              borderRadius: "12px",
-                              backgroundColor: subtleBg,
-                            }}
-                          >
-                            <table
-                              width="100%"
-                              border={0}
-                              cellSpacing={0}
-                              cellPadding={0}
-                              role="presentation"
-                            >
-                              <tbody>
-                                <tr>
-                                  <td width={36} valign="top">
-                                    <div
-                                      style={{
-                                        width: "30px",
-                                        height: "30px",
-                                        borderRadius: "8px",
-                                        textAlign: "center",
-                                        lineHeight: "30px",
-                                        fontSize: "15px",
-                                        backgroundColor:
-                                          "rgb(220,252,231)",
-                                      }}
-                                    >
-                                      🛡️
-                                    </div>
-                                  </td>
-                                  <td style={{ paddingLeft: "12px" }}>
-                                    <b
-                                      style={{
-                                        fontFamily:
-                                          "-apple-system,BlinkMacSystemFont,sans-serif",
-                                        fontSize: "13px",
-                                        color: titleColor,
-                                      }}
-                                    >
-                                      {c.card2Title}
-                                    </b>
-                                    <p
-                                      style={{
-                                        margin: "4px 0px 6px",
-                                        fontSize: "12px",
-                                        lineHeight: 1.45,
-                                        color: mutedColor,
-                                      }}
-                                      dangerouslySetInnerHTML={{
-                                        __html: c.card2DescriptionHtml,
-                                      }}
-                                    />
-                                    <span
-                                      style={{
-                                        fontFamily:
-                                          '"SF Mono",Consolas,Monaco,monospace',
-                                        fontSize: "10px",
-                                        fontWeight: 600,
-                                        color: "rgb(22,163,74)",
-                                      }}
-                                    >
-                                      {c.card2Metric}
-                                    </span>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td height={12}></td>
-                        </tr>
-
-                        <tr>
-                          <td
-                            style={{
-                              padding: "16px",
-                              border: `1px solid ${subtleBorder}`,
-                              borderRadius: "12px",
-                              backgroundColor: subtleBg,
-                            }}
-                          >
-                            <table
-                              width="100%"
-                              border={0}
-                              cellSpacing={0}
-                              cellPadding={0}
-                              role="presentation"
-                            >
-                              <tbody>
-                                <tr>
-                                  <td width={36} valign="top">
-                                    <div
-                                      style={{
-                                        width: "30px",
-                                        height: "30px",
-                                        borderRadius: "8px",
-                                        textAlign: "center",
-                                        lineHeight: "30px",
-                                        fontSize: "15px",
-                                        backgroundColor:
-                                          "rgb(243,232,255)",
-                                      }}
-                                    >
-                                      ⚡
-                                    </div>
-                                  </td>
-                                  <td style={{ paddingLeft: "12px" }}>
-                                    <b
-                                      style={{
-                                        fontFamily:
-                                          "-apple-system,BlinkMacSystemFont,sans-serif",
-                                        fontSize: "13px",
-                                        color: titleColor,
-                                      }}
-                                    >
-                                      {c.card3Title}
-                                    </b>
-                                    <p
-                                      style={{
-                                        margin: "4px 0px 6px",
-                                        fontSize: "12px",
-                                        lineHeight: 1.45,
-                                        color: mutedColor,
-                                      }}
-                                      dangerouslySetInnerHTML={{
-                                        __html: c.card3DescriptionHtml,
-                                      }}
-                                    />
-                                    <span
-                                      style={{
-                                        fontFamily:
-                                          '"SF Mono",Consolas,Monaco,monospace',
-                                        fontSize: "10px",
-                                        fontWeight: 600,
-                                        color: "rgb(147,51,234)",
-                                      }}
-                                    >
-                                      {c.card3Metric}
-                                    </span>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>
-
-                {/* BLOQUE CTA · DIAGNÓSTICO COGNITIVO 30 MINUTOS */}
-                <tr data-saasw-block="cta">
-                  <td
-                    style={{
-                      padding: "0px 36px 36px",
-                      backgroundColor: cardBg,
-                    }}
-                  >
-                    <table
-                      width="100%"
-                      border={0}
-                      cellSpacing={0}
-                      cellPadding={0}
-                      style={{
-                        border: "1.5px solid rgb(34,119,156)",
-                        borderRadius: "14px",
-                        backgroundColor: ctaBoxBg,
-                      }}
-                      role="presentation"
-                    >
-                      <tbody>
-                        <tr>
-                          <td align="center" style={{ padding: "24px" }}>
-                            style={{
-                              fontFamily:
-                                '"SF Mono",Consolas,Monaco,monospace',
-                              fontSize: "10px",
-                              fontWeight: 700,
-                              letterSpacing: "0.1em",
-                              color: isDark
-                                ? "rgb(56,189,248)"
-                                : "rgb(34,119,156)",
-                            }}
-                                    >
-                            {c.ctaEyebrow}
-                          </span>
-                          <h3
-                            style={{
-                              margin: "8px 0px 12px",
-                              fontSize: "17px",
-                              fontWeight: 700,
-                              color: titleColor,
-                            }}
-                          >
-                            {c.ctaTitle}
-                          </h3>
-                          <p
-                            style={{
-                              margin: "0px 0px 20px",
-                              fontSize: "13px",
-                              lineHeight: 1.5,
-                              maxWidth: "480px",
-                              color: mutedColor,
-                            }}
-                          >
-                            {c.ctaDescription}
-                          </p>
-
-                          <table
-                            border={0}
-                            cellSpacing={0}
-                            cellPadding={0}
-                            role="presentation"
-                          >
-                            <tbody>
-                              <tr>
-                                <td
-                                  align="center"
-                                  style={{
-                                    background:
-                                      "linear-gradient(90deg,rgb(31,110,145) 0%,rgb(74,100,160) 60%,rgb(110,92,152) 100%)",
-                                    backgroundColor:
-                                      "rgb(31,110,145)",
-                                    borderRadius: "8px",
-                                  }}
-                                >
-                                  <a
-                                    href={c.ctaButtonUrl}
-                                    rel="noopener noreferrer"
-                                    style={{
-                                      display: "inline-block",
-                                      padding: "13px 28px",
-                                      fontFamily:
-                                        "-apple-system,BlinkMacSystemFont,sans-serif",
-                                      fontSize: "13px",
-                                      fontWeight: 700,
-                                      textDecoration: "none",
-                                      letterSpacing: "0.03em",
-                                      color: "rgb(255,255,255)",
+                                        : "rgb(230,243,250)",
                                     }}
-                                    target="_blank"
                                   >
-                                    {c.ctaButtonText}
-                                  </a>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                                    <span
+                                      style={{
+                                        fontFamily:
+                                          '"SF Mono",Consolas,Monaco,monospace',
+                                        fontSize: "11px",
+                                        fontWeight: 700,
+                                        letterSpacing: "0.08em",
+                                        color: isDark
+                                          ? "rgb(56,189,248)"
+                                          : "rgb(30,112,148)",
+                                      }}
+                                    >
+                                      {c.eyebrowPill}
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
 
-                          <p
-                            style={{
-                              margin: "14px 0px 0px",
-                              fontSize: "11px",
-                              color: "rgb(123,140,163)",
-                            }}
-                          >
-                            {c.ctaSubtext}
-                          </p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
+                            <table
+                              border={0}
+                              cellSpacing={0}
+                              cellPadding={0}
+                              style={{ marginBottom: "16px" }}
+                              role="presentation"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td
+                                    style={{
+                                      border: isDark
+                                        ? "1px solid #784E0B"
+                                        : "1px solid rgb(252,211,77)",
+                                      borderRadius: "8px",
+                                      padding: "6px 12px",
+                                      backgroundColor: isDark
+                                        ? "#2E2008"
+                                        : "rgb(254,243,199)",
+                                    }}
+                                  >
+                                    <span
+                                      style={{
+                                        fontFamily:
+                                          '"SF Mono",Consolas,Monaco,monospace',
+                                        fontSize: "11px",
+                                        fontWeight: 700,
+                                        letterSpacing: "0.05em",
+                                        color: isDark
+                                          ? "rgb(251,191,36)"
+                                          : "rgb(146,64,14)",
+                                      }}
+                                    >
+                                      {c.warningBanner}
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
 
-              {/* ECOSISTEMA EN VIVO */}
-              <tr data-saasw-block="ecosystem">
-                <td
-                  style={{
-                    padding: "20px 36px",
-                    borderTop: `1px solid ${dividerColor}`,
-                    borderBottom: `1px solid ${dividerColor}`,
-                    backgroundColor: subtleBg,
-                  }}
-                >
-                  <table
-                    width="100%"
-                    border={0}
-                    cellSpacing={0}
-                    cellPadding={0}
-                    role="presentation"
-                  >
-                    <tbody>
-                      <tr>
-                        <td align="center">
-                          <span
-                            style={{
-                              fontFamily:
-                                '"SF Mono",Consolas,Monaco,monospace',
-                              fontSize: "10px",
-                              fontWeight: 700,
-                              letterSpacing: "0.08em",
-                              textTransform: "uppercase",
-                              color: mutedColor,
-                            }}
-                          >
-                            EXPLORE NUESTRO ECOSISTEMA EN VIVO:
-                          </span>
-                          <div
-                            style={{
-                              marginTop: "8px",
-                              fontSize: "12px",
-                              fontFamily:
-                                "-apple-system,BlinkMacSystemFont,sans-serif",
-                              lineHeight: 1.6,
-                            }}
-                          >
-                            <a
-                              href={c.websiteUrl}
+                            <h1
                               style={{
-                                fontWeight: 700,
-                                textDecoration: "none",
+                                margin: "0px 0px 18px",
                                 fontFamily:
-                                  "-apple-system,BlinkMacSystemFont,sans-serif",
-                                color: "rgb(34,119,156)",
-                              }}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              glocation.co
-                            </a>{" "}
-                            <span
-                              style={{
-                                fontFamily:
-                                  "-apple-system,BlinkMacSystemFont,sans-serif",
-                                color: "rgb(123,140,163)",
+                                  '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',
+                                fontSize: "24px",
+                                fontWeight: 800,
+                                lineHeight: 1.25,
+                                letterSpacing: "-0.02em",
+                                color: titleColor,
                               }}
                             >
-                              (Plataforma Comercial SaaSW)
-                            </span>
-                            <br />
-                            <a
-                              href={c.manifestoUrl}
-                              style={{
-                                fontWeight: 700,
-                                textDecoration: "none",
-                                fontFamily:
-                                  "-apple-system,BlinkMacSystemFont,sans-serif",
-                                color: "rgb(122,92,255)",
-                              }}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              homoagenticus.co
-                            </a>{" "}
-                            <span
-                              style={{
-                                fontFamily:
-                                  "-apple-system,BlinkMacSystemFont,sans-serif",
-                                color: "rgb(123,140,163)",
-                              }}
-                            >
-                              (El Manifiesto del Homo agenticus)
-                            </span>
-                            <br />
-                            <a
-                              href={c.preagenticaUrl}
-                              style={{
-                                fontWeight: 600,
-                                textDecoration: "none",
-                                fontFamily:
-                                  "-apple-system,BlinkMacSystemFont,sans-serif",
-                                color: mutedColor,
-                              }}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              preagentica.glocation.co
-                            </a>{" "}
-                            <span
-                              style={{
-                                fontFamily:
-                                  "-apple-system,BlinkMacSystemFont,sans-serif",
-                                color: "rgb(123,140,163)",
-                              }}
-                            >
-                              (Nuestra Herencia Pre-IA)
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
+                              {c.headlinePart1}{" "}
+                              <span
+                                style={{
+                                  fontFamily:
+                                    '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',
+                                  color: "rgb(34,119,156)",
+                                }}
+                              >
+                                {c.headlineHighlight}
+                              </span>{" "}
+                              {c.headlinePart2}
+                            </h1>
 
-              {/* CINTILLO HOLDING / PARTNER / ISO */}
-              <tr>
-                <td
-                  style={{
-                    padding: "18px 36px",
-                    borderTop: `1px solid ${dividerColor}`,
-                    borderBottom: `1px solid ${dividerColor}`,
-                    backgroundColor: subtleBg,
-                  }}
-                >
-                  <table
-                    width="100%"
-                    border={0}
-                    cellSpacing={0}
-                    cellPadding={0}
-                    role="presentation"
-                  >
-                    <tbody>
-                      <tr>
-                        <td align="center">
-                          <span
-                            style={{
-                              fontFamily:
-                                '"SF Mono",Consolas,Monaco,monospace',
-                              fontSize: "10px",
-                              fontWeight: 600,
-                              letterSpacing: "0.06em",
-                              textTransform: "uppercase",
-                              color: mutedColor,
-                            }}
-                          >
-                            HOLDING SERVINFORMACIÓN (27 AÑOS)
-                            &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER
-                            &nbsp;•&nbsp; NORMA ISO 27001
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-
-              {/* FIRMA COMERCIAL · PAULA ROZO CON FOTO OFICIAL */}
-              <tr data-saasw-block="footer">
-                <td
-                  style={{
-                    padding: "28px 36px 36px",
-                    backgroundColor: cardBg,
-                  }}
-                >
-                  <table
-                    width="100%"
-                    border={0}
-                    cellSpacing={0}
-                    cellPadding={0}
-                    role="presentation"
-                  >
-                    <tbody>
-                      <tr>
-                        <td width={56} valign="top">
-                          <a
-                            href={`mailto:${c.senderEmail}`}
-                            style={{
-                              textDecoration: "none",
-                              border: 0,
-                              display: "inline-block",
-                            }}
-                          >
-                            <img
-                              data-email-img="avatar-paula"
-                              src={assetUrl(
-                                isDark
-                                  ? "/email-icons/avatar-paula-dark.png"
-                                  : "/email-icons/avatar-paula-light.png"
-                              )}
-                              alt={c.senderName}
-                              width={52}
-                              height={52}
+                            <p
                               style={{
-                                display: "block",
-                                width: "52px",
-                                height: "52px",
-                                border: 0,
-                                borderRadius: "50%",
-                                objectFit: "cover",
+                                margin: "0px 0px 20px",
+                                fontSize: "14px",
+                                lineHeight: 1.6,
+                                color: bodyColor,
+                              }}
+                            >
+                              {c.greeting}
+                            </p>
+                            <p
+                              style={{
+                                margin: "0px 0px 24px",
+                                fontSize: "14px",
+                                lineHeight: 1.6,
+                                color: bodyColor,
+                              }}
+                              dangerouslySetInnerHTML={{
+                                __html: c.introParagraphHtml,
                               }}
                             />
-                          </a>
-                        </td>
-                        <td
-                          style={{ paddingLeft: "14px" }}
-                          valign="top"
-                        >
-                          <b
+                          </td>
+                        </tr>
+
+                        {/* 3 TARJETAS DE TRABAJADORES COGNITIVOS */}
+                        <tr data-saasw-block="workers">
+                          <td
                             style={{
-                              fontSize: "14px",
-                              color: titleColor,
+                              padding: "0px 36px 28px",
+                              backgroundColor: cardBg,
                             }}
                           >
-                            {c.senderName}
-                          </b>
-                          <br />
-                          <span
+                            <table
+                              width="100%"
+                              border={0}
+                              cellSpacing={0}
+                              cellPadding={0}
+                              role="presentation"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td
+                                    style={{
+                                      padding: "16px",
+                                      border: `1px solid ${subtleBorder}`,
+                                      borderRadius: "12px",
+                                      marginBottom: "12px",
+                                      backgroundColor: subtleBg,
+                                    }}
+                                  >
+                                    <table
+                                      width="100%"
+                                      border={0}
+                                      cellSpacing={0}
+                                      cellPadding={0}
+                                      role="presentation"
+                                    >
+                                      <tbody>
+                                        <tr>
+                                          <td width={36} valign="top">
+                                            <div
+                                              style={{
+                                                width: "30px",
+                                                height: "30px",
+                                                borderRadius: "8px",
+                                                textAlign: "center",
+                                                lineHeight: "30px",
+                                                fontSize: "15px",
+                                                backgroundColor:
+                                                  "rgb(224,242,254)",
+                                              }}
+                                            >
+                                              📋
+                                            </div>
+                                          </td>
+                                          <td style={{ paddingLeft: "12px" }}>
+                                            <b
+                                              style={{
+                                                fontFamily:
+                                                  "-apple-system,BlinkMacSystemFont,sans-serif",
+                                                fontSize: "13px",
+                                                color: titleColor,
+                                              }}
+                                            >
+                                              {c.card1Title}
+                                            </b>
+                                            <p
+                                              style={{
+                                                margin: "4px 0px 6px",
+                                                fontSize: "12px",
+                                                lineHeight: 1.45,
+                                                color: mutedColor,
+                                              }}
+                                              dangerouslySetInnerHTML={{
+                                                __html: c.card1DescriptionHtml,
+                                              }}
+                                            />
+                                            <span
+                                              style={{
+                                                fontFamily:
+                                                  '"SF Mono",Consolas,Monaco,monospace',
+                                                fontSize: "10px",
+                                                fontWeight: 600,
+                                                color: "rgb(2,132,199)",
+                                              }}
+                                            >
+                                              {c.card1Metric}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td height={12}></td>
+                                </tr>
+
+                                <tr>
+                                  <td
+                                    style={{
+                                      padding: "16px",
+                                      border: `1px solid ${subtleBorder}`,
+                                      borderRadius: "12px",
+                                      backgroundColor: subtleBg,
+                                    }}
+                                  >
+                                    <table
+                                      width="100%"
+                                      border={0}
+                                      cellSpacing={0}
+                                      cellPadding={0}
+                                      role="presentation"
+                                    >
+                                      <tbody>
+                                        <tr>
+                                          <td width={36} valign="top">
+                                            <div
+                                              style={{
+                                                width: "30px",
+                                                height: "30px",
+                                                borderRadius: "8px",
+                                                textAlign: "center",
+                                                lineHeight: "30px",
+                                                fontSize: "15px",
+                                                backgroundColor:
+                                                  "rgb(220,252,231)",
+                                              }}
+                                            >
+                                              🛡️
+                                            </div>
+                                          </td>
+                                          <td style={{ paddingLeft: "12px" }}>
+                                            <b
+                                              style={{
+                                                fontFamily:
+                                                  "-apple-system,BlinkMacSystemFont,sans-serif",
+                                                fontSize: "13px",
+                                                color: titleColor,
+                                              }}
+                                            >
+                                              {c.card2Title}
+                                            </b>
+                                            <p
+                                              style={{
+                                                margin: "4px 0px 6px",
+                                                fontSize: "12px",
+                                                lineHeight: 1.45,
+                                                color: mutedColor,
+                                              }}
+                                              dangerouslySetInnerHTML={{
+                                                __html: c.card2DescriptionHtml,
+                                              }}
+                                            />
+                                            <span
+                                              style={{
+                                                fontFamily:
+                                                  '"SF Mono",Consolas,Monaco,monospace',
+                                                fontSize: "10px",
+                                                fontWeight: 600,
+                                                color: "rgb(22,163,74)",
+                                              }}
+                                            >
+                                              {c.card2Metric}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td height={12}></td>
+                                </tr>
+
+                                <tr>
+                                  <td
+                                    style={{
+                                      padding: "16px",
+                                      border: `1px solid ${subtleBorder}`,
+                                      borderRadius: "12px",
+                                      backgroundColor: subtleBg,
+                                    }}
+                                  >
+                                    <table
+                                      width="100%"
+                                      border={0}
+                                      cellSpacing={0}
+                                      cellPadding={0}
+                                      role="presentation"
+                                    >
+                                      <tbody>
+                                        <tr>
+                                          <td width={36} valign="top">
+                                            <div
+                                              style={{
+                                                width: "30px",
+                                                height: "30px",
+                                                borderRadius: "8px",
+                                                textAlign: "center",
+                                                lineHeight: "30px",
+                                                fontSize: "15px",
+                                                backgroundColor:
+                                                  "rgb(243,232,255)",
+                                              }}
+                                            >
+                                              ⚡
+                                            </div>
+                                          </td>
+                                          <td style={{ paddingLeft: "12px" }}>
+                                            <b
+                                              style={{
+                                                fontFamily:
+                                                  "-apple-system,BlinkMacSystemFont,sans-serif",
+                                                fontSize: "13px",
+                                                color: titleColor,
+                                              }}
+                                            >
+                                              {c.card3Title}
+                                            </b>
+                                            <p
+                                              style={{
+                                                margin: "4px 0px 6px",
+                                                fontSize: "12px",
+                                                lineHeight: 1.45,
+                                                color: mutedColor,
+                                              }}
+                                              dangerouslySetInnerHTML={{
+                                                __html: c.card3DescriptionHtml,
+                                              }}
+                                            />
+                                            <span
+                                              style={{
+                                                fontFamily:
+                                                  '"SF Mono",Consolas,Monaco,monospace',
+                                                fontSize: "10px",
+                                                fontWeight: 600,
+                                                color: "rgb(147,51,234)",
+                                              }}
+                                            >
+                                              {c.card3Metric}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+
+                        {/* BLOQUE CTA · DIAGNÓSTICO COGNITIVO 30 MINUTOS */}
+                        <tr data-saasw-block="cta">
+                          <td
                             style={{
-                              fontSize: "12px",
-                              color: mutedColor,
+                              padding: "0px 36px 36px",
+                              backgroundColor: cardBg,
                             }}
                           >
-                            {c.senderRole}
-                          </span>
-                          <br />
-                          <span
+                            <table
+                              width="100%"
+                              border={0}
+                              cellSpacing={0}
+                              cellPadding={0}
+                              style={{
+                                border: "1.5px solid rgb(34,119,156)",
+                                borderRadius: "14px",
+                                backgroundColor: ctaBoxBg,
+                              }}
+                              role="presentation"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td align="center" style={{ padding: "24px" }}>
+                                    <span
+                                      style={{
+                                        fontFamily:
+                                          '"SF Mono",Consolas,Monaco,monospace',
+                                        fontSize: "10px",
+                                        fontWeight: 700,
+                                        letterSpacing: "0.1em",
+                                        textTransform: "uppercase",
+                                        color: isDark
+                                          ? "rgb(56,189,248)"
+                                          : "rgb(34,119,156)",
+                                      }}
+                                    >
+                                      {c.ctaEyebrow}
+                                    </span>
+                                    <h3
+                                      style={{
+                                        margin: "8px 0px 12px",
+                                        fontSize: "17px",
+                                        fontWeight: 700,
+                                        color: titleColor,
+                                      }}
+                                    >
+                                      {c.ctaTitle}
+                                    </h3>
+                                    <p
+                                      style={{
+                                        margin: "0px 0px 20px",
+                                        fontSize: "13px",
+                                        lineHeight: 1.5,
+                                        maxWidth: "480px",
+                                        color: mutedColor,
+                                      }}
+                                    >
+                                      {c.ctaDescription}
+                                    </p>
+
+                                    <table
+                                      border={0}
+                                      cellSpacing={0}
+                                      cellPadding={0}
+                                      role="presentation"
+                                    >
+                                      <tbody>
+                                        <tr>
+                                          <td
+                                            align="center"
+                                            style={{
+                                              background:
+                                                "linear-gradient(90deg,rgb(31,110,145) 0%,rgb(74,100,160) 60%,rgb(110,92,152) 100%)",
+                                              backgroundColor:
+                                                "rgb(31,110,145)",
+                                              borderRadius: "8px",
+                                            }}
+                                          >
+                                            <a
+                                              href={c.ctaButtonUrl}
+                                              rel="noopener noreferrer"
+                                              style={{
+                                                display: "inline-block",
+                                                padding: "13px 28px",
+                                                fontFamily:
+                                                  "-apple-system,BlinkMacSystemFont,sans-serif",
+                                                fontSize: "13px",
+                                                fontWeight: 700,
+                                                textDecoration: "none",
+                                                letterSpacing: "0.03em",
+                                                color: "rgb(255,255,255)",
+                                              }}
+                                              target="_blank"
+                                            >
+                                              {c.ctaButtonText}
+                                            </a>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+
+                                    <p
+                                      style={{
+                                        margin: "14px 0px 0px",
+                                        fontSize: "11px",
+                                        color: "rgb(123,140,163)",
+                                      }}
+                                    >
+                                      {c.ctaSubtext}
+                                    </p>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+
+                        {/* ECOSISTEMA EN VIVO */}
+                        <tr data-saasw-block="ecosystem">
+                          <td
+                            style={{
+                              padding: "20px 36px",
+                              borderTop: `1px solid ${dividerColor}`,
+                              borderBottom: `1px solid ${dividerColor}`,
+                              backgroundColor: subtleBg,
+                            }}
+                          >
+                            <table
+                              width="100%"
+                              border={0}
+                              cellSpacing={0}
+                              cellPadding={0}
+                              role="presentation"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td align="center">
+                                    <span
+                                      style={{
+                                        fontFamily:
+                                          '"SF Mono",Consolas,Monaco,monospace',
+                                        fontSize: "10px",
+                                        fontWeight: 700,
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                        color: mutedColor,
+                                      }}
+                                    >
+                                      EXPLORE NUESTRO ECOSISTEMA EN VIVO:
+                                    </span>
+                                    <div
+                                      style={{
+                                        marginTop: "8px",
+                                        fontSize: "12px",
+                                        fontFamily:
+                                          "-apple-system,BlinkMacSystemFont,sans-serif",
+                                        lineHeight: 1.6,
+                                      }}
+                                    >
+                                      <a
+                                        href={c.websiteUrl}
+                                        style={{
+                                          fontWeight: 700,
+                                          textDecoration: "none",
+                                          fontFamily:
+                                            "-apple-system,BlinkMacSystemFont,sans-serif",
+                                          color: "rgb(34,119,156)",
+                                        }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        glocation.co
+                                      </a>{" "}
+                                      <span
+                                        style={{
+                                          fontFamily:
+                                            "-apple-system,BlinkMacSystemFont,sans-serif",
+                                          color: "rgb(123,140,163)",
+                                        }}
+                                      >
+                                        (Plataforma Comercial SaaSW)
+                                      </span>
+                                      <br />
+                                      <a
+                                        href={c.manifestoUrl}
+                                        style={{
+                                          fontWeight: 700,
+                                          textDecoration: "none",
+                                          fontFamily:
+                                            "-apple-system,BlinkMacSystemFont,sans-serif",
+                                          color: "rgb(122,92,255)",
+                                        }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        homoagenticus.co
+                                      </a>{" "}
+                                      <span
+                                        style={{
+                                          fontFamily:
+                                            "-apple-system,BlinkMacSystemFont,sans-serif",
+                                          color: "rgb(123,140,163)",
+                                        }}
+                                      >
+                                        (El Manifiesto del Homo agenticus)
+                                      </span>
+                                      <br />
+                                      <a
+                                        href={c.preagenticaUrl}
+                                        style={{
+                                          fontWeight: 600,
+                                          textDecoration: "none",
+                                          fontFamily:
+                                            "-apple-system,BlinkMacSystemFont,sans-serif",
+                                          color: mutedColor,
+                                        }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        preagentica.glocation.co
+                                      </a>{" "}
+                                      <span
+                                        style={{
+                                          fontFamily:
+                                            "-apple-system,BlinkMacSystemFont,sans-serif",
+                                          color: "rgb(123,140,163)",
+                                        }}
+                                      >
+                                        (Nuestra Herencia Pre-IA)
+                                      </span>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+
+                        {/* CINTILLO HOLDING / PARTNER / ISO */}
+                        <tr>
+                          <td
+                            style={{
+                              padding: "18px 36px",
+                              borderTop: `1px solid ${dividerColor}`,
+                              borderBottom: `1px solid ${dividerColor}`,
+                              backgroundColor: subtleBg,
+                            }}
+                          >
+                            <table
+                              width="100%"
+                              border={0}
+                              cellSpacing={0}
+                              cellPadding={0}
+                              role="presentation"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td align="center">
+                                    <span
+                                      style={{
+                                        fontFamily:
+                                          '"SF Mono",Consolas,Monaco,monospace',
+                                        fontSize: "10px",
+                                        fontWeight: 600,
+                                        letterSpacing: "0.06em",
+                                        textTransform: "uppercase",
+                                        color: mutedColor,
+                                      }}
+                                    >
+                                      HOLDING SERVINFORMACIÓN (27 AÑOS)
+                                      &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER
+                                      &nbsp;•&nbsp; NORMA ISO 27001
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+
+                        {/* FIRMA COMERCIAL · PAULA ROZO CON FOTO OFICIAL */}
+                        <tr data-saasw-block="footer">
+                          <td
+                            style={{
+                              padding: "28px 36px 36px",
+                              backgroundColor: cardBg,
+                            }}
+                          >
+                            <table
+                              width="100%"
+                              border={0}
+                              cellSpacing={0}
+                              cellPadding={0}
+                              role="presentation"
+                            >
+                              <tbody>
+                                <tr>
+                                  <td width={56} valign="top">
+                                    <a
+                                      href={`mailto:${c.senderEmail}`}
+                                      style={{
+                                        textDecoration: "none",
+                                        border: 0,
+                                        display: "inline-block",
+                                      }}
+                                    >
+                                      <img
+                                        data-email-img="avatar-paula"
+                                        src={assetUrl(
+                                          isDark
+                                            ? "/email-icons/avatar-paula-dark.png"
+                                            : "/email-icons/avatar-paula-light.png"
+                                        )}
+                                        alt={c.senderName}
+                                        width={52}
+                                        height={52}
+                                        style={{
+                                          display: "block",
+                                          width: "52px",
+                                          height: "52px",
+                                          border: 0,
+                                          borderRadius: "50%",
+                                          objectFit: "cover",
+                                        }}
+                                      />
+                                    </a>
+                                  </td>
+                                  <td
+                                    style={{ paddingLeft: "14px" }}
+                                    valign="top"
+                                  >
+                                    <b
+                                      style={{
+                                        fontSize: "14px",
+                                        color: titleColor,
+                                      }}
+                                    >
+                                      {c.senderName}
+                                    </b>
+                                    <br />
+                                    <span
+                                      style={{
+                                        fontSize: "12px",
+                                        color: mutedColor,
+                                      }}
+                                    >
+                                      {c.senderRole}
+                                    </span>
+                                    <br />
+                                    <span
+                                      style={{
+                                        fontSize: "11px",
+                                        fontWeight: 600,
+                                        color: "rgb(34,119,156)",
+                                      }}
+                                    >
+                                      {c.senderCompany}
+                                    </span>
+                                    <br />
+                                    <span
+                                      style={{
+                                        fontSize: "11px",
+                                        color: "rgb(123,140,163)",
+                                      }}
+                                    >
+                                      <a
+                                        href={`mailto:${c.senderEmail}`}
+                                        style={{
+                                          color: "rgb(34,119,156)",
+                                          textDecoration: "none",
+                                          fontWeight: 600,
+                                        }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        {c.senderEmail}
+                                      </a>{" "}
+                                      &nbsp;|&nbsp;
+                                      <a
+                                        href={c.websiteUrl}
+                                        style={{
+                                          textDecoration: "none",
+                                          fontWeight: 600,
+                                          color: "rgb(34,119,156)",
+                                        }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        glocation.co
+                                      </a>{" "}
+                                      &nbsp;|&nbsp;
+                                      <a
+                                        href={c.manifestoUrl}
+                                        style={{
+                                          textDecoration: "none",
+                                          fontWeight: 600,
+                                          color: "rgb(122,92,255)",
+                                        }}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        homoagenticus.co
+                                      </a>
+                                    </span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    {/* PIE DE DERECHOS RESERVADOS */}
+                    <table
+                      width={600}
+                      border={0}
+                      cellSpacing={0}
+                      cellPadding={0}
+                      style={{
+                        maxWidth: "600px",
+                        width: "100%",
+                        marginTop: "18px",
+                      }}
+                      role="presentation"
+                    >
+                      <tbody>
+                        <tr>
+                          <td
+                            align="center"
                             style={{
                               fontSize: "11px",
-                              fontWeight: 600,
-                              color: "rgb(34,119,156)",
-                            }}
-                          >
-                            {c.senderCompany}
-                          </span>
-                          <br />
-                          <span
-                            style={{
-                              fontSize: "11px",
+                              lineHeight: 1.5,
+                              fontFamily:
+                                "-apple-system,BlinkMacSystemFont,sans-serif",
                               color: "rgb(123,140,163)",
                             }}
                           >
-                            <a
-                              href={`mailto:${c.senderEmail}`}
-                              style={{
-                                color: "rgb(34,119,156)",
-                                textDecoration: "none",
-                                fontWeight: 600,
-                              }}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {c.senderEmail}
-                            </a>{" "}
-                            &nbsp;|&nbsp;
-                            <a
-                              href={c.websiteUrl}
-                              style={{
-                                textDecoration: "none",
-                                fontWeight: 600,
-                                color: "rgb(34,119,156)",
-                              }}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              glocation.co
-                            </a>{" "}
-                            &nbsp;|&nbsp;
-                            <a
-                              href={c.manifestoUrl}
-                              style={{
-                                textDecoration: "none",
-                                fontWeight: 600,
-                                color: "rgb(122,92,255)",
-                              }}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              homoagenticus.co
-                            </a>
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          {/* PIE DE DERECHOS RESERVADOS */}
-          <table
-            width={600}
-            border={0}
-            cellSpacing={0}
-            cellPadding={0}
-            style={{
-              maxWidth: "600px",
-              width: "100%",
-              marginTop: "18px",
-            }}
-            role="presentation"
-          >
-            <tbody>
-              <tr>
-                <td
-                  align="center"
-                  style={{
-                    fontSize: "11px",
-                    lineHeight: 1.5,
-                    fontFamily:
-                      "-apple-system,BlinkMacSystemFont,sans-serif",
-                    color: "rgb(123,140,163)",
-                  }}
-                >
-                  © 2026 GLocation SAS · Bogotá D.C., Colombia.
-                  <br />
-                  Ha recibido este mensaje porque su entidad lidera
-                  proyectos estratégicos de tecnología.
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-    </tbody>
+                            © 2026 GLocation SAS · Bogotá D.C., Colombia.
+                            <br />
+                            Ha recibido este mensaje porque su entidad lidera
+                            proyectos estratégicos de tecnología.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
             </table >
           </div >
         </div >
