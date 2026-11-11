@@ -128,22 +128,48 @@ export function generateSaaswLideresTicHtml(
 <![endif]-->
 <style type="text/css">
   table, td, tr, th {
-    border-collapse: collapse;
-    mso-table-lspace: 0pt;
-    mso-table-rspace: 0pt;
+    border-collapse: collapse !important;
+    mso-table-lspace: 0pt !important;
+    mso-table-rspace: 0pt !important;
   }
   a, a:link, a:visited, a:hover, a:active {
     border: 0 !important;
+    border-style: none !important;
     outline: none !important;
     text-decoration: none !important;
   }
-  img {
+  img, a img {
+    border: 0 !important;
+    border-style: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+    display: block;
+  }
+</style>
+<!--[if mso]>
+<style type="text/css">
+  table, td, tr {
+    border: 0 !important;
+    border-style: none !important;
+    border-collapse: collapse !important;
+    mso-table-lspace: 0pt !important;
+    mso-table-rspace: 0pt !important;
+    mso-border-alt: none !important;
+  }
+  a, a:link, a:visited {
+    border: 0 !important;
+    border-style: none !important;
+    outline: none !important;
+    text-decoration: none !important;
+  }
+  img, a img {
     border: 0 !important;
     border-style: none !important;
     outline: none !important;
     text-decoration: none !important;
   }
 </style>
+<![endif]-->
 </head>
 <body style="margin:0;padding:0;background-color:${outerBg};-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
 <div data-saasw-root="true" style="margin:0px;padding:30px 10px;background-color:${outerBg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
@@ -310,10 +336,10 @@ export function generateSaaswLideresTicHtml(
             </td>
           </tr>
 
-          <!-- BLOQUE CTA · DIAGNÓSTICO COGNITIVO 30 MINUTOS (UN SOLO BLOQUE INTEGRADO SIN BORDES AZULES) -->
+          <!-- BLOQUE CTA · DIAGNÓSTICO COGNITIVO 30 MINUTOS (MISMO BORDE SUTIL QUE TARJETAS SUPERIORES, SIN BORDE AZUL) -->
           <tr>
             <td style="padding:0px 36px 32px;border:none;mso-border-alt:none;background-color:${cardBg};">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="${ctaBoxBg}" style="border:none;border-collapse:collapse;mso-border-alt:none;border-radius:14px;background-color:${ctaBoxBg};">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="${ctaBoxBg}" style="border:1px solid ${subtleBorder};mso-border-alt:1px solid ${subtleBorder};border-radius:14px;background-color:${ctaBoxBg};border-collapse:separate;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                 <tbody><tr>
                   <td align="center" style="padding:24px 20px;border:none;mso-border-alt:none;">
                     <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${isDark ? "#38BDF8" : "rgb(34,119,156)"};">

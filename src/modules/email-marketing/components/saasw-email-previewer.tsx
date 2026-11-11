@@ -232,46 +232,16 @@ export function SaaswEmailPreviewer() {
       setDownloadingFormat("copy-html");
       const fullHtml = await buildExportHtml();
 
-      // Extrae el fragmento HTML autocontenido (el contenedor principal con todos los estilos inline)
-      const rootMatch = fullHtml.match(/<div data-saasw-root="true"[\s\S]*?<\/div>\s*<\/body>/i);
-      const fragment = rootMatch
-        ? rootMatch[0].replace(/<\/body>$/i, "").trim()
-        : fullHtml;
+      let copied = false;
 
-      // 1. Contenedor temporal aislado (NO contenteditable, sin estilos de app) para CF_HTML nativo de Windows (Outlook desktop / Word)
-      let copiedViaDom = false;
-      if (typeof document !== "undefined") {
-        const tempContainer = document.createElement("div");
-        tempContainer.setAttribute("contenteditable", "false");
-        tempContainer.style.position = "fixed";
-        tempContainer.style.left = "-9999px";
-        tempContainer.style.top = "-9999px";
-        tempContainer.style.opacity = "0";
-        tempContainer.style.pointerEvents = "none";
-        tempContainer.innerHTML = fragment;
-        document.body.appendChild(tempContainer);
-
+      // 1. Escritura moderna con ClipboardItem (Chrome, Edge, Safari, Gmail Web)
+      if (
+        typeof window !== "undefined" &&
+        typeof ClipboardItem !== "undefined" &&
+        navigator.clipboard
+      ) {
         try {
-          const sel = window.getSelection();
-          if (sel) {
-            sel.removeAllRanges();
-            const range = document.createRange();
-            range.selectNode(tempContainer.firstElementChild || tempContainer);
-            sel.addRange(range);
-            copiedViaDom = document.execCommand("copy");
-            sel.removeAllRanges();
-          }
-        } catch (e) {
-          console.warn("execCommand fallback:", e);
-        } finally {
-          document.body.removeChild(tempContainer);
-        }
-      }
-
-      // 2. Escritura directa mediante ClipboardItem (para Gmail, Edge, Chrome y clientes web)
-      if (typeof window !== "undefined" && typeof ClipboardItem !== "undefined" && navigator.clipboard) {
-        try {
-          const blobHtml = new Blob([fragment], { type: "text/html" });
+          const blobHtml = new Blob([fullHtml], { type: "text/html" });
           const blobText = new Blob([
             "GLocation SaaSW · Fuerza Laboral Cognitiva para Oficinas TIC\n\n" +
             "Agendar Diagnóstico Cognitivo (30 min): " + (c.ctaButtonUrl || "https://citas.glocation.co/?theme=light") + "\n" +
@@ -286,14 +256,32 @@ export function SaaswEmailPreviewer() {
               "text/plain": blobText,
             }),
           ]);
+          copied = true;
         } catch (clipErr) {
           console.warn("navigator.clipboard.write fallback:", clipErr);
-          if (!copiedViaDom) {
-            await navigator.clipboard.writeText(fragment);
-          }
         }
-      } else if (!copiedViaDom) {
-        await navigator.clipboard.writeText(fragment);
+      }
+
+      // 2. Fallback con listener de 'copy' directo (inyecta fullHtml limpio con MSO styles en CF_HTML sin alterar DOM)
+      if (!copied && typeof document !== "undefined") {
+        try {
+          const listener = (e: ClipboardEvent) => {
+            e.preventDefault();
+            if (e.clipboardData) {
+              e.clipboardData.setData("text/html", fullHtml);
+              e.clipboardData.setData("text/plain", fullHtml);
+            }
+          };
+          document.addEventListener("copy", listener);
+          copied = document.execCommand("copy");
+          document.removeEventListener("copy", listener);
+        } catch (execErr) {
+          console.warn("execCommand fallback failed:", execErr);
+        }
+      }
+
+      if (!copied && navigator.clipboard) {
+        await navigator.clipboard.writeText(fullHtml);
       }
 
       setCopiedHtml(true);
@@ -1300,7 +1288,7 @@ export function SaaswEmailPreviewer() {
                               cellSpacing={0}
                               cellPadding={0}
                               style={{
-                                border: "none",
+                                border: `1px solid ${subtleBorder}`,
                                 borderRadius: "14px",
                                 backgroundColor: ctaBoxBg,
                               }}
