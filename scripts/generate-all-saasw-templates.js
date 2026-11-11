@@ -14,7 +14,7 @@ async function buildAllTemplates() {
   // Asegurar que las tarjetas y rodajas estén actualizadas
   require('./build-cards-and-templates.js');
 
-  function renderTemplatesHtml(theme = 'claro', includeToolbar = true) {
+  function renderTemplatesHtml(theme = 'claro', includeToolbar = true, isSliced = false) {
     const isDark = theme === 'oscuro';
     const outerBg = isDark ? '#0B0F19' : '#F0F4F9';
     const textMuted = isDark ? '#94A3B8' : '#64748B';
@@ -23,9 +23,11 @@ async function buildAllTemplates() {
     const b1Url = `${blocksBase}/saasw-01-hero-${theme}.png`;
     const b2Url = `${blocksBase}/saasw-02-trabajadores-${theme}.png`;
     const b3Url = `${blocksBase}/saasw-03-cta-${theme}.png`;
+    const b4Url = `${blocksBase}/saasw-04-ecosistema-${theme}.png`;
     const b4aUrl = `${blocksBase}/saasw-04a-eco-glocation-${theme}.png`;
     const b4bUrl = `${blocksBase}/saasw-04b-eco-homoagenticus-${theme}.png`;
     const b4cUrl = `${blocksBase}/saasw-04c-eco-preagentica-${theme}.png`;
+    const b5Url = `${blocksBase}/saasw-05-firma-${theme}.png`;
     const b5aUrl = `${blocksBase}/saasw-05a-cintillo-${theme}.png`;
     const b5bUrl = `${blocksBase}/saasw-05b-firma-paula-${theme}.png`;
     const b5cUrl = `${blocksBase}/saasw-05c-boton-glocation-${theme}.png`;
@@ -35,6 +37,8 @@ async function buildAllTemplates() {
     const b1Height = isDark ? 560 : 554;
     const b2Height = 465;
     const b3Height = 340;
+    const b4Height = 195;
+    const b5Height = 160;
 
     const toolbarHtml = includeToolbar ? `
   <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
@@ -154,7 +158,7 @@ ${toolbarHtml}
               </td>
             </tr>
 
-            <!-- BLOQUE 4 · TARJETA ECOSISTEMA (TARJETA REDONDEADA CON SUS 3 OPCIONES Y ENLACES) -->
+            ${isSliced ? `<!-- BLOQUE 4 · TARJETA ECOSISTEMA (RODAJAS SEPARADAS) -->
             <tr>
               <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
@@ -186,7 +190,7 @@ ${toolbarHtml}
               </td>
             </tr>
 
-            <!-- BLOQUE 5 · TARJETA FIRMA & BOTONES (TARJETA REDONDEADA CON CINTILLO + PAULA ROZO + 2 BOTONES) -->
+            <!-- BLOQUE 5 · TARJETA FIRMA & BOTONES (RODAJAS SEPARADAS) -->
             <tr>
               <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
@@ -224,7 +228,23 @@ ${toolbarHtml}
                   </tr>
                 </table>
               </td>
+            </tr>` : `<!-- BLOQUE 4 · TARJETA ECOSISTEMA (TARJETA SÓLIDA CONTINUA SIN CORTES NI ESPACIOS) -->
+            <tr>
+              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+                <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
+                  <img src="${b4Url}" width="660" height="${b4Height}" alt="Explore nuestro ecosistema en vivo: glocation.co, homoagenticus.co, preagentica.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+                </a>
+              </td>
             </tr>
+
+            <!-- BLOQUE 5 · TARJETA FIRMA & CONTACTO (TARJETA SÓLIDA CONTINUA SIN CORTES NI ESPACIOS) -->
+            <tr>
+              <td align="center" style="padding:0 0 14px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+                <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
+                  <img src="${b5Url}" width="660" height="${b5Height}" alt="Paula Rozo — BDR · Business Development Representative · GLocation SAS" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+                </a>
+              </td>
+            </tr>`}
 
             <!-- LEGAL FOOTER (IMAGEN CON FONDO PERMANENTE INTEGRADO) -->
             <tr>
@@ -242,17 +262,19 @@ ${toolbarHtml}
 </html>`;
   }
 
-  const claroHtml = renderTemplatesHtml('claro', true);
-  const oscuroHtml = renderTemplatesHtml('oscuro', true);
+  const claroHtml = renderTemplatesHtml('claro', true, false);
+  const oscuroHtml = renderTemplatesHtml('oscuro', true, false);
+  const claroBloquesHtml = renderTemplatesHtml('claro', true, true);
+  const oscuroBloquesHtml = renderTemplatesHtml('oscuro', true, true);
   const defaultHtml = claroHtml;
 
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-claro.html'), claroHtml, 'utf8');
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-oscuro.html'), oscuroHtml, 'utf8');
   fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic.html'), defaultHtml, 'utf8');
   fs.writeFileSync(path.join(recursosDir, 'plantilla-saasw-lideres-tic.html'), defaultHtml, 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-claro.html'), claroHtml, 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-oscuro.html'), oscuroHtml, 'utf8');
-  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques.html'), defaultHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-claro.html'), claroBloquesHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-oscuro.html'), oscuroBloquesHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques.html'), claroBloquesHtml, 'utf8');
 
   console.log('✓ All templates successfully updated with 20px generous card spacing!');
 }
