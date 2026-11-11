@@ -125,28 +125,38 @@ export function generateSaaswLideresTicHtml(
     mso-table-lspace: 0pt !important;
     mso-table-rspace: 0pt !important;
   }
+  img {
+    border: 0 !important;
+    outline: none !important;
+    text-decoration: none !important;
+  }
+  a {
+    border: 0 !important;
+    outline: none !important;
+    text-decoration: none !important;
+  }
 </style>
 </head>
 <body style="margin:0;padding:0;background-color:${outerBg}">
 <div style="margin:0px;padding:30px 10px;background-color:${outerBg};font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Roboto,sans-serif">
 
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" role="presentation" style="border:none;border-collapse:collapse;">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
     <tbody><tr>
-      <td align="center" style="border:none;">
+      <td align="center" style="border:none;border:0;outline:none;mso-border-alt:none;">
 
-        <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="${cardBg}" style="max-width:600px;width:100%;background-color:${cardBg};border-radius:16px;border:none;overflow:hidden;border-collapse:collapse;">
+        <table width="600" border="0" cellspacing="0" cellpadding="0" bgcolor="${cardBg}" style="max-width:600px;width:100%;background-color:${cardBg};border-radius:16px;border:none;border:0;outline:none;overflow:hidden;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
 
           <!-- CABECERA · LOGO GLOCATION + HOLDING -->
           <tbody><tr>
-            <td style="padding:28px 36px 20px;border:none;background-color:${cardBg}">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+            <td style="padding:28px 36px 20px;border:none;border:0;outline:none;background-color:${cardBg};mso-border-alt:none;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                 <tbody><tr>
-                  <td align="left" valign="middle">
-                    <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;border:0">
-                      <img src="${logoUrl}" alt="GLocation" height="36" style="display:block;height:36px;width:auto;border:0">
+                  <td align="left" valign="middle" style="border:none;border:0;outline:none;mso-border-alt:none;">
+                    <a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="text-decoration:none;border:none;border:0;outline:none;display:inline-block;">
+                      <img src="${logoUrl}" alt="GLocation" height="36" border="0" style="display:block;height:36px;width:auto;border:none;border:0;outline:none;">
                     </a>
                   </td>
-                  <td align="right" valign="middle">
+                  <td align="right" valign="middle" style="border:none;border:0;outline:none;mso-border-alt:none;">
                     <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor}">
                       ${c.holdingBadge}
                     </span>
@@ -158,12 +168,12 @@ export function generateSaaswLideresTicHtml(
 
           <!-- HERO · TITULAR Y CONTEXTO -->
           <tr>
-            <td style="padding:36px 36px 20px;background-color:${cardBg}">
+            <td style="padding:36px 36px 20px;background-color:${cardBg};border:none;border:0;outline:none;mso-border-alt:none;">
 
-              <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px" role="presentation">
+              <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px;border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;" role="presentation">
                 <tbody><tr>
-                  <td style="border:none;background-color:transparent;padding:0">
-                    <div style="display:inline-block;border:none;border-radius:999px;padding:4px 14px;background-color:${isDark ? "#0F293A" : "rgb(230,243,250)"}">
+                  <td style="border:none;border:0;outline:none;background-color:transparent;padding:0;mso-border-alt:none;">
+                    <div style="display:inline-block;border:none;border:0;outline:none;border-radius:999px;padding:4px 14px;background-color:${isDark ? "#0F293A" : "rgb(230,243,250)"}">
                       <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;color:${isDark ? "rgb(56,189,248)" : "rgb(30,112,148)"}">
                         ${c.eyebrowPill}
                       </span>
@@ -172,10 +182,10 @@ export function generateSaaswLideresTicHtml(
                 </tr>
               </tbody></table>
 
-              <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px" role="presentation">
+              <table border="0" cellspacing="0" cellpadding="0" style="margin-bottom:16px;border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;" role="presentation">
                 <tbody><tr>
-                  <td style="border:none;background-color:transparent;padding:0">
-                    <div style="display:inline-block;border:none;border-radius:8px;padding:6px 12px;background-color:${isDark ? "#2E2008" : "rgb(254,243,199)"}">
+                  <td style="border:none;border:0;outline:none;background-color:transparent;padding:0;mso-border-alt:none;">
+                    <div style="display:inline-block;border:none;border:0;outline:none;border-radius:8px;padding:6px 12px;background-color:${isDark ? "#2E2008" : "rgb(254,243,199)"}">
                       <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:11px;font-weight:700;letter-spacing:0.05em;color:${isDark ? "rgb(251,191,36)" : "rgb(146,64,14)"}">
                         ${c.warningBanner}
                       </span>
@@ -200,17 +210,17 @@ export function generateSaaswLideresTicHtml(
 
           <!-- 3 TARJETAS DE TRABAJADORES COGNITIVOS -->
           <tr>
-            <td style="padding:0px 36px 28px;background-color:${cardBg}">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+            <td style="padding:0px 36px 28px;background-color:${cardBg};border:none;border:0;outline:none;mso-border-alt:none;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
 
                 <tbody><tr>
-                  <td style="padding:16px;border:none;border-radius:12px;margin-bottom:12px;background-color:${subtleBg}">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                  <td style="padding:16px;border:none;border:0;outline:none;border-radius:12px;background-color:${subtleBg};mso-border-alt:none;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                       <tbody><tr>
-                        <td width="36" valign="top">
+                        <td width="36" valign="top" style="border:none;border:0;outline:none;mso-border-alt:none;">
                           <div style="width:30px;height:30px;border-radius:8px;text-align:center;line-height:30px;font-size:15px;background-color:rgb(224,242,254)">📋</div>
                         </td>
-                        <td style="padding-left:12px">
+                        <td style="padding-left:12px;border:none;border:0;outline:none;mso-border-alt:none;">
                           <b style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:${titleColor}">${c.card1Title}</b>
                           <p style="margin:4px 0px 6px;font-size:12px;line-height:1.45;color:${mutedColor}">
                             ${c.card1DescriptionHtml}
@@ -223,16 +233,16 @@ export function generateSaaswLideresTicHtml(
                     </tbody></table>
                   </td>
                 </tr>
-                <tr><td height="12"></td></tr>
+                <tr><td height="12" style="border:none;border:0;outline:none;font-size:0;line-height:0;mso-border-alt:none;"></td></tr>
 
                 <tr>
-                  <td style="padding:16px;border:none;border-radius:12px;background-color:${subtleBg}">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                  <td style="padding:16px;border:none;border:0;outline:none;border-radius:12px;background-color:${subtleBg};mso-border-alt:none;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                       <tbody><tr>
-                        <td width="36" valign="top">
+                        <td width="36" valign="top" style="border:none;border:0;outline:none;mso-border-alt:none;">
                           <div style="width:30px;height:30px;border-radius:8px;text-align:center;line-height:30px;font-size:15px;background-color:rgb(220,252,231)">🛡️</div>
                         </td>
-                        <td style="padding-left:12px">
+                        <td style="padding-left:12px;border:none;border:0;outline:none;mso-border-alt:none;">
                           <b style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:${titleColor}">${c.card2Title}</b>
                           <p style="margin:4px 0px 6px;font-size:12px;line-height:1.45;color:${mutedColor}">
                             ${c.card2DescriptionHtml}
@@ -245,16 +255,16 @@ export function generateSaaswLideresTicHtml(
                     </tbody></table>
                   </td>
                 </tr>
-                <tr><td height="12"></td></tr>
+                <tr><td height="12" style="border:none;border:0;outline:none;font-size:0;line-height:0;mso-border-alt:none;"></td></tr>
 
                 <tr>
-                  <td style="padding:16px;border:none;border-radius:12px;background-color:${subtleBg}">
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                  <td style="padding:16px;border:none;border:0;outline:none;border-radius:12px;background-color:${subtleBg};mso-border-alt:none;">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                       <tbody><tr>
-                        <td width="36" valign="top">
+                        <td width="36" valign="top" style="border:none;border:0;outline:none;mso-border-alt:none;">
                           <div style="width:30px;height:30px;border-radius:8px;text-align:center;line-height:30px;font-size:15px;background-color:rgb(243,232,255)">⚡</div>
                         </td>
-                        <td style="padding-left:12px">
+                        <td style="padding-left:12px;border:none;border:0;outline:none;mso-border-alt:none;">
                           <b style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:${titleColor}">${c.card3Title}</b>
                           <p style="margin:4px 0px 6px;font-size:12px;line-height:1.45;color:${mutedColor}">
                             ${c.card3DescriptionHtml}
@@ -275,7 +285,7 @@ export function generateSaaswLideresTicHtml(
           <!-- BLOQUE CTA · DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
             <td style="padding:0px 36px 36px;border:none;border:0;outline:none;background-color:${cardBg};mso-border-alt:none;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="${ctaBoxBg}" style="border:none;border:0;outline:none;border-radius:14px;background-color:${ctaBoxBg};border-collapse:collapse;mso-border-alt:none;" role="presentation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="${ctaBoxBg}" style="border:none;border:0;outline:none;border-radius:14px;background-color:${ctaBoxBg};border-collapse:collapse;mso-border-alt:none;mso-table-lspace:0pt;mso-table-rspace:0pt;" role="presentation">
                 <tbody><tr>
                   <td align="center" style="padding:24px;border:none;border:0;outline:none;mso-border-alt:none;">
                     <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:${isDark ? "rgb(56,189,248)" : "rgb(34,119,156)"}">
@@ -288,7 +298,7 @@ export function generateSaaswLideresTicHtml(
                       ${c.ctaDescription}
                     </p>
 
-                    <table border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-border-alt:none;">
+                    <table border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-border-alt:none;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                       <tbody><tr>
                         <td align="center" bgcolor="#1F6E91" style="background:linear-gradient(90deg,rgb(31,110,145) 0%,rgb(74,100,160) 60%,rgb(110,92,152) 100%);background-color:rgb(31,110,145);border-radius:8px;border:none;border:0;outline:none;mso-border-alt:none;">
                           <a href="${c.ctaButtonUrl}" rel="noopener noreferrer" style="display:inline-block;padding:13px 28px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:0.03em;color:rgb(255,255,255);border:none;border:0;outline:none;" target="_blank">
@@ -310,16 +320,16 @@ export function generateSaaswLideresTicHtml(
           <!-- ECOSISTEMA EN VIVO -->
           <tr>
             <td style="padding:20px 36px;border:none;border:0;outline:none;background-color:${subtleBg};mso-border-alt:none;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-border-alt:none;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-border-alt:none;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                 <tbody><tr>
                   <td align="center" style="border:none;border:0;outline:none;mso-border-alt:none;">
                     <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor}">
                       EXPLORE NUESTRO ECOSISTEMA EN VIVO:
                     </span>
                     <div style="margin-top:8px;font-size:12px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6">
-                      <a href="${c.websiteUrl}" style="font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(34,119,156);border:0;outline:none;" target="_blank">glocation.co</a> <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">(Plataforma Comercial SaaSW)</span><br>
-                      <a href="${c.manifestoUrl}" style="font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(122,92,255);border:0;outline:none;" target="_blank">homoagenticus.co</a> <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">(El Manifiesto del Homo agenticus)</span><br>
-                      <a href="${c.preagenticaUrl}" style="font-weight:600;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${mutedColor};border:0;outline:none;" target="_blank">preagentica.glocation.co</a> <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">(Nuestra Herencia Pre-IA)</span>
+                      <a href="${c.websiteUrl}" style="font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(34,119,156);border:none;border:0;outline:none;" target="_blank">glocation.co</a> <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">(Plataforma Comercial SaaSW)</span><br>
+                      <a href="${c.manifestoUrl}" style="font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(122,92,255);border:none;border:0;outline:none;" target="_blank">homoagenticus.co</a> <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">(El Manifiesto del Homo agenticus)</span><br>
+                      <a href="${c.preagenticaUrl}" style="font-weight:600;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:${mutedColor};border:none;border:0;outline:none;" target="_blank">preagentica.glocation.co</a> <span style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">(Nuestra Herencia Pre-IA)</span>
                     </div>
                   </td>
                 </tr>
@@ -330,7 +340,7 @@ export function generateSaaswLideresTicHtml(
           <!-- CINTILLO HOLDING / PARTNER / ISO -->
           <tr>
             <td style="padding:18px 36px;border:none;border:0;outline:none;background-color:${subtleBg};mso-border-alt:none;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-border-alt:none;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                 <tbody><tr>
                   <td align="center" style="border:none;border:0;outline:none;mso-border-alt:none;">
                     <span style="font-family:&quot;SF Mono&quot;,Consolas,Monaco,monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${mutedColor}">
@@ -345,11 +355,11 @@ export function generateSaaswLideresTicHtml(
           <!-- FIRMA COMERCIAL · PAULA ROZO CON FOTO OFICIAL -->
           <tr>
             <td style="padding:28px 36px 36px;border:none;border:0;outline:none;background-color:${cardBg};mso-border-alt:none;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-border-alt:none;">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
                 <tbody><tr>
                   <td width="56" valign="top" style="border:none;border:0;outline:none;mso-border-alt:none;">
-                    <a href="mailto:${c.senderEmail}" style="text-decoration:none;border:0;outline:none;display:inline-block">
-                      <img src="${paulaPhotoPublicUrl}" alt="${c.senderName}" width="52" height="52" border="0" style="display:block;width:52px;height:52px;border:0;border-radius:50%;object-fit:cover;outline:none;">
+                    <a href="mailto:${c.senderEmail}" style="text-decoration:none;border:none;border:0;outline:none;display:inline-block">
+                      <img src="${paulaPhotoPublicUrl}" alt="${c.senderName}" width="52" height="52" border="0" style="display:block;width:52px;height:52px;border:none;border:0;border-radius:50%;object-fit:cover;outline:none;">
                     </a>
                   </td>
                   <td style="padding-left:14px;border:none;border:0;outline:none;mso-border-alt:none;" valign="top">
@@ -357,9 +367,9 @@ export function generateSaaswLideresTicHtml(
                     <span style="font-size:12px;color:${mutedColor}">${c.senderRole}</span><br>
                     <span style="font-size:11px;font-weight:600;color:rgb(34,119,156)">${c.senderCompany}</span><br>
                     <span style="font-size:11px;color:rgb(123,140,163)">
-                      <a href="mailto:${c.senderEmail}" style="color:rgb(34,119,156);text-decoration:none;font-weight:600;border:0;outline:none;" target="_blank">${c.senderEmail}</a> &nbsp;|&nbsp;
-                      <a href="${c.websiteUrl}" style="text-decoration:none;font-weight:600;color:rgb(34,119,156);border:0;outline:none;" target="_blank">glocation.co</a> &nbsp;|&nbsp;
-                      <a href="${c.manifestoUrl}" style="text-decoration:none;font-weight:600;color:rgb(122,92,255);border:0;outline:none;" target="_blank">homoagenticus.co</a>
+                      <a href="mailto:${c.senderEmail}" style="color:rgb(34,119,156);text-decoration:none;font-weight:600;border:none;border:0;outline:none;" target="_blank">${c.senderEmail}</a> &nbsp;|&nbsp;
+                      <a href="${c.websiteUrl}" style="text-decoration:none;font-weight:600;color:rgb(34,119,156);border:none;border:0;outline:none;" target="_blank">glocation.co</a> &nbsp;|&nbsp;
+                      <a href="${c.manifestoUrl}" style="text-decoration:none;font-weight:600;color:rgb(122,92,255);border:none;border:0;outline:none;" target="_blank">homoagenticus.co</a>
                     </span>
                   </td>
                 </tr>
@@ -370,7 +380,7 @@ export function generateSaaswLideresTicHtml(
         </tbody></table>
 
         <!-- PIE DE DERECHOS RESERVADOS -->
-        <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;width:100%;margin-top:18px" role="presentation">
+        <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;width:100%;margin-top:18px;border:none;border:0;outline:none;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;" role="presentation">
           <tbody><tr>
             <td align="center" style="font-size:11px;line-height:1.5;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:rgb(123,140,163)">
               © 2026 GLocation SAS · Bogotá D.C., Colombia.<br>

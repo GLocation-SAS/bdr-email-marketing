@@ -218,28 +218,13 @@ export function SaaswEmailPreviewer() {
   // compatible con cualquier cliente de correo (Gmail, Outlook, Mailchimp, Brevo, HubSpot)
   // con el Bloque CTA enlazado a https://citas.glocation.co/?theme=light
   const buildExportHtml = React.useCallback(async (): Promise<string> => {
-    // 1. Guardar automáticamente los bloques PNG en public/email-blocks/
-    try {
-      const result = await sliceEmailBlocks();
-      if (result && result.slices.length > 0) {
-        const suffix = theme === "light" ? "claro" : "oscuro";
-        await fetch("/api/save-blocks", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ slices: result.slices, suffix }),
-        }).catch(() => { });
-      }
-    } catch (err) {
-      console.warn("Auto-save blocks warning:", err);
-    }
-
-    // 2. Retorna estructura de imágenes de alta resolución con enlaces activos
-    return generateSaaswLideresTicImageEmailHtml({
+    // Retorna plantilla HTML nativa para correo con todos los hipervínculos activos y sin bordes
+    return generateSaaswLideresTicHtml({
       ...c,
       theme,
       ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
     });
-  }, [c, theme, sliceEmailBlocks]);
+  }, [c, theme]);
 
   const handleCopyHtml = async () => {
     if (downloadingFormat) return;
@@ -265,7 +250,7 @@ export function SaaswEmailPreviewer() {
       setCopiedHtml(true);
       toast.success("Campaña copiada al portapapeles", {
         description:
-          "HTML limpio sin bordes con enlaces activos, idéntico a la previsualización y al PDF.",
+          "HTML nativo sin bordes con todos los hipervínculos activos para Outlook, Gmail y Word.",
       });
       setTimeout(() => setCopiedHtml(false), 2500);
     } catch (err) {
@@ -295,7 +280,7 @@ export function SaaswEmailPreviewer() {
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(url), 1500);
       toast.success("Plantilla HTML descargada correctamente", {
-        description: `${filename} · Estructura de 4 bloques en imagen PNG con enlace CTA activo`,
+        description: `${filename} · Plantilla HTML nativa con todos los enlaces activos`,
       });
     } catch (err) {
       console.error("Error al descargar HTML:", err);
