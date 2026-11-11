@@ -409,7 +409,8 @@ export function generateSaaswLideresTicImageEmailHtml(
   const block1HeroUrl = `${blocksBaseUrl}/saasw-01-hero-${suffix}.png`;
   const block2WorkersUrl = `${blocksBaseUrl}/saasw-02-trabajadores-${suffix}.png`;
   const block3CtaUrl = `${blocksBaseUrl}/saasw-03-cta-${suffix}.png`;
-  const paulaPhotoPublicUrl = `https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-${isDark ? "dark" : "light"}.png`;
+  const block4EcosystemUrl = `${blocksBaseUrl}/saasw-04-ecosistema-${suffix}.png`;
+  const block5FirmaUrl = `${blocksBaseUrl}/saasw-05-firma-${suffix}.png`;
 
   const mailtoLink = `mailto:${c.senderEmail}?subject=${encodeURIComponent(
     "Diagnóstico Cognitivo Oficina TIC - GLocation"
@@ -499,51 +500,21 @@ export function generateSaaswLideresTicImageEmailHtml(
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO (ENLACES ACTIVOS SIN BORDES) -->
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES -->
           <tr>
-            <td align="center" style="padding: 22px 32px 18px 32px; background-color: ${subtleBg}; border: 0; border: none; outline: none; mso-border-alt: none;">
-              <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor};display:block;margin-bottom:8px;">
-                EXPLORE NUESTRO ECOSISTEMA EN VIVO:
-              </span>
-              <div style="font-size:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.8;">
-                <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:none;color:rgb(34,119,156);border:0;outline:none;">glocation.co</a> <span style="color:rgb(123,140,163);">(Plataforma Comercial SaaSW)</span><br />
-                <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:none;color:rgb(122,92,255);border:0;outline:none;">homoagenticus.co</a> <span style="color:rgb(123,140,163);">(El Manifiesto del Homo agenticus)</span><br />
-                <a href="${preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:600;text-decoration:none;color:${mutedColor};border:0;outline:none;">preagentica.glocation.co</a> <span style="color:rgb(123,140,163);">(Nuestra Herencia Pre-IA)</span>
-              </div>
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
+              <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0; border: none; outline: none;">
+                <img src="${block4EcosystemUrl}" alt="Explore nuestro ecosistema en vivo — glocation.co, homoagenticus.co, preagentica.glocation.co" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; border: none; outline: none; text-decoration: none;" />
+              </a>
             </td>
           </tr>
 
-          <!-- CINTILLO HOLDING / GOOGLE CLOUD PARTNER / ISO 27001 -->
+          <!-- BLOQUE 5 · FIRMA COMERCIAL PAULA ROZO Y DERECHOS RESERVADOS -->
           <tr>
-            <td align="center" style="padding: 16px 24px; border: 0; border: none; outline: none; background-color: ${subtleBg}; mso-border-alt: none;">
-              <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${mutedColor};">
-                HOLDING SERVINFORMACIÓN (27 AÑOS) &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER &nbsp;•&nbsp; NORMA ISO 27001
-              </span>
-            </td>
-          </tr>
-
-          <!-- BLOQUE 5 · FIRMA COMERCIAL PAULA ROZO CON FOTO OFICIAL -->
-          <tr>
-            <td style="padding: 28px 36px 32px 36px; background-color: ${cardBg}; border: 0; border: none; outline: none; mso-border-alt: none;">
-              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation" style="border-collapse: collapse; border: 0; border: none; outline: none; mso-border-alt: none; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                <tr>
-                  <td width="56" valign="top" style="border: 0; border: none; outline: none; mso-border-alt: none;">
-                    <a href="${mailtoLink}" style="text-decoration: none; border: 0; outline: none; display: inline-block;">
-                      <img src="${paulaPhotoPublicUrl}" alt="${c.senderName}" width="52" height="52" border="0" style="display: block; width: 52px; height: 52px; border: 0; border-radius: 50%; object-fit: cover; outline: none; text-decoration: none;" />
-                    </a>
-                  </td>
-                  <td style="padding-left: 14px; border: 0; border: none; outline: none; mso-border-alt: none;" valign="top">
-                    <b style="font-size: 14px; color: ${titleColor}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${c.senderName}</b><br />
-                    <span style="font-size: 12px; color: ${mutedColor}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${c.senderRole}</span><br />
-                    <span style="font-size: 11px; font-weight: 600; color: rgb(34,119,156); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${c.senderCompany}</span><br />
-                    <span style="font-size: 11px; color: rgb(123,140,163); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-                      <a href="${mailtoLink}" style="color: rgb(34,119,156); text-decoration: none; font-weight: 600; border: 0; outline: none;" target="_blank">${c.senderEmail}</a> &nbsp;|&nbsp;
-                      <a href="${websiteUrl}" style="text-decoration: none; font-weight: 600; color: rgb(34,119,156); border: 0; outline: none;" target="_blank">glocation.co</a> &nbsp;|&nbsp;
-                      <a href="${manifestoUrl}" style="text-decoration: none; font-weight: 600; color: rgb(122,92,255); border: 0; outline: none;" target="_blank">homoagenticus.co</a>
-                    </span>
-                  </td>
-                </tr>
-              </table>
+            <td align="center" style="padding: 0 0 12px 0; margin: 0; font-size: 0; line-height: 0;">
+              <a href="${mailtoLink}" style="display: block; text-decoration: none; border: 0; border: none; outline: none;">
+                <img src="${block5FirmaUrl}" alt="Paula Rozo — BDR GLocation" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; border: none; outline: none; text-decoration: none;" />
+              </a>
             </td>
           </tr>
 
