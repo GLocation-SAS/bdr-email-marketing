@@ -243,8 +243,8 @@ export function SaaswEmailPreviewer() {
       console.warn("Auto-save blocks warning:", err);
     }
 
-    // 2. Retorna estructura idéntica a campana-jefes-ti con URLs públicas de GitHub y CTA activo
-    return generateSaaswLideresTicImageEmailHtml({
+    // 2. Retorna estructura HTML completa idéntica a la previsualización y al PDF
+    return generateSaaswLideresTicHtml({
       ...c,
       theme,
       ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
@@ -275,7 +275,7 @@ export function SaaswEmailPreviewer() {
       setCopiedHtml(true);
       toast.success("Campaña copiada al portapapeles", {
         description:
-          "Lista para pegar directo en Gmail, Outlook o editor HTML (5 bloques PNG con CTA activo).",
+          "HTML limpio sin bordes con enlaces activos, idéntico a la previsualización y al PDF.",
       });
       setTimeout(() => setCopiedHtml(false), 2500);
     } catch (err) {
@@ -784,7 +784,8 @@ export function SaaswEmailPreviewer() {
                         width: "100%",
                         backgroundColor: cardBg,
                         borderRadius: "16px",
-                        border: `1px solid ${cardBorder}`,
+                        border: "none",
+                        boxShadow: isDark ? "0 4px 20px rgba(0,0,0,0.4)" : "0 4px 20px rgba(0,0,0,0.06)",
                         overflow: "hidden",
                       }}
                     >
@@ -794,7 +795,7 @@ export function SaaswEmailPreviewer() {
                           <td
                             style={{
                               padding: "28px 36px 20px",
-                              borderBottom: `1px solid ${dividerColor}`,
+                              border: "none",
                               backgroundColor: cardBg,
                             }}
                           >
@@ -889,9 +890,7 @@ export function SaaswEmailPreviewer() {
                                     <div
                                       style={{
                                         display: "inline-block",
-                                        border: isDark
-                                          ? "1px solid #1E4E6B"
-                                          : "1px solid rgb(184,220,240)",
+                                        border: "none",
                                         borderRadius: "999px",
                                         padding: "4px 14px",
                                         backgroundColor: isDark
@@ -938,9 +937,7 @@ export function SaaswEmailPreviewer() {
                                     <div
                                       style={{
                                         display: "inline-block",
-                                        border: isDark
-                                          ? "1px solid #784E0B"
-                                          : "1px solid rgb(252,211,77)",
+                                        border: "none",
                                         borderRadius: "8px",
                                         padding: "6px 12px",
                                         backgroundColor: isDark
@@ -1037,7 +1034,7 @@ export function SaaswEmailPreviewer() {
                                   <td
                                     style={{
                                       padding: "16px",
-                                      border: `1px solid ${subtleBorder}`,
+                                      border: "none",
                                       borderRadius: "12px",
                                       marginBottom: "12px",
                                       backgroundColor: subtleBg,
@@ -1115,7 +1112,7 @@ export function SaaswEmailPreviewer() {
                                   <td
                                     style={{
                                       padding: "16px",
-                                      border: `1px solid ${subtleBorder}`,
+                                      border: "none",
                                       borderRadius: "12px",
                                       backgroundColor: subtleBg,
                                     }}
@@ -1192,7 +1189,7 @@ export function SaaswEmailPreviewer() {
                                   <td
                                     style={{
                                       padding: "16px",
-                                      border: `1px solid ${subtleBorder}`,
+                                      border: "none",
                                       borderRadius: "12px",
                                       backgroundColor: subtleBg,
                                     }}
@@ -1271,6 +1268,7 @@ export function SaaswEmailPreviewer() {
                           <td
                             style={{
                               padding: "0px 36px 36px",
+                              border: "none",
                               backgroundColor: cardBg,
                             }}
                           >
@@ -1280,7 +1278,7 @@ export function SaaswEmailPreviewer() {
                               cellSpacing={0}
                               cellPadding={0}
                               style={{
-                                border: "1.5px solid rgb(34,119,156)",
+                                border: "none",
                                 borderRadius: "14px",
                                 backgroundColor: ctaBoxBg,
                               }}
@@ -1393,8 +1391,9 @@ export function SaaswEmailPreviewer() {
                           <td
                             style={{
                               padding: "20px 36px",
-                              borderTop: `1px solid ${dividerColor}`,
-                              borderBottom: `1px solid ${dividerColor}`,
+                              border: "none",
+                              borderTop: "none",
+                              borderBottom: "none",
                               backgroundColor: subtleBg,
                             }}
                           >
@@ -1532,8 +1531,9 @@ export function SaaswEmailPreviewer() {
                           <td
                             style={{
                               padding: "18px 36px",
-                              borderTop: `1px solid ${dividerColor}`,
-                              borderBottom: `1px solid ${dividerColor}`,
+                              border: "none",
+                              borderTop: "none",
+                              borderBottom: "none",
                               backgroundColor: subtleBg,
                             }}
                           >
@@ -1574,6 +1574,7 @@ export function SaaswEmailPreviewer() {
                           <td
                             style={{
                               padding: "28px 36px 36px",
+                              border: "none",
                               backgroundColor: cardBg,
                             }}
                           >
