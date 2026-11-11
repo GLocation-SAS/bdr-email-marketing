@@ -72,51 +72,22 @@ async function buildAllCards() {
     fs.writeFileSync(heroPath, heroBaseBuf);
 
     // ==========================================
-    // 2. CARD 2 (Trabajadores): Keep top flat white (unites with Hero), round bottom corners (rx=24)
+    // 2. CARD 2 (Trabajadores): Flat white top and flat white bottom (seamless inside container)
     // ==========================================
     const trabPath = path.join(blocksDir, `saasw-02-trabajadores-${t.id}.png`);
     const trabBaseBuf = cp.execSync(`git show 660d9a3:public/email-blocks/saasw-02-trabajadores-${t.id}.png`);
     const trabMeta = await sharp(trabBaseBuf).metadata();
     const trabH = trabMeta.height;
-    const trabBottomCorner = Buffer.from(`
-      <svg width="1320" height="${trabH}" xmlns="http://www.w3.org/2000/svg">
-        <!-- Bottom corners only: round bottom of united Hero+Trabajadores card -->
-        <path d="M 60,${trabH - 24} L 60,${trabH} L 84,${trabH} A 24 24 0 0 1 60,${trabH - 24} Z" fill="${t.outerBg}" />
-        <path d="M 1260,${trabH - 24} L 1260,${trabH} L 1236,${trabH} A 24 24 0 0 0 1260,${trabH - 24} Z" fill="${t.outerBg}" />
-      </svg>
-    `);
-    const roundedTrab = await sharp(trabBaseBuf)
-      .composite([{ input: trabBottomCorner, blend: 'over' }])
-      .png()
-      .toBuffer();
-    fs.writeFileSync(trabPath, roundedTrab);
 
-    // Also generate unified 1-piece image for Card 1 + Card 2 (Hero + Trabajadores)
-    const heroMeta = await sharp(heroBaseBuf).metadata();
-    const combinedH = heroMeta.height + trabH;
-    const heroTrabCombined = await sharp({
-      create: {
-        width: 1320,
-        height: combinedH,
-        channels: 4,
-        background: t.id === 'claro' ? { r: 240, g: 244, b: 249, alpha: 1 } : { r: 11, g: 15, b: 25, alpha: 1 }
-      }
-    })
-    .composite([
-      { input: heroBaseBuf, top: 0, left: 0 },
-      { input: roundedTrab, top: heroMeta.height, left: 0 }
-    ])
-    .png()
-    .toBuffer();
-    fs.writeFileSync(path.join(blocksDir, `saasw-01-hero-trabajadores-${t.id}.png`), heroTrabCombined);
+    // Save 100% flat white trabajadores block (no rounded bottom, perfectly connects inside container)
+    fs.writeFileSync(trabPath, trabBaseBuf);
 
     // ==========================================
-    // 3. CARD 3 (CTA): Clean, uniform card with balanced padding (no empty void)
+    // 3. CARD 3 (CTA): Seamless inside container with flat white top and bottom
     // ==========================================
     const ctaPath = path.join(blocksDir, `saasw-03-cta-${t.id}.png`);
     const ctaH = 550;
-    const ctaCardBg = t.id === 'claro' ? '#FFFFFF' : '#0F172A';
-    const ctaCardBorder = t.id === 'claro' ? '#E2E8F0' : '#1E293B';
+    const ctaCardBg = t.id === 'claro' ? '#FFFFFF' : '#111827';
     const ctaEyebrowColor = t.id === 'claro' ? '#0284C7' : '#38BDF8';
     const ctaTitleColor = t.id === 'claro' ? '#0F172A' : '#F8FAFC';
     const ctaDescColor = t.id === 'claro' ? '#475569' : '#94A3B8';
@@ -132,26 +103,26 @@ async function buildAllCards() {
           </linearGradient>
         </defs>
         <rect width="1320" height="${ctaH}" fill="${t.outerBg}" />
-        <rect x="60" y="0" width="1200" height="${ctaH}" rx="24" ry="24" fill="${ctaCardBg}" stroke="${ctaCardBorder}" stroke-width="1.5" />
+        <rect x="60" y="0" width="1200" height="${ctaH}" fill="${ctaCardBg}" />
         
         <!-- Eyebrow -->
-        <text x="660" y="72" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2.2" fill="${ctaEyebrowColor}">
+        <text x="660" y="70" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2.2" fill="${ctaEyebrowColor}">
           DIAGNÓSTICO COGNITIVO · 30 MINUTOS
         </text>
 
         <!-- Título -->
-        <text x="660" y="140" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+        <text x="660" y="138" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
           ¿Exploramos qué proceso de su oficina TIC podemos liberar
         </text>
-        <text x="660" y="185" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+        <text x="660" y="183" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
           este mes?
         </text>
 
         <!-- Descripción -->
-        <text x="660" y="255" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+        <text x="660" y="252" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
           Agende una sesión técnica de 30 minutos. Evaluaremos uno de sus cuellos de
         </text>
-        <text x="660" y="295" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+        <text x="660" y="292" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
           botella operativos y le entregaremos una estimación contable de ahorro y tiempos.
         </text>
 
@@ -171,7 +142,7 @@ async function buildAllCards() {
     fs.writeFileSync(ctaPath, ctaBuffer);
 
     // ==========================================
-    // 4. MASTER CARD 4: ECOSISTEMA (Rounded card with top and bottom rx=24)
+    // 4. MASTER CARD 4: ECOSISTEMA (Seamless inside container with flat white top and bottom)
     // ==========================================
     const ecoSvg = `
     <svg width="1320" height="390" viewBox="0 0 1320 390" xmlns="http://www.w3.org/2000/svg">
@@ -186,7 +157,7 @@ async function buildAllCards() {
         </style>
       </defs>
       <rect width="1320" height="390" fill="${t.outerBg}"/>
-      <rect x="60" y="0" width="1200" height="380" rx="24" ry="24" fill="${t.cardBg}"/>
+      <rect x="60" y="0" width="1200" height="390" fill="${t.cardBg}"/>
 
       <!-- 1. TÍTULO ECOSISTEMA (y: 0 - 62, h=62) -->
       <text x="660" y="42" class="eco-label">EXPLORE NUESTRO ECOSISTEMA EN VIVO:</text>
@@ -236,7 +207,7 @@ async function buildAllCards() {
       .png().toFile(path.join(blocksDir, `saasw-04c-eco-preagentica-${t.id}.png`));
 
     // ==========================================
-    // 5. MASTER CARD 5: FIRMA & BOTONES (Rounded card with top and bottom rx=24)
+    // 5. MASTER CARD 5: FIRMA & BOTONES (Seamless inside container)
     // ==========================================
     const firmaSvg = `
     <svg width="1320" height="320" viewBox="0 0 1320 320" xmlns="http://www.w3.org/2000/svg">
@@ -256,14 +227,14 @@ async function buildAllCards() {
         </style>
       </defs>
       <rect width="1320" height="320" fill="${t.outerBg}"/>
-      <rect x="60" y="0" width="1200" height="312" rx="24" ry="24" fill="${t.cardBg}"/>
+      <rect x="60" y="0" width="1200" height="320" fill="${t.cardBg}"/>
 
       <!-- 1. CINTILLO HOLDING (y: 0 - 66, h=66) -->
-      <path d="M 84,0 L 1236,0 A 24 24 0 0 1 1260,24 L 1260,66 L 60,66 L 60,24 A 24 24 0 0 1 84,0 Z" fill="${t.subtleBg}"/>
+      <rect x="60" y="0" width="1200" height="66" fill="${t.subtleBg}"/>
       <line x1="60" y1="66" x2="1260" y2="66" stroke="${t.divider}" stroke-width="2"/>
       <text x="660" y="41" class="cintillo">HOLDING SERVINFORMACIÓN (27 AÑOS)   •   GOOGLE CLOUD PREMIER PARTNER   •   NORMA ISO 27001</text>
 
-      <!-- 2. FIRMA PAULA ROZO + AVATAR (y: 66 - 312, h=246) -->
+      <!-- 2. FIRMA PAULA ROZO + AVATAR (y: 66 - 320, h=254) -->
       <circle cx="150" cy="188" r="53" fill="${t.avatarBorder}"/>
       <image href="${t.paulaAvatarB64}" x="100" y="138" width="100" height="100" clip-path="url(#avatar-clip-${t.id})"/>
       <text x="224" y="152" class="name">Paula Rozo</text>
@@ -305,15 +276,18 @@ async function buildAllCards() {
       .png().toFile(path.join(blocksDir, `saasw-05d-boton-homoagenticus-${t.id}.png`));
 
     // ==========================================
-    // 6. BLOCK 6: LEGAL FOOTER IMAGE (Ensures background is permanently included)
+    // 6. BLOCK 6: LEGAL FOOTER (Rounds the bottom of the united container)
     // ==========================================
     const legalSvg = `
-      <svg width="1320" height="96" xmlns="http://www.w3.org/2000/svg">
-        <rect width="1320" height="96" fill="${t.outerBg}" />
-        <text x="660" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="${t.textMuted}">
+      <svg width="1320" height="106" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1320" height="106" fill="${t.outerBg}" />
+        <!-- Rounded bottom corners closing the 1200px container seamlessly -->
+        <path d="M 60,0 L 1260,0 L 1260,82 A 24 24 0 0 1 1236,106 L 84,106 A 24 24 0 0 1 60,82 Z" fill="${t.cardBg}" />
+        <line x1="60" y1="0" x2="1260" y2="0" stroke="${t.divider}" stroke-width="1.5"/>
+        <text x="660" y="44" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" fill="${t.textMuted}">
           © 2026 GLocation SAS · Bogotá D.C., Colombia.
         </text>
-        <text x="660" y="68" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="${t.textMuted}">
+        <text x="660" y="74" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="19" fill="${t.textMuted}">
           Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología.
         </text>
       </svg>
