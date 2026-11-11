@@ -61,54 +61,54 @@ async function buildAllCards() {
     }
   ];
 
+  const cp = require('child_process');
+
   for (const t of themes) {
     // ==========================================
-    // 1. CARD 1 (Hero): Ensure rounded top and bottom corners
+    // 1. CARD 1 (Hero): Keep top corners rounded, bottom 100% flat white to unite with Trabajadores
     // ==========================================
     const heroPath = path.join(blocksDir, `saasw-01-hero-${t.id}.png`);
-    if (fs.existsSync(heroPath)) {
-      const heroMeta = await sharp(heroPath).metadata();
-      const heroH = heroMeta.height;
-      const cornerOverlay = Buffer.from(`
-        <svg width="1320" height="${heroH}" xmlns="http://www.w3.org/2000/svg">
-          <!-- Top corners -->
-          <path d="M 60,0 L 60,24 A 24 24 0 0 1 84,0 Z" fill="${t.outerBg}" />
-          <path d="M 1260,0 L 1260,24 A 24 24 0 0 0 1236,0 Z" fill="${t.outerBg}" />
-          <!-- Bottom corners -->
-          <path d="M 60,${heroH - 24} L 60,${heroH} L 84,${heroH} A 24 24 0 0 1 60,${heroH - 24} Z" fill="${t.outerBg}" />
-          <path d="M 1260,${heroH - 24} L 1260,${heroH} L 1236,${heroH} A 24 24 0 0 0 1260,${heroH - 24} Z" fill="${t.outerBg}" />
-        </svg>
-      `);
-      const rounded = await sharp(heroPath)
-        .composite([{ input: cornerOverlay, blend: 'over' }])
-        .png()
-        .toBuffer();
-      fs.writeFileSync(heroPath, rounded);
-    }
+    const heroBaseBuf = cp.execSync(`git show 660d9a3:public/email-blocks/saasw-01-hero-${t.id}.png`);
+    fs.writeFileSync(heroPath, heroBaseBuf);
 
     // ==========================================
-    // 2. CARD 2 (Trabajadores): Ensure rounded top and bottom corners
+    // 2. CARD 2 (Trabajadores): Keep top flat white (unites with Hero), round bottom corners (rx=24)
     // ==========================================
     const trabPath = path.join(blocksDir, `saasw-02-trabajadores-${t.id}.png`);
-    if (fs.existsSync(trabPath)) {
-      const trabMeta = await sharp(trabPath).metadata();
-      const trabH = trabMeta.height;
-      const trabOverlay = Buffer.from(`
-        <svg width="1320" height="${trabH}" xmlns="http://www.w3.org/2000/svg">
-          <!-- Top corners -->
-          <path d="M 60,0 L 60,24 A 24 24 0 0 1 84,0 Z" fill="${t.outerBg}" />
-          <path d="M 1260,0 L 1260,24 A 24 24 0 0 0 1236,0 Z" fill="${t.outerBg}" />
-          <!-- Bottom corners -->
-          <path d="M 60,${trabH - 24} L 60,${trabH} L 84,${trabH} A 24 24 0 0 1 60,${trabH - 24} Z" fill="${t.outerBg}" />
-          <path d="M 1260,${trabH - 24} L 1260,${trabH} L 1236,${trabH} A 24 24 0 0 0 1260,${trabH - 24} Z" fill="${t.outerBg}" />
-        </svg>
-      `);
-      const rounded = await sharp(trabPath)
-        .composite([{ input: trabOverlay, blend: 'over' }])
-        .png()
-        .toBuffer();
-      fs.writeFileSync(trabPath, rounded);
-    }
+    const trabBaseBuf = cp.execSync(`git show 660d9a3:public/email-blocks/saasw-02-trabajadores-${t.id}.png`);
+    const trabMeta = await sharp(trabBaseBuf).metadata();
+    const trabH = trabMeta.height;
+    const trabBottomCorner = Buffer.from(`
+      <svg width="1320" height="${trabH}" xmlns="http://www.w3.org/2000/svg">
+        <!-- Bottom corners only: round bottom of united Hero+Trabajadores card -->
+        <path d="M 60,${trabH - 24} L 60,${trabH} L 84,${trabH} A 24 24 0 0 1 60,${trabH - 24} Z" fill="${t.outerBg}" />
+        <path d="M 1260,${trabH - 24} L 1260,${trabH} L 1236,${trabH} A 24 24 0 0 0 1260,${trabH - 24} Z" fill="${t.outerBg}" />
+      </svg>
+    `);
+    const roundedTrab = await sharp(trabBaseBuf)
+      .composite([{ input: trabBottomCorner, blend: 'over' }])
+      .png()
+      .toBuffer();
+    fs.writeFileSync(trabPath, roundedTrab);
+
+    // Also generate unified 1-piece image for Card 1 + Card 2 (Hero + Trabajadores)
+    const heroMeta = await sharp(heroBaseBuf).metadata();
+    const combinedH = heroMeta.height + trabH;
+    const heroTrabCombined = await sharp({
+      create: {
+        width: 1320,
+        height: combinedH,
+        channels: 4,
+        background: t.id === 'claro' ? { r: 240, g: 244, b: 249, alpha: 1 } : { r: 11, g: 15, b: 25, alpha: 1 }
+      }
+    })
+    .composite([
+      { input: heroBaseBuf, top: 0, left: 0 },
+      { input: roundedTrab, top: heroMeta.height, left: 0 }
+    ])
+    .png()
+    .toBuffer();
+    fs.writeFileSync(path.join(blocksDir, `saasw-01-hero-trabajadores-${t.id}.png`), heroTrabCombined);
 
     // ==========================================
     // 3. CARD 3 (CTA): Clean, uniform card with generous breathing space
