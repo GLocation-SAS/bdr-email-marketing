@@ -409,8 +409,7 @@ export function generateSaaswLideresTicImageEmailHtml(
   const block1HeroUrl = `${blocksBaseUrl}/saasw-01-hero-${suffix}.png`;
   const block2WorkersUrl = `${blocksBaseUrl}/saasw-02-trabajadores-${suffix}.png`;
   const block3CtaUrl = `${blocksBaseUrl}/saasw-03-cta-${suffix}.png`;
-  const block4EcosystemUrl = `${blocksBaseUrl}/saasw-04-ecosistema-${suffix}.png`;
-  const block5FirmaUrl = `${blocksBaseUrl}/saasw-05-firma-${suffix}.png`;
+  const block4EcosystemFirmaUrl = `${blocksBaseUrl}/saasw-04-ecosistema-firma-${suffix}.png`;
 
   const mailtoLink = `mailto:${c.senderEmail}?subject=${encodeURIComponent(
     "Diagnóstico Cognitivo Oficina TIC - GLocation"
@@ -454,14 +453,19 @@ export function generateSaaswLideresTicImageEmailHtml(
     img, a img {
       -ms-interpolation-mode: bicubic;
       border: 0 !important;
+      border-style: none !important;
+      border-width: 0 !important;
       outline: none !important;
       text-decoration: none !important;
       display: block;
     }
-    a {
+    a, a:link, a:visited, a:hover, a:active, a:focus {
       text-decoration: none !important;
       border: 0 !important;
+      border-style: none !important;
+      border-width: 0 !important;
       outline: none !important;
+      color: inherit !important;
     }
     body {
       margin: 0 !important;
@@ -479,42 +483,31 @@ export function generateSaaswLideresTicImageEmailHtml(
 
           <!-- BLOQUE 1 · CABECERA Y HERO — SAASW LÍDERES TIC -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <img src="${block1HeroUrl}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador." width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none;" />
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
+              <img src="${block1HeroUrl}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador." width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important;" />
             </td>
           </tr>
 
           <!-- BLOQUE 2 · TRES TRABAJADORES COGNITIVOS TIC -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <img src="${block2WorkersUrl}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none;" />
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
+              <img src="${block2WorkersUrl}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important;" />
             </td>
           </tr>
 
           <!-- BLOQUE 3 · CTA — DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0; border: none; outline: none;">
-                <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; border: none; outline: none; text-decoration: none;" />
+            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
+              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="display: block; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important; color: transparent !important; -webkit-tap-highlight-color: transparent !important;">
+                <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important;" />
               </a>
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES -->
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y FIRMA COMERCIAL PAULA ROZO (UN SOLO BLOQUE CONTINUO) -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0; border: none; outline: none;">
-                <img src="${block4EcosystemUrl}" alt="Explore nuestro ecosistema en vivo — glocation.co, homoagenticus.co, preagentica.glocation.co" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; border: none; outline: none; text-decoration: none;" />
-              </a>
-            </td>
-          </tr>
-
-          <!-- BLOQUE 5 · FIRMA COMERCIAL PAULA ROZO Y DERECHOS RESERVADOS -->
-          <tr>
-            <td align="center" style="padding: 0 0 12px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${mailtoLink}" style="display: block; text-decoration: none; border: 0; border: none; outline: none;">
-                <img src="${block5FirmaUrl}" alt="Paula Rozo — BDR GLocation" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; border: none; outline: none; text-decoration: none;" />
-              </a>
+            <td align="center" style="padding: 0 0 12px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
+              <img src="${block4EcosystemFirmaUrl}" alt="Ecosistema GLocation y Firma Comercial Paula Rozo — BDR" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important;" />
             </td>
           </tr>
 

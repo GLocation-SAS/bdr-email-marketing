@@ -174,21 +174,12 @@ export function SaaswEmailPreviewer() {
         href: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
       },
       {
-        id: "04-ecosistema",
+        id: "04-ecosistema-firma",
         step: "Bloque 4",
-        title: "Ecosistema en Vivo y Certificaciones",
-        alt: "Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones",
+        title: "Ecosistema en Vivo y Firma Comercial Paula Rozo",
+        alt: "Ecosistema GLocation y Firma Comercial Paula Rozo — BDR",
         yStart: cut3,
-        yEnd: cut4,
-      },
-      {
-        id: "05-firma",
-        step: "Bloque 5",
-        title: "Firma Comercial Paula Rozo y Derechos Reservados",
-        alt: "Paula Rozo — BDR GLocation",
-        yStart: cut4,
         yEnd: cut5,
-        href: `mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation&body=Hola%20Paula%2C%20me%20gustar%C3%ADa%20coordinar%20una%20sesi%C3%B3n%20de%2030%20minutos%20sobre%20Trabajadores%20Cognitivos%20para%20nuestra%20oficina%20TIC.`,
       },
     ];
 
@@ -305,7 +296,7 @@ export function SaaswEmailPreviewer() {
       document.body.removeChild(link);
       setTimeout(() => URL.revokeObjectURL(url), 1500);
       toast.success("Plantilla HTML descargada correctamente", {
-        description: `${filename} · Estructura de 5 bloques en imagen PNG con enlace CTA activo`,
+        description: `${filename} · Estructura de 4 bloques en imagen PNG con enlace CTA activo`,
       });
     } catch (err) {
       console.error("Error al descargar HTML:", err);
@@ -321,7 +312,7 @@ export function SaaswEmailPreviewer() {
       setDownloadingFormat("all-parts");
       const suffix = theme === "light" ? "claro" : "oscuro";
       toast.info(
-        `Generando los 5 bloques en PNG (${theme === "dark" ? "Versión Oscura" : "Versión Clara"
+        `Generando los 4 bloques en PNG (${theme === "dark" ? "Versión Oscura" : "Versión Clara"
         })...`,
         {
           description: "Cada bloque se descargará automáticamente.",
@@ -349,9 +340,9 @@ export function SaaswEmailPreviewer() {
         body: JSON.stringify({ slices: result.slices, suffix }),
       }).catch(() => { });
 
-      toast.success("Los 5 bloques PNG se descargaron y sincronizaron correctamente");
+      toast.success("Los 4 bloques PNG se descargaron y sincronizaron correctamente");
     } catch (err) {
-      console.error("Error al descargar los 5 bloques:", err);
+      console.error("Error al descargar los bloques:", err);
       toast.error("Error al descargar los bloques PNG");
     } finally {
       setDownloadingFormat(null);
@@ -650,7 +641,7 @@ export function SaaswEmailPreviewer() {
           >
             {downloadingFormat === "all-parts"
               ? "Generando bloques..."
-              : "Descargar 5 Bloques (.png)"}
+              : "Descargar 4 Bloques (.png)"}
           </Button>
 
           {/* Descargar PDF */}
