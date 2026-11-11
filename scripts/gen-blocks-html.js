@@ -5,15 +5,24 @@ function getImageHtml(theme) {
   const suffix = isDark ? 'oscuro' : 'claro';
   const outerBg = isDark ? '#0B0F19' : '#F0F4F9';
   const cardBg = isDark ? '#111827' : '#FFFFFF';
-  const cardBorder = isDark ? '#1E293B' : 'rgb(214,227,240)';
+  const cardBorder = isDark ? '#1E293B' : '#D6E3F0';
   const subtleBg = isDark ? '#1E293B' : '#F8FAFD';
-  const dividerColor = isDark ? '#1E293B' : 'rgb(237,243,250)';
+  const dividerColor = isDark ? '#1E293B' : '#E2EBF5';
   const titleColor = isDark ? '#F8FAFC' : '#040914';
   const mutedColor = isDark ? '#94A3B8' : '#51647D';
   const accentColor = isDark ? '#38BDF8' : '#0E768C';
   const manifestoColor = isDark ? '#A78BFA' : '#7A5CFF';
   const blocksBaseUrl = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
-  const paulaImgUrl = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/paula_natalia_rozo%20(4).png';
+  const paulaImgUrl = isDark
+    ? 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-dark.png'
+    : 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-light.png';
+
+  const ecoBg1 = isDark ? '#0F293A' : '#F0F7FB';
+  const ecoBorder1 = isDark ? '#1E405A' : '#D0E7F5';
+  const ecoBg2 = isDark ? '#231B3D' : '#F6F3FF';
+  const ecoBorder2 = isDark ? '#3B2D6B' : '#E4DAFF';
+  const ecoBg3 = isDark ? '#1E293B' : '#F8FAFD';
+  const ecoBorder3 = isDark ? '#334155' : '#E2EBF5';
 
   return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -90,24 +99,52 @@ function getImageHtml(theme) {
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO + HOLDING + FIRMA PAULA ROZO CON ENLACES REALES -->
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO + HOLDING + FIRMA PAULA ROZO CON ALTO IMPACTO VISUAL -->
           <tr>
             <td align="center" style="padding: 0 0 10px 0; border: 0 !important; border-style: none !important;">
-              <div style="background-color: ${cardBg}; border-radius: 14px; border: 1px solid ${cardBorder}; overflow: hidden; width: 100%; max-width: 660px; text-align: center; box-sizing: border-box;">
+              <div style="background-color: ${cardBg}; border-radius: 16px; border: 1px solid ${cardBorder}; overflow: hidden; width: 100%; max-width: 660px; text-align: center; box-sizing: border-box; box-shadow: 0 4px 20px rgba(15,28,48,0.06);">
                 
-                <!-- 4A · ECOSISTEMA EN VIVO -->
-                <div style="padding: 24px 20px 18px 20px; text-align: center;">
-                  <div style="font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: ${mutedColor}; margin-bottom: 10px;">
+                <!-- 4A · ECOSISTEMA EN VIVO (TARJETAS INDIVIDUALES CLICKEABLES) -->
+                <div style="padding: 26px 24px 20px 24px; text-align: center;">
+                  <div style="font-family: 'SF Mono', Consolas, Monaco, monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: ${mutedColor}; margin-bottom: 14px;">
                     EXPLORE NUESTRO ECOSISTEMA EN VIVO:
                   </div>
-                  <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 13px; line-height: 1.8;">
-                    <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="color: ${accentColor}; font-weight: 700; text-decoration: underline !important;">glocation.co</a>
-                    <span style="color: #7B8CA3;"> (Plataforma Comercial SaaSW)</span><br />
-                    <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="color: ${manifestoColor}; font-weight: 700; text-decoration: underline !important;">homoagenticus.co</a>
-                    <span style="color: #7B8CA3;"> (El Manifiesto del Homo agenticus)</span><br />
-                    <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="color: ${mutedColor}; font-weight: 600; text-decoration: underline !important;">preagentica.glocation.co</a>
-                    <span style="color: #7B8CA3;"> (Nuestra Herencia Pre-IA)</span>
-                  </div>
+
+                  <!-- Botón Tarjeta 1: glocation.co -->
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 10px; border-collapse: collapse;">
+                    <tr>
+                      <td style="background-color: ${ecoBg1}; border: 1px solid ${ecoBorder1}; border-radius: 10px; padding: 12px 18px; text-align: left;">
+                        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none;">
+                          <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; color: ${accentColor};">🌐 glocation.co</span>
+                          <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: ${mutedColor}; margin-left: 8px;">· Plataforma Comercial SaaSW &nbsp;→</span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Botón Tarjeta 2: homoagenticus.co -->
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 10px; border-collapse: collapse;">
+                    <tr>
+                      <td style="background-color: ${ecoBg2}; border: 1px solid ${ecoBorder2}; border-radius: 10px; padding: 12px 18px; text-align: left;">
+                        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none;">
+                          <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 700; color: ${manifestoColor};">📖 homoagenticus.co</span>
+                          <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: ${mutedColor}; margin-left: 8px;">· El Manifiesto del Homo agenticus &nbsp;→</span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Botón Tarjeta 3: preagentica.glocation.co -->
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+                    <tr>
+                      <td style="background-color: ${ecoBg3}; border: 1px solid ${ecoBorder3}; border-radius: 10px; padding: 12px 18px; text-align: left;">
+                        <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none;">
+                          <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 600; color: ${mutedColor};">🏛 preagentica.glocation.co</span>
+                          <span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; color: rgb(123,140,163); margin-left: 8px;">· Nuestra Herencia Pre-IA &nbsp;→</span>
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
 
                 <!-- 4B · CINTILLO HOLDING -->
@@ -115,25 +152,31 @@ function getImageHtml(theme) {
                   HOLDING SERVINFORMACIÓN (27 AÑOS) &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER &nbsp;•&nbsp; NORMA ISO 27001
                 </div>
 
-                <!-- 4C · FIRMA PAULA ROZO -->
-                <div style="padding: 22px 26px; text-align: left;">
+                <!-- 4C · FIRMA EJECUTIVA PAULA ROZO -->
+                <div style="padding: 24px 28px; text-align: left;">
                   <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border: 0 !important; width: 100%;">
                     <tr>
-                      <td width="52" valign="top" style="width: 52px; padding: 0 14px 0 0; margin: 0; border: 0 !important;">
+                      <td width="64" valign="top" style="width: 64px; padding: 0 16px 0 0; margin: 0; border: 0 !important;">
                         <a href="mailto:paula.rozo@glocation.com.co" style="text-decoration: none; border: 0 !important; outline: none !important; display: block;">
-                          <img src="${paulaImgUrl}" alt="Paula Rozo" width="48" height="48" border="0" style="display: block; width: 48px; height: 48px; border-radius: 50%; border: 0 !important; outline: none !important;" />
+                          <img src="${paulaImgUrl}" alt="Paula Rozo" width="56" height="56" border="0" style="display: block; width: 56px; height: 56px; border-radius: 50%; border: 2px solid ${accentColor} !important; outline: none !important; box-shadow: 0 4px 12px rgba(14,118,140,0.25);" />
                         </a>
                       </td>
-                      <td valign="top" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; border: 0 !important; padding: 0; margin: 0;">
-                        <div style="font-size: 15px; font-weight: 700; color: ${titleColor}; line-height: 1.2;">Paula Rozo</div>
-                        <div style="font-size: 12px; color: ${mutedColor}; margin-top: 2px;">BDR · Business Development Representative</div>
-                        <div style="font-size: 12px; font-weight: 600; color: ${accentColor}; margin-top: 2px;">GLocation SAS · Transformación Cognitiva</div>
-                        <div style="font-size: 12px; margin-top: 6px; color: #7B8CA3; line-height: 1.5;">
-                          <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="color: ${accentColor}; font-weight: 600; text-decoration: underline !important;">paula.rozo@glocation.com.co</a>
-                          &nbsp;|&nbsp;
-                          <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="color: ${accentColor}; font-weight: 600; text-decoration: underline !important;">glocation.co</a>
-                          &nbsp;|&nbsp;
-                          <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="color: ${manifestoColor}; font-weight: 600; text-decoration: underline !important;">homoagenticus.co</a>
+                      <td valign="top" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; border: 0 !important; padding: 0; margin: 0;">
+                        <div style="font-size: 16px; font-weight: 800; color: ${titleColor}; line-height: 1.2; letter-spacing: -0.01em;">Paula Rozo</div>
+                        <div style="font-size: 12px; font-weight: 500; color: ${mutedColor}; margin-top: 2px;">BDR · Business Development Representative</div>
+                        <div style="display: inline-block; background-color: ${isDark ? '#1E293B' : '#E6F4F8'}; color: ${accentColor}; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-top: 4px;">GLocation SAS · Transformación Cognitiva</div>
+                        
+                        <!-- BOTONES DE CONTACTO DIRECTO -->
+                        <div style="margin-top: 10px; font-size: 11px; line-height: 1.8;">
+                          <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" style="display: inline-block; background-color: ${accentColor}; color: #FFFFFF !important; font-weight: 600; text-decoration: none !important; padding: 4px 12px; border-radius: 6px; margin-right: 6px; margin-bottom: 4px;">
+                            ✉️ paula.rozo@glocation.com.co
+                          </a>
+                          <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: ${isDark ? '#1E293B' : '#F0F4F9'}; color: ${accentColor} !important; font-weight: 600; text-decoration: none !important; padding: 4px 10px; border-radius: 6px; margin-right: 6px; margin-bottom: 4px; border: 1px solid ${dividerColor};">
+                            🌐 glocation.co
+                          </a>
+                          <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: ${isDark ? '#231B3D' : '#F6F3FF'}; color: ${manifestoColor} !important; font-weight: 600; text-decoration: none !important; padding: 4px 10px; border-radius: 6px; margin-bottom: 4px; border: 1px solid ${isDark ? '#3B2D6B' : '#E4DAFF'};">
+                            📖 homoagenticus.co
+                          </a>
                         </div>
                       </td>
                     </tr>
@@ -184,6 +227,7 @@ fs.writeFileSync('public/plantilla-saasw-lideres-tic-bloques-oscuro.html', getIm
 fs.writeFileSync('public/plantilla-saasw-lideres-tic.html', getImageHtml('light'), 'utf8');
 fs.writeFileSync('public/plantilla-saasw-lideres-tic-claro.html', getImageHtml('light'), 'utf8');
 fs.writeFileSync('public/plantilla-saasw-lideres-tic-oscuro.html', getImageHtml('dark'), 'utf8');
-console.log('Saved all 6 HTML files with active ecosystem and signature links!');
+console.log('Saved all 6 HTML files with high-impact cards and active links!');
+
 
 
