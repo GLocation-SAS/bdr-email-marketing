@@ -218,8 +218,8 @@ export function SaaswEmailPreviewer() {
   // compatible con cualquier cliente de correo (Gmail, Outlook, Mailchimp, Brevo, HubSpot)
   // con el Bloque CTA enlazado a https://citas.glocation.co/?theme=light
   const buildExportHtml = React.useCallback(async (): Promise<string> => {
-    // Retorna plantilla HTML nativa para correo con todos los hipervínculos activos y sin bordes
-    return generateSaaswLideresTicHtml({
+    // Retorna plantilla HTML con diseño visual 100% fiel en bloques de imagen e hipervínculos activos
+    return generateSaaswLideresTicImageEmailHtml({
       ...c,
       theme,
       ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
@@ -232,65 +232,25 @@ export function SaaswEmailPreviewer() {
       setDownloadingFormat("copy-html");
       const fullHtml = await buildExportHtml();
 
-      const rootMatch = fullHtml.match(/<div data-saasw-root="true"[\s\S]*?<\/div>\s*<\/body>/i);
-      const fragment = rootMatch
-        ? rootMatch[0].replace(/<\/body>$/i, "").trim()
-        : fullHtml;
-
-      let copied = false;
-
-      // 1. Selección DOM nativa del lienzo visible (genera CF_HTML y RTF nativos de Windows para Outlook, Word y Gmail)
-      if (typeof window !== "undefined" && typeof document !== "undefined") {
+      if (navigator.clipboard) {
         try {
-          const rootElement =
-            emailCanvasRef.current?.querySelector('[data-saasw-root="true"]') ||
-            emailCanvasRef.current;
-          if (rootElement) {
-            const sel = window.getSelection();
-            if (sel) {
-              sel.removeAllRanges();
-              const range = document.createRange();
-              range.selectNode(rootElement);
-              sel.addRange(range);
-              copied = document.execCommand("copy");
-              sel.removeAllRanges();
-            }
-          }
-        } catch (domErr) {
-          console.warn("DOM copy fallback:", domErr);
-        }
-      }
-
-      // 2. Solo si la selección DOM nativa falló, usar ClipboardItem moderno
-      if (
-        !copied &&
-        typeof window !== "undefined" &&
-        typeof ClipboardItem !== "undefined" &&
-        navigator.clipboard
-      ) {
-        try {
-          const rootElement =
-            emailCanvasRef.current?.querySelector('[data-saasw-root="true"]') ||
-            emailCanvasRef.current;
-          const plainText = (rootElement as HTMLElement)?.innerText || "";
-          const blobHtml = new Blob([fragment], { type: "text/html" });
-          const blobPlain = new Blob([plainText], { type: "text/plain" });
+          const blobHtml = new Blob([fullHtml], { type: "text/html" });
+          const blobPlain = new Blob([fullHtml], { type: "text/plain" });
           await navigator.clipboard.write([
             new ClipboardItem({
               "text/html": blobHtml,
               "text/plain": blobPlain,
             }),
           ]);
-          copied = true;
-        } catch (clipErr) {
-          console.warn("ClipboardItem write:", clipErr);
+        } catch {
+          await navigator.clipboard.writeText(fullHtml);
         }
       }
 
       setCopiedHtml(true);
-      toast.success("¡Campaña copiada con éxito!", {
+      toast.success("¡Código HTML del diseño copiado al portapapeles!", {
         description:
-          "Diseño visual idéntico al PDF con todos los enlaces activos. Pégalo directamente (Ctrl+V) en Gmail, Outlook o Word.",
+          "Pégalo en 'Fuente HTML' de tu plataforma de correo o directamente en tu gestor.",
       });
       setTimeout(() => setCopiedHtml(false), 2500);
     } catch (err) {
