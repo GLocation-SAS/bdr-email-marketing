@@ -426,12 +426,17 @@ export function generateSaaswLideresTicImageEmailHtml(
       mso-table-lspace: 0pt;
       mso-table-rspace: 0pt;
     }
-    img {
+    img, a img {
       -ms-interpolation-mode: bicubic;
-      border: 0;
-      outline: none;
-      text-decoration: none;
+      border: 0 !important;
+      outline: none !important;
+      text-decoration: none !important;
       display: block;
+    }
+    a {
+      text-decoration: none !important;
+      border: 0 !important;
+      outline: none !important;
     }
     body {
       margin: 0 !important;
@@ -450,26 +455,22 @@ export function generateSaaswLideresTicImageEmailHtml(
           <!-- BLOQUE 1 · CABECERA Y HERO — SAASW LÍDERES TIC -->
           <tr>
             <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
-                <img src="${block1HeroUrl}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador." width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
-              </a>
+              <img src="${block1HeroUrl}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador." width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none;" />
             </td>
           </tr>
 
           <!-- BLOQUE 2 · TRES TRABAJADORES COGNITIVOS TIC -->
           <tr>
             <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
-                <img src="${block2WorkersUrl}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
-              </a>
+              <img src="${block2WorkersUrl}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none;" />
             </td>
           </tr>
 
           <!-- BLOQUE 3 · CTA — DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
             <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
-                <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
+              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0; border: none; outline: none;">
+                <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; border: none; outline: none; text-decoration: none;" />
               </a>
             </td>
           </tr>
@@ -477,9 +478,7 @@ export function generateSaaswLideresTicImageEmailHtml(
           <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES -->
           <tr>
             <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="display: block; text-decoration: none; border: 0;">
-                <img src="${block4EcosystemUrl}" alt="Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones" width="600" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0;" />
-              </a>
+              <img src="${block4EcosystemUrl}" alt="Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none;" />
             </td>
           </tr>
 
@@ -492,13 +491,14 @@ export function generateSaaswLideresTicImageEmailHtml(
                   <td width="378" valign="top" style="width: 62.97%; padding: 0; margin: 0; font-size: 0; line-height: 0;">
                     <a
                       href="${mailtoLink}"
-                      style="display: block; text-decoration: none; border: 0;"
+                      style="display: block; text-decoration: none; border: 0; border: none; outline: none;"
                     >
                       <img
                         src="${block5aPaulaUrl}"
                         alt="Paula Rozo — BDR | Business Development Representative"
                         width="378"
-                        style="display: block; width: 100%; max-width: 378px; height: auto; border: 0;"
+                        border="0"
+                        style="display: block; width: 100%; max-width: 378px; height: auto; border: 0; border: none; outline: none; text-decoration: none;"
                       />
                     </a>
                   </td>
@@ -508,13 +508,14 @@ export function generateSaaswLideresTicImageEmailHtml(
                       href="${websiteUrl}"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style="display: block; text-decoration: none; border: 0;"
+                      style="display: block; text-decoration: none; border: 0; border: none; outline: none;"
                     >
                       <img
                         src="${block5bWebUrl}"
                         alt="Sitio web oficial glocation.co"
                         width="100"
-                        style="display: block; width: 100%; max-width: 100px; height: auto; border: 0;"
+                        border="0"
+                        style="display: block; width: 100%; max-width: 100px; height: auto; border: 0; border: none; outline: none; text-decoration: none;"
                       />
                     </a>
                   </td>
@@ -524,13 +525,14 @@ export function generateSaaswLideresTicImageEmailHtml(
                       href="${linkedinUrl}"
                       target="_blank"
                       rel="noopener noreferrer"
-                      style="display: block; text-decoration: none; border: 0;"
+                      style="display: block; text-decoration: none; border: 0; border: none; outline: none;"
                     >
                       <img
                         src="${block5cLinkedinUrl}"
                         alt="LinkedIn oficial de GLocation"
                         width="122"
-                        style="display: block; width: 100%; max-width: 122px; height: auto; border: 0;"
+                        border="0"
+                        style="display: block; width: 100%; max-width: 122px; height: auto; border: 0; border: none; outline: none; text-decoration: none;"
                       />
                     </a>
                   </td>
