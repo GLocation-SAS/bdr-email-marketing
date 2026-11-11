@@ -412,7 +412,15 @@ export function generateSaaswLideresTicImageEmailHtml(
 
   const ctaUrl = (c.ctaButtonUrl || "https://citas.glocation.co/?theme=light").trim();
   const websiteUrl = (c.websiteUrl || "https://glocation.co").trim();
+  const manifestoUrl = (c.manifestoUrl || "https://homoagenticus.co").trim();
+  const preagenticaUrl = (c.preagenticaUrl || "https://preagentica.glocation.co").trim();
   const linkedinUrl = (c.linkedinUrl || "https://www.linkedin.com/company/glocation/").trim();
+
+  const cardBg = isDark ? "#111827" : "#FFFFFF";
+  const cardBorder = isDark ? "#1E293B" : "rgb(214,227,240)";
+  const dividerColor = isDark ? "#1E293B" : "rgb(237,243,250)";
+  const mutedColor = isDark ? "#94A3B8" : "rgb(81,100,125)";
+  const subtleBg = isDark ? "#1E293B" : "rgb(248,250,253)";
 
   return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -479,10 +487,30 @@ export function generateSaaswLideresTicImageEmailHtml(
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES -->
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES (TEXTO HTML CON ENLACES .CO ACTIVOS) -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0;">
-              <img src="${block4EcosystemUrl}" alt="Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none;" />
+            <td align="center" style="padding: 0 0 6px 0;">
+              <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 100%; border-collapse: collapse; margin: 0 auto; background-color: ${cardBg}; border: 1px solid ${cardBorder}; border-radius: 12px; overflow: hidden;">
+                <tr>
+                  <td align="center" style="padding: 20px 24px 16px 24px; background-color: ${subtleBg};">
+                    <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor};display:block;margin-bottom:8px;">
+                      EXPLORE NUESTRO ECOSISTEMA EN VIVO:
+                    </span>
+                    <div style="font-size:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.8;">
+                      <a href="${websiteUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:none;color:rgb(34,119,156);">glocation.co</a> <span style="color:rgb(123,140,163);">(Plataforma Comercial SaaSW)</span><br />
+                      <a href="${manifestoUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:700;text-decoration:none;color:rgb(122,92,255);">homoagenticus.co</a> <span style="color:rgb(123,140,163);">(El Manifiesto del Homo agenticus)</span><br />
+                      <a href="${preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="font-weight:600;text-decoration:none;color:${mutedColor};">preagentica.glocation.co</a> <span style="color:rgb(123,140,163);">(Nuestra Herencia Pre-IA)</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding: 12px 20px; border-top: 1px solid ${dividerColor}; background-color: ${cardBg};">
+                    <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${mutedColor};">
+                      HOLDING SERVINFORMACIÓN (27 AÑOS) &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER &nbsp;•&nbsp; NORMA ISO 27001
+                    </span>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
 
