@@ -213,13 +213,10 @@ export function SaaswEmailPreviewer() {
     return { slices, fullCanvas: canvas };
   }, [c.ctaButtonUrl, c.senderEmail, c.websiteUrl, isDark]);
 
-  // Construye la estructura HTML idéntica a la campaña de Jefes TI:
-  // 5 bloques en imágenes PNG públicas alojadas en GitHub dentro de una tabla de 600px
-  // compatible con cualquier cliente de correo (Gmail, Outlook, Mailchimp, Brevo, HubSpot)
-  // con el Bloque CTA enlazado a https://citas.glocation.co/?theme=light
+  // Construye la estructura HTML nativa continua (tarjeta responsiva 580px, sin bloques de imagen):
+  // 100% compatible con Brevo, Gmail, Outlook y gestores de correo, sin bordes de tabla feos y con enlaces activos
   const buildExportHtml = React.useCallback(async (): Promise<string> => {
-    // Retorna plantilla HTML con diseño visual 100% fiel en bloques de imagen e hipervínculos activos
-    return generateSaaswLideresTicImageEmailHtml({
+    return generateSaaswLideresTicHtml({
       ...c,
       theme,
       ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
