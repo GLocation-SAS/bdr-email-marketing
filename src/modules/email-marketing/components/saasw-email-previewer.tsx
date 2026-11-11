@@ -16,6 +16,7 @@ import {
   RotateCcw,
   PencilLine,
   Download,
+  ExternalLink,
 } from "lucide-react";
 import { toPng, toCanvas } from "html-to-image";
 import { toast } from "sonner";
@@ -722,13 +723,26 @@ export function SaaswEmailPreviewer() {
         <div className="flex items-center gap-2 text-xs text-foreground">
           <PencilLine className="w-4 h-4 text-primary shrink-0" />
           <span>
-            <strong>Edición directa habilitada:</strong> haz clic sobre
-            cualquier texto para editarlo antes de usar{" "}
-            <strong>Descargar HTML</strong> o <strong>Copiar HTML</strong>. La
-            foto circular de <strong>Paula Rozo</strong> ya está incrustada con
-            URL pública compatible con Gmail y Outlook.
+            <strong>Edición directa habilitada:</strong> haz clic sobre cualquier texto para editarlo. El botón de agendar citas y Bloque 3 redirigen a{" "}
+            <a
+              href="https://citas.glocation.co/?theme=light"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary font-semibold underline underline-offset-2 hover:opacity-80"
+            >
+              citas.glocation.co/?theme=light
+            </a>.
           </span>
         </div>
+        <a
+          href="https://citas.glocation.co/?theme=light"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-primary text-primary-foreground hover:opacity-90 shrink-0 transition"
+        >
+          <ExternalLink className="w-3.5 h-3.5" />
+          Probar Enlace Citas
+        </a>
       </div>
 
       {/* Lienzo del Email */}
@@ -798,12 +812,18 @@ export function SaaswEmailPreviewer() {
                                 <tr>
                                   <td align="left" valign="middle">
                                     <a
-                                      href={c.websiteUrl}
+                                      href={c.websiteUrl || "https://glocation.co"}
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       style={{
                                         textDecoration: "none",
                                         border: 0,
+                                        cursor: "pointer",
+                                      }}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        window.open(c.websiteUrl || "https://glocation.co", "_blank");
                                       }}
                                     >
                                       <img
@@ -1310,8 +1330,13 @@ export function SaaswEmailPreviewer() {
                                             }}
                                           >
                                             <a
-                                              href={c.ctaButtonUrl}
+                                              href={c.ctaButtonUrl || "https://citas.glocation.co/?theme=light"}
                                               rel="noopener noreferrer"
+                                              onClick={(e) => {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                window.open(c.ctaButtonUrl || "https://citas.glocation.co/?theme=light", "_blank");
+                                              }}
                                               style={{
                                                 display: "inline-block",
                                                 padding: "13px 28px",
@@ -1391,16 +1416,22 @@ export function SaaswEmailPreviewer() {
                                       }}
                                     >
                                       <a
-                                        href={c.websiteUrl}
+                                        href={c.websiteUrl || "https://glocation.co"}
                                         style={{
                                           fontWeight: 700,
                                           textDecoration: "none",
                                           fontFamily:
                                             "-apple-system,BlinkMacSystemFont,sans-serif",
                                           color: "rgb(34,119,156)",
+                                          cursor: "pointer",
                                         }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          window.open(c.websiteUrl || "https://glocation.co", "_blank");
+                                        }}
                                       >
                                         glocation.co
                                       </a>{" "}
@@ -1415,16 +1446,22 @@ export function SaaswEmailPreviewer() {
                                       </span>
                                       <br />
                                       <a
-                                        href={c.manifestoUrl}
+                                        href={c.manifestoUrl || "https://homoagenticus.co"}
                                         style={{
                                           fontWeight: 700,
                                           textDecoration: "none",
                                           fontFamily:
                                             "-apple-system,BlinkMacSystemFont,sans-serif",
                                           color: "rgb(122,92,255)",
+                                          cursor: "pointer",
                                         }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          window.open(c.manifestoUrl || "https://homoagenticus.co", "_blank");
+                                        }}
                                       >
                                         homoagenticus.co
                                       </a>{" "}
@@ -1439,16 +1476,22 @@ export function SaaswEmailPreviewer() {
                                       </span>
                                       <br />
                                       <a
-                                        href={c.preagenticaUrl}
+                                        href={c.preagenticaUrl || "https://preagentica.glocation.co"}
                                         style={{
                                           fontWeight: 600,
                                           textDecoration: "none",
                                           fontFamily:
                                             "-apple-system,BlinkMacSystemFont,sans-serif",
                                           color: mutedColor,
+                                          cursor: "pointer",
                                         }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          window.open(c.preagenticaUrl || "https://preagentica.glocation.co", "_blank");
+                                        }}
                                       >
                                         preagentica.glocation.co
                                       </a>{" "}
@@ -1610,27 +1653,39 @@ export function SaaswEmailPreviewer() {
                                       </a>{" "}
                                       &nbsp;|&nbsp;
                                       <a
-                                        href={c.websiteUrl}
+                                        href={c.websiteUrl || "https://glocation.co"}
                                         style={{
                                           textDecoration: "none",
                                           fontWeight: 600,
                                           color: "rgb(34,119,156)",
+                                          cursor: "pointer",
                                         }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          window.open(c.websiteUrl || "https://glocation.co", "_blank");
+                                        }}
                                       >
                                         glocation.co
                                       </a>{" "}
                                       &nbsp;|&nbsp;
                                       <a
-                                        href={c.manifestoUrl}
+                                        href={c.manifestoUrl || "https://homoagenticus.co"}
                                         style={{
                                           textDecoration: "none",
                                           fontWeight: 600,
                                           color: "rgb(122,92,255)",
+                                          cursor: "pointer",
                                         }}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          window.open(c.manifestoUrl || "https://homoagenticus.co", "_blank");
+                                        }}
                                       >
                                         homoagenticus.co
                                       </a>
