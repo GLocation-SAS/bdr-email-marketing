@@ -213,10 +213,10 @@ export function SaaswEmailPreviewer() {
     return { slices, fullCanvas: canvas };
   }, [c.ctaButtonUrl, c.senderEmail, c.websiteUrl, isDark]);
 
-  // Construye la estructura HTML nativa continua (tarjeta responsiva 580px, sin bloques de imagen):
-  // 100% compatible con Brevo, Gmail, Outlook y gestores de correo, sin bordes de tabla feos y con enlaces activos
+  // Construye la estructura HTML gráfica unificada en 1 sola pieza continua:
+  // Cero cortes, cero bloques, cero espacios, con Image Map interactivo y rutas activas
   const buildExportHtml = React.useCallback(async (): Promise<string> => {
-    return generateSaaswLideresTicHtml({
+    return generateSaaswLideresTicImageEmailHtml({
       ...c,
       theme,
       ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
