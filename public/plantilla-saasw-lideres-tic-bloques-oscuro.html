@@ -11,18 +11,18 @@
       -ms-text-size-adjust: 100%;
     }
     table, td, tr {
-      mso-table-lspace: 0pt;
-      mso-table-rspace: 0pt;
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
       border-collapse: collapse !important;
       border-spacing: 0 !important;
       border: 0 !important;
     }
     img {
       -ms-interpolation-mode: bicubic;
-      border: 0;
-      outline: none;
-      text-decoration: none;
-      display: block;
+      border: 0 !important;
+      outline: none !important;
+      text-decoration: none !important;
+      display: block !important;
     }
     body {
       margin: 0 !important;
@@ -30,70 +30,24 @@
       width: 100% !important;
       background-color: #0B0F19;
     }
-    area {
-      outline: none;
-      border: none;
-      cursor: pointer;
-    }
-    .saasw-link-overlay:hover {
-      background-color: rgba(2, 132, 199, 0.08) !important;
-      cursor: pointer;
-    }
   </style>
 </head>
-<body style="margin: 0; padding: 0; width: 100% !important; background-color: #0B0F19;">
+<body style="margin:0 !important;padding:0 !important;width:100% !important;background-color:#0B0F19;">
 
-  <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR Y VERIFICAR ZONAS INTERACTIVAS -->
+  <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
   <div id="saasw-floating-toolbar" style="position:sticky;top:0;z-index:999999;background:#0F172A;border-bottom:2px solid #0284C7;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;flex-wrap:wrap;">
-    <button id="btnToggleZonas" onclick="toggleZonasClic()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
-      👁️ <span id="txtBtnZonas">VER FORMA DE ZONAS (SIN TEXTO EXTRA)</span>
-    </button>
     <button id="btnCopiarVisual" onclick="copiarCorreoVisual()" style="background:linear-gradient(90deg,#0284C7 0%,#2563EB 100%);color:#FFFFFF;border:none;padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.5);display:inline-flex;align-items:center;gap:8px;">
-      📋 COPIAR DISEÑO COMPLETO (Ctrl+V en Brevo / Gmail / Outlook)
+      📋 COPIAR DISEÑO CON ENLACES (Ctrl+V en Brevo / Gmail / Outlook)
     </button>
-    <button id="btnCopiarCodigo" onclick="copiarCodigoHtml()" style="background:#1E293B;color:#F8FAFC;border:1px solid #475569;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
+    <button id="btnCopiarCodigo" onclick="copiarCodigoHtml()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
       &lt;/&gt; COPIAR CÓDIGO HTML
     </button>
-    <a href="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-email-completo-oscuro.png" download="saasw-email-completo-oscuro.png" target="_blank" style="background:#1E293B;color:#94A3B8;border:1px solid #334155;padding:10px 14px;border-radius:8px;font-weight:600;font-size:12px;cursor:pointer;text-decoration:none;">
-      ⬇ DESCARGAR PNG
-    </a>
     <span id="copyMsg" style="color:#38BDF8;font-size:13px;font-weight:700;display:none;">
       ✓ ¡Copiado con éxito!
     </span>
   </div>
   <script>
-    var zonasVisibles = false;
-    function toggleZonasClic() {
-      zonasVisibles = !zonasVisibles;
-      var overlays = document.querySelectorAll('.saasw-link-overlay');
-      var txtBtn = document.getElementById('txtBtnZonas');
-      var btn = document.getElementById('btnToggleZonas');
-
-      overlays.forEach(function(ov) {
-        if (zonasVisibles) {
-          ov.style.outline = '2px dashed #0284C7';
-          ov.style.backgroundColor = 'rgba(2, 132, 199, 0.14)';
-        } else {
-          ov.style.outline = 'none';
-          ov.style.backgroundColor = 'transparent';
-        }
-      });
-
-      if (zonasVisibles) {
-        txtBtn.innerText = 'OCULTAR RESALTADO DE ZONAS';
-        btn.style.background = '#0284C7';
-        btn.style.color = '#FFFFFF';
-      } else {
-        txtBtn.innerText = 'VER FORMA DE ZONAS (SIN TEXTO EXTRA)';
-        btn.style.background = '#1E293B';
-        btn.style.color = '#38BDF8';
-      }
-    }
-
     function copiarCorreoVisual() {
-      var eraVisible = zonasVisibles;
-      if (eraVisible) toggleZonasClic();
-
       var root = document.querySelector('[data-saasw-root="true"]');
       if (!root) return;
       var sel = window.getSelection();
@@ -104,21 +58,16 @@
       try {
         document.execCommand('copy');
         sel.removeAllRanges();
-        mostrarMsg('✓ ¡Diseño completo copiado! Pégalo ahora con Ctrl+V');
+        mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en tu correo');
       } catch (err) {
         alert('Por favor presiona Ctrl+C para copiar');
       }
-      if (eraVisible) toggleZonasClic();
     }
 
     function copiarCodigoHtml() {
       var root = document.querySelector('[data-saasw-root="true"]');
       if (!root) return;
-      var clone = root.cloneNode(true);
-      var overlays = clone.querySelectorAll('.saasw-link-overlay');
-      overlays.forEach(function(el) { el.remove(); });
-
-      navigator.clipboard.writeText(clone.outerHTML).then(function() {
+      navigator.clipboard.writeText(root.outerHTML).then(function() {
         mostrarMsg('✓ ¡Código HTML limpio copiado! Pégalo en tu editor en modo "Fuente HTML"');
       });
     }
@@ -131,64 +80,30 @@
       setTimeout(function () { msg.style.display = 'none'; }, 4000);
     }
   </script>
-
-  <!-- CONTENEDOR RAÍZ CONTINUO EN 1 SOLA PIEZA (TODO DENTRO DE LO MISMO, CERO TEXTOS APARTE) -->
-  <div data-saasw-root="true" style="margin: 0; padding: 0; background-color: #0B0F19;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0F19" style="width: 100%; border-collapse: collapse; border-spacing: 0; background-color: #0B0F19; margin: 0; padding: 0; border: 0;">
+  <!-- CONTENEDOR RAÍZ CONTINUO SIN ESPACIOS (BLOQUES CON HIPERVÍNCULOS NATIVOS 100% COMPATIBLES) -->
+  <div data-saasw-root="true" style="margin:0 !important;padding:0 !important;background-color:#0B0F19;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0F19" style="width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;background-color:#0B0F19;margin:0 !important;padding:0 !important;border:0 !important;">
       <tr>
-        <td align="center" style="padding: 20px 10px; border: 0;">
-          <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width: 660px; max-width: 100%; border-collapse: collapse; border-spacing: 0; margin: 0 auto; border: 0;">
-            <tr>
-              <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0; border: 0; position: relative;">
-                
-                <!-- CONTENEDOR RELATIVO PARA ENLACES DIRECTOS DENTRO DEL MISMO LIENZO -->
-                <div style="position: relative; width: 660px; max-width: 100%; margin: 0 auto; line-height: 0; font-size: 0;">
-                  
-                  <!-- IMAGEN ÚNICA CONTINUA HD EN 1 SOLA PIEZA (TODO EL DISEÑO Y TEXTOS DENTRO DE LA IMAGEN) -->
-                  <img 
-                    src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-email-completo-oscuro.png" 
-                    alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo que hace el trabajo." 
-                    width="660" 
-                    height="1775" 
-                    usemap="#saasw-map-oscuro" 
-                    border="0" 
-                    style="display: block; width: 660px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none; margin: 0; padding: 0;" 
-                  />
-
-                  <!-- CAPA INTERACTIVA DE ENLACES TOTALMENTE TRANSPARENTE (SIN TEXTO EXTRA, DENTRO DE LO MISMO) -->
-
-        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" title="GLocation · Cabecera Oficial" class="saasw-link-overlay" data-region="hero-header" style="position:absolute;left:48px;top:0px;width:564px;height:100px;border-radius:16px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" title="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" class="saasw-link-overlay" data-region="cta-diagnostico" style="position:absolute;left:67px;top:1040px;width:526px;height:340px;border-radius:18px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" title="glocation.co · Plataforma Comercial SaaSW" class="saasw-link-overlay" data-region="eco-glocation" style="position:absolute;left:48px;top:1456px;width:564px;height:46px;border-radius:8px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" title="homoagenticus.co · El Manifiesto del Homo agenticus" class="saasw-link-overlay" data-region="eco-homoagenticus" style="position:absolute;left:48px;top:1508px;width:564px;height:46px;border-radius:8px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" title="preagentica.glocation.co · Nuestra Herencia Pre-IA" class="saasw-link-overlay" data-region="eco-preagentica" style="position:absolute;left:48px;top:1560px;width:564px;height:46px;border-radius:8px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" title="Paula Rozo · Correo Directo (paula.rozo@glocation.com.co)" class="saasw-link-overlay" data-region="firma-paula" style="position:absolute;left:48px;top:1646px;width:312px;height:116px;border-radius:14px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" title="Sitio Web glocation.co" class="saasw-link-overlay" data-region="firma-btn-gloc" style="position:absolute;left:370px;top:1667px;width:115px;height:68px;border-radius:10px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-        <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" title="Manifiesto homoagenticus.co" class="saasw-link-overlay" data-region="firma-btn-homo" style="position:absolute;left:497px;top:1667px;width:115px;height:68px;border-radius:10px;text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>
-
-                </div>
-
-                <!-- MAPA DE ENLACES ESTÁNDAR PARA CLIENTES DE CORREO -->
-                <map name="saasw-map-oscuro">
-              <area shape="rect" coords="48,0,612,100" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="GLocation · Cabecera Oficial">
-              <area shape="rect" coords="67,1040,593,1380" href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co">
-              <area shape="rect" coords="48,1456,612,1502" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="glocation.co · Plataforma Comercial SaaSW">
-              <area shape="rect" coords="48,1508,612,1554" href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" alt="homoagenticus.co · El Manifiesto del Homo agenticus">
-              <area shape="rect" coords="48,1560,612,1606" href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA">
-              <area shape="rect" coords="48,1646,360,1762" href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" alt="Paula Rozo · Correo Directo (paula.rozo@glocation.com.co)">
-              <area shape="rect" coords="370,1667,485,1735" href="https://glocation.co" target="_blank" rel="noopener noreferrer" alt="Sitio Web glocation.co">
-              <area shape="rect" coords="497,1667,612,1735" href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" alt="Manifiesto homoagenticus.co">
-                </map>
-
-              </td>
-            </tr>
+        <td align="center" style="padding:20px 10px !important;margin:0 !important;border:0 !important;">
+          <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:660px !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
+            <!-- BLOQUE 1 · HERO HEADER -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-01-hero-oscuro.png" width="660" height="560" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo." border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 2 · TRABAJADORES COGNITIVOS -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-02-trabajadores-oscuro.png" width="660" height="465" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 3 · CTA DIAGNÓSTICO COGNITIVO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-03-cta-oscuro.png" width="660" height="400" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 4A · ECOSISTEMA: GLOCATION.CO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-04a-eco-glocation-oscuro.png" width="660" height="80" alt="glocation.co · Plataforma Comercial SaaSW" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 4B · ECOSISTEMA: HOMOAGENTICUS.CO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-04b-eco-homoagenticus-oscuro.png" width="660" height="53" alt="homoagenticus.co · El Manifiesto del Homo agenticus" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 4C · ECOSISTEMA: PREAGENTICA.GLOCATION.CO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-04c-eco-preagentica-oscuro.png" width="660" height="56" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 5A · CINTILLO HOLDING SERVINFORMACIÓN -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-05a-cintillo-oscuro.png" width="660" height="33" alt="HOLDING SERVINFORMACIÓN (27 AÑOS) • GOOGLE CLOUD PREMIER PARTNER • NORMA ISO 27001" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 5 ROW · FIRMA PAULA ROZO + BOTONES (3 COLUMNAS SIN ESPACIOS) -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;"><tr><td width="365" valign="top" style="width:365px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-05b-firma-paula-oscuro.png" width="365" height="129" alt="Paula Rozo — BDR · Business Development Representative" border="0" style="display:block !important;width:365px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td><td width="125" valign="top" style="width:125px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-05c-boton-glocation-oscuro.png" width="125" height="129" alt="glocation.co" border="0" style="display:block !important;width:125px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td><td width="170" valign="top" style="width:170px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/saasw-05d-boton-homoagenticus-oscuro.png" width="170" height="129" alt="homoagenticus.co" border="0" style="display:block !important;width:170px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr></table></td></tr>
+            <!-- LEGAL FOOTER -->
+            <tr><td align="center" style="padding:16px 10px 24px 10px !important;margin:0 !important;border:0 !important;"><table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px !important;width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border:0 !important;" role="presentation"><tr><td align="center" style="font-size:11px !important;line-height:1.5 !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;color:#94A3B8 !important;border:0 !important;">© 2026 GLocation SAS · Bogotá D.C., Colombia.<br />Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología.</td></tr></table></td></tr>
           </table>
         </td>
       </tr>

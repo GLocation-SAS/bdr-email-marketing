@@ -2,190 +2,92 @@ const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
-// Generador de plantilla SaaSW en 1 SOLA PIEZA CONTINUA
-// Todo integrado dentro de lo mismo (sin textos flotantes externos, sin bloques separados)
-// Con Image Map interactivo (<map><area>) y enlaces de precisión que respetan la redondez y distribución gráfica.
+// Generador de plantillas SaaSW en BLOQUES SIN ESPACIOS
+// Formato Jefes TIC: Cada bloque tiene su hipervínculo nativo (<a href="..."><img></a>)
+// para funcionar 100% en Brevo, Gmail, Outlook y cualquier cliente.
+// ZERO SPACES: Sin saltos de línea dentro de <td>, sin márgenes, sin bordes feos.
+// Las rodajas provienen de la tarjeta maestra continua, por lo que encajan al milímetro.
 
-async function buildUnifiedTemplates() {
+async function buildAllTemplates() {
   const blocksDir = path.join(__dirname, '../public/email-blocks');
+  const publicDir = path.join(__dirname, '../public');
+  const recursosDir = path.join(__dirname, '../recursos');
 
-  // Asegurar que las imágenes maestras continuas existen
-  const claroBuf = await sharp({
-    create: {
-      width: 1320,
-      height: 3365,
-      channels: 4,
-      background: { r: 240, g: 244, b: 249, alpha: 1 }
+  // 1. Extraer las rodajas pixel-perfect desde la tarjeta maestra continua
+  for (const theme of ['claro', 'oscuro']) {
+    const cardPath = path.join(blocksDir, `saasw-04-ecosistema-firma-${theme}.png`);
+    if (!fs.existsSync(cardPath)) {
+      console.warn(`No existe ${cardPath}, omitiendo corte`);
+      continue;
     }
-  })
-  .composite([
-    { input: path.join(blocksDir, 'saasw-01-hero-claro.png'), top: 0, left: 0 },
-    { input: path.join(blocksDir, 'saasw-02-trabajadores-claro.png'), top: 1107, left: 0 },
-    { input: path.join(blocksDir, 'saasw-03-cta-claro.png'), top: 2036, left: 0 },
-    { input: path.join(blocksDir, 'saasw-04-ecosistema-firma-claro.png'), top: 2665, left: 0 }
-  ])
-  .png({ quality: 100 })
-  .toBuffer();
 
-  fs.writeFileSync(path.join(blocksDir, 'saasw-email-completo-claro.png'), claroBuf);
+    // 1. Eco Glocation (y=0, h=160, w=1320)
+    await sharp(cardPath).extract({ left: 0, top: 0, width: 1320, height: 160 })
+      .png().toFile(path.join(blocksDir, `saasw-04a-eco-glocation-${theme}.png`));
 
-  const oscuroBuf = await sharp({
-    create: {
-      width: 1320,
-      height: 3549,
-      channels: 4,
-      background: { r: 11, g: 15, b: 25, alpha: 1 }
-    }
-  })
-  .composite([
-    { input: path.join(blocksDir, 'saasw-01-hero-oscuro.png'), top: 0, left: 0 },
-    { input: path.join(blocksDir, 'saasw-02-trabajadores-oscuro.png'), top: 1120, left: 0 },
-    { input: path.join(blocksDir, 'saasw-03-cta-oscuro.png'), top: 2049, left: 0 },
-    { input: path.join(blocksDir, 'saasw-04-ecosistema-firma-oscuro.png'), top: 2849, left: 0 }
-  ])
-  .png({ quality: 100 })
-  .toBuffer();
+    // 2. Eco Homoagenticus (y=160, h=105, w=1320)
+    await sharp(cardPath).extract({ left: 0, top: 160, width: 1320, height: 105 })
+      .png().toFile(path.join(blocksDir, `saasw-04b-eco-homoagenticus-${theme}.png`));
 
-  fs.writeFileSync(path.join(blocksDir, 'saasw-email-completo-oscuro.png'), oscuroBuf);
-  console.log('Master images updated: saasw-email-completo-claro.png & oscuro.png');
+    // 3. Eco Preagentica (y=265, h=111, w=1320)
+    await sharp(cardPath).extract({ left: 0, top: 265, width: 1320, height: 111 })
+      .png().toFile(path.join(blocksDir, `saasw-04c-eco-preagentica-${theme}.png`));
 
-  function renderUnifiedHtml(theme = 'claro', includeToolbar = true) {
+    // 4. Cintillo Holding (y=376, h=66, w=1320)
+    await sharp(cardPath).extract({ left: 0, top: 376, width: 1320, height: 66 })
+      .png().toFile(path.join(blocksDir, `saasw-05a-cintillo-${theme}.png`));
+
+    // 5. Firma Row (y=442, h=258):
+    // 5A Paula: left: 0, top: 442, width: 730, height: 258
+    await sharp(cardPath).extract({ left: 0, top: 442, width: 730, height: 258 })
+      .png().toFile(path.join(blocksDir, `saasw-05b-firma-paula-${theme}.png`));
+
+    // 5B Botón Gloc: left: 730, top: 442, width: 250, height: 258
+    await sharp(cardPath).extract({ left: 730, top: 442, width: 250, height: 258 })
+      .png().toFile(path.join(blocksDir, `saasw-05c-boton-glocation-${theme}.png`));
+
+    // 5C Botón Homo: left: 980, top: 442, width: 340, height: 258
+    await sharp(cardPath).extract({ left: 980, top: 442, width: 340, height: 258 })
+      .png().toFile(path.join(blocksDir, `saasw-05d-boton-homoagenticus-${theme}.png`));
+  }
+  console.log('✓ Rodajas de tarjeta continua extraídas con éxito');
+
+  function renderSeamlessBlocksHtml(theme = 'claro', includeToolbar = true) {
     const isDark = theme === 'oscuro';
     const outerBg = isDark ? '#0B0F19' : '#F0F4F9';
-    const imgName = `saasw-email-completo-${theme}.png`;
-    const imgUrl = `https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/${imgName}`;
-    const mapName = `saasw-map-${theme}`;
+    const textMuted = isDark ? '#94A3B8' : '#64748B';
+    const blocksBase = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
 
-    // Dimensiones de display (ancho 660px, escala 0.5):
-    const displayWidth = 660;
-    const displayHeight = isDark ? 1775 : 1683;
+    const b1Url = `${blocksBase}/saasw-01-hero-${theme}.png`;
+    const b2Url = `${blocksBase}/saasw-02-trabajadores-${theme}.png`;
+    const b3Url = `${blocksBase}/saasw-03-cta-${theme}.png`;
+    const b4aUrl = `${blocksBase}/saasw-04a-eco-glocation-${theme}.png`;
+    const b4bUrl = `${blocksBase}/saasw-04b-eco-homoagenticus-${theme}.png`;
+    const b4cUrl = `${blocksBase}/saasw-04c-eco-preagentica-${theme}.png`;
+    const b5aUrl = `${blocksBase}/saasw-05a-cintillo-${theme}.png`;
+    const b5bUrl = `${blocksBase}/saasw-05b-firma-paula-${theme}.png`;
+    const b5cUrl = `${blocksBase}/saasw-05c-boton-glocation-${theme}.png`;
+    const b5dUrl = `${blocksBase}/saasw-05d-boton-homoagenticus-${theme}.png`;
 
-    const ctaY1 = isDark ? 1040 : 1019;
-    const ctaY2 = isDark ? 1380 : 1297;
-    const ecoOffset = isDark ? 1425 : 1333;
-
-    // Regiones estructuradas exactamente sobre la geometría gráfica de cada botón y tarjeta
-    // Sin textos aparte: todo vive dentro de la imagen maestra
-    const regions = [
-      {
-        id: 'hero-header',
-        title: 'GLocation · Cabecera Oficial',
-        url: 'https://glocation.co',
-        x: 48, y: 0, w: 564, h: 100,
-        radius: '16px'
-      },
-      {
-        id: 'cta-diagnostico',
-        title: 'Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co',
-        url: 'https://citas.glocation.co/?theme=light',
-        x: 67, y: ctaY1, w: 526, h: (ctaY2 - ctaY1),
-        radius: '18px'
-      },
-      {
-        id: 'eco-glocation',
-        title: 'glocation.co · Plataforma Comercial SaaSW',
-        url: 'https://glocation.co',
-        x: 48, y: ecoOffset + 31, w: 564, h: 46,
-        radius: '8px'
-      },
-      {
-        id: 'eco-homoagenticus',
-        title: 'homoagenticus.co · El Manifiesto del Homo agenticus',
-        url: 'https://homoagenticus.co',
-        x: 48, y: ecoOffset + 83, w: 564, h: 46,
-        radius: '8px'
-      },
-      {
-        id: 'eco-preagentica',
-        title: 'preagentica.glocation.co · Nuestra Herencia Pre-IA',
-        url: 'https://preagentica.glocation.co',
-        x: 48, y: ecoOffset + 135, w: 564, h: 46,
-        radius: '8px'
-      },
-      {
-        id: 'firma-paula',
-        title: 'Paula Rozo · Correo Directo (paula.rozo@glocation.com.co)',
-        url: 'mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation',
-        x: 48, y: ecoOffset + 221, w: 312, h: 116,
-        radius: '14px'
-      },
-      {
-        id: 'firma-btn-gloc',
-        title: 'Sitio Web glocation.co',
-        url: 'https://glocation.co',
-        x: 370, y: ecoOffset + 242, w: 115, h: 68,
-        radius: '10px'
-      },
-      {
-        id: 'firma-btn-homo',
-        title: 'Manifiesto homoagenticus.co',
-        url: 'https://homoagenticus.co',
-        x: 497, y: ecoOffset + 242, w: 115, h: 68,
-        radius: '10px'
-      }
-    ];
-
-    const areasHtml = regions.map(r => 
-      `              <area shape="rect" coords="${r.x},${r.y},${r.x + r.w},${r.y + r.h}" href="${r.url}" target="_blank" rel="noopener noreferrer" alt="${r.title}">`
-    ).join('\n');
-
-    // Capa interactiva limpia SIN NINGÚN TEXTO APARTE (solo zonas transparentes con su forma y redondez)
-    const overlayDivsHtml = regions.map(r => `
-        <a href="${r.url}" target="_blank" rel="noopener noreferrer" title="${r.title}" class="saasw-link-overlay" data-region="${r.id}" style="position:absolute;left:${r.x}px;top:${r.y}px;width:${r.w}px;height:${r.h}px;border-radius:${r.radius};text-decoration:none;box-sizing:border-box;transition:all 0.15s ease;z-index:10;outline:none;background:transparent;"></a>`
-    ).join('\n');
+    const b1Height = isDark ? 560 : 554;
+    const b2Height = 465;
+    const b3Height = isDark ? 400 : 315;
 
     const toolbarHtml = includeToolbar ? `
-  <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR Y VERIFICAR ZONAS INTERACTIVAS -->
+  <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
   <div id="saasw-floating-toolbar" style="position:sticky;top:0;z-index:999999;background:#0F172A;border-bottom:2px solid #0284C7;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;flex-wrap:wrap;">
-    <button id="btnToggleZonas" onclick="toggleZonasClic()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;">
-      👁️ <span id="txtBtnZonas">VER FORMA DE ZONAS (SIN TEXTO EXTRA)</span>
-    </button>
     <button id="btnCopiarVisual" onclick="copiarCorreoVisual()" style="background:linear-gradient(90deg,#0284C7 0%,#2563EB 100%);color:#FFFFFF;border:none;padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.5);display:inline-flex;align-items:center;gap:8px;">
-      📋 COPIAR DISEÑO COMPLETO (Ctrl+V en Brevo / Gmail / Outlook)
+      📋 COPIAR DISEÑO CON ENLACES (Ctrl+V en Brevo / Gmail / Outlook)
     </button>
-    <button id="btnCopiarCodigo" onclick="copiarCodigoHtml()" style="background:#1E293B;color:#F8FAFC;border:1px solid #475569;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
+    <button id="btnCopiarCodigo" onclick="copiarCodigoHtml()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
       &lt;/&gt; COPIAR CÓDIGO HTML
     </button>
-    <a href="${imgUrl}" download="${imgName}" target="_blank" style="background:#1E293B;color:#94A3B8;border:1px solid #334155;padding:10px 14px;border-radius:8px;font-weight:600;font-size:12px;cursor:pointer;text-decoration:none;">
-      ⬇ DESCARGAR PNG
-    </a>
     <span id="copyMsg" style="color:#38BDF8;font-size:13px;font-weight:700;display:none;">
       ✓ ¡Copiado con éxito!
     </span>
   </div>
   <script>
-    var zonasVisibles = false;
-    function toggleZonasClic() {
-      zonasVisibles = !zonasVisibles;
-      var overlays = document.querySelectorAll('.saasw-link-overlay');
-      var txtBtn = document.getElementById('txtBtnZonas');
-      var btn = document.getElementById('btnToggleZonas');
-
-      overlays.forEach(function(ov) {
-        if (zonasVisibles) {
-          ov.style.outline = '2px dashed #0284C7';
-          ov.style.backgroundColor = 'rgba(2, 132, 199, 0.14)';
-        } else {
-          ov.style.outline = 'none';
-          ov.style.backgroundColor = 'transparent';
-        }
-      });
-
-      if (zonasVisibles) {
-        txtBtn.innerText = 'OCULTAR RESALTADO DE ZONAS';
-        btn.style.background = '#0284C7';
-        btn.style.color = '#FFFFFF';
-      } else {
-        txtBtn.innerText = 'VER FORMA DE ZONAS (SIN TEXTO EXTRA)';
-        btn.style.background = '#1E293B';
-        btn.style.color = '#38BDF8';
-      }
-    }
-
     function copiarCorreoVisual() {
-      var eraVisible = zonasVisibles;
-      if (eraVisible) toggleZonasClic();
-
       var root = document.querySelector('[data-saasw-root="true"]');
       if (!root) return;
       var sel = window.getSelection();
@@ -196,21 +98,16 @@ async function buildUnifiedTemplates() {
       try {
         document.execCommand('copy');
         sel.removeAllRanges();
-        mostrarMsg('✓ ¡Diseño completo copiado! Pégalo ahora con Ctrl+V');
+        mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en tu correo');
       } catch (err) {
         alert('Por favor presiona Ctrl+C para copiar');
       }
-      if (eraVisible) toggleZonasClic();
     }
 
     function copiarCodigoHtml() {
       var root = document.querySelector('[data-saasw-root="true"]');
       if (!root) return;
-      var clone = root.cloneNode(true);
-      var overlays = clone.querySelectorAll('.saasw-link-overlay');
-      overlays.forEach(function(el) { el.remove(); });
-
-      navigator.clipboard.writeText(clone.outerHTML).then(function() {
+      navigator.clipboard.writeText(root.outerHTML).then(function() {
         mostrarMsg('✓ ¡Código HTML limpio copiado! Pégalo en tu editor en modo "Fuente HTML"');
       });
     }
@@ -222,8 +119,7 @@ async function buildUnifiedTemplates() {
       msg.style.display = 'inline';
       setTimeout(function () { msg.style.display = 'none'; }, 4000);
     }
-  </script>
-` : '';
+  </script>` : '';
 
     return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -238,18 +134,18 @@ async function buildUnifiedTemplates() {
       -ms-text-size-adjust: 100%;
     }
     table, td, tr {
-      mso-table-lspace: 0pt;
-      mso-table-rspace: 0pt;
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
       border-collapse: collapse !important;
       border-spacing: 0 !important;
       border: 0 !important;
     }
     img {
       -ms-interpolation-mode: bicubic;
-      border: 0;
-      outline: none;
-      text-decoration: none;
-      display: block;
+      border: 0 !important;
+      outline: none !important;
+      text-decoration: none !important;
+      display: block !important;
     }
     body {
       margin: 0 !important;
@@ -257,54 +153,34 @@ async function buildUnifiedTemplates() {
       width: 100% !important;
       background-color: ${outerBg};
     }
-    area {
-      outline: none;
-      border: none;
-      cursor: pointer;
-    }
-    .saasw-link-overlay:hover {
-      background-color: rgba(2, 132, 199, 0.08) !important;
-      cursor: pointer;
-    }
   </style>
 </head>
-<body style="margin: 0; padding: 0; width: 100% !important; background-color: ${outerBg};">
+<body style="margin:0 !important;padding:0 !important;width:100% !important;background-color:${outerBg};">
 ${toolbarHtml}
-  <!-- CONTENEDOR RAÍZ CONTINUO EN 1 SOLA PIEZA (TODO DENTRO DE LO MISMO, CERO TEXTOS APARTE) -->
-  <div data-saasw-root="true" style="margin: 0; padding: 0; background-color: ${outerBg};">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${outerBg}" style="width: 100%; border-collapse: collapse; border-spacing: 0; background-color: ${outerBg}; margin: 0; padding: 0; border: 0;">
+  <!-- CONTENEDOR RAÍZ CONTINUO SIN ESPACIOS (BLOQUES CON HIPERVÍNCULOS NATIVOS 100% COMPATIBLES) -->
+  <div data-saasw-root="true" style="margin:0 !important;padding:0 !important;background-color:${outerBg};">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="${outerBg}" style="width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;background-color:${outerBg};margin:0 !important;padding:0 !important;border:0 !important;">
       <tr>
-        <td align="center" style="padding: 20px 10px; border: 0;">
-          <table role="presentation" width="${displayWidth}" cellpadding="0" cellspacing="0" border="0" style="width: ${displayWidth}px; max-width: 100%; border-collapse: collapse; border-spacing: 0; margin: 0 auto; border: 0;">
-            <tr>
-              <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0; border: 0; position: relative;">
-                
-                <!-- CONTENEDOR RELATIVO PARA ENLACES DIRECTOS DENTRO DEL MISMO LIENZO -->
-                <div style="position: relative; width: ${displayWidth}px; max-width: 100%; margin: 0 auto; line-height: 0; font-size: 0;">
-                  
-                  <!-- IMAGEN ÚNICA CONTINUA HD EN 1 SOLA PIEZA (TODO EL DISEÑO Y TEXTOS DENTRO DE LA IMAGEN) -->
-                  <img 
-                    src="${imgUrl}" 
-                    alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo que hace el trabajo." 
-                    width="${displayWidth}" 
-                    height="${displayHeight}" 
-                    usemap="#${mapName}" 
-                    border="0" 
-                    style="display: block; width: ${displayWidth}px; max-width: 100%; height: auto; border: 0; outline: none; text-decoration: none; margin: 0; padding: 0;" 
-                  />
-
-                  <!-- CAPA INTERACTIVA DE ENLACES TOTALMENTE TRANSPARENTE (SIN TEXTO EXTRA, DENTRO DE LO MISMO) -->
-${overlayDivsHtml}
-
-                </div>
-
-                <!-- MAPA DE ENLACES ESTÁNDAR PARA CLIENTES DE CORREO -->
-                <map name="${mapName}">
-${areasHtml}
-                </map>
-
-              </td>
-            </tr>
+        <td align="center" style="padding:20px 10px !important;margin:0 !important;border:0 !important;">
+          <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:660px !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
+            <!-- BLOQUE 1 · HERO HEADER -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b1Url}" width="660" height="${b1Height}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo." border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 2 · TRABAJADORES COGNITIVOS -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b2Url}" width="660" height="${b2Height}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 3 · CTA DIAGNÓSTICO COGNITIVO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b3Url}" width="660" height="${b3Height}" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 4A · ECOSISTEMA: GLOCATION.CO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b4aUrl}" width="660" height="80" alt="glocation.co · Plataforma Comercial SaaSW" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 4B · ECOSISTEMA: HOMOAGENTICUS.CO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b4bUrl}" width="660" height="53" alt="homoagenticus.co · El Manifiesto del Homo agenticus" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 4C · ECOSISTEMA: PREAGENTICA.GLOCATION.CO -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b4cUrl}" width="660" height="56" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 5A · CINTILLO HOLDING SERVINFORMACIÓN -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5aUrl}" width="660" height="33" alt="HOLDING SERVINFORMACIÓN (27 AÑOS) • GOOGLE CLOUD PREMIER PARTNER • NORMA ISO 27001" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr>
+            <!-- BLOQUE 5 ROW · FIRMA PAULA ROZO + BOTONES (3 COLUMNAS SIN ESPACIOS) -->
+            <tr><td align="center" style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;"><tr><td width="365" valign="top" style="width:365px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5bUrl}" width="365" height="129" alt="Paula Rozo — BDR · Business Development Representative" border="0" style="display:block !important;width:365px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td><td width="125" valign="top" style="width:125px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5cUrl}" width="125" height="129" alt="glocation.co" border="0" style="display:block !important;width:125px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td><td width="170" valign="top" style="width:170px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${b5dUrl}" width="170" height="129" alt="homoagenticus.co" border="0" style="display:block !important;width:170px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td></tr></table></td></tr>
+            <!-- LEGAL FOOTER -->
+            <tr><td align="center" style="padding:16px 10px 24px 10px !important;margin:0 !important;border:0 !important;"><table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px !important;width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border:0 !important;" role="presentation"><tr><td align="center" style="font-size:11px !important;line-height:1.5 !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;color:${textMuted} !important;border:0 !important;">© 2026 GLocation SAS · Bogotá D.C., Colombia.<br />Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología.</td></tr></table></td></tr>
           </table>
         </td>
       </tr>
@@ -314,19 +190,19 @@ ${areasHtml}
 </html>`;
   }
 
-  // Generar todos los archivos estáticos
-  const htmlClaro = renderUnifiedHtml('claro', true);
-  const htmlOscuro = renderUnifiedHtml('oscuro', true);
+  const claroHtml = renderSeamlessBlocksHtml('claro', true);
+  const oscuroHtml = renderSeamlessBlocksHtml('oscuro', true);
+  const defaultHtml = claroHtml;
 
-  fs.writeFileSync(path.join(__dirname, '../public/plantilla-saasw-lideres-tic-claro.html'), htmlClaro, 'utf8');
-  fs.writeFileSync(path.join(__dirname, '../public/plantilla-saasw-lideres-tic-oscuro.html'), htmlOscuro, 'utf8');
-  fs.writeFileSync(path.join(__dirname, '../public/plantilla-saasw-lideres-tic.html'), htmlClaro, 'utf8');
-  fs.writeFileSync(path.join(__dirname, '../recursos/plantilla-saasw-lideres-tic.html'), htmlClaro, 'utf8');
-  fs.writeFileSync(path.join(__dirname, '../public/plantilla-saasw-lideres-tic-bloques-claro.html'), htmlClaro, 'utf8');
-  fs.writeFileSync(path.join(__dirname, '../public/plantilla-saasw-lideres-tic-bloques-oscuro.html'), htmlOscuro, 'utf8');
-  fs.writeFileSync(path.join(__dirname, '../public/plantilla-saasw-lideres-tic-bloques.html'), htmlClaro, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-claro.html'), claroHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-oscuro.html'), oscuroHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic.html'), defaultHtml, 'utf8');
+  fs.writeFileSync(path.join(recursosDir, 'plantilla-saasw-lideres-tic.html'), defaultHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-claro.html'), claroHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques-oscuro.html'), oscuroHtml, 'utf8');
+  fs.writeFileSync(path.join(publicDir, 'plantilla-saasw-lideres-tic-bloques.html'), defaultHtml, 'utf8');
 
-  console.log('Successfully generated clean templates: NO extra texts, everything inside the design.');
+  console.log('✓ All templates generated in seamless linked blocks format with ZERO SPACES!');
 }
 
-buildUnifiedTemplates().catch(console.error);
+buildAllTemplates();
