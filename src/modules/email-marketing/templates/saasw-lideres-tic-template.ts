@@ -399,10 +399,7 @@ export function generateSaaswLideresTicImageEmailHtml(
   const block1HeroUrl = `${blocksBaseUrl}/saasw-01-hero-${suffix}.png`;
   const block2WorkersUrl = `${blocksBaseUrl}/saasw-02-trabajadores-${suffix}.png`;
   const block3CtaUrl = `${blocksBaseUrl}/saasw-03-cta-${suffix}.png`;
-  const block4EcosystemUrl = `${blocksBaseUrl}/saasw-04-ecosistema-${suffix}.png`;
-  const block5aPaulaUrl = `${blocksBaseUrl}/05a-glocation-bloque-firma-paula-cursor-${suffix}.png`;
-  const block5bWebUrl = `${blocksBaseUrl}/05b-glocation-bloque-firma-web-${suffix}.png`;
-  const block5cLinkedinUrl = `${blocksBaseUrl}/05c-glocation-bloque-firma-linkedin-${suffix}.png`;
+  const paulaPhotoPublicUrl = `https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-${isDark ? "dark" : "light"}.png`;
 
   const mailtoLink = `mailto:${c.senderEmail}?subject=${encodeURIComponent(
     "Diagnóstico Cognitivo Oficina TIC - GLocation"
@@ -421,6 +418,7 @@ export function generateSaaswLideresTicImageEmailHtml(
   const dividerColor = isDark ? "#1E293B" : "rgb(237,243,250)";
   const mutedColor = isDark ? "#94A3B8" : "rgb(81,100,125)";
   const subtleBg = isDark ? "#1E293B" : "rgb(248,250,253)";
+  const titleColor = isDark ? "#F8FAFC" : "rgb(15,28,48)";
 
   return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -487,12 +485,13 @@ export function generateSaaswLideresTicImageEmailHtml(
             </td>
           </tr>
 
-          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES (TEXTO HTML CON ENLACES .CO ACTIVOS) -->
+          <!-- BLOQUE 4 · ECOSISTEMA EN VIVO Y CERTIFICACIONES + BLOQUE 5 · FIRMA COMERCIAL PAULA ROZO -->
           <tr>
-            <td align="center" style="padding: 0 0 6px 0;">
+            <td align="center" style="padding: 0 0 12px 0;">
               <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 100%; border-collapse: collapse; margin: 0 auto; background-color: ${cardBg}; border: 1px solid ${cardBorder}; border-radius: 12px; overflow: hidden;">
+                <!-- ECOSISTEMA EN VIVO -->
                 <tr>
-                  <td align="center" style="padding: 20px 24px 16px 24px; background-color: ${subtleBg};">
+                  <td align="center" style="padding: 22px 32px 18px 32px; background-color: ${subtleBg};">
                     <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${mutedColor};display:block;margin-bottom:8px;">
                       EXPLORE NUESTRO ECOSISTEMA EN VIVO:
                     </span>
@@ -503,70 +502,52 @@ export function generateSaaswLideresTicImageEmailHtml(
                     </div>
                   </td>
                 </tr>
+
+                <!-- CINTILLO HOLDING / GOOGLE CLOUD PARTNER / ISO 27001 -->
                 <tr>
-                  <td align="center" style="padding: 12px 20px; border-top: 1px solid ${dividerColor}; background-color: ${cardBg};">
+                  <td align="center" style="padding: 16px 24px; border-top: 1px solid ${dividerColor}; border-bottom: 1px solid ${dividerColor}; background-color: ${subtleBg};">
                     <span style="font-family:'SF Mono',Consolas,Monaco,monospace;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:${mutedColor};">
                       HOLDING SERVINFORMACIÓN (27 AÑOS) &nbsp;•&nbsp; GOOGLE CLOUD PREMIER PARTNER &nbsp;•&nbsp; NORMA ISO 27001
                     </span>
+                  </td>
+                </tr>
+
+                <!-- FIRMA COMERCIAL · PAULA ROZO CON FOTO OFICIAL -->
+                <tr>
+                  <td style="padding: 28px 36px 32px 36px; background-color: ${cardBg};">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                      <tr>
+                        <td width="56" valign="top">
+                          <a href="${mailtoLink}" style="text-decoration: none; border: 0; display: inline-block;">
+                            <img src="${paulaPhotoPublicUrl}" alt="${c.senderName}" width="52" height="52" style="display: block; width: 52px; height: 52px; border: 0; border-radius: 50%; object-fit: cover;" />
+                          </a>
+                        </td>
+                        <td style="padding-left: 14px;" valign="top">
+                          <b style="font-size: 14px; color: ${titleColor}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${c.senderName}</b><br />
+                          <span style="font-size: 12px; color: ${mutedColor}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${c.senderRole}</span><br />
+                          <span style="font-size: 11px; font-weight: 600; color: rgb(34,119,156); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${c.senderCompany}</span><br />
+                          <span style="font-size: 11px; color: rgb(123,140,163); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+                            <a href="${mailtoLink}" style="color: rgb(34,119,156); text-decoration: none; font-weight: 600;" target="_blank">${c.senderEmail}</a> &nbsp;|&nbsp;
+                            <a href="${websiteUrl}" style="text-decoration: none; font-weight: 600; color: rgb(34,119,156);" target="_blank">glocation.co</a> &nbsp;|&nbsp;
+                            <a href="${manifestoUrl}" style="text-decoration: none; font-weight: 600; color: rgb(122,92,255);" target="_blank">homoagenticus.co</a>
+                          </span>
+                        </td>
+                      </tr>
+                    </table>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <!-- BLOQUE 5 · FIRMA COMERCIAL Y REDES (PAULA ROZO + WEB GLOCATION.CO + LINKEDIN GLOCATION) -->
+          <!-- PIE DE DERECHOS RESERVADOS -->
           <tr>
-            <td align="center" style="padding: 0; margin: 0; font-size: 0; line-height: 0;">
-              <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width: 600px; max-width: 100%; border-collapse: collapse; margin: 0 auto;">
+            <td align="center" style="padding: 6px 10px 24px 10px;">
+              <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; margin: 0 auto;" role="presentation">
                 <tr>
-                  <!-- 5A · Paula Rozo (Correo directo) -->
-                  <td width="378" valign="top" style="width: 62.97%; padding: 0; margin: 0; font-size: 0; line-height: 0;">
-                    <a
-                      href="${mailtoLink}"
-                      style="display: block; text-decoration: none; border: 0; border: none; outline: none;"
-                    >
-                      <img
-                        src="${block5aPaulaUrl}"
-                        alt="Paula Rozo — BDR | Business Development Representative"
-                        width="378"
-                        border="0"
-                        style="display: block; width: 100%; max-width: 378px; height: auto; border: 0; border: none; outline: none; text-decoration: none;"
-                      />
-                    </a>
-                  </td>
-                  <!-- 5B · Botón Web glocation.co -->
-                  <td width="100" valign="top" style="width: 16.76%; padding: 0; margin: 0; font-size: 0; line-height: 0;">
-                    <a
-                      href="${websiteUrl}"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style="display: block; text-decoration: none; border: 0; border: none; outline: none;"
-                    >
-                      <img
-                        src="${block5bWebUrl}"
-                        alt="Sitio web oficial glocation.co"
-                        width="100"
-                        border="0"
-                        style="display: block; width: 100%; max-width: 100px; height: auto; border: 0; border: none; outline: none; text-decoration: none;"
-                      />
-                    </a>
-                  </td>
-                  <!-- 5C · Botón LinkedIn GLocation -->
-                  <td width="122" valign="top" style="width: 20.27%; padding: 0; margin: 0; font-size: 0; line-height: 0;">
-                    <a
-                      href="${linkedinUrl}"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style="display: block; text-decoration: none; border: 0; border: none; outline: none;"
-                    >
-                      <img
-                        src="${block5cLinkedinUrl}"
-                        alt="LinkedIn oficial de GLocation"
-                        width="122"
-                        border="0"
-                        style="display: block; width: 100%; max-width: 122px; height: auto; border: 0; border: none; outline: none; text-decoration: none;"
-                      />
-                    </a>
+                  <td align="center" style="font-size: 11px; line-height: 1.5; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: rgb(123,140,163);">
+                    © 2026 GLocation SAS · Bogotá D.C., Colombia.<br />
+                    Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología.
                   </td>
                 </tr>
               </table>
