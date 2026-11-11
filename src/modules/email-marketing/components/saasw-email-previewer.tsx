@@ -171,7 +171,6 @@ export function SaaswEmailPreviewer() {
         alt: "Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita",
         yStart: cut2,
         yEnd: cut3,
-        href: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
       },
       {
         id: "04-ecosistema-firma",

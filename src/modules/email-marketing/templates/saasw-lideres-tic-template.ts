@@ -498,9 +498,7 @@ export function generateSaaswLideresTicImageEmailHtml(
           <!-- BLOQUE 3 · CTA — DIAGNÓSTICO COGNITIVO 30 MINUTOS -->
           <tr>
             <td align="center" style="padding: 0 0 6px 0; margin: 0; font-size: 0; line-height: 0; border: 0 !important; border-style: none !important;">
-              <a href="${ctaUrl}" target="_blank" rel="noopener noreferrer" style="display: block; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important; color: transparent !important; -webkit-tap-highlight-color: transparent !important;">
-                <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important;" />
-              </a>
+              <img src="${block3CtaUrl}" alt="Diagnóstico de Viabilidad Cognitiva para su Oficina TIC (30 min) — Agendar cita" width="600" border="0" style="display: block; width: 600px; max-width: 100%; height: auto; border: 0 !important; border-style: none !important; border-width: 0 !important; outline: none !important; text-decoration: none !important;" />
             </td>
           </tr>
 
