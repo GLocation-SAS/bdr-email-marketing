@@ -111,10 +111,10 @@ async function buildAllCards() {
     }
 
     // ==========================================
-    // 3. CARD 3 (CTA): Clean, uniform card with 24px rounded corners
+    // 3. CARD 3 (CTA): Clean, uniform card with generous breathing space
     // ==========================================
     const ctaPath = path.join(blocksDir, `saasw-03-cta-${t.id}.png`);
-    const ctaH = 630;
+    const ctaH = 680;
     const ctaCardBg = t.id === 'claro' ? '#FFFFFF' : '#0F172A';
     const ctaCardBorder = t.id === 'claro' ? '#E2E8F0' : '#1E293B';
     const ctaEyebrowColor = t.id === 'claro' ? '#0284C7' : '#38BDF8';
@@ -135,34 +135,34 @@ async function buildAllCards() {
         <rect x="60" y="0" width="1200" height="${ctaH}" rx="24" ry="24" fill="${ctaCardBg}" stroke="${ctaCardBorder}" stroke-width="1.5" />
         
         <!-- Eyebrow -->
-        <text x="660" y="90" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2" fill="${ctaEyebrowColor}">
+        <text x="660" y="100" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2.2" fill="${ctaEyebrowColor}">
           DIAGNÓSTICO COGNITIVO · 30 MINUTOS
         </text>
 
         <!-- Título -->
-        <text x="660" y="160" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+        <text x="660" y="180" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
           ¿Exploramos qué proceso de su oficina TIC podemos liberar
         </text>
-        <text x="660" y="210" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+        <text x="660" y="230" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
           este mes?
         </text>
 
         <!-- Descripción -->
-        <text x="660" y="280" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+        <text x="660" y="310" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
           Agende una sesión técnica de 30 minutos. Evaluaremos uno de sus cuellos de
         </text>
-        <text x="660" y="320" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+        <text x="660" y="355" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
           botella operativos y le entregaremos una estimación contable de ahorro y tiempos.
         </text>
 
         <!-- Botón CTA -->
-        <rect x="340" y="380" width="640" height="96" rx="16" ry="16" fill="url(#ctaBtnGrad_${t.id})" />
-        <text x="660" y="440" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">
+        <rect x="340" y="420" width="640" height="96" rx="16" ry="16" fill="url(#ctaBtnGrad_${t.id})" />
+        <text x="660" y="480" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">
           Agendar Diagnóstico Cognitivo (30 min) →
         </text>
 
         <!-- Subtexto -->
-        <text x="660" y="540" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="400" fill="${ctaSubtextColor}">
+        <text x="660" y="585" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="400" fill="${ctaSubtextColor}">
           Sin formularios eternos: seleccione día y hora directamente en nuestra plataforma.
         </text>
       </svg>
@@ -180,16 +180,16 @@ async function buildAllCards() {
           .eco-label { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 2.2px; fill: ${t.textMuted}; text-anchor: middle; }
           .eco-title-gloc { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 25px; font-weight: 700; fill: ${t.btnGlocText}; }
           .eco-title-homo { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 25px; font-weight: 700; fill: ${t.btnHomoText}; }
-          .eco-title-pre  { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 25px; font-weight: 700; fill: ${t.btnPreText}; }
-          .eco-desc { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 21px; font-weight: 400; fill: ${t.textMuted}; }
-          .pill-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 19px; font-weight: 700; fill: #FFFFFF; text-anchor: middle; }
+          .eco-title-pre { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 25px; font-weight: 700; fill: ${t.btnPreText}; }
+          .eco-desc { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 22px; font-weight: 400; fill: ${t.textMuted}; }
+          .pill-text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 20px; font-weight: 700; fill: #FFFFFF; text-anchor: middle; }
         </style>
       </defs>
       <rect width="1320" height="390" fill="${t.outerBg}"/>
-      <rect x="60" y="0" width="1200" height="382" rx="24" ry="24" fill="${t.cardBg}"/>
+      <rect x="60" y="0" width="1200" height="380" rx="24" ry="24" fill="${t.cardBg}"/>
 
-      <!-- 1. HEADER ECOSISTEMA -->
-      <text x="660" y="44" class="eco-label">EXPLORE NUESTRO ECOSISTEMA EN VIVO:</text>
+      <!-- 1. TÍTULO ECOSISTEMA (y: 0 - 62, h=62) -->
+      <text x="660" y="42" class="eco-label">EXPLORE NUESTRO ECOSISTEMA EN VIVO:</text>
 
       <!-- 2. BOTÓN GLOCATION.CO (y=62, h=92) -->
       <g transform="translate(96, 62)">
@@ -303,9 +303,27 @@ async function buildAllCards() {
 
     await sharp(firmaBuf).extract({ left: 980, top: 66, width: 340, height: 254 })
       .png().toFile(path.join(blocksDir, `saasw-05d-boton-homoagenticus-${t.id}.png`));
+
+    // ==========================================
+    // 6. BLOCK 6: LEGAL FOOTER IMAGE (Ensures background is permanently included)
+    // ==========================================
+    const legalSvg = `
+      <svg width="1320" height="96" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1320" height="96" fill="${t.outerBg}" />
+        <text x="660" y="38" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="${t.textMuted}">
+          © 2026 GLocation SAS · Bogotá D.C., Colombia.
+        </text>
+        <text x="660" y="68" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" fill="${t.textMuted}">
+          Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología.
+        </text>
+      </svg>
+    `;
+    const legalBuf = await sharp(Buffer.from(legalSvg)).png().toBuffer();
+    fs.writeFileSync(path.join(blocksDir, `saasw-06-legal-${t.id}.png`), legalBuf);
   }
 
-  console.log('✓ Cards and slices rebuilt with crisp rounded corners!');
+  console.log('✓ Cards and slices rebuilt with crisp rounded corners and baked legal background!');
 }
 
 buildAllCards();
+module.exports = { buildAllCards };

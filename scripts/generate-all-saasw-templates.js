@@ -30,10 +30,11 @@ async function buildAllTemplates() {
     const b5bUrl = `${blocksBase}/saasw-05b-firma-paula-${theme}.png`;
     const b5cUrl = `${blocksBase}/saasw-05c-boton-glocation-${theme}.png`;
     const b5dUrl = `${blocksBase}/saasw-05d-boton-homoagenticus-${theme}.png`;
+    const b6Url = `${blocksBase}/saasw-06-legal-${theme}.png`;
 
     const b1Height = isDark ? 560 : 554;
     const b2Height = 465;
-    const b3Height = 315;
+    const b3Height = 340;
 
     const toolbarHtml = includeToolbar ? `
   <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
@@ -146,7 +147,7 @@ ${toolbarHtml}
 
             <!-- BLOQUE 3 · CTA DIAGNÓSTICO COGNITIVO (TARJETA REDONDEADA) -->
             <tr>
-              <td align="center" style="padding:0 0 22px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 28px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
                   <img src="${b3Url}" width="660" height="${b3Height}" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
                 </a>
@@ -225,16 +226,10 @@ ${toolbarHtml}
               </td>
             </tr>
 
-            <!-- LEGAL FOOTER -->
+            <!-- LEGAL FOOTER (IMAGEN CON FONDO PERMANENTE INTEGRADO) -->
             <tr>
-              <td align="center" style="padding:20px 10px 36px 10px !important;margin:0 !important;border:0 !important;">
-                <table width="600" border="0" cellspacing="0" cellpadding="0" style="max-width:600px !important;width:100% !important;margin:0 auto !important;border-collapse:collapse !important;border:0 !important;" role="presentation">
-                  <tr>
-                    <td align="center" style="font-size:11px !important;line-height:1.5 !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif !important;color:${textMuted} !important;border:0 !important;">
-                      © 2026 GLocation SAS · Bogotá D.C., Colombia.<br />Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología.
-                    </td>
-                  </tr>
-                </table>
+              <td align="center" bgcolor="${outerBg}" style="padding:14px 0 36px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;background-color:${outerBg};border:0 !important;">
+                <img src="${b6Url}" width="660" height="48" alt="© 2026 GLocation SAS · Bogotá D.C., Colombia. Ha recibido este mensaje porque su entidad lidera proyectos estratégicos de tecnología." border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 auto !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
               </td>
             </tr>
 
