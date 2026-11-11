@@ -759,7 +759,7 @@ export function SaaswEmailPreviewer() {
                         width: "100%",
                         backgroundColor: cardBg,
                         borderRadius: "16px",
-                        border: "none",
+                        border: `1px solid ${cardBorder}`,
                         boxShadow: isDark ? "0 4px 20px rgba(0,0,0,0.4)" : "0 4px 20px rgba(0,0,0,0.06)",
                         overflow: "hidden",
                       }}
@@ -1009,7 +1009,7 @@ export function SaaswEmailPreviewer() {
                                   <td
                                     style={{
                                       padding: "16px",
-                                      border: "none",
+                                      border: `1px solid ${subtleBorder}`,
                                       borderRadius: "12px",
                                       marginBottom: "12px",
                                       backgroundColor: subtleBg,
@@ -1087,7 +1087,7 @@ export function SaaswEmailPreviewer() {
                                   <td
                                     style={{
                                       padding: "16px",
-                                      border: "none",
+                                      border: `1px solid ${subtleBorder}`,
                                       borderRadius: "12px",
                                       backgroundColor: subtleBg,
                                     }}
@@ -1164,7 +1164,7 @@ export function SaaswEmailPreviewer() {
                                   <td
                                     style={{
                                       padding: "16px",
-                                      border: "none",
+                                      border: `1px solid ${subtleBorder}`,
                                       borderRadius: "12px",
                                       backgroundColor: subtleBg,
                                     }}
