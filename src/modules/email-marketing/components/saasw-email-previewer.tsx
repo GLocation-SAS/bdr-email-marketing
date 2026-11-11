@@ -243,8 +243,8 @@ export function SaaswEmailPreviewer() {
       console.warn("Auto-save blocks warning:", err);
     }
 
-    // 2. Retorna estructura HTML completa idéntica a la previsualización y al PDF
-    return generateSaaswLideresTicHtml({
+    // 2. Retorna estructura de imágenes de alta resolución con enlaces activos
+    return generateSaaswLideresTicImageEmailHtml({
       ...c,
       theme,
       ctaButtonUrl: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
