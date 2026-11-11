@@ -256,11 +256,26 @@ export function SaaswEmailPreviewer() {
     try {
       setDownloadingFormat("copy-html");
       const htmlContent = await buildExportHtml();
-      await navigator.clipboard.writeText(htmlContent);
+      if (typeof window !== "undefined" && typeof ClipboardItem !== "undefined") {
+        try {
+          const blobHtml = new Blob([htmlContent], { type: "text/html" });
+          const blobText = new Blob([htmlContent], { type: "text/plain" });
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              "text/html": blobHtml,
+              "text/plain": blobText,
+            }),
+          ]);
+        } catch {
+          await navigator.clipboard.writeText(htmlContent);
+        }
+      } else {
+        await navigator.clipboard.writeText(htmlContent);
+      }
       setCopiedHtml(true);
-      toast.success("Código HTML copiado al portapapeles", {
+      toast.success("Campaña copiada al portapapeles", {
         description:
-          "Estructura de 5 bloques en imagen PNG (600px) con enlace CTA activo a citas.glocation.co",
+          "Lista para pegar directo en Gmail, Outlook o editor HTML (5 bloques PNG con CTA activo).",
       });
       setTimeout(() => setCopiedHtml(false), 2500);
     } catch (err) {
