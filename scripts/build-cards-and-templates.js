@@ -111,10 +111,10 @@ async function buildAllCards() {
     fs.writeFileSync(path.join(blocksDir, `saasw-01-hero-trabajadores-${t.id}.png`), heroTrabCombined);
 
     // ==========================================
-    // 3. CARD 3 (CTA): Clean, uniform card with generous breathing space
+    // 3. CARD 3 (CTA): Clean, uniform card with balanced padding (no empty void)
     // ==========================================
     const ctaPath = path.join(blocksDir, `saasw-03-cta-${t.id}.png`);
-    const ctaH = 680;
+    const ctaH = 550;
     const ctaCardBg = t.id === 'claro' ? '#FFFFFF' : '#0F172A';
     const ctaCardBorder = t.id === 'claro' ? '#E2E8F0' : '#1E293B';
     const ctaEyebrowColor = t.id === 'claro' ? '#0284C7' : '#38BDF8';
@@ -135,34 +135,34 @@ async function buildAllCards() {
         <rect x="60" y="0" width="1200" height="${ctaH}" rx="24" ry="24" fill="${ctaCardBg}" stroke="${ctaCardBorder}" stroke-width="1.5" />
         
         <!-- Eyebrow -->
-        <text x="660" y="100" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2.2" fill="${ctaEyebrowColor}">
+        <text x="660" y="72" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700" letter-spacing="2.2" fill="${ctaEyebrowColor}">
           DIAGNÓSTICO COGNITIVO · 30 MINUTOS
         </text>
 
         <!-- Título -->
-        <text x="660" y="180" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+        <text x="660" y="140" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
           ¿Exploramos qué proceso de su oficina TIC podemos liberar
         </text>
-        <text x="660" y="230" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
+        <text x="660" y="185" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="800" fill="${ctaTitleColor}">
           este mes?
         </text>
 
         <!-- Descripción -->
-        <text x="660" y="310" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+        <text x="660" y="255" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
           Agende una sesión técnica de 30 minutos. Evaluaremos uno de sus cuellos de
         </text>
-        <text x="660" y="355" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
+        <text x="660" y="295" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="23" font-weight="400" fill="${ctaDescColor}">
           botella operativos y le entregaremos una estimación contable de ahorro y tiempos.
         </text>
 
         <!-- Botón CTA -->
-        <rect x="340" y="420" width="640" height="96" rx="16" ry="16" fill="url(#ctaBtnGrad_${t.id})" />
-        <text x="660" y="480" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">
+        <rect x="340" y="348" width="640" height="92" rx="16" ry="16" fill="url(#ctaBtnGrad_${t.id})" />
+        <text x="660" y="406" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF">
           Agendar Diagnóstico Cognitivo (30 min) →
         </text>
 
         <!-- Subtexto -->
-        <text x="660" y="585" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="400" fill="${ctaSubtextColor}">
+        <text x="660" y="492" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="21" font-weight="400" fill="${ctaSubtextColor}">
           Sin formularios eternos: seleccione día y hora directamente en nuestra plataforma.
         </text>
       </svg>

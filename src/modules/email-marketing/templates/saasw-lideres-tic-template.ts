@@ -503,7 +503,7 @@ export function generateSaaswLideresTicImageEmailHtml(
 
   const b1Height = isDark ? 560 : 554;
   const b2Height = 465;
-  const b3Height = 340;
+  const b3Height = 275;
 
   return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
@@ -547,13 +547,13 @@ export function generateSaaswLideresTicImageEmailHtml(
           <table role="presentation" width="660" cellpadding="0" cellspacing="0" border="0" style="width:660px !important;max-width:660px !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
             <!-- BLOQUE 1 · HERO & TRABAJADORES (1 SOLA TARJETA UNIDA CON ENLACES INDEPENDIENTES) -->
             <tr>
-              <td align="center" style="padding:0 0 24px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 10px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <div style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;"><a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b1Url}" width="660" height="${b1Height}" alt="GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador cognitivo." border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="${c.ctaButtonUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b2Url}" width="660" height="${b2Height}" alt="Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></div>
               </td>
             </tr>
             <!-- BLOQUE 2 · CTA DIAGNÓSTICO COGNITIVO (TARJETA INDEPENDIENTE FLOTANTE) -->
             <tr>
-              <td align="center" style="padding:0 0 24px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 10px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <a href="${c.ctaButtonUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;">
                   <img src="${b3Url}" width="660" height="${b3Height}" alt="Agendar Diagnóstico Cognitivo (30 min) en citas.glocation.co" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
                 </a>
@@ -561,7 +561,7 @@ export function generateSaaswLideresTicImageEmailHtml(
             </tr>
             <!-- BLOQUE 3 · TARJETA ECOSISTEMA (1 TARJETA UNIDA DIVIDIDA EN 3 ENLACES INDEPENDIENTES) -->
             <tr>
-              <td align="center" style="padding:0 0 24px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+              <td align="center" style="padding:0 0 10px 0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
                 <div style="margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;"><a href="${c.websiteUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4aUrl}" width="660" height="80" alt="glocation.co · Plataforma Comercial SaaSW" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="${c.manifestoUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4bUrl}" width="660" height="53" alt="homoagenticus.co · El Manifiesto del Homo agenticus" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a><a href="${c.preagenticaUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${b4cUrl}" width="660" height="62" alt="preagentica.glocation.co · Nuestra Herencia Pre-IA" border="0" style="display:block !important;width:660px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></div>
               </td>
             </tr>
