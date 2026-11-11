@@ -230,32 +230,81 @@ export function SaaswEmailPreviewer() {
     if (downloadingFormat) return;
     try {
       setDownloadingFormat("copy-html");
-      const htmlContent = await buildExportHtml();
-      if (typeof window !== "undefined" && typeof ClipboardItem !== "undefined") {
+      const fullHtml = await buildExportHtml();
+
+      // Extrae el fragmento HTML autocontenido (el contenedor principal con todos los estilos inline)
+      const rootMatch = fullHtml.match(/<div data-saasw-root="true"[\s\S]*?<\/div>\s*<\/body>/i);
+      const fragment = rootMatch
+        ? rootMatch[0].replace(/<\/body>$/i, "").trim()
+        : fullHtml;
+
+      // 1. Contenedor temporal aislado (NO contenteditable, sin estilos de app) para CF_HTML nativo de Windows (Outlook desktop / Word)
+      let copiedViaDom = false;
+      if (typeof document !== "undefined") {
+        const tempContainer = document.createElement("div");
+        tempContainer.setAttribute("contenteditable", "false");
+        tempContainer.style.position = "fixed";
+        tempContainer.style.left = "-9999px";
+        tempContainer.style.top = "-9999px";
+        tempContainer.style.opacity = "0";
+        tempContainer.style.pointerEvents = "none";
+        tempContainer.innerHTML = fragment;
+        document.body.appendChild(tempContainer);
+
         try {
-          const blobHtml = new Blob([htmlContent], { type: "text/html" });
-          const blobText = new Blob([htmlContent], { type: "text/plain" });
+          const sel = window.getSelection();
+          if (sel) {
+            sel.removeAllRanges();
+            const range = document.createRange();
+            range.selectNode(tempContainer.firstElementChild || tempContainer);
+            sel.addRange(range);
+            copiedViaDom = document.execCommand("copy");
+            sel.removeAllRanges();
+          }
+        } catch (e) {
+          console.warn("execCommand fallback:", e);
+        } finally {
+          document.body.removeChild(tempContainer);
+        }
+      }
+
+      // 2. Escritura directa mediante ClipboardItem (para Gmail, Edge, Chrome y clientes web)
+      if (typeof window !== "undefined" && typeof ClipboardItem !== "undefined" && navigator.clipboard) {
+        try {
+          const blobHtml = new Blob([fragment], { type: "text/html" });
+          const blobText = new Blob([
+            "GLocation SaaSW · Fuerza Laboral Cognitiva para Oficinas TIC\n\n" +
+            "Agendar Diagnóstico Cognitivo (30 min): " + (c.ctaButtonUrl || "https://citas.glocation.co/?theme=light") + "\n" +
+            "Plataforma Comercial SaaSW: " + (c.websiteUrl || "https://glocation.co") + "\n" +
+            "Manifiesto Homo Agenticus: " + (c.manifestoUrl || "https://homoagenticus.co") + "\n" +
+            "Contacto: " + c.senderName + " (" + c.senderEmail + ")"
+          ], { type: "text/plain" });
+
           await navigator.clipboard.write([
             new ClipboardItem({
               "text/html": blobHtml,
               "text/plain": blobText,
             }),
           ]);
-        } catch {
-          await navigator.clipboard.writeText(htmlContent);
+        } catch (clipErr) {
+          console.warn("navigator.clipboard.write fallback:", clipErr);
+          if (!copiedViaDom) {
+            await navigator.clipboard.writeText(fragment);
+          }
         }
-      } else {
-        await navigator.clipboard.writeText(htmlContent);
+      } else if (!copiedViaDom) {
+        await navigator.clipboard.writeText(fragment);
       }
+
       setCopiedHtml(true);
-      toast.success("Campaña copiada al portapapeles", {
+      toast.success("¡Correo copiado en un solo bloque!", {
         description:
-          "HTML nativo sin bordes con todos los hipervínculos activos para Outlook, Gmail y Word.",
+          "HTML limpio sin bordes azules y con todos los enlaces activos. Pégalo directamente (Ctrl+V) en Gmail u Outlook.",
       });
-      setTimeout(() => setCopiedHtml(false), 2500);
+      setTimeout(() => setCopiedHtml(false), 3000);
     } catch (err) {
       console.error("Error al copiar HTML:", err);
-      toast.error("No se pudo copiar el HTML");
+      toast.error("No se pudo copiar el correo");
     } finally {
       setDownloadingFormat(null);
     }
@@ -695,7 +744,7 @@ export function SaaswEmailPreviewer() {
         <div className="flex items-center gap-2 text-xs text-foreground">
           <PencilLine className="w-4 h-4 text-primary shrink-0" />
           <span>
-            <strong>Edición directa habilitada:</strong> haz clic sobre cualquier texto para editarlo. El botón de agendar citas y Bloque 3 redirigen a{" "}
+            <strong>Plantilla 100% interactiva:</strong> todos los hipervínculos están activos (agendar citas, ecosistema, contacto). Copia el correo y pégalo directamente en Gmail u Outlook en un solo bloque continuo sin bordes. Redirige a{" "}
             <a
               href="https://citas.glocation.co/?theme=light"
               target="_blank"
@@ -722,8 +771,6 @@ export function SaaswEmailPreviewer() {
         <div
           key={resetKey}
           ref={emailCanvasRef}
-          contentEditable
-          suppressContentEditableWarning
           spellCheck={false}
           className={`transition-all duration-300 w-full ${viewMode === "mobile" ? "max-w-[375px]" : "max-w-[660px]"
             } outline-none rounded-2xl overflow-hidden`}
