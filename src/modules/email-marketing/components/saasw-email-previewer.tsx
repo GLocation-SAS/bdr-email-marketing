@@ -154,7 +154,7 @@ export function SaaswEmailPreviewer() {
         alt: "GLocation SaaSW — Su oficina TIC no necesita más software. Le entregamos el trabajador.",
         yStart: cut0,
         yEnd: cut1,
-        href: c.websiteUrl,
+        href: c.websiteUrl || "https://glocation.co",
       },
       {
         id: "02-trabajadores",
@@ -163,6 +163,7 @@ export function SaaswEmailPreviewer() {
         alt: "Trabajador PMO & Proyectos, Mesa de Ayuda TIC y Cumplimiento & Gobierno",
         yStart: cut1,
         yEnd: cut2,
+        href: c.ctaButtonUrl || "https://citas.glocation.co/?theme=light",
       },
       {
         id: "03-cta",
@@ -180,6 +181,7 @@ export function SaaswEmailPreviewer() {
         alt: "Ecosistema cognitivo GLocation — Modelos empresariales, infraestructura soberana y certificaciones",
         yStart: cut3,
         yEnd: cut4,
+        href: c.websiteUrl || "https://glocation.co",
       },
       {
         id: "05-firma",
@@ -188,7 +190,7 @@ export function SaaswEmailPreviewer() {
         alt: "Paula Rozo — BDR GLocation",
         yStart: cut4,
         yEnd: cut5,
-        href: `mailto:${c.senderEmail}`,
+        href: `mailto:${c.senderEmail}?subject=Diagn%C3%B3stico%20Cognitivo%20Oficina%20TIC%20-%20GLocation&body=Hola%20Paula%2C%20me%20gustar%C3%ADa%20coordinar%20una%20sesi%C3%B3n%20de%2030%20minutos%20sobre%20Trabajadores%20Cognitivos%20para%20nuestra%20oficina%20TIC.`,
       },
     ];
 
