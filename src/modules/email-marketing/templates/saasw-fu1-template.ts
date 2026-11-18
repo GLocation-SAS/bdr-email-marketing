@@ -69,3 +69,4 @@ export function generateSaaswFu1Html(): string {
   </tr>
 </table>`;
 }
+
