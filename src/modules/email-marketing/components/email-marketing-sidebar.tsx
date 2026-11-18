@@ -99,6 +99,14 @@ export const EMAIL_MARKETING_NAV_ITEMS: EmailNavItem[] = [
     badge: "EM-06",
   },
   {
+    id: "plantilla-saasw-fu1",
+    label: "Follow-up 1 · TC-PMO Actas",
+    icon: Send,
+    href: "/email-marketing/plantilla-saasw-fu1",
+    group: "campanas",
+    badge: "EM-07",
+  },
+  {
     id: "bajas",
     label: "Control de Bajas",
     icon: UserX,

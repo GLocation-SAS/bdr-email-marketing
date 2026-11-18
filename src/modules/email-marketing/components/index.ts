@@ -8,3 +8,4 @@ export * from "./email-marketing-sidebar";
 export * from "./email-template-variants";
 export * from "./google-forms-header-previewer";
 export * from "./saasw-email-previewer";
+export * from "./saasw-fu1-email-previewer";

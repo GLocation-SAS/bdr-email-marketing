@@ -6,5 +6,6 @@ export {
   CampaignDualColorTemplatePage,
   GoogleFormsHeaderPage,
   CampaignSaaswTemplatePage,
+  CampaignSaaswFu1TemplatePage,
 } from "./campaign-jefes-ti-page";
 export { UnsubscribePage } from "./unsubscribe-page";
