@@ -9,6 +9,7 @@ import { EmailPreviewer } from "../components/email-previewer";
 import { GoogleFormsHeaderPreviewer } from "../components/google-forms-header-previewer";
 import { SaaswEmailPreviewer } from "../components/saasw-email-previewer";
 import { SaaswFu1EmailPreviewer } from "../components/saasw-fu1-email-previewer";
+import { ProveedoresRedPreviewer } from "../components/proveedores-red-previewer";
 import { EmailMarketingSidebar } from "../components/email-marketing-sidebar";
 import "../styles/email-marketing.css";
 
@@ -115,6 +116,58 @@ export function CampaignSaaswFu1TemplatePage() {
       <SidebarInset className="min-w-0">
         <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
           <SaaswFu1EmailPreviewer />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function CampaignRedTecnologiaPage() {
+  return (
+    <SidebarProvider>
+      <EmailMarketingSidebar />
+      <SidebarInset className="min-w-0">
+        <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
+          <ProveedoresRedPreviewer campaignKey="tecnologia" />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function CampaignRedLogisticaPage() {
+  return (
+    <SidebarProvider>
+      <EmailMarketingSidebar />
+      <SidebarInset className="min-w-0">
+        <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
+          <ProveedoresRedPreviewer campaignKey="logistica" />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function CampaignRedConstruccionPage() {
+  return (
+    <SidebarProvider>
+      <EmailMarketingSidebar />
+      <SidebarInset className="min-w-0">
+        <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
+          <ProveedoresRedPreviewer campaignKey="construccion" />
+        </div>
+      </SidebarInset>
+    </SidebarProvider>
+  );
+}
+
+export function CampaignRedAgroindustriaPage() {
+  return (
+    <SidebarProvider>
+      <EmailMarketingSidebar />
+      <SidebarInset className="min-w-0">
+        <div className="email-marketing-container w-full px-6 py-6 md:px-8 space-y-6">
+          <ProveedoresRedPreviewer campaignKey="agroindustria" />
         </div>
       </SidebarInset>
     </SidebarProvider>
