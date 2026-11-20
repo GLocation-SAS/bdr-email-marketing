@@ -326,51 +326,60 @@ async function buildFu1Blocks() {
   await sharp(Buffer.from(svg07)).png().toFile(path.join(blocksDir, 'saasw-fu1-07-firma-banda-claro.png'));
 
   // ==========================================
-  // BLOCK 08: Firma Paula Rozo - 668 x 254 (width 334 display)
+  // BLOCK 08: Firma Paula Rozo - 680 x 270 (width 340 display) - con margen y esquina redondeada
   // ==========================================
   const svg08 = `
-  <svg width="668" height="254" viewBox="0 0 668 254" xmlns="http://www.w3.org/2000/svg">
+  <svg width="680" height="270" viewBox="0 0 680 270" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <clipPath id="avatar-clip-fu1">
-        <circle cx="95" cy="127" r="50"/>
+        <circle cx="125" cy="135" r="50"/>
       </clipPath>
     </defs>
-    <rect width="668" height="254" fill="${cardBg}"/>
-    <circle cx="95" cy="127" r="53" fill="#D0E7F5"/>
-    <image href="${paulaB64}" x="45" y="77" width="100" height="100" clip-path="url(#avatar-clip-fu1)"/>
-    <text x="175" y="90" font-family="${fontFam}" font-size="30" font-weight="800" fill="${textDark}">Paula Rozo</text>
-    <text x="175" y="125" font-family="${fontFam}" font-size="21" font-weight="500" fill="${textMuted}">BDR · Business Development Representative</text>
-    <text x="175" y="157" font-family="${fontFam}" font-size="21" font-weight="700" fill="#0E768C">GLocation SAS · Transformación Cognitiva</text>
-    <text x="175" y="190" font-family="${fontFam}" font-size="21" font-weight="600" fill="${bluePrimary}" text-decoration="underline">✉️ paula.rozo@glocation.com.co</text>
+    <!-- Fondo exterior -->
+    <rect width="680" height="270" fill="#EFF3F8"/>
+    <!-- Tarjeta blanca con esquina inferior izquierda redondeada -->
+    <path d="M 0,0 L 680,0 L 680,270 L 24,270 Q 0,270 0,246 Z" fill="${cardBg}"/>
+
+    <circle cx="125" cy="135" r="53" fill="#D0E7F5"/>
+    <image href="${paulaB64}" x="75" y="85" width="100" height="100" clip-path="url(#avatar-clip-fu1)"/>
+
+    <text x="195" y="96" font-family="${fontFam}" font-size="28" font-weight="800" fill="${textDark}">Paula Rozo</text>
+    <text x="195" y="130" font-family="${fontFam}" font-size="19" font-weight="500" fill="${textMuted}">BDR · Business Development Representative</text>
+    <text x="195" y="162" font-family="${fontFam}" font-size="19" font-weight="700" fill="#0E768C">GLocation SAS · Transformación Cognitiva</text>
+    <text x="195" y="194" font-family="${fontFam}" font-size="19" font-weight="600" fill="${bluePrimary}" text-decoration="underline">✉️ paula.rozo@glocation.com.co</text>
   </svg>`;
   await sharp(Buffer.from(svg08)).png().toFile(path.join(blocksDir, 'saasw-fu1-08-firma-paula-claro.png'));
 
   // ==========================================
-  // BLOCK 09: Botón GLocation.co - 254 x 254 (width 127 display)
+  // BLOCK 09: Botón GLocation.co - 260 x 270 (width 130 display)
   // ==========================================
   const svg09 = `
-  <svg width="254" height="254" viewBox="0 0 254 254" xmlns="http://www.w3.org/2000/svg">
-    <rect width="254" height="254" fill="${cardBg}"/>
-    <g transform="translate(12, 40)">
-      <rect width="230" height="174" rx="14" ry="14" fill="${blueBgSubtle}" stroke="${blueBorder}" stroke-width="2"/>
-      <text x="115" y="60" font-size="34" text-anchor="middle">🌐</text>
-      <text x="115" y="102" font-family="${fontFam}" font-size="22" font-weight="800" fill="${bluePrimary}" text-anchor="middle">glocation.co</text>
-      <text x="115" y="134" font-family="${fontFam}" font-size="18" font-weight="600" fill="${textMuted}" text-anchor="middle">Plataforma →</text>
+  <svg width="260" height="270" viewBox="0 0 260 270" xmlns="http://www.w3.org/2000/svg">
+    <rect width="260" height="270" fill="${cardBg}"/>
+    <g transform="translate(35, 50)">
+      <rect width="190" height="170" rx="14" ry="14" fill="${blueBgSubtle}" stroke="${blueBorder}" stroke-width="2"/>
+      <text x="95" y="55" font-size="34" text-anchor="middle">🌐</text>
+      <text x="95" y="96" font-family="${fontFam}" font-size="22" font-weight="800" fill="${bluePrimary}" text-anchor="middle">glocation.co</text>
+      <text x="95" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Plataforma →</text>
     </g>
   </svg>`;
   await sharp(Buffer.from(svg09)).png().toFile(path.join(blocksDir, 'saasw-fu1-09-firma-glocation-claro.png'));
 
   // ==========================================
-  // BLOCK 10: Botón HomoAgenticus.co - 278 x 254 (width 139 display)
+  // BLOCK 10: Botón HomoAgenticus.co - 260 x 270 (width 130 display) - con margen y esquina redondeada
   // ==========================================
   const svg10 = `
-  <svg width="278" height="254" viewBox="0 0 278 254" xmlns="http://www.w3.org/2000/svg">
-    <rect width="278" height="254" fill="${cardBg}"/>
-    <g transform="translate(12, 40)">
-      <rect width="254" height="174" rx="14" ry="14" fill="#F6F3FF" stroke="#D8C7FF" stroke-width="2"/>
-      <text x="127" y="60" font-size="34" text-anchor="middle">📖</text>
-      <text x="127" y="102" font-family="${fontFam}" font-size="21" font-weight="800" fill="#7C3AED" text-anchor="middle">homoagenticus.co</text>
-      <text x="127" y="134" font-family="${fontFam}" font-size="18" font-weight="600" fill="${textMuted}" text-anchor="middle">Manifiesto →</text>
+  <svg width="260" height="270" viewBox="0 0 260 270" xmlns="http://www.w3.org/2000/svg">
+    <!-- Fondo exterior -->
+    <rect width="260" height="270" fill="#EFF3F8"/>
+    <!-- Tarjeta blanca con esquina inferior derecha redondeada -->
+    <path d="M 0,0 L 260,0 L 260,246 Q 260,270 236,270 L 0,270 Z" fill="${cardBg}"/>
+
+    <g transform="translate(25, 50)">
+      <rect width="190" height="170" rx="14" ry="14" fill="#F6F3FF" stroke="#D8C7FF" stroke-width="2"/>
+      <text x="95" y="55" font-size="34" text-anchor="middle">📖</text>
+      <text x="95" y="96" font-family="${fontFam}" font-size="21" font-weight="800" fill="#7C3AED" text-anchor="middle">homoagenticus.co</text>
+      <text x="95" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Manifiesto →</text>
     </g>
   </svg>`;
   await sharp(Buffer.from(svg10)).png().toFile(path.join(blocksDir, 'saasw-fu1-10-firma-homoagenticus-claro.png'));
