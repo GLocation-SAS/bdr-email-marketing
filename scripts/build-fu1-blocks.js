@@ -75,16 +75,16 @@ async function buildFu1Blocks() {
     </text>
 
     <!-- Greeting & Intro (Bigger readable text with comfortable margins) -->
-    <text x="60" y="272" font-family="${fontFam}" font-size="26" font-weight="700" fill="${textDark}">
+    <text x="60" y="270" font-family="${fontFam}" font-size="26" font-weight="700" fill="${textDark}">
       Estimado(a) Líder de Tecnología:
     </text>
-    <text x="60" y="318" font-family="${fontFam}" font-size="24" font-weight="400" fill="${textBody}">
+    <text x="60" y="314" font-family="${fontFam}" font-size="24" font-weight="400" fill="${textBody}">
       La semana pasada le escribí sobre fuerza laboral cognitiva para su Oficina TIC.
     </text>
-    <text x="60" y="358" font-family="${fontFam}" font-size="24" font-weight="400" fill="${textBody}">
+    <text x="60" y="354" font-family="${fontFam}" font-size="24" font-weight="400" fill="${textBody}">
       Hoy quiero mostrarle cómo podría aplicarse a una tarea administrativa concreta:
     </text>
-    <text x="60" y="398" font-family="${fontFam}" font-size="24" font-weight="700" fill="${textDark}">
+    <text x="60" y="394" font-family="${fontFam}" font-size="23" font-weight="700" fill="${textDark}">
       revisar entregables de contratistas y preparar las actas correspondientes.
     </text>
 
@@ -335,8 +335,8 @@ async function buildFu1Blocks() {
         <circle cx="125" cy="135" r="50"/>
       </clipPath>
     </defs>
-    <!-- Fondo exterior -->
-    <rect width="680" height="270" fill="#EFF3F8"/>
+    <!-- Fondo exterior exacto al contenedor #F0F4F9 -->
+    <rect width="680" height="270" fill="#F0F4F9"/>
     <!-- Tarjeta blanca con esquina inferior izquierda redondeada -->
     <path d="M 0,0 L 680,0 L 680,270 L 24,270 Q 0,270 0,246 Z" fill="${cardBg}"/>
 
@@ -356,30 +356,30 @@ async function buildFu1Blocks() {
   const svg09 = `
   <svg width="260" height="270" viewBox="0 0 260 270" xmlns="http://www.w3.org/2000/svg">
     <rect width="260" height="270" fill="${cardBg}"/>
-    <g transform="translate(35, 50)">
-      <rect width="190" height="170" rx="14" ry="14" fill="${blueBgSubtle}" stroke="${blueBorder}" stroke-width="2"/>
-      <text x="95" y="55" font-size="34" text-anchor="middle">🌐</text>
-      <text x="95" y="96" font-family="${fontFam}" font-size="22" font-weight="800" fill="${bluePrimary}" text-anchor="middle">glocation.co</text>
-      <text x="95" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Plataforma →</text>
+    <g transform="translate(40, 50)">
+      <rect width="180" height="170" rx="14" ry="14" fill="${blueBgSubtle}" stroke="${blueBorder}" stroke-width="2"/>
+      <text x="90" y="55" font-size="34" text-anchor="middle">🌐</text>
+      <text x="90" y="96" font-family="${fontFam}" font-size="22" font-weight="800" fill="${bluePrimary}" text-anchor="middle">glocation.co</text>
+      <text x="90" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Plataforma →</text>
     </g>
   </svg>`;
   await sharp(Buffer.from(svg09)).png().toFile(path.join(blocksDir, 'saasw-fu1-09-firma-glocation-claro.png'));
 
   // ==========================================
-  // BLOCK 10: Botón HomoAgenticus.co - 260 x 270 (width 130 display) - con margen y esquina redondeada
+  // BLOCK 10: Botón HomoAgenticus.co - 260 x 270 (width 130 display) - con margen amplio y esquina redondeada
   // ==========================================
   const svg10 = `
   <svg width="260" height="270" viewBox="0 0 260 270" xmlns="http://www.w3.org/2000/svg">
-    <!-- Fondo exterior -->
-    <rect width="260" height="270" fill="#EFF3F8"/>
+    <!-- Fondo exterior exacto al contenedor #F0F4F9 -->
+    <rect width="260" height="270" fill="#F0F4F9"/>
     <!-- Tarjeta blanca con esquina inferior derecha redondeada -->
     <path d="M 0,0 L 260,0 L 260,246 Q 260,270 236,270 L 0,270 Z" fill="${cardBg}"/>
 
-    <g transform="translate(25, 50)">
-      <rect width="190" height="170" rx="14" ry="14" fill="#F6F3FF" stroke="#D8C7FF" stroke-width="2"/>
-      <text x="95" y="55" font-size="34" text-anchor="middle">📖</text>
-      <text x="95" y="96" font-family="${fontFam}" font-size="21" font-weight="800" fill="#7C3AED" text-anchor="middle">homoagenticus.co</text>
-      <text x="95" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Manifiesto →</text>
+    <g transform="translate(20, 50)">
+      <rect width="180" height="170" rx="14" ry="14" fill="#F6F3FF" stroke="#D8C7FF" stroke-width="2"/>
+      <text x="90" y="55" font-size="34" text-anchor="middle">📖</text>
+      <text x="90" y="96" font-family="${fontFam}" font-size="21" font-weight="800" fill="#7C3AED" text-anchor="middle">homoagenticus.co</text>
+      <text x="90" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Manifiesto →</text>
     </g>
   </svg>`;
   await sharp(Buffer.from(svg10)).png().toFile(path.join(blocksDir, 'saasw-fu1-10-firma-homoagenticus-claro.png'));
