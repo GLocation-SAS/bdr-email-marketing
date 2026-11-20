@@ -6,25 +6,25 @@ const ctaConfigs = {
     btn2Text: 'Tengo un caso para explorar',
     subject: 'Posible alianza con GLocation',
     body: 'Hola Paula, me interesa explorar una posible alianza. El caso que tenemos en mente es: ',
-    microcopy: '¿Aún no desea agendar? Responda este correo con una breve descripción de su necesidad o interés. Paula le dará seguimiento.'
+    microcopy: 'Si aún no desea agendar, responda este correo con una breve descripción de su necesidad o interés.'
   },
   logistica: {
     btn2Text: 'Quiero revisar un proceso de compras',
     subject: 'Posible alianza con GLocation - Logística',
     body: 'Hola Paula, me interesa revisar un proceso de compras con Trabajadores Cognitivos. Nuestro caso es: ',
-    microcopy: '¿Aún no desea agendar? Responda este correo indicando qué proceso de compras o fletes le gustaría agilizar. Paula le dará seguimiento.'
+    microcopy: 'Si aún no desea agendar, responda este correo con una breve descripción de su necesidad o interés.'
   },
   construccion: {
     btn2Text: 'Quiero revisar un proceso de contratación',
     subject: 'Posible alianza con GLocation - Construcción',
     body: 'Hola Paula, me interesa revisar un proceso de contratación con Trabajadores Cognitivos. Nuestro caso es: ',
-    microcopy: '¿Aún no desea agendar? Responda este correo indicando qué trámite o expediente de obra le quita más tiempo. Paula le dará seguimiento.'
+    microcopy: 'Si aún no desea agendar, responda este correo con una breve descripción de su necesidad o interés.'
   },
   agroindustria: {
     btn2Text: 'Quiero revisar la evaluación de proveedores',
     subject: 'Posible alianza con GLocation - Agroindustria',
     body: 'Hola Paula, me interesa revisar la evaluación de proveedores con Trabajadores Cognitivos. Nuestro caso es: ',
-    microcopy: '¿Aún no desea agendar? Responda este correo indicando qué validación de calidad o proveedores le resulta más desgastante. Paula le dará seguimiento.'
+    microcopy: 'Si aún no desea agendar, responda este correo con una breve descripción de su necesidad o interés.'
   }
 };
 
