@@ -356,11 +356,11 @@ async function buildFu1Blocks() {
   const svg09 = `
   <svg width="260" height="270" viewBox="0 0 260 270" xmlns="http://www.w3.org/2000/svg">
     <rect width="260" height="270" fill="${cardBg}"/>
-    <g transform="translate(40, 50)">
-      <rect width="180" height="170" rx="14" ry="14" fill="${blueBgSubtle}" stroke="${blueBorder}" stroke-width="2"/>
-      <text x="90" y="55" font-size="34" text-anchor="middle">🌐</text>
-      <text x="90" y="96" font-family="${fontFam}" font-size="22" font-weight="800" fill="${bluePrimary}" text-anchor="middle">glocation.co</text>
-      <text x="90" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Plataforma →</text>
+    <g transform="translate(22, 55)">
+      <rect width="216" height="160" rx="14" ry="14" fill="${blueBgSubtle}" stroke="${blueBorder}" stroke-width="2"/>
+      <text x="108" y="50" font-size="32" text-anchor="middle">🌐</text>
+      <text x="108" y="92" font-family="${fontFam}" font-size="19" font-weight="800" fill="${bluePrimary}" text-anchor="middle">glocation.co</text>
+      <text x="108" y="122" font-family="${fontFam}" font-size="16" font-weight="600" fill="${textMuted}" text-anchor="middle">Plataforma →</text>
     </g>
   </svg>`;
   await sharp(Buffer.from(svg09)).png().toFile(path.join(blocksDir, 'saasw-fu1-09-firma-glocation-claro.png'));
@@ -375,11 +375,11 @@ async function buildFu1Blocks() {
     <!-- Tarjeta blanca con esquina inferior derecha redondeada -->
     <path d="M 0,0 L 260,0 L 260,246 Q 260,270 236,270 L 0,270 Z" fill="${cardBg}"/>
 
-    <g transform="translate(20, 50)">
-      <rect width="180" height="170" rx="14" ry="14" fill="#F6F3FF" stroke="#D8C7FF" stroke-width="2"/>
-      <text x="90" y="55" font-size="34" text-anchor="middle">📖</text>
-      <text x="90" y="96" font-family="${fontFam}" font-size="21" font-weight="800" fill="#7C3AED" text-anchor="middle">homoagenticus.co</text>
-      <text x="90" y="128" font-family="${fontFam}" font-size="17" font-weight="600" fill="${textMuted}" text-anchor="middle">Manifiesto →</text>
+    <g transform="translate(18, 55)">
+      <rect width="216" height="160" rx="14" ry="14" fill="#F6F3FF" stroke="#D8C7FF" stroke-width="2"/>
+      <text x="108" y="50" font-size="32" text-anchor="middle">📖</text>
+      <text x="108" y="92" font-family="${fontFam}" font-size="18" font-weight="800" fill="#7C3AED" text-anchor="middle">homoagenticus.co</text>
+      <text x="108" y="122" font-family="${fontFam}" font-size="16" font-weight="600" fill="${textMuted}" text-anchor="middle">Manifiesto →</text>
     </g>
   </svg>`;
   await sharp(Buffer.from(svg10)).png().toFile(path.join(blocksDir, 'saasw-fu1-10-firma-homoagenticus-claro.png'));
