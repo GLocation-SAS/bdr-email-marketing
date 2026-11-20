@@ -35,14 +35,14 @@ async function buildFu1Blocks() {
     <!-- Top rounded corners -->
     <path d="M 0,24 Q 0,0 24,0 L 1176,0 Q 1200,0 1200,24 L 1200,150 L 0,150 Z" fill="${cardBg}"/>
     
-    <!-- Logo GLocation -->
-    <image href="${logoB64}" x="60" y="46" width="220" height="58" preserveAspectRatio="xMidYMid meet"/>
+    <!-- Logo GLocation (más grande y centrado verticalmente) -->
+    <image href="${logoB64}" x="60" y="30" width="240" height="90" preserveAspectRatio="xMinYMid meet"/>
     
     <!-- Holding Servinformación -->
-    <text x="1140" y="74" text-anchor="end" font-family="${fontFam}" font-size="19" font-weight="700" letter-spacing="1.8" fill="${textMuted}">
+    <text x="1140" y="72" text-anchor="end" font-family="${fontFam}" font-size="20" font-weight="700" letter-spacing="1.8" fill="${textMuted}">
       HOLDING SERVINFORMACIÓN
     </text>
-    <text x="1140" y="98" text-anchor="end" font-family="${fontFam}" font-size="14" font-weight="600" letter-spacing="1" fill="${bluePrimary}">
+    <text x="1140" y="98" text-anchor="end" font-family="${fontFam}" font-size="15" font-weight="600" letter-spacing="1" fill="${bluePrimary}">
       GOOGLE CLOUD PREMIER PARTNER
     </text>
     
