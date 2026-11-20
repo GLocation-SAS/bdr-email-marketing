@@ -51,11 +51,11 @@ async function buildFu1Blocks() {
   await sharp(Buffer.from(svg01)).png().toFile(path.join(blocksDir, 'saasw-fu1-01-encabezado-claro.png'));
 
   // ==========================================
-  // BLOCK 02: Apertura (Pill + Título + Saludo + Pregunta) - 1200 x 530
+  // BLOCK 02: Apertura (Pill + Título + Saludo + Pregunta) - 1200 x 570
   // ==========================================
   const svg02 = `
-  <svg width="1200" height="530" viewBox="0 0 1200 530" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="530" fill="${cardBg}"/>
+  <svg width="1200" height="570" viewBox="0 0 1200 570" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="570" fill="${cardBg}"/>
 
     <!-- Eyebrow Pill -->
     <g transform="translate(60, 36)">
@@ -74,20 +74,23 @@ async function buildFu1Blocks() {
       lista para revisión.
     </text>
 
-    <!-- Greeting & Intro -->
-    <text x="60" y="270" font-family="${fontFam}" font-size="24" font-weight="700" fill="${textDark}">
+    <!-- Greeting & Intro (Multi-line without overflow) -->
+    <text x="60" y="268" font-family="${fontFam}" font-size="24" font-weight="700" fill="${textDark}">
       Estimado(a) Líder de Tecnología:
     </text>
-    <text x="60" y="318" font-family="${fontFam}" font-size="22" font-weight="400" fill="${textBody}">
+    <text x="60" y="312" font-family="${fontFam}" font-size="22" font-weight="400" fill="${textBody}">
       La semana pasada le escribí sobre fuerza laboral cognitiva para su Oficina TIC.
     </text>
-    <text x="60" y="354" font-family="${fontFam}" font-size="22" font-weight="400" fill="${textBody}">
-      Hoy quiero mostrarle cómo podría aplicarse a una tarea concreta: <tspan font-weight="700" fill="${textDark}">revisar entregables de contratistas y preparar las actas correspondientes.</tspan>
+    <text x="60" y="350" font-family="${fontFam}" font-size="22" font-weight="400" fill="${textBody}">
+      Hoy quiero mostrarle cómo podría aplicarse a una tarea administrativa concreta:
+    </text>
+    <text x="60" y="386" font-family="${fontFam}" font-size="22" font-weight="700" fill="${textDark}">
+      revisar entregables de contratistas y preparar las actas correspondientes.
     </text>
 
     <!-- Question Box (Storytelling Curiosidad) -->
-    <g transform="translate(60, 395)">
-      <rect width="1080" height="90" rx="12" ry="12" fill="#F0F7FB" stroke="${blueBorder}" stroke-width="1.5"/>
+    <g transform="translate(60, 425)">
+      <rect width="1080" height="92" rx="12" ry="12" fill="#F0F7FB" stroke="${blueBorder}" stroke-width="1.5"/>
       <text x="36" y="42" font-family="${fontFam}" font-size="22" font-weight="700" fill="${bluePrimary}">
         ¿Qué sucede cuando lo reportado no coincide con lo contratado?
       </text>
@@ -96,7 +99,7 @@ async function buildFu1Blocks() {
       </text>
     </g>
 
-    <line x1="60" y1="520" x2="1140" y2="520" stroke="${cardBorder}" stroke-width="1.5"/>
+    <line x1="60" y1="558" x2="1140" y2="558" stroke="${cardBorder}" stroke-width="1.5"/>
   </svg>`;
   await sharp(Buffer.from(svg02)).png().toFile(path.join(blocksDir, 'saasw-fu1-02-apertura-claro.png'));
 
@@ -135,7 +138,7 @@ async function buildFu1Blocks() {
       <circle cx="55" cy="57" r="28" fill="${bluePrimary}"/>
       <text x="55" y="67" text-anchor="middle" font-family="${fontFam}" font-size="26" font-weight="800" fill="#FFFFFF">3</text>
       <text x="110" y="46" font-family="${fontFam}" font-size="23" font-weight="700" fill="${textDark}">TC-PMO prepara un borrador e identifica faltantes</text>
-      <text x="110" y="80" font-family="${fontFam}" font-size="19" font-weight="400" fill="${textMuted}">Genera acta preliminar, resalta desvíos, dispara alertas y consolida dashboards de gestión.</text>
+      <text x="110" y="80" font-family="${fontFam}" font-size="18" font-weight="400" fill="${textMuted}">Genera acta preliminar, resalta desvíos, dispara alertas y consolida dashboards de gestión.</text>
     </g>
 
     <!-- Step 4 -->
@@ -206,16 +209,16 @@ async function buildFu1Blocks() {
       <text x="30" y="42" font-family="${fontFam}" font-size="18" font-weight="800" letter-spacing="1.2" fill="${textMuted}">
         OTROS PROCESOS DISPONIBLES EN SU OFICINA TIC:
       </text>
-      <text x="30" y="85" font-family="${fontFam}" font-size="20" font-weight="700" fill="${bluePrimary}">
+      <text x="30" y="85" font-family="${fontFam}" font-size="19" font-weight="700" fill="${bluePrimary}">
         ● TC-Workspace:
       </text>
-      <text x="200" y="85" font-family="${fontFam}" font-size="20" font-weight="400" fill="${textBody}">
-        Gobierna identidades corporativas, permisos de acceso mínimo y carpetas Drive (ISO 27001).
+      <text x="190" y="85" font-family="${fontFam}" font-size="18" font-weight="400" fill="${textBody}">
+        Gobierna identidades corporativas, permisos de acceso mínimo y Drive (ISO 27001).
       </text>
-      <text x="30" y="125" font-family="${fontFam}" font-size="20" font-weight="700" fill="#7C3AED">
+      <text x="30" y="125" font-family="${fontFam}" font-size="19" font-weight="700" fill="#7C3AED">
         ● TC-Test (QA):
       </text>
-      <text x="180" y="125" font-family="${fontFam}" font-size="20" font-weight="400" fill="${textBody}">
+      <text x="175" y="125" font-family="${fontFam}" font-size="18" font-weight="400" fill="${textBody}">
         Pruebas continuas multidispositivo y regresión CI/CD en 15 segundos antes de desplegar.
       </text>
     </g>
