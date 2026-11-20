@@ -43,9 +43,9 @@ function generateCtaHtml(cfg) {
       </td>
     </tr></table>
     <p style="margin:16px 0 10px 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;font-weight:600;color:#64748B;text-align:center;">O empecemos por correo</p>
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr>
-      <td align="center" bgcolor="#E2E8F0" style="border-radius:40px;background-color:#E2E8F0;border:1px solid #CBD5E1;">
-        <a href="${mailtoUrl}" style="display:inline-block;padding:11px 22px;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#1E293B;text-decoration:none;">${cfg.btn2Text} &#9993;</a>
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="border-collapse:separate !important;border:0 !important;border-style:none !important;"><tr>
+      <td align="center" bgcolor="#475569" style="border-radius:40px;background-color:#475569;border:0 !important;border-style:none !important;">
+        <a href="${mailtoUrl}" style="display:inline-block;padding:12px 26px;border-radius:40px;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;font-weight:600;color:#ffffff;text-decoration:none;">${cfg.btn2Text} &#9993;</a>
       </td>
     </tr></table>
     <p style="margin:14px 0 0 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;font-weight:400;color:#64748B;text-align:center;">${cfg.microcopy}</p>
