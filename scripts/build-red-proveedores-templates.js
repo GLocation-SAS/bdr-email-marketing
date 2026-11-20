@@ -7,44 +7,48 @@ const inputFiles = [
     title: 'GLocation · Tecnología y Servicios Digitales',
     sector: 'Tecnología y Servicios Digitales',
     badge: 'EM-08',
-    file: 'C:/Users/Paula/.gemini/antigravity/brain/76107d8b-3c93-4070-bf7a-b3a458efa390/.user_uploaded/media_1795102933089_43d46d4f.html',
+    file: path.join(__dirname, '..', 'recursos', 'storytelling', 'GLocation_Tecnologia_Storytelling.html'),
     slug: 'plantilla-red-tecnologia',
     filename: 'glocation-red-tecnologia-y-servicios-digitales.html',
-    hero: 'Un agente es tecnología. UN TRABAJADOR COGNITIVO ES ORGANIZACIÓN.',
-    target: 'Gerente Comercial o de Alianzas'
+    hero: 'Su cliente ya pidió IA. ¿LA TIENE LISTA PARA OFRECER?',
+    target: 'Gerente Comercial o de Alianzas',
+    desc: 'Email B2B para Gerentes Comerciales y de Alianzas. Enfoque: conversación de alianzas para sumar IA y Trabajadores Cognitivos a su oferta sin desarrollarla desde cero.'
   },
   {
     key: 'logistica',
     title: 'GLocation · Logística y Transporte',
     sector: 'Logística y Transporte',
     badge: 'EM-09',
-    file: 'C:/Users/Paula/.gemini/antigravity/brain/76107d8b-3c93-4070-bf7a-b3a458efa390/.user_uploaded/media_1795102933108_a62c57f6.html',
+    file: path.join(__dirname, '..', 'recursos', 'storytelling', 'GLocation_Logistica_Storytelling.html'),
     slug: 'plantilla-red-logistica',
     filename: 'glocation-red-logistica-y-transporte.html',
-    hero: 'Cientos de proveedores, ofertas y servicios, CON SU EQUIPO AL MANDO.',
-    target: 'Líder de Compras y Abastecimiento'
+    hero: 'La operación pide una respuesta. LAS OFERTAS SIGUEN SIN CONSOLIDAR.',
+    target: 'Líder de Compras y Abastecimiento',
+    desc: 'Email B2B para líderes de Compras y Abastecimiento. Enfoque: comparativos de cotizaciones y expedientes de proveedores preparados con TC-Analista.'
   },
   {
     key: 'construccion',
     title: 'GLocation · Construcción e Inmobiliario',
     sector: 'Construcción e Inmobiliario',
     badge: 'EM-10',
-    file: 'C:/Users/Paula/.gemini/antigravity/brain/76107d8b-3c93-4070-bf7a-b3a458efa390/.user_uploaded/media_1795102933108_5f98cc3a.html',
+    file: path.join(__dirname, '..', 'recursos', 'storytelling', 'GLocation_Construccion_Storytelling.html'),
     slug: 'plantilla-red-construccion',
     filename: 'glocation-red-construccion-e-inmobiliario.html',
-    hero: 'Pliegos, contratos y actas de varios proyectos, CON SU EQUIPO AL MANDO.',
-    target: 'Líder de Compras y Contratos'
+    hero: 'El proyecto necesita contratar. EL EXPEDIENTE TODAVÍA NO ESTÁ COMPLETO.',
+    target: 'Líder de Compras y Contratos',
+    desc: 'Email B2B para líderes de Compras y Contratos. Enfoque: expedientes de contratación consolidados, pólizas y cotizaciones por proyecto con TC-Analista.'
   },
   {
     key: 'agroindustria',
     title: 'GLocation · Agroindustria y Alimentos',
     sector: 'Agroindustria y Alimentos',
     badge: 'EM-11',
-    file: 'C:/Users/Paula/.gemini/antigravity/brain/76107d8b-3c93-4070-bf7a-b3a458efa390/.user_uploaded/media_1795102933108_728b2d52.html',
+    file: path.join(__dirname, '..', 'recursos', 'storytelling', 'GLocation_Agroindustria_Storytelling.html'),
     slug: 'plantilla-red-agroindustria',
     filename: 'glocation-red-agroindustria-y-alimentos.html',
-    hero: 'Evaluar proveedores de muchas categorías, SIN PERDER EL CONTROL.',
-    target: 'Líder de Compras y Abastecimiento'
+    hero: 'Aprobar un proveedor necesita a Compras y a Calidad. Y QUE CADA SOPORTE ESTÉ VIGENTE.',
+    target: 'Líder de Compras, Abastecimiento o Calidad',
+    desc: 'Email B2B para líderes de Compras, Abastecimiento o Calidad. Enfoque: aprobación técnica de proveedores, vigencias de soportes y expedientes listos con TC-Analista.'
   }
 ];
 
@@ -55,9 +59,6 @@ const embeddedResetStyle = `  <!-- Reset explícito para evitar cuadrículas/bor
       -ms-text-size-adjust: 100%;
     }
     table, td, tr, th {
-      border: 0 !important;
-      border-style: none !important;
-      border-collapse: collapse !important;
       mso-table-lspace: 0pt !important;
       mso-table-rspace: 0pt !important;
     }
@@ -85,8 +86,6 @@ const embeddedResetStyle = `  <!-- Reset explícito para evitar cuadrículas/bor
     }
     a {
       text-decoration: none !important;
-      border: 0 !important;
-      border-style: none !important;
       outline: none !important;
     }
   </style>`;
@@ -150,43 +149,49 @@ function transformHtmlForConverso(raw) {
   const bodyMatch = raw.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
   let body = bodyMatch ? bodyMatch[1].trim() : raw.trim();
 
-  // 1. Force outer wrapper table to match Jefes TI structure:
+  // 1. Force outer wrapper table to match email marketing background structure
   body = body.replace(
     /<table\s+role="presentation"\s+width="100%"\s+cellpadding="0"\s+cellspacing="0"\s+border="0"\s+style="background-color:#E7EEF8;">/i,
-    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#E7EEF8" style="width:100% !important;border-collapse:collapse !important;background-color:#E7EEF8;margin:0 !important;padding:0 !important;border:0 !important;border-style:none !important;">'
+    '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#E7EEF8" style="width:100% !important;border-collapse:collapse !important;background-color:#E7EEF8;margin:0 !important;padding:0 !important;border:0 !important;border-style:none !important;mso-table-lspace:0pt !important;mso-table-rspace:0pt !important;">'
   );
 
-  // 2. Ensure the centering td matches Jefes TI
+  // 2. Ensure the centering td
   body = body.replace(
-    /<tr><td\s+align="center"\s+style="padding:24px 10px;">/i,
-    '<tr><td align="center" style="padding:24px 10px !important;margin:0 !important;border:0 !important;border-style:none !important;">'
+    /<tr><td\s+align="center"\s+style="padding:(?:20|24)px\s+10px;">/i,
+    '<tr><td align="center" style="padding:20px 10px !important;margin:0 !important;border:0 !important;border-style:none !important;">'
   );
 
-  // 3. Force inner card table to fixed width 640px matching Jefes TI structure (so Converso does not stretch it to 100%):
+  // 3. MSO conditional comment table
   body = body.replace(
-    /<table\s+role="presentation"\s+width="100%"\s+cellpadding="0"\s+cellspacing="0"\s+border="0"\s+style="max-width:640px;border-radius:20px;overflow:hidden;background-color:#ffffff;">/i,
-    '<table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width:640px !important;max-width:640px !important;border-collapse:collapse !important;margin:0 auto !important;border:0 !important;border-style:none !important;border-radius:20px;overflow:hidden;background-color:#ffffff;">'
+    /<!--\[if mso\]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><!\[endif\]-->/i,
+    '<!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="border:0 !important;border-style:none !important;border-collapse:collapse !important;mso-table-lspace:0pt !important;mso-table-rspace:0pt !important;"><tr><td style="border:0 !important;border-style:none !important;"><![endif]-->'
   );
 
-  // 4. Transform all table tags:
-  // - Replace border-collapse:separate with border-collapse:collapse !important;
-  // - Ensure border:0 !important; border-style:none !important; mso-table-lspace:0pt !important; mso-table-rspace:0pt !important;
+  // 4. Force inner card table to fixed width 600px
+  body = body.replace(
+    /<table\s+role="presentation"\s+width="100%"\s+cellpadding="0"\s+cellspacing="0"\s+border="0"\s+style="max-width:600px;border-radius:18px;overflow:hidden;background-color:#ffffff;">/i,
+    '<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width:600px !important;max-width:600px !important;border-collapse:collapse !important;margin:0 auto !important;border:0 !important;border-style:none !important;border-radius:18px;overflow:hidden;background-color:#ffffff;mso-table-lspace:0pt !important;mso-table-rspace:0pt !important;">'
+  );
+
+  // 5. Transform all table tags:
   body = body.replace(/<table\b([^>]*)>/gi, (fullMatch, attrs) => {
     let cleanAttrs = attrs;
 
-    // Eliminate border-collapse: separate
-    cleanAttrs = cleanAttrs.replace(/border-collapse:\s*separate;?/gi, 'border-collapse:collapse !important;');
-
-    // Inspect style attribute
+    // Check style attribute
     const styleMatch = cleanAttrs.match(/style="([^"]*)"/i);
     if (styleMatch) {
       let styleVal = styleMatch[1];
-      if (!/border\s*:\s*0/i.test(styleVal) && !/border\s*:\s*none/i.test(styleVal) && !/border\s*:\s*1px/i.test(styleVal)) {
+
+      // If table has explicit card borders, preserve with !important
+      if (/border:\s*1px\s*solid\s*(#[a-f0-9]+)/i.test(styleVal)) {
+        styleVal = styleVal.replace(/border:\s*1px\s*solid\s*([^;]+);?/gi, 'border:1px solid $1 !important;');
+        if (/border-left:\s*4px\s*solid\s*([^;]+)/i.test(styleVal)) {
+          styleVal = styleVal.replace(/border-left:\s*4px\s*solid\s*([^;]+);?/gi, 'border-left:4px solid $1 !important;');
+        }
+      } else if (!/border\s*:/i.test(styleVal)) {
         styleVal += ';border:0 !important;border-style:none !important;';
       }
-      if (!/border-collapse/i.test(styleVal)) {
-        styleVal += ';border-collapse:collapse !important;';
-      }
+
       if (!/mso-table-lspace/i.test(styleVal)) {
         styleVal += ';mso-table-lspace:0pt !important;mso-table-rspace:0pt !important;';
       }
@@ -196,7 +201,6 @@ function transformHtmlForConverso(raw) {
       cleanAttrs += ' style="border:0 !important;border-style:none !important;border-collapse:collapse !important;mso-table-lspace:0pt !important;mso-table-rspace:0pt !important;"';
     }
 
-    // Ensure border="0" cellpadding="0" cellspacing="0"
     if (!/border="/i.test(cleanAttrs)) cleanAttrs += ' border="0"';
     if (!/cellpadding="/i.test(cleanAttrs)) cleanAttrs += ' cellpadding="0"';
     if (!/cellspacing="/i.test(cleanAttrs)) cleanAttrs += ' cellspacing="0"';
@@ -204,20 +208,23 @@ function transformHtmlForConverso(raw) {
     return `<table${cleanAttrs}>`;
   });
 
-  // 5. Transform all td tags:
-  // - If it has card border (1px solid #B7C6D8), make sure it has !important
-  // - If it has no border, add border:0 !important; border-style:none !important;
+  // 6. Transform all td tags:
   body = body.replace(/<td\b([^>]*)>/gi, (fullMatch, attrs) => {
     let cleanAttrs = attrs;
 
     const styleMatch = cleanAttrs.match(/style="([^"]*)"/i);
     let styleVal = styleMatch ? styleMatch[1] : '';
 
-    // If card with border
-    if (/border:\s*1px\s*solid\s*#B7C6D8/i.test(styleVal)) {
-      styleVal = styleVal.replace(/border:\s*1px\s*solid\s*#B7C6D8;?/gi, 'border:1px solid #B7C6D8 !important;');
+    if (/border:\s*1px\s*solid\s*([^;]+)/i.test(styleVal)) {
+      styleVal = styleVal.replace(/border:\s*1px\s*solid\s*([^;]+);?/gi, 'border:1px solid $1 !important;');
+    }
+    if (/border-top:\s*1px\s*solid\s*([^;]+)/i.test(styleVal)) {
+      styleVal = styleVal.replace(/border-top:\s*1px\s*solid\s*([^;]+);?/gi, 'border-top:1px solid $1 !important;');
+    }
+    if (/border-left:\s*4px\s*solid\s*([^;]+)/i.test(styleVal)) {
       styleVal = styleVal.replace(/border-left:\s*4px\s*solid\s*([^;]+);?/gi, 'border-left:4px solid $1 !important;');
-    } else if (!/border\s*:/i.test(styleVal)) {
+    }
+    if (!/border\s*:/i.test(styleVal)) {
       styleVal += ';border:0 !important;border-style:none !important;';
     }
 
@@ -232,7 +239,7 @@ function transformHtmlForConverso(raw) {
     return `<td${cleanAttrs}>`;
   });
 
-  // 6. Prepend embeddedResetStyle inside data-saasw-root
+  // 7. Wrap inside data-saasw-root
   const finalRoot = `<div data-saasw-root="true" style="margin:0 !important;padding:0 !important;background-color:#E7EEF8;">\n${embeddedResetStyle}\n${body}\n</div>`;
 
   return {
@@ -318,7 +325,7 @@ for (const p of processed) {
     id: "${p.badge}",
     title: "${p.title}",
     sector: "${p.sector}",
-    description: "Campaña B2B dirigida a ${p.target.toLowerCase()} en el sector ${p.sector.toLowerCase()}, derivada del programa Proveedores en Red. Estructura optimizada para Converso.",
+    description: "${p.desc.replace(/"/g, '\\"')}",
     target: "${p.target}",
     hero: "${p.hero}",
     slug: "${p.slug}",
