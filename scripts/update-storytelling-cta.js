@@ -5,22 +5,26 @@ const ctaConfigs = {
   tecnologia: {
     btn2Text: 'Tengo un caso para explorar',
     subject: 'Posible alianza con GLocation',
-    body: 'Hola Paula, me interesa explorar una posible alianza. El caso que tenemos en mente es: '
+    body: 'Hola Paula, me interesa explorar una posible alianza. El caso que tenemos en mente es: ',
+    microcopy: '¿Aún no desea agendar? Responda este correo con una breve descripción de su necesidad o interés. Paula le dará seguimiento.'
   },
   logistica: {
     btn2Text: 'Quiero revisar un proceso de compras',
     subject: 'Posible alianza con GLocation - Logística',
-    body: 'Hola Paula, me interesa revisar un proceso de compras con Trabajadores Cognitivos. El caso que tenemos en mente es: '
+    body: 'Hola Paula, me interesa revisar un proceso de compras con Trabajadores Cognitivos. Nuestro caso es: ',
+    microcopy: '¿Aún no desea agendar? Responda este correo indicando qué proceso de compras o fletes le gustaría agilizar. Paula le dará seguimiento.'
   },
   construccion: {
     btn2Text: 'Quiero revisar un proceso de contratación',
     subject: 'Posible alianza con GLocation - Construcción',
-    body: 'Hola Paula, me interesa revisar un proceso de contratación con Trabajadores Cognitivos. El caso que tenemos en mente es: '
+    body: 'Hola Paula, me interesa revisar un proceso de contratación con Trabajadores Cognitivos. Nuestro caso es: ',
+    microcopy: '¿Aún no desea agendar? Responda este correo indicando qué trámite o expediente de obra le quita más tiempo. Paula le dará seguimiento.'
   },
   agroindustria: {
     btn2Text: 'Quiero revisar la evaluación de proveedores',
     subject: 'Posible alianza con GLocation - Agroindustria',
-    body: 'Hola Paula, me interesa revisar la evaluación de proveedores con Trabajadores Cognitivos. El caso que tenemos en mente es: '
+    body: 'Hola Paula, me interesa revisar la evaluación de proveedores con Trabajadores Cognitivos. Nuestro caso es: ',
+    microcopy: '¿Aún no desea agendar? Responda este correo indicando qué validación de calidad o proveedores le resulta más desgastante. Paula le dará seguimiento.'
   }
 };
 
@@ -40,11 +44,11 @@ function generateCtaHtml(cfg) {
     </tr></table>
     <p style="margin:16px 0 12px 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;font-weight:600;color:#64748B;text-align:center;">O empecemos por correo</p>
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center"><tr>
-      <td align="center" bgcolor="#ffffff" style="border-radius:40px;background-color:#ffffff;border:1px solid #B7C6D8;">
-        <a href="${mailtoUrl}" style="display:inline-block;padding:11px 24px;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;line-height:17px;font-weight:600;color:#22779c;text-decoration:none;">${cfg.btn2Text} &#9993;</a>
+      <td class="btn" align="center" bgcolor="#3F1C81" style="border-radius:40px;background-color:#3F1C81;background-image:linear-gradient(90deg,#3F1C81 0%,#BF8BDB 100%);">
+        <a href="${mailtoUrl}" style="display:inline-block;padding:14px 28px;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:700;color:#ffffff;text-decoration:none;">${cfg.btn2Text} &#9993;</a>
       </td>
     </tr></table>
-    <p style="margin:14px 0 0 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;font-weight:400;color:#64748B;text-align:center;">¿Aún no desea agendar? Responda este correo con una breve descripción de su necesidad. Paula le dará seguimiento.</p>
+    <p style="margin:14px 0 0 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;font-weight:400;color:#64748B;text-align:center;">${cfg.microcopy}</p>
   </td></tr></table>
 </td></tr>\n\n`;
 }
