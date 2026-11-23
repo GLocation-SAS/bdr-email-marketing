@@ -39,8 +39,8 @@ function buildSection08(subject) {
 <tr><td class="px" style="padding:18px 28px 14px 28px;background-color:#ffffff;border-top:1px solid #E3E9F1;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
     <tr>
-      <td width="58" valign="middle" style="width:58px;padding-right:12px;">
-        <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-light.png" width="52" height="52" alt="Paula Rozo" style="width:52px;height:52px;border-radius:26px;display:block;border:2px solid #E0F2FE;">
+      <td width="66" valign="middle" style="width:66px;min-width:66px;padding-right:14px;">
+        <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-light.png" width="52" height="52" alt="Paula Rozo" style="width:52px;height:52px;min-width:52px;max-width:52px;min-height:52px;max-height:52px;border-radius:26px;display:block;border:0;outline:none;">
       </td>
       <td valign="middle">
         <p style="margin:0 0 2px 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:15px;line-height:19px;font-weight:700;color:#0D2140;">Paula Rozo</p>
