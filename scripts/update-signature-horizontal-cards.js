@@ -60,7 +60,7 @@ function buildSection08(subject) {
     <tr>
       <!-- TARJETA 1: glocation.co -->
       <td width="25%" valign="top" style="width:25%;padding:0 4px 0 0;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F0F9FF;border:1px solid #BAE6FD;border-radius:10px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F8FAFD;border:1px solid #E2E8F0;border-radius:10px;">
           <tr>
             <td align="center" style="padding:9px 4px;">
               <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:block;">
@@ -74,7 +74,7 @@ function buildSection08(subject) {
       </td>
       <!-- TARJETA 2: homoagenticus.co -->
       <td width="25%" valign="top" style="width:25%;padding:0 3px 0 3px;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#FAF5FF;border:1px solid #E9D5FF;border-radius:10px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F8FAFD;border:1px solid #E2E8F0;border-radius:10px;">
           <tr>
             <td align="center" style="padding:9px 4px;">
               <a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:block;">
@@ -88,7 +88,7 @@ function buildSection08(subject) {
       </td>
       <!-- TARJETA 3: preagentica.glocation.co -->
       <td width="25%" valign="top" style="width:25%;padding:0 3px 0 3px;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F8FAFC;border:1px solid #CBD5E1;border-radius:10px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F8FAFD;border:1px solid #E2E8F0;border-radius:10px;">
           <tr>
             <td align="center" style="padding:9px 4px;">
               <a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:block;">
@@ -102,7 +102,7 @@ function buildSection08(subject) {
       </td>
       <!-- TARJETA 4: LinkedIn Oficial -->
       <td width="25%" valign="top" style="width:25%;padding:0 0 0 4px;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F0F7FF;border:1px solid #BFDBFE;border-radius:10px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:separate !important;background-color:#F8FAFD;border:1px solid #E2E8F0;border-radius:10px;">
           <tr>
             <td align="center" style="padding:9px 4px;">
               <a href="https://www.linkedin.com/company/glocation/" target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:block;">
