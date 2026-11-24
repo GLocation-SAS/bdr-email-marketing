@@ -457,10 +457,11 @@ async function generateAllBlocks() {
     await sharp(Buffer.from(svg04)).png().toFile(path.join(blocksDir, `red-${s.key}-04-caso-confianza.png`));
 
     // ==========================================
-    // BLOCK 05: CTA Principal - 1200 x 370
+    // BLOCK 05: CTA Principal - 1200 x 380
     // ==========================================
+    const ctaSubLines = wrapText(s.cta_sub, 64);
     const svg05 = `
-    <svg width="1200" height="370" viewBox="0 0 1200 370" xmlns="http://www.w3.org/2000/svg">
+    <svg width="1200" height="380" viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="ctaBoxGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#E6F6FE" />
@@ -471,29 +472,31 @@ async function generateAllBlocks() {
           <stop offset="100%" stop-color="#BF8BDB" />
         </linearGradient>
       </defs>
-      <rect width="1200" height="370" fill="${cardBg}"/>
+      <rect width="1200" height="380" fill="${cardBg}"/>
 
       <g transform="translate(60, 10)">
-        <rect width="1080" height="350" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
+        <rect width="1080" height="360" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
 
-        <text x="540" y="65" text-anchor="middle" font-family="${fontFam}" font-size="32" font-weight="800" fill="#0D2140">
+        <text x="540" y="58" text-anchor="middle" font-family="${fontFam}" font-size="30" font-weight="800" fill="#0D2140">
           ${escapeXml(s.cta_q)}
         </text>
 
-        <text x="540" y="115" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">
-          ${escapeXml(s.cta_sub)}
-        </text>
+        ${ctaSubLines.map((line, idx) => `
+          <text x="540" y="${98 + idx * 28}" text-anchor="middle" font-family="${fontFam}" font-size="20" font-weight="400" fill="#4A515D">
+            ${escapeXml(line)}
+          </text>
+        `).join('')}
 
         <!-- Big Primary Button - Amplio y centrado sin desbordar texto -->
-        <g transform="translate(150, 160)">
-          <rect width="780" height="88" rx="44" ry="44" fill="url(#btnGrad-${s.key})" filter="drop-shadow(0 4px 12px rgba(63,28,129,0.25))"/>
-          <text x="390" y="54" text-anchor="middle" font-family="${fontFam}" font-size="24" font-weight="700" fill="#FFFFFF">
+        <g transform="translate(150, 172)">
+          <rect width="780" height="84" rx="42" ry="42" fill="url(#btnGrad-${s.key})" filter="drop-shadow(0 4px 12px rgba(63,28,129,0.25))"/>
+          <text x="390" y="52" text-anchor="middle" font-family="${fontFam}" font-size="24" font-weight="700" fill="#FFFFFF">
             ${escapeXml(s.cta_btn)}
           </text>
         </g>
 
         <!-- Subtext below button con margen limpio -->
-        <text x="540" y="295" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="500" fill="#8A94A3">
+        <text x="540" y="306" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="500" fill="#8A94A3">
           citas.glocation.co · Sesión individual de 30 minutos sin compromiso
         </text>
       </g>
@@ -533,7 +536,7 @@ async function generateAllBlocks() {
 
 function buildSectorHtml(s) {
   const mailtoUrl = `mailto:paula.rozo@glocation.com.co?subject=${encodeURIComponent(s.mailto_sub)}&body=${encodeURIComponent(s.mailto_body)}`;
-  const v = '?v=20261124e';
+  const v = '?v=20261124f';
   const cdn = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
 
   return `<!-- Preencabezado (oculto) -->
