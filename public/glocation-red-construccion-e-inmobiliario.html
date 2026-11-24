@@ -10,16 +10,19 @@
       -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
     }
-    table, td {
-      mso-table-lspace: 0pt;
-      mso-table-rspace: 0pt;
+    table, td, tr {
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
+      border-collapse: collapse !important;
+      border-spacing: 0 !important;
+      border: 0 !important;
     }
     img {
       -ms-interpolation-mode: bicubic;
-      border: 0;
-      outline: none;
-      text-decoration: none;
-      display: block;
+      border: 0 !important;
+      outline: none !important;
+      text-decoration: none !important;
+      display: block !important;
     }
     body {
       margin: 0 !important;
@@ -29,7 +32,64 @@
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; width: 100% !important; background-color: #EFF3F8;">
+<body style="margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #EFF3F8;">
+
+  <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
+  <div id="saasw-floating-toolbar" style="position:sticky;top:0;z-index:999999;background:#0F172A;border-bottom:2px solid #0284C7;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;flex-wrap:wrap;">
+    <button id="btnCopiarVisual" onclick="copiarCorreoVisual()" style="background:linear-gradient(90deg,#0284C7 0%,#2563EB 100%);color:#FFFFFF;border:none;padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.5);display:inline-flex;align-items:center;gap:8px;">
+      📋 COPIAR DISEÑO CON ENLACES (Ctrl+V en Converso / Brevo / Gmail)
+    </button>
+    <button id="btnCopiarCodigo" onclick="copiarCodigoHtml()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
+      &lt;/&gt; COPIAR CÓDIGO HTML
+    </button>
+    <span id="copyMsg" style="color:#38BDF8;font-size:13px;font-weight:700;display:none;">
+      ✓ ¡Copiado con éxito!
+    </span>
+  </div>
+  <script>
+    function copiarCorreoVisual() {
+      var root = document.querySelector('[data-saasw-root="true"]');
+      if (!root) return;
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      var range = document.createRange();
+      range.selectNode(root);
+      sel.addRange(range);
+      try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          var htmlBlob = new Blob([root.outerHTML], { type: 'text/html' });
+          var textBlob = new Blob([root.innerText], { type: 'text/plain' });
+          navigator.clipboard.write([
+            new ClipboardItem({ 'text/html': htmlBlob, 'text/plain': textBlob })
+          ]).catch(function(){});
+        }
+        document.execCommand('copy');
+        sel.removeAllRanges();
+        mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en Converso / Brevo');
+      } catch (err) {
+        alert('Por favor presiona Ctrl+C para copiar');
+      }
+    }
+
+    function copiarCodigoHtml() {
+      var root = document.querySelector('[data-saasw-root="true"]');
+      if (!root) return;
+      navigator.clipboard.writeText(root.outerHTML).then(function() {
+        mostrarMsg('✓ ¡Código HTML limpio copiado! Pégalo en tu editor en modo "Fuente HTML"');
+      });
+    }
+
+    function mostrarMsg(texto) {
+      var msg = document.getElementById('copyMsg');
+      if (!msg) return;
+      msg.innerText = texto;
+      msg.style.display = 'inline';
+      setTimeout(function () { msg.style.display = 'none'; }, 4000);
+    }
+  </script>
+
+  <!-- CONTENEDOR RAÍZ CONTINUO (1 SOLA TARJETA CONTINUA SIN ESPACIOS, CON HIPERVÍNCULOS NATIVOS) -->
+  <div data-saasw-root="true" style="margin:0 !important;padding:0 !important;background-color:#EFF3F8;">
 <!-- Preencabezado (oculto) -->
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#EFF3F8;">
   Control de contratistas, pólizas y seguridad social al día antes de ingresar a obra.&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
@@ -41,19 +101,19 @@
         <tr>
           <td align="center" style="padding:0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
             <!-- 1. Encabezado → glocation.co -->
-            <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-01-encabezado.png?v=20261124c" width="600" alt="GLocation · Holding Servinformación" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-01-encabezado.png?v=20261124d" width="600" alt="GLocation · Holding Servinformación" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
             <!-- 2. Apertura (sin enlace) -->
-            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-02-apertura.png?v=20261124c" width="600" alt="Construcción e Inmobiliario: La obra avanza en terreno. LOS EXPEDIENTES SIGUEN EN TRÁMITE." border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-02-apertura.png?v=20261124d" width="600" alt="Construcción e Inmobiliario: La obra avanza en terreno. LOS EXPEDIENTES SIGUEN EN TRÁMITE." border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
             <!-- 3. Comparativo (sin enlace) -->
-            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-03-comparativo.png?v=20261124c" width="600" alt="Hoy vs Con un Trabajador Cognitivo" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-03-comparativo.png?v=20261124d" width="600" alt="Hoy vs Con un Trabajador Cognitivo" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
             <!-- 4. Caso de uso y confianza (sin enlace) -->
-            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-04-caso-confianza.png?v=20261124c" width="600" alt="El caso de uso: Habilitación de subcontratistas y control de requisitos" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-04-caso-confianza.png?v=20261124d" width="600" alt="El caso de uso: Habilitación de subcontratistas y control de requisitos" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
             <!-- 5. CTA Principal → citas.glocation.co -->
-            <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-05-cta-principal.png?v=20261124c" width="600" alt="Agendar Diagnóstico Cognitivo (30 min) →" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-05-cta-principal.png?v=20261124d" width="600" alt="Agendar Diagnóstico Cognitivo (30 min) →" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
             <!-- 6. CTA Secundario → mailto -->
-            <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Construcci%C3%B3n%20-%20GLocation&body=Hola%2C%20Paula%3A%20me%20interesa%20revisar%20la%20contrataci%C3%B3n%20en%20obra.%20Nuestro%20proceso%20es%3A%20" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-06-cta-secundario.png?v=20261124c" width="600" alt="Quiero revisar la contratación en obra ✉" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <a href="mailto:paula.rozo@glocation.com.co?subject=Diagn%C3%B3stico%20Cognitivo%20Construcci%C3%B3n%20-%20GLocation&body=Hola%2C%20Paula%3A%20me%20interesa%20revisar%20la%20contrataci%C3%B3n%20en%20obra.%20Nuestro%20proceso%20es%3A%20" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-construccion-06-cta-secundario.png?v=20261124d" width="600" alt="Quiero revisar la contratación en obra ✉" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
             <!-- 7. Cintillo Holding -->
-            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-07-firma-banda.png?v=20261124c" width="600" alt="Holding Servinformación (27 años)" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks/red-07-firma-banda.png?v=20261124d" width="600" alt="Holding Servinformación (27 años)" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
             <!-- 8. Firma: Paula (3 columnas fijas de imagen) -->
             <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 !important;padding:0 !important;border:0 !important;table-layout:fixed !important;">
               <tr>
@@ -76,5 +136,6 @@
     </td>
   </tr>
 </table>
+  </div>
 </body>
 </html>

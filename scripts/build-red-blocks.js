@@ -360,18 +360,18 @@ async function generateAllBlocks() {
     await sharp(Buffer.from(svg03)).png().toFile(path.join(blocksDir, `red-${s.key}-03-comparativo.png`));
 
     // ==========================================
-    // BLOCK 04: Caso de Uso Protagonista + Confianza - 1200 x 480
+    // BLOCK 04: Caso de Uso Protagonista + Confianza - 1200 x 500
     // ==========================================
     const caseLines = wrapText(s.case_desc, 68);
     const svg04 = `
-    <svg width="1200" height="480" viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="480" fill="${cardBg}"/>
+    <svg width="1200" height="500" viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="500" fill="${cardBg}"/>
 
-      <!-- Tarjeta Caso de Uso (width 1080, height 290) -->
+      <!-- Tarjeta Caso de Uso (width 1080, height 330) -->
       <g transform="translate(60, 10)">
-        <rect width="1080" height="290" rx="16" ry="16" fill="#F8FAFD" stroke="#DCE6F2" stroke-width="1.5"/>
+        <rect width="1080" height="330" rx="16" ry="16" fill="#F8FAFD" stroke="#DCE6F2" stroke-width="1.5"/>
         <!-- Left border accent -->
-        <path d="M 0,16 Q 0,0 16,0 L 16,290 Q 0,290 0,274 Z" fill="#0284C7"/>
+        <path d="M 0,16 Q 0,0 16,0 L 16,330 Q 0,330 0,314 Z" fill="#0284C7"/>
 
         <!-- Badge Icon -->
         <g transform="translate(36, 36)">
@@ -396,10 +396,10 @@ async function generateAllBlocks() {
             </text>
           `).join('')}
 
-          <!-- Pill Inferior -->
-          <g transform="translate(0, ${100 + caseLines.length * 36 + 10})">
-            <rect width="420" height="38" rx="19" ry="19" fill="#E0F2FE"/>
-            <text x="20" y="25" font-family="${fontFam}" font-size="16" font-weight="700" letter-spacing="0.8" fill="#0284C7">
+          <!-- Pill Inferior dentro de tarjeta con margen -->
+          <g transform="translate(0, ${100 + caseLines.length * 36 + 14})">
+            <rect width="450" height="38" rx="19" ry="19" fill="#E0F2FE"/>
+            <text x="22" y="25" font-family="${fontFam}" font-size="16" font-weight="700" letter-spacing="0.8" fill="#0284C7">
               ${escapeXml(s.case_pill)}
             </text>
           </g>
@@ -407,7 +407,7 @@ async function generateAllBlocks() {
       </g>
 
       <!-- Trust Checkmarks (width 1080) -->
-      <g transform="translate(80, 340)">
+      <g transform="translate(80, 370)">
         <text x="0" y="32" font-family="${fontFam}" font-size="26" font-weight="700" fill="#16A34A">✓</text>
         <text x="36" y="32" font-family="${fontFam}" font-size="22" font-weight="500" fill="#4A515D">${escapeXml(s.trust_1)}</text>
 
@@ -418,10 +418,10 @@ async function generateAllBlocks() {
     await sharp(Buffer.from(svg04)).png().toFile(path.join(blocksDir, `red-${s.key}-04-caso-confianza.png`));
 
     // ==========================================
-    // BLOCK 05: CTA Principal - 1200 x 360
+    // BLOCK 05: CTA Principal - 1200 x 370
     // ==========================================
     const svg05 = `
-    <svg width="1200" height="360" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
+    <svg width="1200" height="370" viewBox="0 0 1200 370" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="ctaBoxGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#E6F6FE" />
@@ -432,10 +432,10 @@ async function generateAllBlocks() {
           <stop offset="100%" stop-color="#BF8BDB" />
         </linearGradient>
       </defs>
-      <rect width="1200" height="360" fill="${cardBg}"/>
+      <rect width="1200" height="370" fill="${cardBg}"/>
 
       <g transform="translate(60, 10)">
-        <rect width="1080" height="330" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
+        <rect width="1080" height="350" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
 
         <text x="540" y="65" text-anchor="middle" font-family="${fontFam}" font-size="32" font-weight="800" fill="#0D2140">
           ${escapeXml(s.cta_q)}
@@ -445,16 +445,16 @@ async function generateAllBlocks() {
           ${escapeXml(s.cta_sub)}
         </text>
 
-        <!-- Big Primary Button -->
-        <g transform="translate(240, 160)">
-          <rect width="600" height="88" rx="44" ry="44" fill="url(#btnGrad-${s.key})" filter="drop-shadow(0 4px 12px rgba(63,28,129,0.25))"/>
-          <text x="300" y="55" text-anchor="middle" font-family="${fontFam}" font-size="25" font-weight="700" fill="#FFFFFF">
+        <!-- Big Primary Button - Amplio y centrado sin desbordar texto -->
+        <g transform="translate(150, 160)">
+          <rect width="780" height="88" rx="44" ry="44" fill="url(#btnGrad-${s.key})" filter="drop-shadow(0 4px 12px rgba(63,28,129,0.25))"/>
+          <text x="390" y="54" text-anchor="middle" font-family="${fontFam}" font-size="24" font-weight="700" fill="#FFFFFF">
             ${escapeXml(s.cta_btn)}
           </text>
         </g>
 
-        <!-- Subtext below button -->
-        <text x="540" y="285" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="500" fill="#8A94A3">
+        <!-- Subtext below button con margen limpio -->
+        <text x="540" y="295" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="500" fill="#8A94A3">
           citas.glocation.co · Sesión individual de 30 minutos sin compromiso
         </text>
       </g>
@@ -462,26 +462,26 @@ async function generateAllBlocks() {
     await sharp(Buffer.from(svg05)).png().toFile(path.join(blocksDir, `red-${s.key}-05-cta-principal.png`));
 
     // ==========================================
-    // BLOCK 06: CTA Secundario - 1200 x 200
+    // BLOCK 06: CTA Secundario - 1200 x 210
     // ==========================================
     const svg06 = `
-    <svg width="1200" height="200" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="200" fill="${cardBg}"/>
+    <svg width="1200" height="210" viewBox="0 0 1200 210" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="210" fill="${cardBg}"/>
 
       <g transform="translate(60, 0)">
         <text x="540" y="40" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="500" fill="#64748B">
           ${escapeXml(s.cta_support)}
         </text>
 
-        <!-- Ghost / White Pill Button -->
-        <g transform="translate(260, 65)">
-          <rect width="560" height="70" rx="35" ry="35" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-          <text x="280" y="44" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="700" fill="#1E293B">
+        <!-- Ghost / White Pill Button - Amplio y centrado -->
+        <g transform="translate(170, 65)">
+          <rect width="740" height="70" rx="35" ry="35" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+          <text x="370" y="44" text-anchor="middle" font-family="${fontFam}" font-size="21" font-weight="700" fill="#1E293B">
             ${escapeXml(s.cta_sec_text)}
           </text>
         </g>
 
-        <text x="540" y="172" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="400" fill="#94A3B8">
+        <text x="540" y="174" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="400" fill="#94A3B8">
           Abre correo directo a paula.rozo@glocation.com.co
         </text>
       </g>
@@ -494,7 +494,7 @@ async function generateAllBlocks() {
 
 function buildSectorHtml(s) {
   const mailtoUrl = `mailto:paula.rozo@glocation.com.co?subject=${encodeURIComponent(s.mailto_sub)}&body=${encodeURIComponent(s.mailto_body)}`;
-  const v = '?v=20261124c';
+  const v = '?v=20261124d';
   const cdn = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
 
   return `<!-- Preencabezado (oculto) -->
@@ -558,16 +558,19 @@ function wrapStandaloneDoc(rawHtml, title) {
       -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
     }
-    table, td {
-      mso-table-lspace: 0pt;
-      mso-table-rspace: 0pt;
+    table, td, tr {
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
+      border-collapse: collapse !important;
+      border-spacing: 0 !important;
+      border: 0 !important;
     }
     img {
       -ms-interpolation-mode: bicubic;
-      border: 0;
-      outline: none;
-      text-decoration: none;
-      display: block;
+      border: 0 !important;
+      outline: none !important;
+      text-decoration: none !important;
+      display: block !important;
     }
     body {
       margin: 0 !important;
@@ -577,8 +580,66 @@ function wrapStandaloneDoc(rawHtml, title) {
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; width: 100% !important; background-color: #EFF3F8;">
+<body style="margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #EFF3F8;">
+
+  <!-- BARRA DE ACCIÓN SUPERIOR PARA COPIAR CON ENLACES ACTIVOS -->
+  <div id="saasw-floating-toolbar" style="position:sticky;top:0;z-index:999999;background:#0F172A;border-bottom:2px solid #0284C7;padding:12px 20px;display:flex;align-items:center;justify-content:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.25);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;flex-wrap:wrap;">
+    <button id="btnCopiarVisual" onclick="copiarCorreoVisual()" style="background:linear-gradient(90deg,#0284C7 0%,#2563EB 100%);color:#FFFFFF;border:none;padding:10px 22px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 8px rgba(2,132,199,0.5);display:inline-flex;align-items:center;gap:8px;">
+      📋 COPIAR DISEÑO CON ENLACES (Ctrl+V en Converso / Brevo / Gmail)
+    </button>
+    <button id="btnCopiarCodigo" onclick="copiarCodigoHtml()" style="background:#1E293B;color:#38BDF8;border:1.5px solid #38BDF8;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;">
+      &lt;/&gt; COPIAR CÓDIGO HTML
+    </button>
+    <span id="copyMsg" style="color:#38BDF8;font-size:13px;font-weight:700;display:none;">
+      ✓ ¡Copiado con éxito!
+    </span>
+  </div>
+  <script>
+    function copiarCorreoVisual() {
+      var root = document.querySelector('[data-saasw-root="true"]');
+      if (!root) return;
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      var range = document.createRange();
+      range.selectNode(root);
+      sel.addRange(range);
+      try {
+        if (navigator.clipboard && window.ClipboardItem) {
+          var htmlBlob = new Blob([root.outerHTML], { type: 'text/html' });
+          var textBlob = new Blob([root.innerText], { type: 'text/plain' });
+          navigator.clipboard.write([
+            new ClipboardItem({ 'text/html': htmlBlob, 'text/plain': textBlob })
+          ]).catch(function(){});
+        }
+        document.execCommand('copy');
+        sel.removeAllRanges();
+        mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en Converso / Brevo');
+      } catch (err) {
+        alert('Por favor presiona Ctrl+C para copiar');
+      }
+    }
+
+    function copiarCodigoHtml() {
+      var root = document.querySelector('[data-saasw-root="true"]');
+      if (!root) return;
+      navigator.clipboard.writeText(root.outerHTML).then(function() {
+        mostrarMsg('✓ ¡Código HTML limpio copiado! Pégalo en tu editor en modo "Fuente HTML"');
+      });
+    }
+
+    function mostrarMsg(texto) {
+      var msg = document.getElementById('copyMsg');
+      if (!msg) return;
+      msg.innerText = texto;
+      msg.style.display = 'inline';
+      setTimeout(function () { msg.style.display = 'none'; }, 4000);
+    }
+  </script>
+
+  <!-- CONTENEDOR RAÍZ CONTINUO (1 SOLA TARJETA CONTINUA SIN ESPACIOS, CON HIPERVÍNCULOS NATIVOS) -->
+  <div data-saasw-root="true" style="margin:0 !important;padding:0 !important;background-color:#EFF3F8;">
 ${rawHtml}
+  </div>
 </body>
 </html>`;
 }
@@ -597,8 +658,10 @@ async function updateAllFiles() {
     // 1. public/
     fs.writeFileSync(path.join(__dirname, `../public/${s.slug}.html`), standaloneHtml, 'utf8');
     fs.writeFileSync(path.join(__dirname, `../public/${s.filename}`), standaloneHtml, 'utf8');
+    fs.writeFileSync(path.join(__dirname, `../public/glocation-red-${s.key}.html`), standaloneHtml, 'utf8');
 
-    // 2. recursos/storytelling/
+    // 2. recursos/
+    fs.writeFileSync(path.join(__dirname, `../recursos/plantilla-red-${s.key}.html`), standaloneHtml, 'utf8');
     const storytellingPath = path.join(__dirname, `../recursos/storytelling/${s.storytellingFile}`);
     fs.writeFileSync(storytellingPath, standaloneHtml, 'utf8');
 
@@ -607,6 +670,20 @@ async function updateAllFiles() {
       const destFile = path.join(downloadsDir, s.storytellingFile);
       fs.writeFileSync(destFile, standaloneHtml, 'utf8');
       console.log(`Updated in Downloads: ${destFile}`);
+
+      // Also update any legacy GLocation_Sector.html in Downloads
+      const legacyNames = [
+        `GLocation_${s.title.replace('GLocation · ', '').replace(/ /g, '-')}.html`,
+        `GLocation_${s.title.replace('GLocation · ', '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ /g, '-')}.html`,
+        `GLocation_${s.title.replace('GLocation · ', '').replace(/ /g, '_')}.html`,
+      ];
+      for (const leg of legacyNames) {
+        const legacyDlPath = path.join(downloadsDir, leg);
+        if (fs.existsSync(legacyDlPath)) {
+          fs.writeFileSync(legacyDlPath, standaloneHtml, 'utf8');
+          console.log(`Updated legacy in Downloads: ${legacyDlPath}`);
+        }
+      }
     }
   }
 
