@@ -17,6 +17,32 @@ const blueBorder = '#B8DCF0';
 const purpleBorder = '#DDD0FB';
 const cardBorder = '#E2EBF5';
 
+function escapeXml(unsafe) {
+  return (unsafe || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function wrapText(text, maxChars) {
+  const clean = text.replace(/<[^>]+>/g, '');
+  const words = clean.split(/\s+/);
+  const lines = [];
+  let currentLine = '';
+  for (const word of words) {
+    if ((currentLine + ' ' + word).trim().length > maxChars) {
+      if (currentLine) lines.push(currentLine.trim());
+      currentLine = word;
+    } else {
+      currentLine += (currentLine ? ' ' : '') + word;
+    }
+  }
+  if (currentLine) lines.push(currentLine.trim());
+  return lines;
+}
+
 const SECTORS_DATA = [
   {
     key: 'tecnologia',
@@ -105,38 +131,38 @@ const SECTORS_DATA = [
     slug: 'plantilla-red-construccion',
     filename: 'glocation-red-construccion-e-inmobiliario.html',
     storytellingFile: 'GLocation_Construccion_Storytelling.html',
-    preheader: 'Expedientes de subcontratistas completos y al día; Contratos y Obra deciden.',
-    chip: 'CONSTRUCCIÓN E INMOBILIARIO',
-    h1_a: 'El proyecto necesita contratar.',
-    h1_b: 'EL EXPEDIENTE TODAVÍA NO ESTÁ COMPLETO.',
-    sub_hero: 'El retraso no está en la negociación; está en reunir, validar y cruzar soportes de contratistas.',
-    destinatario: 'Estimado(a) líder de Compras y Contratos:',
-    intro: 'Le escribimos porque su empresa hizo parte del programa Proveedores en Red. Para arrancar cada frente de obra, su equipo revisa pólizas, hojas de vida y cotizaciones de varios subcontratistas. La carga documental frena la adjudicación y atrasa el cronograma de obra.',
+    preheader: 'Control de contratistas, pólizas y seguridad social al día antes de ingresar a obra.',
+    chip: 'CONSTRUCCIÓN · CONTRATACIÓN',
+    h1_a: 'La obra avanza en terreno.',
+    h1_b: 'LOS EXPEDIENTES SIGUEN EN TRÁMITE.',
+    sub_hero: 'Soportes pendientes que frenan pólizas, actas y pagos a contratistas.',
+    destinatario: 'Estimado(a) Director(a) de Contratación o Compras de Obra:',
+    intro: 'Le escribimos porque su empresa hizo parte del programa Proveedores en Red. La obra no da espera, pero contratar a un subcontratista o recibir un hito exige verificar aportes a seguridad social, pólizas y soportes técnicos. Cuando los papeles se represan, el frente de obra se resiente.',
     hoy_items: [
-      'Expedientes dispersos entre obra y oficina',
-      'Pólizas y vigencias verificadas tarde',
-      'Dudas sobre qué contratista está listo'
+      'Soportes dispersos por frente de obra',
+      'Pólizas y seguridad social al límite',
+      'Contratos que arrancan sin cerrar expediente'
     ],
     tc_items: [
-      'Expediente consolidado por subcontratista',
-      'Pólizas y vigencias al día, por obra',
-      'Contratos y Obra adjudican a tiempo'
+      'Expediente al día antes de ingresar a obra',
+      'Alertas tempranas de vencimientos',
+      'Contratación valida y autoriza'
     ],
-    tc_highlight: 'Contratos y Obra adjudican a tiempo',
-    case_ico: 'POL',
+    tc_highlight: 'Contratación valida y autoriza',
+    case_ico: 'OBR',
     case_sub: 'El caso de uso',
-    case_title: 'Expediente de subcontratistas y control de pólizas',
-    case_desc: 'TC-Analista reúne cotizaciones y soportes por subcontratista, verifica vigencias y coberturas frente a los requisitos de la obra y alerta sobre faltantes. Su equipo adjudica.',
-    case_pill: '●  USTED ADJUDICA: CONTRATOS Y OBRA',
-    trust_1: 'Se adapta al flujo de compras y contratos que ya tienen.',
-    trust_2: 'La decisión contractual y técnica sigue en su equipo.',
+    case_title: 'Habilitación de subcontratistas y control de requisitos',
+    case_desc: 'Para cada subcontratista, TC-Analista coteja aportes a seguridad social, vigencia de pólizas y certificaciones de altura antes del ingreso a obra, dejando listo el visto bueno para Contratación.',
+    case_pill: '●  USTED AUTORIZA: CONTRATACIÓN',
+    trust_1: 'Se integra a sus carpetas de obra o ERP de gestión sin fricción.',
+    trust_2: 'Control de ingreso en tiempo real sin retrasar el frente de trabajo.',
     cta_q: '¿Revisamos qué está frenando su contratación?',
-    cta_sub: 'En 30 minutos, sin venta, miramos las cotizaciones o los expedientes de un proyecto y definimos si vale la pena.',
+    cta_sub: 'En 30 minutos, sin venta, evaluamos cómo gestionan hoy pólizas y requisitos de contratistas en obra y definimos la viabilidad.',
     cta_btn: 'Agendar Diagnóstico Cognitivo (30 min) →',
     cta_support: 'Si aún no desea agendar, responda este correo y cuéntenos qué proceso le gustaría revisar:',
-    cta_sec_text: 'Quiero revisar un proceso de contratación ✉',
+    cta_sec_text: 'Quiero revisar la contratación en obra ✉',
     mailto_sub: 'Diagnóstico Cognitivo Construcción - GLocation',
-    mailto_body: 'Hola, Paula: me interesa revisar un proceso de contratación. Nuestro proceso es: '
+    mailto_body: 'Hola, Paula: me interesa revisar la contratación en obra. Nuestro proceso es: '
   },
   {
     key: 'agroindustria',
@@ -180,21 +206,25 @@ const SECTORS_DATA = [
   }
 ];
 
-function escapeXml(unsafe) {
-  return (unsafe || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
-async function buildAllRedBlocks() {
-  console.log('Generating Red Proveedores image blocks with Sharp...');
+async function generateAllBlocks() {
+  console.log('Generating Red Proveedores image blocks with pure SVG <text>...');
 
   const logoBuf = fs.readFileSync(path.join(iconsDir, 'logo-glocation-claro.png'));
   const logoB64 = `data:image/png;base64,${logoBuf.toString('base64')}`;
 
+  // 1. Shared BANDA HOLDING: Holding Servinformación (27 años) ONLY (no partner, no ISO)
+  const svgBanda = `
+  <svg width="1200" height="70" viewBox="0 0 1200 70" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="70" fill="#F8FAFD"/>
+    <line x1="0" y1="0" x2="1200" y2="0" stroke="${cardBorder}" stroke-width="1.5"/>
+    <line x1="0" y1="69" x2="1200" y2="69" stroke="${cardBorder}" stroke-width="1.5"/>
+    <text x="600" y="44" text-anchor="middle" font-family="${fontFam}" font-size="20" font-weight="700" letter-spacing="2" fill="${textMuted}">
+      HOLDING SERVINFORMACIÓN (27 AÑOS)
+    </text>
+  </svg>`;
+  await sharp(Buffer.from(svgBanda)).png().toFile(path.join(blocksDir, 'red-07-firma-banda.png'));
+
+  // 2. Loop through all 4 sectors
   for (const s of SECTORS_DATA) {
     console.log(`Processing sector: ${s.key}...`);
 
@@ -229,10 +259,11 @@ async function buildAllRedBlocks() {
     await sharp(Buffer.from(svg01)).png().toFile(path.join(blocksDir, `red-${s.key}-01-encabezado.png`));
 
     // ==========================================
-    // BLOCK 02: Apertura (Hero gradient + Saludo + Conflicto) - 1200 x 620
+    // BLOCK 02: Apertura (Hero gradient + Saludo + Intro) - 1200 x 580
     // ==========================================
+    const introLines = wrapText(s.intro, 78);
     const svg02 = `
-    <svg width="1200" height="620" viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg">
+    <svg width="1200" height="580" viewBox="0 0 1200 580" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="heroGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#E6F6FE" />
@@ -244,7 +275,7 @@ async function buildAllRedBlocks() {
           <stop offset="100%" stop-color="#BF8BDB" />
         </linearGradient>
       </defs>
-      <rect width="1200" height="620" fill="${cardBg}"/>
+      <rect width="1200" height="580" fill="${cardBg}"/>
 
       <!-- Hero Banner Container (width 1080) -->
       <g transform="translate(60, 20)">
@@ -253,16 +284,16 @@ async function buildAllRedBlocks() {
         <!-- Chip / Eyebrow Pill -->
         <g transform="translate(36, 28)">
           <rect width="380" height="38" rx="19" ry="19" fill="url(#chipGrad-${s.key})"/>
-          <text x="190" y="24" text-anchor="middle" font-family="${fontFam}" font-size="16" font-weight="700" letter-spacing="1.8" fill="#FFFFFF">
+          <text x="190" y="25" text-anchor="middle" font-family="${fontFam}" font-size="16" font-weight="700" letter-spacing="1.8" fill="#FFFFFF">
             ${escapeXml(s.chip)}
           </text>
         </g>
 
         <!-- Titular 2 Líneas -->
-        <text x="36" y="112" font-family="${fontFam}" font-size="36" font-weight="600" fill="#0D2140" letter-spacing="-0.3">
+        <text x="36" y="112" font-family="${fontFam}" font-size="34" font-weight="600" fill="#0D2140" letter-spacing="-0.3">
           ${escapeXml(s.h1_a)}
         </text>
-        <text x="36" y="162" font-family="${fontFam}" font-size="42" font-weight="800" fill="#040914" letter-spacing="-0.5">
+        <text x="36" y="162" font-family="${fontFam}" font-size="40" font-weight="800" fill="#040914" letter-spacing="-0.5">
           ${escapeXml(s.h1_b)}
         </text>
 
@@ -274,14 +305,14 @@ async function buildAllRedBlocks() {
 
       <!-- Saludo & Intro -->
       <g transform="translate(60, 320)">
-        <text x="0" y="32" font-family="${fontFam}" font-size="25" font-weight="700" fill="#0D2140">
+        <text x="0" y="30" font-family="${fontFam}" font-size="26" font-weight="700" fill="#0D2140">
           ${escapeXml(s.destinatario)}
         </text>
-        <foreignObject x="0" y="52" width="1080" height="220">
-          <p xmlns="http://www.w3.org/1999/xhtml" style="margin:0;font-family:${fontFam};font-size:22px;line-height:36px;color:#4A515D;">
-            ${escapeXml(s.intro)}
-          </p>
-        </foreignObject>
+        ${introLines.map((line, idx) => `
+          <text x="0" y="${80 + idx * 40}" font-family="${fontFam}" font-size="23" font-weight="400" fill="#4A515D">
+            ${escapeXml(line)}
+          </text>
+        `).join('')}
       </g>
     </svg>`;
     await sharp(Buffer.from(svg02)).png().toFile(path.join(blocksDir, `red-${s.key}-02-apertura.png`));
@@ -331,11 +362,12 @@ async function buildAllRedBlocks() {
     // ==========================================
     // BLOCK 04: Caso de Uso Protagonista + Confianza - 1200 x 480
     // ==========================================
+    const caseLines = wrapText(s.case_desc, 68);
     const svg04 = `
     <svg width="1200" height="480" viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="480" fill="${cardBg}"/>
 
-      <!-- Tarjeta Caso de Uso (width 1080, height 300) -->
+      <!-- Tarjeta Caso de Uso (width 1080, height 290) -->
       <g transform="translate(60, 10)">
         <rect width="1080" height="290" rx="16" ry="16" fill="#F8FAFD" stroke="#DCE6F2" stroke-width="1.5"/>
         <!-- Left border accent -->
@@ -344,7 +376,7 @@ async function buildAllRedBlocks() {
         <!-- Badge Icon -->
         <g transform="translate(36, 36)">
           <rect width="80" height="80" rx="16" ry="16" fill="#0284C7"/>
-          <text x="40" y="49" text-anchor="middle" font-family="${fontFam}" font-size="24" font-weight="800" fill="#FFFFFF">
+          <text x="40" y="50" text-anchor="middle" font-family="${fontFam}" font-size="26" font-weight="800" fill="#FFFFFF">
             ${escapeXml(s.case_ico)}
           </text>
         </g>
@@ -358,77 +390,71 @@ async function buildAllRedBlocks() {
             ${escapeXml(s.case_title)}
           </text>
           
-          <foreignObject x="0" y="74" width="900" height="110">
-            <p xmlns="http://www.w3.org/1999/xhtml" style="margin:0;font-family:${fontFam};font-size:22px;line-height:34px;color:#4A515D;">
-              ${s.case_desc.replace(/<strong[^>]*>/g, '<b style="color:#0D2140;">').replace(/<\/strong>/g, '</b>')}
-            </p>
-          </foreignObject>
+          ${caseLines.map((line, idx) => `
+            <text x="0" y="${98 + idx * 36}" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">
+              ${escapeXml(line)}
+            </text>
+          `).join('')}
 
           <!-- Pill Inferior -->
-          <g transform="translate(0, 190)">
-            <rect width="400" height="38" rx="19" ry="19" fill="#E0F2FE"/>
+          <g transform="translate(0, ${100 + caseLines.length * 36 + 10})">
+            <rect width="420" height="38" rx="19" ry="19" fill="#E0F2FE"/>
             <text x="20" y="25" font-family="${fontFam}" font-size="16" font-weight="700" letter-spacing="0.8" fill="#0284C7">
-              ${escapeXml(s.case_pill.replace(/&#9679;&nbsp;\s*/g, '●  '))}
+              ${escapeXml(s.case_pill)}
             </text>
           </g>
         </g>
       </g>
 
-      <!-- Bloque de Confianza (Checks Verdes) -->
+      <!-- Trust Checkmarks (width 1080) -->
       <g transform="translate(80, 340)">
-        <g transform="translate(0, 20)">
-          <text x="0" y="24" font-family="${fontFam}" font-size="26" font-weight="700" fill="#16A34A">✓</text>
-          <text x="36" y="24" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">
-            ${escapeXml(s.trust_1)}
-          </text>
-        </g>
-        <g transform="translate(0, 70)">
-          <text x="0" y="24" font-family="${fontFam}" font-size="26" font-weight="700" fill="#16A34A">✓</text>
-          <text x="36" y="24" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">
-            ${escapeXml(s.trust_2)}
-          </text>
-        </g>
+        <text x="0" y="32" font-family="${fontFam}" font-size="26" font-weight="700" fill="#16A34A">✓</text>
+        <text x="36" y="32" font-family="${fontFam}" font-size="22" font-weight="500" fill="#4A515D">${escapeXml(s.trust_1)}</text>
+
+        <text x="0" y="82" font-family="${fontFam}" font-size="26" font-weight="700" fill="#16A34A">✓</text>
+        <text x="36" y="82" font-family="${fontFam}" font-size="22" font-weight="500" fill="#4A515D">${escapeXml(s.trust_2)}</text>
       </g>
     </svg>`;
     await sharp(Buffer.from(svg04)).png().toFile(path.join(blocksDir, `red-${s.key}-04-caso-confianza.png`));
 
     // ==========================================
-    // BLOCK 05: CTA Principal (Pregunta + Texto + Botón Agendar) - 1200 x 360
+    // BLOCK 05: CTA Principal - 1200 x 360
     // ==========================================
     const svg05 = `
     <svg width="1200" height="360" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="ctaBgGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="ctaBoxGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#E6F6FE" />
           <stop offset="100%" stop-color="#F3EEFC" />
+        </linearGradient>
+        <linearGradient id="btnGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3F1C81" />
+          <stop offset="100%" stop-color="#BF8BDB" />
         </linearGradient>
       </defs>
       <rect width="1200" height="360" fill="${cardBg}"/>
 
-      <!-- Contenedor CTA Box (width 1080, height 330) -->
       <g transform="translate(60, 10)">
-        <rect width="1080" height="330" rx="20" ry="20" fill="url(#ctaBgGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
+        <rect width="1080" height="330" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
 
-        <!-- Pregunta -->
-        <text x="540" y="64" text-anchor="middle" font-family="${fontFam}" font-size="34" font-weight="700" fill="#0D2140">
+        <text x="540" y="65" text-anchor="middle" font-family="${fontFam}" font-size="32" font-weight="800" fill="#0D2140">
           ${escapeXml(s.cta_q)}
         </text>
 
-        <!-- Texto Breve -->
-        <text x="540" y="118" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">
+        <text x="540" y="115" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">
           ${escapeXml(s.cta_sub)}
         </text>
 
-        <!-- Botón Principal (Agendar 30 min) -->
-        <g transform="translate(240, 170)">
-          <rect width="600" height="84" rx="42" ry="42" fill="#3F1C81"/>
-          <text x="300" y="52" text-anchor="middle" font-family="${fontFam}" font-size="24" font-weight="700" fill="#FFFFFF">
+        <!-- Big Primary Button -->
+        <g transform="translate(240, 160)">
+          <rect width="600" height="88" rx="44" ry="44" fill="url(#btnGrad-${s.key})" filter="drop-shadow(0 4px 12px rgba(63,28,129,0.25))"/>
+          <text x="300" y="55" text-anchor="middle" font-family="${fontFam}" font-size="25" font-weight="700" fill="#FFFFFF">
             ${escapeXml(s.cta_btn)}
           </text>
         </g>
 
-        <!-- Indicador de Enlace citas.glocation.co -->
-        <text x="540" y="295" text-anchor="middle" font-family="${fontFam}" font-size="17" font-weight="500" fill="#64748B">
+        <!-- Subtext below button -->
+        <text x="540" y="285" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="500" fill="#8A94A3">
           citas.glocation.co · Sesión individual de 30 minutos sin compromiso
         </text>
       </g>
@@ -436,33 +462,260 @@ async function buildAllRedBlocks() {
     await sharp(Buffer.from(svg05)).png().toFile(path.join(blocksDir, `red-${s.key}-05-cta-principal.png`));
 
     // ==========================================
-    // BLOCK 06: CTA Secundario (Línea de apoyo + Botón Mailto) - 1200 x 220
+    // BLOCK 06: CTA Secundario - 1200 x 200
     // ==========================================
     const svg06 = `
-    <svg width="1200" height="220" viewBox="0 0 1200 220" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="220" fill="${cardBg}"/>
+    <svg width="1200" height="200" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="200" fill="${cardBg}"/>
 
-      <!-- Línea de apoyo -->
-      <text x="600" y="44" text-anchor="middle" font-family="${fontFam}" font-size="21" font-weight="500" fill="#64748B">
-        ${escapeXml(s.cta_support)}
-      </text>
+      <g transform="translate(60, 0)">
+        <text x="540" y="40" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="500" fill="#64748B">
+          ${escapeXml(s.cta_support)}
+        </text>
 
-      <!-- Botón Secundario Blanco con borde -->
-      <g transform="translate(260, 76)">
-        <rect width="680" height="74" rx="37" ry="37" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-        <text x="340" y="46" text-anchor="middle" font-family="${fontFam}" font-size="23" font-weight="700" fill="#1E293B">
-          ${escapeXml(s.cta_sec_text)}
+        <!-- Ghost / White Pill Button -->
+        <g transform="translate(260, 65)">
+          <rect width="560" height="70" rx="35" ry="35" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+          <text x="280" y="44" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="700" fill="#1E293B">
+            ${escapeXml(s.cta_sec_text)}
+          </text>
+        </g>
+
+        <text x="540" y="172" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="400" fill="#94A3B8">
+          Abre correo directo a paula.rozo@glocation.com.co
         </text>
       </g>
-
-      <text x="600" y="190" text-anchor="middle" font-family="${fontFam}" font-size="16" font-weight="500" fill="#94A3B8">
-        Abre correo directo a paula.rozo@glocation.com.co
-      </text>
     </svg>`;
     await sharp(Buffer.from(svg06)).png().toFile(path.join(blocksDir, `red-${s.key}-06-cta-secundario.png`));
   }
 
-  console.log('✓ All sector image blocks generated successfully!');
+  console.log('✓ All 24 sector blocks + 1 shared banda generated successfully!');
 }
 
-buildAllRedBlocks().catch(console.error);
+function buildSectorHtml(s) {
+  const mailtoUrl = `mailto:paula.rozo@glocation.com.co?subject=${encodeURIComponent(s.mailto_sub)}&body=${encodeURIComponent(s.mailto_body)}`;
+  const v = '?v=20261124c';
+  const cdn = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
+
+  return `<!-- Preencabezado (oculto) -->
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;font-size:1px;line-height:1px;color:#EFF3F8;">
+  ${s.preheader}&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#EFF3F8" style="width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;background-color:#EFF3F8;margin:0 !important;padding:0 !important;border:0 !important;">
+  <tr>
+    <td align="center" style="padding:28px 12px 36px 12px !important;margin:0 !important;border:0 !important;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px !important;max-width:600px !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 auto !important;padding:0 !important;border:0 !important;">
+        <tr>
+          <td align="center" style="padding:0 !important;margin:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;">
+            <!-- 1. Encabezado → glocation.co -->
+            <a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${cdn}/red-${s.key}-01-encabezado.png${v}" width="600" alt="GLocation · Holding Servinformación" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <!-- 2. Apertura (sin enlace) -->
+            <img src="${cdn}/red-${s.key}-02-apertura.png${v}" width="600" alt="${escapeXml(s.sectorTitle)}: ${escapeXml(s.h1_a)} ${escapeXml(s.h1_b)}" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <!-- 3. Comparativo (sin enlace) -->
+            <img src="${cdn}/red-${s.key}-03-comparativo.png${v}" width="600" alt="Hoy vs Con un Trabajador Cognitivo" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <!-- 4. Caso de uso y confianza (sin enlace) -->
+            <img src="${cdn}/red-${s.key}-04-caso-confianza.png${v}" width="600" alt="El caso de uso: ${escapeXml(s.case_title)}" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <!-- 5. CTA Principal → citas.glocation.co -->
+            <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${cdn}/red-${s.key}-05-cta-principal.png${v}" width="600" alt="${escapeXml(s.cta_btn)}" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <!-- 6. CTA Secundario → mailto -->
+            <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${cdn}/red-${s.key}-06-cta-secundario.png${v}" width="600" alt="${escapeXml(s.cta_sec_text)}" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <!-- 7. Cintillo Holding -->
+            <img src="${cdn}/red-07-firma-banda.png${v}" width="600" alt="Holding Servinformación (27 años)" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <!-- 8. Firma: Paula (3 columnas fijas de imagen) -->
+            <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 !important;padding:0 !important;border:0 !important;table-layout:fixed !important;">
+              <tr>
+                <td width="340" valign="top" style="width:340px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/saasw-fu1-08-firma-paula-claro.png?v=20261120P" width="340" alt="Paula Rozo · BDR · paula.rozo@glocation.com.co" border="0" style="display:block !important;width:340px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+                <td width="130" valign="top" style="width:130px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/saasw-fu1-09-firma-glocation-claro.png?v=20261120P" width="130" alt="glocation.co · Plataforma" border="0" style="display:block !important;width:130px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+                <td width="130" valign="top" style="width:130px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/saasw-fu1-10-firma-homoagenticus-claro.png?v=20261120P" width="130" alt="homoagenticus.co · Manifiesto" border="0" style="display:block !important;width:130px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <!-- 9. Pie (texto legal) -->
+        <tr>
+          <td align="center" style="border-width:0px;padding:18px 20px 24px 20px;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#94A3B8;text-align:center;">
+            &copy; 2026 GLocation SAS &middot; Holding Servinformación &middot; Bogotá D.C., Colombia.<br />
+            Recibe este mensaje porque su empresa participó en el programa Proveedores en Red.<br />
+            Si prefiere no recibir más mensajes, responda &laquo;BAJA&raquo; a este correo.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>`;
+}
+
+function wrapStandaloneDoc(rawHtml, title) {
+  return `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>${title}</title>
+  <style type="text/css">
+    body, table, td, a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    table, td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      display: block;
+    }
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      background-color: #EFF3F8;
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; width: 100% !important; background-color: #EFF3F8;">
+${rawHtml}
+</body>
+</html>`;
+}
+
+async function updateAllFiles() {
+  await generateAllBlocks();
+
+  console.log('Updating HTML files across all locations...');
+
+  const downloadsDir = 'C:\\Users\\Paula\\Downloads';
+
+  for (const s of SECTORS_DATA) {
+    const rawHtml = buildSectorHtml(s);
+    const standaloneHtml = wrapStandaloneDoc(rawHtml, s.title);
+
+    // 1. public/
+    fs.writeFileSync(path.join(__dirname, `../public/${s.slug}.html`), standaloneHtml, 'utf8');
+    fs.writeFileSync(path.join(__dirname, `../public/${s.filename}`), standaloneHtml, 'utf8');
+
+    // 2. recursos/storytelling/
+    const storytellingPath = path.join(__dirname, `../recursos/storytelling/${s.storytellingFile}`);
+    fs.writeFileSync(storytellingPath, standaloneHtml, 'utf8');
+
+    // 3. Downloads directory
+    if (fs.existsSync(downloadsDir)) {
+      const destFile = path.join(downloadsDir, s.storytellingFile);
+      fs.writeFileSync(destFile, standaloneHtml, 'utf8');
+      console.log(`Updated in Downloads: ${destFile}`);
+    }
+  }
+
+  // 4. Update src/modules/email-marketing/templates/proveedores-red-templates.ts
+  console.log('Updating proveedores-red-templates.ts...');
+  const tsContent = `/**
+ * Plantillas de Email Marketing — Campañas Proveedores en Red (4 Sectores)
+ * GLocation SAS · Holding Servinformación
+ * Estructura de bloques PNG retina con enlaces activos 100% compatible con Converso (CKEditor) y Brevo.
+ */
+
+export interface ProveedorRedCampaign {
+  key: "tecnologia" | "logistica" | "construccion" | "agroindustria";
+  id: string;
+  title: string;
+  sector: string;
+  description: string;
+  target: string;
+  hero: string;
+  slug: string;
+  href: string;
+  htmlAsset: string;
+  htmlFilename: string;
+  rawHtml: string;
+}
+
+export function generateRedTecnologiaHtml(): string {
+  return ${JSON.stringify(buildSectorHtml(SECTORS_DATA[0]))};
+}
+
+export function generateRedLogisticaHtml(): string {
+  return ${JSON.stringify(buildSectorHtml(SECTORS_DATA[1]))};
+}
+
+export function generateRedConstruccionHtml(): string {
+  return ${JSON.stringify(buildSectorHtml(SECTORS_DATA[2]))};
+}
+
+export function generateRedAgroindustriaHtml(): string {
+  return ${JSON.stringify(buildSectorHtml(SECTORS_DATA[3]))};
+}
+
+export const PROVEEDORES_RED_CAMPAIGNS: ProveedorRedCampaign[] = [
+  {
+    key: "tecnologia",
+    id: "red-tecnologia",
+    title: "Tecnología y Servicios Digitales",
+    sector: "Tecnología",
+    description: "Para empresas que atienden cuentas corporativas y reciben solicitudes de IA de sus clientes.",
+    target: "Gerentes Comerciales, Directores de Alianzas y Líderes de Soluciones Digitales",
+    hero: "Su cliente ya pidió IA. ¿La tiene lista para ofrecer?",
+    slug: "tecnologia",
+    href: "/campanas/proveedores-red/tecnologia",
+    htmlAsset: "/plantilla-red-tecnologia.html",
+    htmlFilename: "GLocation_Tecnologia_Storytelling.html",
+    rawHtml: generateRedTecnologiaHtml(),
+  },
+  {
+    key: "logistica",
+    id: "red-logistica",
+    title: "Logística y Transporte",
+    sector: "Logística",
+    description: "Para empresas con alta dispersión de fletes, transportadores y proveedores de insumos operativos.",
+    target: "Líderes de Compras, Abastecimiento y Operaciones Logísticas",
+    hero: "La operación pide una respuesta. Las ofertas siguen sin consolidar.",
+    slug: "logistica",
+    href: "/campanas/proveedores-red/logistica",
+    htmlAsset: "/plantilla-red-logistica.html",
+    htmlFilename: "GLocation_Logistica_Storytelling.html",
+    rawHtml: generateRedLogisticaHtml(),
+  },
+  {
+    key: "construccion",
+    id: "red-construccion",
+    title: "Construcción e Inmobiliario",
+    sector: "Construcción",
+    description: "Para constructoras y empresas de ingeniería con múltiples frentes de obra y subcontratistas.",
+    target: "Directores de Contratación, Compras de Obra y Gerentes de Proyectos",
+    hero: "La obra avanza en terreno. Los expedientes siguen en trámite.",
+    slug: "construccion",
+    href: "/campanas/proveedores-red/construccion",
+    htmlAsset: "/plantilla-red-construccion.html",
+    htmlFilename: "GLocation_Construccion_Storytelling.html",
+    rawHtml: generateRedConstruccionHtml(),
+  },
+  {
+    key: "agroindustria",
+    id: "red-agroindustria",
+    title: "Agroindustria y Alimentos",
+    sector: "Agroindustria",
+    description: "Para procesadoras, empacadoras y comercializadoras con cadena de abastecimiento sensible a calidad.",
+    target: "Líderes de Compras de Materias Primas, Abastecimiento y Calidad",
+    hero: "La planta necesita insumos ya. Los certificados siguen pendientes.",
+    slug: "agroindustria",
+    href: "/campanas/proveedores-red/agroindustria",
+    htmlAsset: "/plantilla-red-agroindustria.html",
+    htmlFilename: "GLocation_Agroindustria_Storytelling.html",
+    rawHtml: generateRedAgroindustriaHtml(),
+  },
+];
+`;
+
+  fs.writeFileSync(
+    path.join(__dirname, '../src/modules/email-marketing/templates/proveedores-red-templates.ts'),
+    tsContent,
+    'utf8'
+  );
+
+  console.log('✓ All files and templates successfully updated!');
+}
+
+updateAllFiles().catch(console.error);

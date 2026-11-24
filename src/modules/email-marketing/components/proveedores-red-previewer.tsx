@@ -90,10 +90,45 @@ export function ProveedoresRedPreviewer({
 
   const handleCopyHtml = async () => {
     try {
-      await navigator.clipboard.writeText(rawHtml);
+      const fullHtml = `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>${campaign.title}</title>
+  <style type="text/css">
+    body, table, td, a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    table, td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      display: block;
+    }
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      background-color: #EFF3F8;
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; width: 100% !important; background-color: #EFF3F8;">
+${rawHtml}
+</body>
+</html>`;
+      await navigator.clipboard.writeText(fullHtml);
       setCopiedHtml(true);
       toast.success(
-        "¡Código HTML copiado! Pégalo en tu editor en modo Fuente HTML"
+        "¡Código HTML completo copiado! Pégalo en modo Fuente HTML en Converso o Brevo"
       );
       setTimeout(() => setCopiedHtml(false), 3000);
     } catch {
@@ -107,9 +142,33 @@ export function ProveedoresRedPreviewer({
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>${campaign.title}</title>
+  <style type="text/css">
+    body, table, td, a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    table, td {
+      mso-table-lspace: 0pt;
+      mso-table-rspace: 0pt;
+    }
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0;
+      outline: none;
+      text-decoration: none;
+      display: block;
+    }
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      background-color: #EFF3F8;
+    }
+  </style>
 </head>
-<body style="margin:0 !important;padding:0 !important;background-color:#E7EEF8;">
+<body style="margin: 0; padding: 0; width: 100% !important; background-color: #EFF3F8;">
 ${rawHtml}
 </body>
 </html>`;
