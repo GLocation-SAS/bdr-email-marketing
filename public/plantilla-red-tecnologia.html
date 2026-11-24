@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
+  <!-- Reset explícito para evitar cuadrículas/bordes de tablas en Converso (CKEditor), Brevo y clientes de correo -->
+  <style type="text/css">
+    body, table, td, a {
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    table, td, tr, th {
+      mso-table-lspace: 0pt !important;
+      mso-table-rspace: 0pt !important;
+    }
+    table.cke_show_border,
+    table.cke_show_border td,
+    table.cke_show_border tr,
+    .cke_show_border,
+    .cke_show_border td,
+    .cke_show_border tr {
+      border: 0 !important;
+      border-style: none !important;
+      outline: none !important;
+    }
+    .cke_table-faked-selection-editor {
+      border: 0 !important;
+      outline: none !important;
+    }
+    img {
+      -ms-interpolation-mode: bicubic;
+      border: 0 !important;
+      border-style: none !important;
+      outline: none !important;
+      text-decoration: none !important;
+      display: block !important;
+    }
+    a {
+      text-decoration: none !important;
+      outline: none !important;
+    }
+  </style>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -67,7 +104,7 @@
         }
         document.execCommand('copy');
         sel.removeAllRanges();
-        mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en Converso / Brevo');
+        mostrarMsg('✓ ¡Diseño con enlaces copiado! Pégalo con Ctrl+V en Converso / correo');
       } catch (err) {
         alert('Por favor presiona Ctrl+C para copiar');
       }
@@ -77,7 +114,7 @@
       var root = document.querySelector('[data-saasw-root="true"]');
       if (!root) return;
       navigator.clipboard.writeText(root.outerHTML).then(function() {
-        mostrarMsg('✓ ¡Código HTML limpio copiado! Pégalo en tu editor en modo "Fuente HTML"');
+        mostrarMsg('✓ ¡Código HTML limpio copiado! Pégalo en modo Fuente HTML');
       });
     }
 
@@ -232,7 +269,7 @@
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:0 !important;border-style:none !important;border-collapse:collapse !important;mso-table-lspace:0pt !important;mso-table-rspace:0pt !important;">
     <tr>
       <td width="66" valign="middle" style="width:66px;min-width:66px;padding-right:14px;border:0 !important;border-style:none !important;">
-        <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-light.png" width="52" height="52" alt="Paula Rozo" style="width:52px;height:52px;min-width:52px;max-width:52px;min-height:52px;max-height:52px;border-radius:26px;display:block;border:0;outline:none;">
+        <img src="https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-icons/avatar-paula-light.png?v=20261124b" width="52" height="52" alt="Paula Rozo" style="width:52px;height:52px;min-width:52px;max-width:52px;min-height:52px;max-height:52px;border-radius:26px;display:block;border:0;outline:none;">
       </td>
       <td valign="middle" style=";border:0 !important;border-style:none !important;">
         <p style="margin:0 0 2px 0;font-family:'Poppins','Segoe UI',Arial,Helvetica,sans-serif;font-size:15px;line-height:19px;font-weight:700;color:#0D2140;">Paula Rozo</p>
