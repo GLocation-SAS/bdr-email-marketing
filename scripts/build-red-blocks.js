@@ -457,11 +457,11 @@ async function generateAllBlocks() {
     await sharp(Buffer.from(svg04)).png().toFile(path.join(blocksDir, `red-${s.key}-04-caso-confianza.png`));
 
     // ==========================================
-    // BLOCK 05: CTA Principal - 1200 x 380
+    // BLOCK 05: CTA Principal - 1200 x 336 (sin pie bajo el botón)
     // ==========================================
     const ctaSubLines = wrapText(s.cta_sub, 64);
     const svg05 = `
-    <svg width="1200" height="380" viewBox="0 0 1200 380" xmlns="http://www.w3.org/2000/svg">
+    <svg width="1200" height="336" viewBox="0 0 1200 336" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="ctaBoxGrad-${s.key}" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#E6F6FE" />
@@ -472,60 +472,51 @@ async function generateAllBlocks() {
           <stop offset="100%" stop-color="#BF8BDB" />
         </linearGradient>
       </defs>
-      <rect width="1200" height="380" fill="${cardBg}"/>
+      <rect width="1200" height="336" fill="${cardBg}"/>
 
       <g transform="translate(60, 10)">
-        <rect width="1080" height="360" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
+        <rect width="1080" height="316" rx="20" ry="20" fill="url(#ctaBoxGrad-${s.key})" stroke="#DCE6F2" stroke-width="1.5"/>
 
-        <text x="540" y="58" text-anchor="middle" font-family="${fontFam}" font-size="30" font-weight="800" fill="#0D2140">
+        <text x="540" y="62" text-anchor="middle" font-family="${fontFam}" font-size="30" font-weight="800" fill="#0D2140">
           ${escapeXml(s.cta_q)}
         </text>
 
         ${ctaSubLines.map((line, idx) => `
-          <text x="540" y="${98 + idx * 28}" text-anchor="middle" font-family="${fontFam}" font-size="20" font-weight="400" fill="#4A515D">
+          <text x="540" y="${104 + idx * 28}" text-anchor="middle" font-family="${fontFam}" font-size="20" font-weight="400" fill="#4A515D">
             ${escapeXml(line)}
           </text>
         `).join('')}
 
         <!-- Big Primary Button - Amplio y centrado sin desbordar texto -->
-        <g transform="translate(150, 172)">
+        <g transform="translate(150, 178)">
           <rect width="780" height="84" rx="42" ry="42" fill="url(#btnGrad-${s.key})" filter="drop-shadow(0 4px 12px rgba(63,28,129,0.25))"/>
           <text x="390" y="52" text-anchor="middle" font-family="${fontFam}" font-size="24" font-weight="700" fill="#FFFFFF">
             ${escapeXml(s.cta_btn)}
           </text>
         </g>
-
-        <!-- Subtext below button con margen limpio -->
-        <text x="540" y="306" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="500" fill="#8A94A3">
-          citas.glocation.co · Sesión individual de 30 minutos sin compromiso
-        </text>
       </g>
     </svg>`;
     await sharp(Buffer.from(svg05)).png().toFile(path.join(blocksDir, `red-${s.key}-05-cta-principal.png`));
 
     // ==========================================
-    // BLOCK 06: CTA Secundario - 1200 x 210
+    // BLOCK 06: CTA Secundario - 1200 x 160 (sin pie bajo el botón)
     // ==========================================
     const svg06 = `
-    <svg width="1200" height="210" viewBox="0 0 1200 210" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="210" fill="${cardBg}"/>
+    <svg width="1200" height="160" viewBox="0 0 1200 160" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="160" fill="${cardBg}"/>
 
       <g transform="translate(60, 0)">
-        <text x="540" y="40" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="500" fill="#64748B">
+        <text x="540" y="42" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="500" fill="#64748B">
           ${escapeXml(s.cta_support)}
         </text>
 
         <!-- Ghost / White Pill Button - Amplio y centrado -->
-        <g transform="translate(170, 65)">
+        <g transform="translate(170, 68)">
           <rect width="740" height="70" rx="35" ry="35" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
           <text x="370" y="44" text-anchor="middle" font-family="${fontFam}" font-size="21" font-weight="700" fill="#1E293B">
             ${escapeXml(s.cta_sec_text)}
           </text>
         </g>
-
-        <text x="540" y="174" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="400" fill="#94A3B8">
-          Abre correo directo a paula.rozo@glocation.com.co
-        </text>
       </g>
     </svg>`;
     await sharp(Buffer.from(svg06)).png().toFile(path.join(blocksDir, `red-${s.key}-06-cta-secundario.png`));
@@ -536,7 +527,7 @@ async function generateAllBlocks() {
 
 function buildSectorHtml(s) {
   const mailtoUrl = `mailto:paula.rozo@glocation.com.co?subject=${encodeURIComponent(s.mailto_sub)}&body=${encodeURIComponent(s.mailto_body)}`;
-  const v = '?v=20261124f';
+  const v = '?v=20261124g';
   const cdn = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
 
   return `<!-- Preencabezado (oculto) -->
