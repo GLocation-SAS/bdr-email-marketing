@@ -212,17 +212,56 @@ async function generateAllBlocks() {
   const logoBuf = fs.readFileSync(path.join(iconsDir, 'logo-glocation-claro.png'));
   const logoB64 = `data:image/png;base64,${logoBuf.toString('base64')}`;
 
-  // 1. Shared BANDA HOLDING: Holding Servinformación (27 años) ONLY (no partner, no ISO)
+  // 1. Shared BANDA HOLDING: Holding Servinformación (27 años) · Google Cloud Premier Partner · Norma ISO 27001
   const svgBanda = `
-  <svg width="1200" height="70" viewBox="0 0 1200 70" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="70" fill="#F8FAFD"/>
+  <svg width="1200" height="76" viewBox="0 0 1200 76" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="76" fill="#F8FAFD"/>
     <line x1="0" y1="0" x2="1200" y2="0" stroke="${cardBorder}" stroke-width="1.5"/>
-    <line x1="0" y1="69" x2="1200" y2="69" stroke="${cardBorder}" stroke-width="1.5"/>
-    <text x="600" y="44" text-anchor="middle" font-family="${fontFam}" font-size="20" font-weight="700" letter-spacing="2" fill="${textMuted}">
-      HOLDING SERVINFORMACIÓN (27 AÑOS)
+    <line x1="0" y1="75" x2="1200" y2="75" stroke="${cardBorder}" stroke-width="1.5"/>
+    <text x="600" y="47" text-anchor="middle" font-family="${fontFam}" font-size="18" font-weight="700" letter-spacing="1.5" fill="${textMuted}">
+      HOLDING SERVINFORMACIÓN (27 AÑOS)   ·   GOOGLE CLOUD PREMIER PARTNER   ·   NORMA ISO 27001
     </text>
   </svg>`;
   await sharp(Buffer.from(svgBanda)).png().toFile(path.join(blocksDir, 'red-07-firma-banda.png'));
+
+  // 1b. Shared FIRMA PAULA ROZO: 1200 x 200 (Avatar circular + Datos completos)
+  const avatarBuf = fs.readFileSync(path.join(iconsDir, 'avatar-paula-light.png'));
+  const avatarB64 = `data:image/png;base64,${avatarBuf.toString('base64')}`;
+  const svgPaulaFirma = `
+  <svg width="1200" height="200" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <clipPath id="paulaCircleClip">
+        <circle cx="140" cy="100" r="64"/>
+      </clipPath>
+    </defs>
+    <rect width="1200" height="200" fill="#FFFFFF"/>
+    <image x="76" y="36" width="128" height="128" clip-path="url(#paulaCircleClip)" href="${avatarB64}"/>
+    <text x="240" y="65" font-family="${fontFam}" font-size="30" font-weight="700" fill="#0D2140">Paula Rozo</text>
+    <text x="240" y="100" font-family="${fontFam}" font-size="22" font-weight="400" fill="#4A515D">BDR · Business Development Representative</text>
+    <text x="240" y="135" font-family="${fontFam}" font-size="22" font-weight="600" fill="#22779C">GLocation SAS · Transformación Cognitiva</text>
+    <text x="240" y="170" font-family="${fontFam}" font-size="22" font-weight="600" fill="#0284C7">✉ paula.rozo@glocation.com.co</text>
+    <line x1="0" y1="199" x2="1200" y2="199" stroke="#E2E8F0" stroke-width="2"/>
+  </svg>`;
+  await sharp(Buffer.from(svgPaulaFirma)).png().toFile(path.join(blocksDir, 'red-08-firma-paula.png'));
+
+  // 1c. Shared 4 TARJETAS HORIZONTALES (cada una 300 x 190 para 150px @2x)
+  const ecosystemCards = [
+    { file: 'red-card-01-glocation.png', ico: '🌐', title: 'glocation.co', color: '#0284C7', sub: 'Plataforma →' },
+    { file: 'red-card-02-homoagenticus.png', ico: '📖', title: 'homoagenticus', color: '#7C3AED', sub: 'Manifiesto →' },
+    { file: 'red-card-03-preagentica.png', ico: '🏛️', title: 'preagentica', color: '#334155', sub: 'Pre-IA →' },
+    { file: 'red-card-04-linkedin.png', ico: '💼', title: 'LinkedIn', color: '#0A66C2', sub: 'Perfil →' }
+  ];
+  for (const c of ecosystemCards) {
+    const svgCard = `
+    <svg width="300" height="190" viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg">
+      <rect width="300" height="190" fill="#F8FAFD"/>
+      <rect x="8" y="10" width="284" height="170" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+      <text x="150" y="66" text-anchor="middle" font-family="${fontFam}" font-size="34">${c.ico}</text>
+      <text x="150" y="112" text-anchor="middle" font-family="${fontFam}" font-size="22" font-weight="700" fill="${c.color}">${c.title}</text>
+      <text x="150" y="146" text-anchor="middle" font-family="${fontFam}" font-size="17" font-weight="500" fill="#64748B">${c.sub}</text>
+    </svg>`;
+    await sharp(Buffer.from(svgCard)).png().toFile(path.join(blocksDir, c.file));
+  }
 
   // 2. Loop through all 4 sectors
   for (const s of SECTORS_DATA) {
@@ -494,7 +533,7 @@ async function generateAllBlocks() {
 
 function buildSectorHtml(s) {
   const mailtoUrl = `mailto:paula.rozo@glocation.com.co?subject=${encodeURIComponent(s.mailto_sub)}&body=${encodeURIComponent(s.mailto_body)}`;
-  const v = '?v=20261124d';
+  const v = '?v=20261124e';
   const cdn = 'https://raw.githubusercontent.com/GLocation-SAS/bdr-email-marketing/main/public/email-blocks';
 
   return `<!-- Preencabezado (oculto) -->
@@ -519,24 +558,27 @@ function buildSectorHtml(s) {
             <a href="https://citas.glocation.co/?theme=light" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${cdn}/red-${s.key}-05-cta-principal.png${v}" width="600" alt="${escapeXml(s.cta_btn)}" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
             <!-- 6. CTA Secundario → mailto -->
             <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${cdn}/red-${s.key}-06-cta-secundario.png${v}" width="600" alt="${escapeXml(s.cta_sec_text)}" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
-            <!-- 7. Cintillo Holding -->
-            <img src="${cdn}/red-07-firma-banda.png${v}" width="600" alt="Holding Servinformación (27 años)" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
-            <!-- 8. Firma: Paula (3 columnas fijas de imagen) -->
+            <!-- 7. Cintillo Holding (Google Cloud Premier Partner · Norma ISO 27001) -->
+            <img src="${cdn}/red-07-firma-banda.png${v}" width="600" alt="Holding Servinformación (27 años) · Google Cloud Premier Partner · Norma ISO 27001" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" />
+            <!-- 8. Firma: Paula Rozo (Avatar circular + Datos completos) -->
+            <a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;line-height:0 !important;font-size:0 !important;margin:0 !important;padding:0 !important;border:0 !important;outline:none !important;"><img src="${cdn}/red-08-firma-paula.png${v}" width="600" alt="Paula Rozo · BDR · paula.rozo@glocation.com.co" border="0" style="display:block !important;width:600px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a>
+            <!-- 9. 4 Tarjetas horizontales fijas (150px cada una) -->
             <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px !important;max-width:100% !important;border-collapse:collapse !important;border-spacing:0 !important;margin:0 !important;padding:0 !important;border:0 !important;table-layout:fixed !important;">
               <tr>
-                <td width="340" valign="top" style="width:340px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="${mailtoUrl}" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/saasw-fu1-08-firma-paula-claro.png?v=20261120P" width="340" alt="Paula Rozo · BDR · paula.rozo@glocation.com.co" border="0" style="display:block !important;width:340px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
-                <td width="130" valign="top" style="width:130px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/saasw-fu1-09-firma-glocation-claro.png?v=20261120P" width="130" alt="glocation.co · Plataforma" border="0" style="display:block !important;width:130px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
-                <td width="130" valign="top" style="width:130px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/saasw-fu1-10-firma-homoagenticus-claro.png?v=20261120P" width="130" alt="homoagenticus.co · Manifiesto" border="0" style="display:block !important;width:130px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+                <td width="150" valign="top" style="width:150px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/red-card-01-glocation.png${v}" width="150" alt="glocation.co · Plataforma" border="0" style="display:block !important;width:150px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+                <td width="150" valign="top" style="width:150px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://homoagenticus.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/red-card-02-homoagenticus.png${v}" width="150" alt="homoagenticus.co · Manifiesto" border="0" style="display:block !important;width:150px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+                <td width="150" valign="top" style="width:150px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://preagentica.glocation.co" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/red-card-03-preagentica.png${v}" width="150" alt="preagentica · Pre-IA" border="0" style="display:block !important;width:150px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
+                <td width="150" valign="top" style="width:150px !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;border:0 !important;mso-line-height-rule:exactly;"><a href="https://www.linkedin.com/company/glocation/" target="_blank" rel="noopener noreferrer" style="display:block !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;line-height:0 !important;font-size:0 !important;"><img src="${cdn}/red-card-04-linkedin.png${v}" width="150" alt="LinkedIn · Perfil" border="0" style="display:block !important;width:150px !important;max-width:100% !important;height:auto !important;border:0 !important;outline:none !important;text-decoration:none !important;margin:0 !important;padding:0 !important;-ms-interpolation-mode:bicubic;" /></a></td>
               </tr>
             </table>
           </td>
         </tr>
-        <!-- 9. Pie (texto legal) -->
+        <!-- 10. Pie (texto legal) -->
         <tr>
           <td align="center" style="border-width:0px;padding:18px 20px 24px 20px;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#94A3B8;text-align:center;">
-            &copy; 2026 GLocation SAS &middot; Holding Servinformación &middot; Bogotá D.C., Colombia.<br />
-            Recibe este mensaje porque su empresa participó en el programa Proveedores en Red.<br />
-            Si prefiere no recibir más mensajes, responda &laquo;BAJA&raquo; a este correo.
+            &copy; 2026 GLocation SAS &middot; Holding Servinformaci&oacute;n &middot; Bogot&aacute; D.C., Colombia.<br />
+            Recibe este mensaje porque su empresa particip&oacute; en el programa Proveedores en Red. Sus datos de contacto se usan para agendar reuniones comerciales en Colombia y para la recolecci&oacute;n de datos asociada, conforme a la Ley 1581 de 2012.<br />
+            Si prefiere no recibir m&aacute;s mensajes, responda &laquo;BAJA&raquo; a este correo.
           </td>
         </tr>
       </table>
